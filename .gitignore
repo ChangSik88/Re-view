@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+
+# 환경 변수
+.env
+
+# VS Code
+.vscode/
