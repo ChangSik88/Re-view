@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ChatImage {
+  chat_image_id Int         @id(map: "PK_CHATIMAGE") @default(autoincrement())
+  room_id       Int
+  image_url     String?     @db.VarChar(2048)
+  created_at    DateTime?   @db.Timestamp(6)
+  ChatSession   ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatImage")
+}
+
+model ChatMessage {
+  message_id  String      @id(map: "PK_CHATMESSAGE") @db.VarChar(255)
+  room_id     Int
+  role        String?     @db.VarChar(10)
+  content     String?
+  created_at  DateTime?   @db.Timestamp(6)
+  ChatSession ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatMessage")
+}
+
+model ChatSession {
+  room_id        Int                    @id(map: "PK_CHATSESSION") @default(autoincrement())
+  user_id        Int
+  title          String?                @db.VarChar(50)
+  content        String?
+  is_marked      Boolean?
+  routine_type   String?                @db.VarChar(20)
+  created_at     DateTime?              @db.Timestamp(6)
+  updated_at     DateTime?              @db.Timestamp(6)
+  content_vector Unsupported("vector")?
+  ChatImage      ChatImage[]
+  ChatMessage    ChatMessage[]
+  User           User                   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_ChatSession")
+}
+
+model Diary_Info {
+  diary_info_id Int       @id(map: "PK_DIARY_INFO") @default(autoincrement())
+  shopping_id   Int
+  selected_date DateTime? @db.Date
+  shopping      shopping  @relation(fields: [shopping_id], references: [shopping_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_shopping_TO_Diary_Info")
+}
+
+model Item {
+  item_id     Int        @id(map: "PK_ITEM") @default(autoincrement())
+  item_name   String?    @db.VarChar(50)
+  headline    String?    @db.VarChar(50)
+  description String?
+  price       Int?
+  category    String?    @db.VarChar(10)
+  Item_Url    Item_Url[]
+  shopping    shopping[]
+}
+
+model Item_Url {
+  item_image_id Int     @id(map: "PK_ITEM_URL") @default(autoincrement())
+  item_id       Int
+  image_url     String? @db.VarChar(2048)
+  Item          Item    @relation(fields: [item_id], references: [item_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Item_TO_Item_Url")
+}
+
+model User {
+  user_id        Int              @id(map: "PK_USER") @default(autoincrement())
+  id             String?          @db.VarChar(30)
+  password       String?          @db.VarChar(255)
+  name           String?          @db.VarChar(30)
+  birth          DateTime?        @db.Date
+  gender         String?          @db.VarChar(10)
+  ChatSession    ChatSession[]
+  Weekly_Session Weekly_Session[]
+  shopping       shopping[]
+}
+
+model Weekly_Session {
+  content_id     Int       @id(map: "PK_WEEKLY_SESSION") @default(autoincrement())
+  user_id        Int
+  weekly_content String?
+  start_date     DateTime? @db.Date
+  end_date       DateTime? @db.Date
+  User           User      @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_Weekly_Session")
+}
+
+model shopping {
+  shopping_id Int          @id(map: "PK_SHOPPING") @default(autoincrement())
+  user_id     Int
+  item_id     Int
+  bought_at   DateTime?    @db.Timestamp(6)
+  is_bought   String?      @db.VarChar(20)
+  Diary_Info  Diary_Info[]
+  Item        Item         @relation(fields: [item_id], references: [item_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Item_TO_shopping")
+  User        User         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_shopping")
+}
