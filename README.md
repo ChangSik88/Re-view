@@ -24,3 +24,7 @@ venv\Scripts\activate
 # 로컬 서버 실행
 
 uvicorn app.main:app --reload
+
+# 안드로이드 서버 접속
+
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
