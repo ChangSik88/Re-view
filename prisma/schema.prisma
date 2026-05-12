@@ -18,7 +18,7 @@ model ChatImage {
 }
 
 model ChatMessage {
-  message_id  String      @id(map: "PK_CHATMESSAGE") @db.VarChar(255)
+  message_id  Int      @id(map: "PK_CHATMESSAGE") @default(autoincrement())
   room_id     Int
   role        String?     @db.VarChar(10)
   content     String?
@@ -31,6 +31,7 @@ model ChatSession {
   user_id        Int
   title          String?                @db.VarChar(50)
   content        String?
+  tags           String?                @db.VarChar(50)
   is_marked      Boolean?
   routine_type   String?                @db.VarChar(20)
   created_at     DateTime?              @db.Timestamp(6)
