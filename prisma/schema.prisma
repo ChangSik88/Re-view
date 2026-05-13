@@ -1,7 +1,7 @@
 generator client {
   provider             = "prisma-client-py"
   interface            = "asyncio"
-  recursive_type_depth = 5
+  recursive_type_depth = "5"
 }
 
 datasource db {
@@ -13,16 +13,16 @@ model ChatImage {
   chat_image_id Int         @id(map: "PK_CHATIMAGE") @default(autoincrement())
   room_id       Int
   image_url     String?     @db.VarChar(2048)
-  created_at    DateTime?   @db.Timestamp(6)
+  created_at    DateTime?   @default(now()) @db.Timestamp(6)
   ChatSession   ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatImage")
 }
 
 model ChatMessage {
-  message_id  Int      @id(map: "PK_CHATMESSAGE") @default(autoincrement())
   room_id     Int
-  role        String?     @db.VarChar(10)
+  role        String?     @default("user") @db.VarChar(10)
   content     String?
-  created_at  DateTime?   @db.Timestamp(6)
+  created_at  DateTime?   @default(now()) @db.Timestamp(6)
+  message_id  Int         @id(map: "PK_CHATMESSAGE") @default(autoincrement())
   ChatSession ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatMessage")
 }
 
@@ -31,12 +31,12 @@ model ChatSession {
   user_id        Int
   title          String?                @db.VarChar(50)
   content        String?
-  tags           String?                @db.VarChar(50)
-  is_marked      Boolean?
+  is_marked      Boolean?               @default(false)
   routine_type   String?                @db.VarChar(20)
-  created_at     DateTime?              @db.Timestamp(6)
-  updated_at     DateTime?              @db.Timestamp(6)
+  created_at     DateTime?              @default(now()) @db.Timestamp(6)
+  updated_at     DateTime?              @default(now()) @db.Timestamp(6)
   content_vector Unsupported("vector")?
+  tags           String?                @db.VarChar(50)
   ChatImage      ChatImage[]
   ChatMessage    ChatMessage[]
   User           User                   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_ChatSession")
@@ -92,8 +92,8 @@ model shopping {
   shopping_id Int          @id(map: "PK_SHOPPING") @default(autoincrement())
   user_id     Int
   item_id     Int
-  bought_at   DateTime?    @db.Timestamp(6)
-  is_bought   String?      @db.VarChar(20)
+  bought_at   DateTime?    @default(now()) @db.Timestamp(6)
+  is_bought   String?      @default("N") @db.VarChar(20)
   Diary_Info  Diary_Info[]
   Item        Item         @relation(fields: [item_id], references: [item_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Item_TO_shopping")
   User        User         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_shopping")
