@@ -32,3 +32,4 @@ async def generate_diary(request: DiaryRequest):
     # 키워드도 서비스로 전송
     result = await chat_service.create_diary(request.session_id, request.selected_keywords)
     return result
+

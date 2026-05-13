@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field
-from datetime import date
 from typing import Optional
 from pydantic import BaseModel, field_validator
 from datetime import date, datetime, timezone
@@ -20,7 +19,7 @@ class UserCreateBody(BaseModel):
     gender: str = Field(..., pattern="^(male|female)$") # 특정 값만 허용하도록 검증 가능
 
 # 회원가입 성공 후 안드로이드에 다시 보내줄 데이터 규격
-class UserResponse(BaseModel):
+class UserData(BaseModel):
     user_id: int
     id: str
     name: str
@@ -28,3 +27,7 @@ class UserResponse(BaseModel):
     
     class Config:
         from_attributes = True # Prisma 모델 객체를 자동으로 Schema로 변환해줌
+
+class UserResponse(BaseModel):
+    message: str
+    result: UserData

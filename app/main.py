@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.core.db import db
-from app.api import userApi, chatApi
+from app.api import userApi, chatApi, chatSessionApi
 from contextlib import asynccontextmanager
 import os
 
@@ -29,3 +29,4 @@ def read_root():
 
 app.include_router(userApi.router, prefix="/users", tags=["User"])
 app.include_router(chatApi.router, prefix="/chatting", tags=["Chat"])
+app.include_router(chatSessionApi.router, prefix="/chatting", tags=["Chat"])
