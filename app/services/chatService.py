@@ -1,14 +1,17 @@
 from app.repositories.chatRepository import ChatRepository
 from app.schemas.chatSchema import AIAnalysisResponse
-from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
 from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_vector_embedding
+from app.core.ai.imageManager import ImageManager
 from typing import List
+import uuid
+import os
+
 
 class ChatService:
     def __init__(self):
         self.chat_repo = ChatRepository()
+        self.image_manager=ImageManager()
+        
 
     # 채팅방 생성 로직
     async def create_new_chat(self, user_id: int,routine_type:str):
@@ -16,7 +19,7 @@ class ChatService:
 
     # 핵심 대화 처리 로직
     async def process_message(self, session_id: int, user_message: str):
-        routine_type= await self.chat_repo.get_session(session_id)
+        routine_type= await self.chat_repo.get_routine_type(session_id)
     
         # 유저가 보낸 메시지를 DB에 저장
         await self.chat_repo.save_message(session_id, "USER", user_message)
@@ -47,7 +50,7 @@ class ChatService:
         }
     
     async def create_diary(self, session_id: int, selected_keywords: List[str]):
-        routine_type = await self.chat_repo.get_session(session_id)
+        routine_type = await self.chat_repo.get_routine_type(session_id)
        
 
         history_records = await self.chat_repo.get_chat_history(session_id)
@@ -72,4 +75,36 @@ class ChatService:
             vector=vector_data
         )
         
-        return diary_result
+        image_url = await self._generate_and_save_image(session_id, diary_result.image_prompt)
+
+        return {
+        "title": diary_result.title,
+        "content": diary_result.content,
+        "tags": diary_result.tags,
+        "image_url": image_url
+    }
+    
+    async def _generate_and_save_image(self, session_id: int, image_prompt: str):
+        try:
+            # AI 이미지 생성
+            image = await self.image_manager.generate_flux_image(image_prompt)
+
+            # 파일 저장 경로 설정 (static/images/UUID.png)
+            file_name = f"{uuid.uuid4()}.png"
+            file_dir = "app/static/images"
+            if not os.path.exists(file_dir):
+                os.makedirs(file_dir)
+            
+            save_path = os.path.join(file_dir, file_name)
+            image.save(save_path)
+            
+            # 고정 IP 기반의 URL 생성
+            image_url = f"http://13.209.97.107:8000/static/images/{file_name}"
+            
+            # 4. 이미지 URL DB 저장 (Repository 호출)
+            await self.chat_repo.save_chat_image(session_id, image_url)
+            
+            return image_url
+        except Exception as e:
+            print(f"이미지 생성 중 오류 발생: {e}")
+            return None

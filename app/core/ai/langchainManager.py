@@ -76,6 +76,12 @@ MORNING_DIARY_PROMPT = """당신은 사용자의 단편적인 꿈 내용을 한 
 - 꿈속 이야기가 모두 끝난 후, 글의 가장 마지막 문장은 반드시 아래의 양식을 토씨 하나 틀리지 않고 똑같이 작성하여 글을 끝맺으세요. 다른 다짐이나 여운을 남기는 말은 절대 허용하지 않습니다.
 "오늘 꿨던 [꿈의 핵심 소재] 꿈은 실제로 [해몽 의미](이)라는 의미를 담고 있다고 한다. 참 재미있었다."
 
+[추가 지침 - 이미지 생성용]
+- 이 꿈 일기의 분위기와 핵심 장면을 가장 잘 나타내는 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
+- 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
+- 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
+- 반드시 영어로만 작성하세요.
+
 [JSON 문법 엄수 경고]
 반드시 올바른 JSON 형식으로 답변해야 합니다. "title", "content", "tags" 항목 사이의 쉼표(,)를 절대 누락하지 마세요.
 {format_instructions}"""
@@ -86,6 +92,12 @@ NIGHT_DIARY_PROMPT = """당신은 사용자의 하루 일과 대화를 바탕으
 
 [중요 지침] 사용자가 선택한 핵심 키워드: {selected_keywords}
 이 키워드들이 스토리의 핵심 감정선으로 눈에 띄게 강조되도록 자연스럽게 녹여내 주세요.
+
+[추가 지침 - 이미지 생성용]
+- 이 꿈 일기의 분위기와 핵심 장면을 가장 잘 나타내는 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
+- 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
+- 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
+- 반드시 영어로만 작성하세요.
 
 반드시 아래 JSON 형식으로만 답하세요.
 {format_instructions}"""
