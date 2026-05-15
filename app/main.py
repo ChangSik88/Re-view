@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.core.db import db
+from fastapi.staticfiles import StaticFiles
 from app.api import userApi, chatApi, chatSessionApi
 from contextlib import asynccontextmanager
 import os
@@ -25,7 +26,7 @@ app = FastAPI(lifespan=lifespan)
 def read_root():
     return {"status": "success", "message": "서버가 정상적으로 시작되었습니다"}
 
-
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(userApi.router, prefix="/users", tags=["User"])
 app.include_router(chatApi.router, prefix="/chatting", tags=["Chat"])

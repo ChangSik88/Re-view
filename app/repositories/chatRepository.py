@@ -1,6 +1,6 @@
 from prisma.models import ChatSession, ChatMessage
 from app.core.db import db # main.py에서 연결한 prisma db 객체
-
+from datetime import datetime
 class ChatRepository:
     # 1. 새로운 채팅방 생성
     async def create_session(self, user_id: int,routine_type:str):
@@ -47,10 +47,19 @@ class ChatRepository:
         )
         
         return True
+    #이미지 URL을 저장
+    async def save_chat_image(self, session_id: int, image_url: str):
+        return await db.chatimage.create(
+            data={
+                "room_id": session_id,
+                "image_url": image_url,
+            }
+        )
 
-    
-    #세션 아이디를 가져오는 함수
-    async def get_session(self, session_id: int):
+
+
+    #루틴타입을 가져오는 함수
+    async def get_routine_type(self, session_id: int):
         result= await db.chatsession.find_unique(
             where={"room_id": session_id}
         )

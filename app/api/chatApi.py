@@ -27,7 +27,8 @@ async def send_message(request: ChatMessageRequest):
     result = await chat_service.process_message(request.session_id, request.message)
     return result
 
-@router.post("/diary", response_model=DiaryGenerationResponse)
+#image_url도 함께 받기 위해서 response_model 없앰
+@router.post("/diary")
 async def generate_diary(request: DiaryRequest):
     # 키워드도 서비스로 전송
     result = await chat_service.create_diary(request.session_id, request.selected_keywords)
