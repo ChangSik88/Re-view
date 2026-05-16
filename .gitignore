@@ -9,3 +9,6 @@ venv/
 
 # VS Code
 .vscode/
+
+#생성 이미지
+app/static/images/
