@@ -8,7 +8,7 @@ class UserCreateBody(BaseModel):
     id: str = Field(..., max_length=30, description="사용자 아이디")
     password: str = Field(..., max_length=30, description="비밀번호")
     name: str = Field(..., max_length=30)
-    birth: datetime
+    birth: Optional[date]
     @field_validator('birth', mode='before') #Prisma가 date때문에 오류 내기 전에 가져오기
     def assemble_date(cls, v): #v는 들어온 데이터
         if isinstance(v, str): #들어온 데이터가 String이면
@@ -31,3 +31,7 @@ class UserData(BaseModel):
 class UserResponse(BaseModel):
     message: str
     result: UserData
+
+class LoginRequest(BaseModel):
+    userAccount: str
+    password: str

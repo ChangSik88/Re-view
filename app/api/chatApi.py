@@ -1,22 +1,18 @@
-from fastapi import APIRouter
-from pydantic import BaseModel
-from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest
+from fastapi import APIRouter, Depends
+from pydantic import BaseModel,Field
+from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest
 from app.services.chatService import ChatService
-from pydantic import Field
+from app.api.dependencies import get_current_user_id
 
 router = APIRouter()
 chat_service = ChatService()
 
-# 임시: 토큰이 없으니 프론트에서 유저 ID를 직접 쏴주기 위한 스키마
-class SessionCreateRequest(BaseModel):
-    user_id: int
-    routine_type: str=Field(description= "Morning 또는 Night")
 
 # 1. 새로운 채팅방 만들기 (채팅 탭 진입 시 호출)
 @router.post("/session")
-async def create_session(request: SessionCreateRequest):
-    # 안드로이드에서 보낸 user_id(예: "abcd")로 방을 만듭니다.
-    session = await chat_service.create_new_chat(request.user_id,request.routine_type)
+async def create_session(request: SessionCreateRequest,user_id:int=Depends(get_current_user_id)):
+    # user_id로 방을 만든다
+    session = await chat_service.create_new_chat(user_id,request.routine_type)
     return {"message": "채팅방 생성 완료", "session_id": session.room_id, "routine_type": session.routine_type}
 
 # 2. 메시지 보내기 & AI 응답 받기 (채팅 칠 때마다 호출)

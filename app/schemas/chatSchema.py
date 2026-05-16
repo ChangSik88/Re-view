@@ -6,6 +6,9 @@ class ChatMessageRequest(BaseModel):
     session_id: int # 어떤 채팅방에서 온 메시지인지
     message: str    # 유저가 보낸 채팅 내용
     
+class SessionCreateRequest(BaseModel):
+    routine_type: str=Field(description= "Morning 또는 Night")
+
 
 #출력 형태 구조화
 class AIAnalysisResponse(BaseModel):
