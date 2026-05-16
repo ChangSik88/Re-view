@@ -69,8 +69,8 @@ model Item_Url {
 
 model User {
   user_id        Int              @id(map: "PK_USER") @default(autoincrement())
-  id             String?          @db.VarChar(30)
-  password       String?          @db.VarChar(255)
+  id             String           @unique @db.VarChar(30)
+  password       String           @db.VarChar(255)
   name           String?          @db.VarChar(30)
   birth          DateTime?        @db.Date
   gender         String?          @db.VarChar(10)

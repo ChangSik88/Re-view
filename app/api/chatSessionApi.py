@@ -1,14 +1,15 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException,Depends
 from app.services.chatSessionService import ChatSessionService
 from app.schemas.chatSessionSchema import ChatSessionResponse,SingleSessionResponse
 from typing import Optional
+from app.api.dependencies import get_current_user_id
 
 router = APIRouter()
 chat_service = ChatSessionService()
 
-@router.get("/users/{user_id}/sessions", response_model=ChatSessionResponse)
+@router.get("/session/all", response_model=ChatSessionResponse)
 async def get_all_chat_sessions(
-    user_id: int,
+    user_id:int=Depends(get_current_user_id),
     is_marked: Optional[bool] = None):
     try:
         # 서비스 계층에 데이터 요청
@@ -22,8 +23,8 @@ async def get_all_chat_sessions(
         raise HTTPException(status_code=500, detail=f"세션 조회 중 오류 발생: {str(e)}")
     
 
-@router.get("/users/{user_id}/sessions/{room_id}", response_model=SingleSessionResponse)
-async def get_single_session(user_id: int, room_id: int):
+@router.get("/session/single/{room_id}", response_model=SingleSessionResponse)
+async def get_single_session(room_id: int, user_id: int=Depends(get_current_user_id) ):
     try:
         # 서비스 계층 호출
         session = await chat_service.get_single_session(user_id, room_id)
