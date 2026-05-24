@@ -22,15 +22,15 @@ class ChatSessionService:
                 
             return session
     
-    async def get_chat_history(self, user_id: int, session_id: int):
+    async def get_chat_history(self, user_id: int, room_id: int):
         # 1. 보안 검사: 해당 채팅방이 존재하는지, 그리고 이 유저의 방이 맞는지 확인
-        session = await self.chat_session_repository.get_one_session_by_id(user_id,session_id)
+        session = await self.chat_session_repository.get_one_session_by_id(user_id,room_id)
         
         if not session:
             raise ValueError("해당 채팅방을 찾을 수 없습니다.")
 
         # 2. 메시지 내역 불러오기
-        raw_messages = await self.chat_session_repository.get_messages_by_session_id(session_id)
+        raw_messages = await self.chat_session_repository.get_messages_by_session_id(room_id)
 
         # 3. 프론트엔드가 먹기 좋게 데이터 가공 (DB 모델 -> Pydantic 모델)
         history = []
