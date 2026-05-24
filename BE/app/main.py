@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from app.core.db import db
 from fastapi.staticfiles import StaticFiles
-from app.api import userApi, chatApi, chatSessionApi,storeApi
+from app.api import userApi, chatApi, chatSessionApi,storeApi,reportApi
 from contextlib import asynccontextmanager
 import os
 
@@ -32,3 +32,4 @@ app.include_router(userApi.router, prefix="/users", tags=["User"])
 app.include_router(chatApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(chatSessionApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(storeApi.router,prefix="/item",tags=["Store"])
+app.include_router(reportApi.router,prefix="/report",tags=["Chat"])
