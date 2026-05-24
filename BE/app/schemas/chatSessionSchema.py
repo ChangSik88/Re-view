@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel
+from pydantic import BaseModel,Field
 from typing import List, Optional
 from datetime import datetime
 
@@ -34,3 +34,17 @@ class SingleSessionData(BaseModel):
 class SingleSessionResponse(BaseModel):
     message: str
     result: SingleSessionData
+
+class ChatMessageData(BaseModel):
+    user_id: int
+    text: str = Field(description="채팅 메시지 내용")
+    is_me: bool = Field(description="유저가 보낸 메시지인지(True) AI가 보낸 메시지인지(False)")
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+# 💡 API 최종 반환 껍데기
+class ChatHistoryResponse(BaseModel):
+    message: str
+    result: List[ChatMessageData]

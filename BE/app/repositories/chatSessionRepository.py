@@ -25,3 +25,11 @@ class ChatSessionRepository:
                 }
             )
             return session
+    
+
+    # 2. 해당 방의 모든 채팅 메시지를 과거순으로 가져오기
+    async def get_messages_by_session_id(self, session_id: int):
+        return await db.chatmessage.find_many( # DB 테이블 이름(chatmessage) 확인 필요
+            where={"room_id": session_id},
+            order={"created_at": "asc"} # 옛날 대화가 위에, 최신 대화가 아래에 오도록 오름차순(asc)
+        )
