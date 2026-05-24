@@ -24,7 +24,7 @@ class ChatSessionService:
     
     async def get_chat_history(self, user_id: int, session_id: int):
         # 1. 보안 검사: 해당 채팅방이 존재하는지, 그리고 이 유저의 방이 맞는지 확인
-        session = await self.chat_session_repository.get_one_session_by_id(session_id,user_id)
+        session = await self.chat_session_repository.get_one_session_by_id(user_id,session_id)
         
         if not session:
             raise ValueError("해당 채팅방을 찾을 수 없습니다.")
