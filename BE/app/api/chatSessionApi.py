@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException,Depends
 from app.services.chatSessionService import ChatSessionService
-from app.schemas.chatSessionSchema import ChatSessionResponse,SingleSessionResponse
+from app.schemas.chatSessionSchema import ChatSessionResponse,SingleSessionResponse,ChatHistoryResponse
 from typing import Optional
 from app.api.dependencies import get_current_user_id
 
@@ -36,3 +36,26 @@ async def get_single_session(room_id: int, user_id: int=Depends(get_current_user
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"상세 조회 중 오류 발생: {str(e)}")
+    
+
+@router.get("/history/{session_id}", response_model=ChatHistoryResponse)
+async def get_chat_history(
+    session_id: int,
+    user_id: int = Depends(get_current_user_id) # 🚀 이미 만들어둔 완벽한 토큰 인증!
+):
+    try:
+        # 서비스 계층에 유저 ID와 방 번호를 던져서 정제된 내역을 받아옵니다.
+        history_data = await chat_service.get_chat_history(user_id, session_id)
+        
+        return {
+            "message": "대화 내역 복원 성공",
+            "result": history_data
+        }
+        
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        # 남의 방을 보려고 하면 403 몽둥이 찜질
+        raise HTTPException(status_code=403, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"대화 내역 불러오기 실패: {str(e)}")
