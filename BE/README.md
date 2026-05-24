@@ -9,6 +9,7 @@ deactivate
 # 가상환경 활성화
 
 venv\Scripts\activate
+source venv/bin/activate
 
 # 필요한 라이브러리 설치
 
@@ -28,3 +29,15 @@ uvicorn app.main:app --reload
 # 안드로이드 서버 접속
 
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+
+# 서버용
+## 실행
+nohup uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+
+## 가상환경 활성화
+source venv/bin/activate
+
+## 서버 끄기
+lsof -i :8000
+kill -9 [PID번호]
