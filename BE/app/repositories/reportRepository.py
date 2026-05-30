@@ -19,3 +19,9 @@ class ReportRepository:
                 "end_date": end_date
             }
         )
+    
+    async def get_latest_weekly_session(self, user_id: int):
+        return await db.weekly_session.find_first(
+            where={"user_id": user_id},
+            order={"content_id": "desc"}  # 최신순 정렬 (스키마에 created_at이 있다고 가정, 없다면 end_date 사용)
+        )

@@ -38,3 +38,9 @@ class ReportService:
         )
 
         return saved_report
+    
+    async def get_user_report(self, user_id: int):
+        report = await self.report_repo.get_latest_weekly_session(user_id)
+        
+        # 리포트가 아예 없을 수도 있으므로 None을 그대로 반환하여 프론트에서 처리하게 함
+        return report
