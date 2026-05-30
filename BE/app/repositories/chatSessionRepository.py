@@ -12,6 +12,9 @@ class ChatSessionRepository:
             where=where_filter,
             order={
                 "updated_at": "desc" # 최신순 정렬
+            },
+            include={
+                 "ChatImage":True
             }
         )
         return sessions
@@ -22,7 +25,10 @@ class ChatSessionRepository:
                 where={
                     "room_id": room_id,
                     "user_id": user_id  # 내 세션이 맞는지 확인하는 필수 보안 장치!
-                }
+                },
+                include={
+                 "ChatImage":True
+            }
             )
             return session
     

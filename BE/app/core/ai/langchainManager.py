@@ -81,6 +81,7 @@ MORNING_DIARY_PROMPT = """당신은 사용자의 단편적인 꿈 내용을 한 
 - 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
 - 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
 - 반드시 영어로만 작성하세요.
+- 16:9 비율정도의 이미지가 생성되게 하세요.
 
 [JSON 문법 엄수 경고]
 반드시 올바른 JSON 형식으로 답변해야 합니다. "title", "content", "tags" 항목 사이의 쉼표(,)를 절대 누락하지 마세요.
@@ -98,6 +99,7 @@ NIGHT_DIARY_PROMPT = """당신은 사용자의 하루 일과 대화를 바탕으
 - 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
 - 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
 - 반드시 영어로만 작성하세요.
+- 16:9 비율정도의 이미지가 생성되게 하세요.
 
 반드시 아래 JSON 형식으로만 답하세요.
 {format_instructions}"""
