@@ -7,6 +7,9 @@ import 'home_screen.dart';
 import 'dream_list_screen.dart';
 import 'dream_detail_screen.dart';
 import 'chat_screen.dart';
+import 'store_screen.dart';
+import 'store_detail_screen.dart';
+import 'routine_select_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,6 +30,9 @@ class MyApp extends StatelessWidget {
         '/dream_list': (context) => DreamListScreen(), // 4. 꿈나라 대시보드 리스트
         '/chat_detail': (context) => DreamDetailScreen(), // 5. 꿈 상세 기록 화면
         '/chat_input': (context) => ChatScreen(), // 6. AI 채팅 화면
+        '/store': (context) => StoreScreen(), //7. 스토어 메인 화면
+        '/store_detail': (context) => StoreDetailScreen(), //8. 스토어 제품 화면
+        '/routine_select': (context) => RoutineSelectScreen(),
       },
     );
   }

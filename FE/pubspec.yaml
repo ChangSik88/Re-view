@@ -20,6 +20,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
+
+# 💡 2. 아이콘 설정 추가 (파일 맨 아래 빈 공간에 추가)
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png" # 방금 넣은 아이콘 파일의 경로와 이름
