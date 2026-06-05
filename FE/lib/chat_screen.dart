@@ -3,11 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// 채팅 메시지를 담을 클래스 (데이터 스키마)
 class ChatMessage {
   final String text;
-  final bool isMe; // 내가 보낸 건지, AI가 보낸 건지 구분
-  final List<String>? suggestedFeelings; // AI가 감정 분석을 줬을 때 띄워줄 체크박스 데이터
+  final bool isMe;
+  final List<String>? suggestedFeelings;
 
   ChatMessage({required this.text, required this.isMe, this.suggestedFeelings});
 }
@@ -16,37 +15,107 @@ class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
-
+ 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _focusNode = FocusNode(); // 💡 [추가] 키보드 포커스 제어용
 
   List<ChatMessage> _messages = [];
   bool _isTyping = false;
   String _routineType = 'morning';
-
-  // 💡 추가된 부분: 방 번호를 저장할 변수
   int _sessionId = 0;
   Set<String> _selectedFeelings = {};
+
+  bool _isHistoryLoading = false;
+  bool _isInit = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    if (args != null) {
-      _routineType = args['routine'] ?? 'morning';
-      // 💡 추가된 부분: 이전 화면에서 넘겨준 session_id를 꽉 잡습니다!
-      _sessionId = args['session_id'] ?? 0;
-    }
+    if (!_isInit) {
+      _isInit = true;
+      final args =
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    if (_messages.isEmpty) {
-      _setInitialGreeting();
+      if (args != null) {
+        _routineType = args['routine'] ?? 'morning';
+        _sessionId = int.tryParse(args['session_id']?.toString() ?? '0') ?? 0;
+      }
+
+      if (_sessionId != 0) {
+        _fetchChatHistory();
+      } else {
+        _setInitialGreeting();
+      }
     }
   }
 
-  // 💡 모닝/굿나잇 분기 처리 (기획 내용 완벽 반영!)
+  @override
+  void dispose() {
+    _messageController.dispose();
+    _scrollController.dispose();
+    _focusNode.dispose(); // 💡 [추가] 메모리 누수 방지
+    super.dispose();
+  }
+
+  Future<void> _fetchChatHistory() async {
+    setState(() => _isHistoryLoading = true);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final String? token = prefs.getString('jwt_token');
+
+      final url =
+          Uri.parse('http://13.209.97.107:8000/chatting/history/$_sessionId');
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      });
+
+      if (response.statusCode == 200) {
+        final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
+        List<dynamic> historyList = [];
+
+        if (decodedResponse is List) {
+          historyList = decodedResponse;
+        } else if (decodedResponse is Map) {
+          historyList = decodedResponse['result'] ??
+              decodedResponse['messages'] ??
+              decodedResponse['history'] ??
+              [];
+        }
+
+        setState(() {
+          _messages = historyList.map((msg) {
+            String msgText =
+                msg['text'] ?? msg['content'] ?? msg['message'] ?? '';
+            bool isMe = false;
+            if (msg.containsKey('is_me')) {
+              isMe = msg['is_me'] == true;
+            } else if (msg.containsKey('role')) {
+              isMe = msg['role'] == 'user';
+            }
+            return ChatMessage(text: msgText, isMe: isMe);
+          }).toList();
+          _isHistoryLoading = false;
+        });
+
+        if (_messages.isEmpty) {
+          _setInitialGreeting();
+        } else {
+          _scrollToBottom();
+        }
+      } else {
+        _setInitialGreeting();
+        setState(() => _isHistoryLoading = false);
+      }
+    } catch (e) {
+      _setInitialGreeting();
+      setState(() => _isHistoryLoading = false);
+    }
+  }
+
   void _setInitialGreeting() {
     if (_routineType == 'morning') {
       _messages.add(ChatMessage(text: "모닝 루틴을 작성해 볼까요?", isMe: false));
@@ -59,8 +128,10 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {});
   }
 
-// 💡 1. 사용자가 텍스트를 전송했을 때
   Future<void> _sendMessage() async {
+    // 💡 [개선 1] 연타 방지: 이미 로딩 중이면 함수를 멈춤
+    if (_isTyping) return;
+
     final text = _messageController.text.trim();
     if (text.isEmpty) return;
 
@@ -72,42 +143,60 @@ class _ChatScreenState extends State<ChatScreen> {
     _scrollToBottom();
 
     try {
-      // 🚀 토큰 꺼내기
       final prefs = await SharedPreferences.getInstance();
       final String? token = prefs.getString('jwt_token');
+      final String? userId = prefs.getString('user_id');
+
+      if (token == null) {
+        setState(() => _isTyping = false);
+        return;
+      }
+
+      if (_sessionId == 0) {
+        final createRoomUrl =
+            Uri.parse('http://13.209.97.107:8000/chatting/session');
+        final roomResponse = await http.post(
+          createRoomUrl,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token'
+          },
+          body: jsonEncode({
+            "routine_type": _routineType == 'morning' ? 'Morning' : 'Night',
+            "user_id": userId
+          }),
+        );
+
+        if (roomResponse.statusCode == 200 || roomResponse.statusCode == 201) {
+          final roomData = jsonDecode(roomResponse.body);
+          _sessionId = roomData['session_id'] ?? 0;
+        } else {
+          // 💡 [개선 3] 방 생성 실패 시 에러 던지기
+          throw Exception("CreateRoomFailed");
+        }
+      }
 
       final url = Uri.parse('http://13.209.97.107:8000/chatting/message');
       final response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', // 🚀 401, 422 방어용 토큰!
+          'Authorization': 'Bearer $token'
         },
-        body: jsonEncode({
-          "session_id": _sessionId, // 🚀 백엔드에 방 번호 전달
-          "message": text
-        }),
+        body: jsonEncode({"session_id": _sessionId, "message": text}),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // 인코딩 깨짐 방지 처리
         final data = jsonDecode(utf8.decode(response.bodyBytes));
-
         setState(() {
           _isTyping = false;
-
-          // 🚀 핵심 수정 1: 'analysis'라는 중간 상자를 먼저 엽니다!
           final analysisData = data['analysis'] ?? {};
-
-          // 🚀 핵심 수정 2: 중간 상자 안에서 진짜 알맹이들을 꺼냅니다!
           final aiReply = analysisData['ai_reply'] ?? "이야기를 더 들려주세요.";
           final feelings =
               List<String>.from(analysisData['suggested_feelings'] ?? []);
 
-          // 💡 AI 답변 말풍선을 먼저 띄웁니다!
           _messages.add(ChatMessage(text: aiReply, isMe: false));
 
-          // 💡 키워드가 있으면 체크박스 말풍선을 이어서 띄웁니다!
           if (feelings.isNotEmpty) {
             _messages.add(ChatMessage(
               text: "이 꿈에서 가장 가까운 느낌을 선택해주세요.",
@@ -121,18 +210,26 @@ class _ChatScreenState extends State<ChatScreen> {
         _loadMockAnalyzeResponse();
       }
     } catch (e) {
-      _loadMockAnalyzeResponse();
+      print("메시지 전송 에러: $e");
+      setState(() => _isTyping = false);
+
+      // 💡 [개선 3] 에러 종류에 따라 다르게 대처
+      if (e.toString().contains("CreateRoomFailed")) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('채팅방을 생성하지 못했습니다. 다시 전송해주세요.')));
+      } else {
+        _loadMockAnalyzeResponse();
+      }
     }
   }
 
-  // 해커톤 시연용 가짜 응답 (API 서버 연결 안 될 때 작동)
   void _loadMockAnalyzeResponse() {
     Future.delayed(Duration(seconds: 1), () {
       setState(() {
         _messages.add(ChatMessage(
-          text: "이 꿈에서 가장 가까운 느낌이 무엇이었나요?",
+          text: "서버가 응답하지 않아 임시 답변을 띄웁니다.",
           isMe: false,
-          suggestedFeelings: ['불안', '긴장', '혼란', '설명하기 어려움'], // 체크박스로 뜰 녀석들
+          suggestedFeelings: ['불안', '긴장', '혼란', '설명하기 어려움'],
         ));
         _isTyping = false;
       });
@@ -140,16 +237,12 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  // 💡 2. 감정 체크박스 선택 후 "일기 작성" 버튼 눌렀을 때 (두 번째 API 호출)
   Future<void> _submitFeelingsAndGenerate() async {
     if (_selectedFeelings.isEmpty) return;
 
-    setState(() {
-      _isTyping = true;
-    });
+    setState(() => _isTyping = true);
 
     try {
-      // 🚀 토큰 꺼내기
       final prefs = await SharedPreferences.getInstance();
       final String? token = prefs.getString('jwt_token');
 
@@ -158,34 +251,26 @@ class _ChatScreenState extends State<ChatScreen> {
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token', // 🚀 토큰 필수!
+          'Authorization': 'Bearer $token'
         },
         body: jsonEncode({
-          "session_id": _sessionId, // 🚀 어떤 채팅방의 일기를 쓸지 알려줌
-          "selected_feelings": _selectedFeelings.toList(),
+          "session_id": _sessionId,
+          "selected_feelings": _selectedFeelings.toList()
         }),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // 일기 생성 성공 시 리스트 화면으로 이동
         Navigator.pushReplacementNamed(context, '/dream_list');
       } else {
-        // 실패 시 에러 스낵바
-        setState(() {
-          _isTyping = false;
-        });
+        setState(() => _isTyping = false);
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('일기 생성 실패: ${response.statusCode}')));
       }
     } catch (e) {
-      setState(() {
-        _isTyping = false;
-      });
-      print("일기 생성 에러: $e");
+      setState(() => _isTyping = false);
     }
   }
 
-  // 스크롤을 맨 아래로 내려주는 함수
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -213,26 +298,25 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // 💡 [채팅 로그 영역]
             Expanded(
-              child: ListView.builder(
-                controller: _scrollController,
-                padding: EdgeInsets.all(16),
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  final msg = _messages[index];
-                  return _buildChatBubble(msg);
-                },
-              ),
+              child: _isHistoryLoading
+                  ? Center(
+                      child:
+                          CircularProgressIndicator(color: Color(0xFF8F6CFF)))
+                  : ListView.builder(
+                      controller: _scrollController,
+                      padding: EdgeInsets.all(16),
+                      itemCount: _messages.length,
+                      itemBuilder: (context, index) {
+                        final msg = _messages[index];
+                        return _buildChatBubble(msg);
+                      },
+                    ),
             ),
-
-            // AI 로딩 인디케이터
             if (_isTyping)
               Padding(
                   padding: EdgeInsets.all(8.0),
                   child: CircularProgressIndicator(color: Color(0xFF8F6CFF))),
-
-            // 💡 [입력창 영역] (무진님 코드 UI 반영)
             _buildInputArea(),
           ],
         ),
@@ -240,7 +324,6 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // 말풍선 그리는 함수
   Widget _buildChatBubble(ChatMessage message) {
     bool isMe = message.isMe;
 
@@ -252,8 +335,7 @@ class _ChatScreenState extends State<ChatScreen> {
         constraints:
             BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
         decoration: BoxDecoration(
-          color:
-              isMe ? Color(0xFF7247FF) : Color(0xFF454048), // 나는 보라색, AI는 짙은 회색
+          color: isMe ? Color(0xFF7247FF) : Color(0xFF454048),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
@@ -264,12 +346,9 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 일반 텍스트
             Text(message.text,
                 style:
                     TextStyle(color: Colors.white, fontSize: 15, height: 1.4)),
-
-            // 💡 AI가 감정 분석(체크박스)을 보냈을 때만 렌더링되는 마법의 UI
             if (message.suggestedFeelings != null &&
                 message.suggestedFeelings!.isNotEmpty) ...[
               SizedBox(height: 16),
@@ -277,13 +356,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   .map((feeling) => _buildFeelingCheckbox(feeling))
                   .toList(),
               SizedBox(height: 16),
-
-              // 하단 버튼 2개 (일기 작성 등)
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   OutlinedButton(
-                    onPressed: () {},
+                    // 💡 [개선 2] 비어있던 '더 대화하기' 버튼에 입력창 포커스 기능 연결!
+                    onPressed: () {
+                      _focusNode.requestFocus();
+                    },
                     style: OutlinedButton.styleFrom(
                         side: BorderSide(color: Colors.grey)),
                     child: Text('더 대화하기',
@@ -291,7 +371,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: _submitFeelingsAndGenerate, // 💡 최종 제출 버튼
+                    onPressed: _submitFeelingsAndGenerate,
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.white),
                     child: Text('일기 작성',
@@ -309,10 +389,8 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // 체크박스 UI (단순 터치 로직 구현)
   Widget _buildFeelingCheckbox(String feeling) {
     bool isSelected = _selectedFeelings.contains(feeling);
-
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -340,7 +418,6 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // 맨 밑 입력창 UI
   Widget _buildInputArea() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -353,24 +430,24 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Color(0xFF100D10),
-                borderRadius: BorderRadius.circular(36),
-              ),
+                  color: Color(0xFF100D10),
+                  borderRadius: BorderRadius.circular(36)),
               child: TextField(
                 controller: _messageController,
+                focusNode: _focusNode, // 💡 추가된 포커스 노드 연결
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: '메시지 입력',
                   hintStyle: TextStyle(color: Colors.grey),
                   border: InputBorder.none,
                 ),
-                onSubmitted: (value) => _sendMessage(), // 엔터 쳐도 전송
+                onSubmitted: (value) => _sendMessage(),
               ),
             ),
           ),
           SizedBox(width: 10),
           GestureDetector(
-            onTap: _sendMessage, // 💡 전송 버튼 누르면 API 호출!
+            onTap: _sendMessage,
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
