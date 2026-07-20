@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'services/store_service.dart';
+import '../../services/store_service.dart';
 
 class StoreScreen extends StatefulWidget {
   @override

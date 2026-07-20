@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'services/api_client.dart';
-import 'services/chat_service.dart';
-
-class ChatMessage {
-  final String text;
-  final bool isMe;
-  final List<String>? suggestedFeelings;
-
-  ChatMessage({required this.text, required this.isMe, this.suggestedFeelings});
-}
+import '../../services/api_client.dart';
+import '../../services/chat_service.dart';
+import '../../models/chat_message.dart';
 
 class ChatScreen extends StatefulWidget {
   @override

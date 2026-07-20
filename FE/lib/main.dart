@@ -2,15 +2,15 @@
 import 'package:flutter/material.dart';
 import 'theme/app_theme.dart';
 // 💡 이 줄을 맨 위에 추가해 주세요!
-import 'login_screen.dart';
-import 'signup_screen.dart';
-import 'home_screen.dart';
-import 'dream_list_screen.dart';
-import 'dream_detail_screen.dart';
-import 'chat_screen.dart';
-import 'store_screen.dart';
-import 'store_detail_screen.dart';
-import 'routine_select_screen.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/signup_screen.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/dream/dream_list_screen.dart';
+import 'screens/dream/dream_detail_screen.dart';
+import 'screens/chat/chat_screen.dart';
+import 'screens/store/store_screen.dart';
+import 'screens/store/store_detail_screen.dart';
+import 'screens/chat/routine_select_screen.dart';
 
 void main() {
   runApp(MyApp());
