@@ -1,4 +1,4 @@
-import jwt,os
+import jwt,os,bcrypt
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 load_dotenv()
@@ -21,3 +21,14 @@ def create_access_token(user_id: int):
     
     # 비밀 키로 도장을 찍어 암호화된 토큰 문자열을 반환합니다.
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def hash_password(plain_password: str) -> str:
+    # 평문 비밀번호를 bcrypt 해시 문자열로 변환합니다.
+    hashed = bcrypt.hashpw(plain_password.encode("utf-8"), bcrypt.gensalt())
+    return hashed.decode("utf-8")
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    # 평문 비밀번호가 저장된 해시와 일치하는지 검증합니다.
+    return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))

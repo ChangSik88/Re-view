@@ -17,9 +17,20 @@ class ChatService:
     async def create_new_chat(self, user_id: int,routine_type:str):
         return await self.chat_repo.create_session(user_id, routine_type)
 
+    # 방 소유권 검증 공통 로직
+    async def _get_owned_session(self, user_id: int, room_id: int):
+        session = await self.chat_repo.get_session(room_id)
+        if not session:
+            raise ValueError("채팅방을 찾을 수 없습니다.")
+        if session.user_id != user_id:
+            raise PermissionError("해당 채팅방에 접근할 권한이 없습니다.")
+        return session
+
     # 핵심 대화 처리 로직
-    async def process_message(self, room_id: int, user_message: str):
-        routine_type= await self.chat_repo.get_routine_type(room_id)
+    async def process_message(self, user_id: int, room_id: int, user_message: str):
+        # 방 소유권 검증: 존재하지 않거나 남의 방이면 차단
+        session = await self._get_owned_session(user_id, room_id)
+        routine_type = session.routine_type
 
         # 유저가 보낸 메시지를 DB에 저장
         await self.chat_repo.save_message(room_id, "USER", user_message)
@@ -48,9 +59,10 @@ class ChatService:
             "analysis": ai_result
         }
 
-    async def create_diary(self, room_id: int, selected_keywords: List[str]):
-        routine_type = await self.chat_repo.get_routine_type(room_id)
-
+    async def create_diary(self, user_id: int, room_id: int, selected_keywords: List[str]):
+        # 방 소유권 검증: 존재하지 않거나 남의 방이면 차단
+        session = await self._get_owned_session(user_id, room_id)
+        routine_type = session.routine_type
 
         history_records = await self.chat_repo.get_chat_history(room_id)
         formatted_history = "\n".join([f"{msg.role}: {msg.content}" for msg in history_records])
