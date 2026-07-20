@@ -3,7 +3,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI,GoogleGenerativeAIEmbe
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from app.schemas.chatSchema import AIAnalysisResponse, DiaryGenerationResponse
-from typing import List;
 
 # .env에서 불러온 API 키를 자동 인식하여 모델을 세팅합니다.
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.7)

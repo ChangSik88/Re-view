@@ -56,7 +56,7 @@ class ChatSessionService:
             raise ValueError("해당 채팅방을 찾을 수 없습니다.")
 
         # 2. 메시지 내역 불러오기
-        raw_messages = await self.chat_session_repository.get_messages_by_session_id(room_id)
+        raw_messages = await self.chat_session_repository.get_messages_by_room_id(room_id)
 
         # 3. 프론트엔드가 먹기 좋게 데이터 가공 (DB 모델 -> Pydantic 모델)
         history = []

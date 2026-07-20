@@ -4,7 +4,6 @@ from app.core.db import db
 from fastapi.staticfiles import StaticFiles
 from app.api import userApi, chatApi, chatSessionApi,storeApi,reportApi
 from contextlib import asynccontextmanager
-import os
 
 load_dotenv()
 

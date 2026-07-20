@@ -12,7 +12,7 @@ class ReportResponse(BaseModel):
     message: str
     result: WeeklySessionDTO
 
-class WeeklySessionDTO(BaseModel):
+class WeeklySessionDetailDTO(BaseModel):
     content_id: int
     user_id: int
     weekly_content: str
@@ -21,4 +21,4 @@ class WeeklySessionDTO(BaseModel):
 
 class ReportGetResponse(BaseModel):
     message: str
-    result: Optional[WeeklySessionDTO] = None
+    result: Optional[WeeklySessionDetailDTO] = None
