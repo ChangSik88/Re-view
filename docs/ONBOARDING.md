@@ -42,6 +42,13 @@ dream_diary/
 │   │   └── schemas/       # Pydantic 요청/응답 모델
 │   └── prisma/schema.prisma
 └── FE/                # Flutter 프론트엔드
+    └── lib/
+        ├── main.dart      # 앱 진입점·라우팅
+        ├── config/        # API 베이스 URL·엔드포인트
+        ├── services/      # API 통신 (도메인별: auth/chat/session/report/store)
+        ├── models/        # 데이터 모델
+        ├── theme/         # 색·타이포 토큰 (AppColors/AppTextStyles)
+        └── screens/       # 화면 (auth/home/chat/dream/store)
 ```
 
 ## 4. 백엔드 아키텍처 한눈에
@@ -88,7 +95,40 @@ api (라우터)  →  services (로직)  →  repositories (DB)  →  Prisma / P
 - **모닝/나이트 프롬프트는 쌍으로 존재합니다.** 프롬프트를 손보면 두 갈래(MORNING/NIGHT)를 모두 확인하세요.
 - **파일명 컨벤션이 섞여 있습니다.** `user*`만 복수형(`userServices.py`), 나머지는 단수형(`chatService.py`)입니다. 기존 파일을 고칠 땐 그 파일 관례를 따르세요.
 
-## 8. 더 읽을거리
+## 8. 프로젝트 진행 이력
+
+새로 합류한 팀원이 "최근 어떤 작업이 있었는지" 파악할 수 있도록, 주요 변경을 주제별로 정리합니다. (괄호는 PR 번호)
+
+### 2026-07-20 — 백엔드·프론트엔드 대규모 리팩토링 및 개선
+
+**보안 · 데이터 정합성**
+- 비밀번호 bcrypt 해싱, 채팅 엔드포인트 인증/소유권 검증 추가 (#17)
+- `routine_type` 대소문자·`None` 정규화 — 모닝 루틴이 밤 프롬프트로 처리되던 버그 수정 (#26)
+- 일기 생성 키워드 필드명 정합(`selected_keywords`) — 선택 감정이 반영되지 않던 버그 수정 (#26)
+- 리포트 분석 대상을 일기 본문이 있는 방으로 한정 (#19)
+- JWT 액세스 토큰 만료 30일 → 7일 (#22)
+- 일기 저장(본문+벡터)을 트랜잭션으로 묶어 부분 저장 방지 (#23)
+
+**백엔드 구조 · 정리**
+- 죽은 코드 제거 및 변수명을 prisma 스키마와 통일 (#15)
+- 미사용 의존성(`openai` 등)·추적 산출물 정리 (#21)
+- 설정·패키지·가상환경을 루트로 일원화(풀스택 관리) (#16)
+- 이미지 URL 하드코딩 IP → `.env`의 `SERVER_BASE_URL` (#18)
+
+**AI**
+- LLM 모델을 `gemini-3.1-flash-lite`로 교체 (#20)
+- 모닝 프롬프트 개선: 해몽 분량 제한, 밤 표현 금지 강화 (#20)
+
+**프론트엔드**
+- API 통신을 `services/` 계층으로 분리(하드코딩 IP·토큰 로딩 중앙화) (#25)
+- 디자인 토큰 인프라(`AppColors`/`AppTextStyles`) 도입 (#27)
+- async 갭 뒤 `mounted` 가드 추가(크래시 방지) + `print` 제거 (#28)
+- 화면을 `screens/` 기능별 폴더로 정리, `ChatMessage` 모델 분리 (#29)
+
+**문서**
+- `CLAUDE.md`, 이 온보딩 가이드, `docs/design-tokens.md` 추가 (#24, #27)
+
+## 9. 더 읽을거리
 
 - [README.md](../README.md) — 설치·실행 명령어
 - [CLAUDE.md](../CLAUDE.md) — 아키텍처·주의사항 요약(AI 어시스턴트용이지만 사람이 읽어도 유용)
