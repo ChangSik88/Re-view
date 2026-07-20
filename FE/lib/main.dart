@@ -1,5 +1,6 @@
 // 💡 메모장에 미리 복사해둘 완성형 main.dart 코드
 import 'package:flutter/material.dart';
+import 'theme/app_theme.dart';
 // 💡 이 줄을 맨 위에 추가해 주세요!
 import 'login_screen.dart';
 import 'signup_screen.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'AI-Diary',
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: AppTheme.theme,
       // 💡 첫 화면을 로그인 화면으로 지정합니다.
       home: LoginScreen(),
       routes: {
