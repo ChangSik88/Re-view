@@ -11,28 +11,28 @@ class ChatRepository:
         )
 
     # 2. 메시지 저장 (유저 메시지 & AI 메시지 공용)
-    async def save_message(self, session_id: int, sender_type: str, content: str):
-        # sender_type은 "USER" 또는 "AI" 로 구분하여 저장
+    async def save_message(self, room_id: int, role: str, content: str):
+        # role은 "USER" 또는 "AI" 로 구분하여 저장
         return await db.chatmessage.create(
             data={
-                "room_id": session_id,
-                "role": sender_type,
+                "room_id": room_id,
+                "role": role,
                 "content": content
             }
         )
 
     # 3. 과거 대화 내역 불러오기 (LangChain에게 문맥을 주기 위함)
-    async def get_chat_history(self, session_id: int):
+    async def get_chat_history(self, room_id: int):
         # 특정 방의 메시지를 시간순(오름차순)으로 전부 가져옵니다.
         return await db.chatmessage.find_many(
-            where={"room_id": session_id},
+            where={"room_id": room_id},
             order={"created_at": "asc"}
         )
-    
-    async def update_session_with_diary(self, session_id: int, title: str, content: str, tags: list[str], vector: list[float]):
+
+    async def update_session_with_diary(self, room_id: int, title: str, content: str, tags: list[str], vector: list[float]):
         await db.chatsession.update(
             where={
-                "room_id": session_id
+                "room_id": room_id
             },
             data={
                 "title": title,
@@ -43,15 +43,15 @@ class ChatRepository:
         await db.execute_raw(
             'UPDATE "ChatSession" SET content_vector = $1::vector WHERE room_id = $2',
             vector_str,
-            session_id
+            room_id
         )
-        
+
         return True
     #이미지 URL을 저장
-    async def save_chat_image(self, session_id: int, image_url: str):
+    async def save_chat_image(self, room_id: int, image_url: str):
         return await db.chatimage.create(
             data={
-                "room_id": session_id,
+                "room_id": room_id,
                 "image_url": image_url,
             }
         )
@@ -59,8 +59,8 @@ class ChatRepository:
 
 
     #루틴타입을 가져오는 함수
-    async def get_routine_type(self, session_id: int):
+    async def get_routine_type(self, room_id: int):
         result= await db.chatsession.find_unique(
-            where={"room_id": session_id}
+            where={"room_id": room_id}
         )
         return result.routine_type if result else None
