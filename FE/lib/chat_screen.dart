@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/api_client.dart';
+import 'services/chat_service.dart';
 
 class ChatMessage {
   final String text;
@@ -63,52 +63,27 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> _fetchChatHistory() async {
     setState(() => _isHistoryLoading = true);
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
+      final historyList = await chatService.getHistory(_sessionId);
 
-      final url =
-          Uri.parse('http://13.209.97.107:8000/chatting/history/$_sessionId');
-      final response = await http.get(url, headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+      setState(() {
+        _messages = historyList.map((msg) {
+          String msgText =
+              msg['text'] ?? msg['content'] ?? msg['message'] ?? '';
+          bool isMe = false;
+          if (msg.containsKey('is_me')) {
+            isMe = msg['is_me'] == true;
+          } else if (msg.containsKey('role')) {
+            isMe = msg['role'] == 'user';
+          }
+          return ChatMessage(text: msgText, isMe: isMe);
+        }).toList();
+        _isHistoryLoading = false;
       });
 
-      if (response.statusCode == 200) {
-        final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-        List<dynamic> historyList = [];
-
-        if (decodedResponse is List) {
-          historyList = decodedResponse;
-        } else if (decodedResponse is Map) {
-          historyList = decodedResponse['result'] ??
-              decodedResponse['messages'] ??
-              decodedResponse['history'] ??
-              [];
-        }
-
-        setState(() {
-          _messages = historyList.map((msg) {
-            String msgText =
-                msg['text'] ?? msg['content'] ?? msg['message'] ?? '';
-            bool isMe = false;
-            if (msg.containsKey('is_me')) {
-              isMe = msg['is_me'] == true;
-            } else if (msg.containsKey('role')) {
-              isMe = msg['role'] == 'user';
-            }
-            return ChatMessage(text: msgText, isMe: isMe);
-          }).toList();
-          _isHistoryLoading = false;
-        });
-
-        if (_messages.isEmpty) {
-          _setInitialGreeting();
-        } else {
-          _scrollToBottom();
-        }
-      } else {
+      if (_messages.isEmpty) {
         _setInitialGreeting();
-        setState(() => _isHistoryLoading = false);
+      } else {
+        _scrollToBottom();
       }
     } catch (e) {
       _setInitialGreeting();
@@ -153,62 +128,37 @@ class _ChatScreenState extends State<ChatScreen> {
       }
 
       if (_sessionId == 0) {
-        final createRoomUrl =
-            Uri.parse('http://13.209.97.107:8000/chatting/session');
-        final roomResponse = await http.post(
-          createRoomUrl,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer $token'
-          },
-          body: jsonEncode({
-            "routine_type": _routineType == 'morning' ? 'Morning' : 'Night',
-            "user_id": userId
-          }),
-        );
-
-        if (roomResponse.statusCode == 200 || roomResponse.statusCode == 201) {
-          final roomData = jsonDecode(roomResponse.body);
-          _sessionId = roomData['session_id'] ?? 0;
-        } else {
-          // 💡 [개선 3] 방 생성 실패 시 에러 던지기
+        try {
+          _sessionId = await chatService.createSession(
+            _routineType == 'morning' ? 'Morning' : 'Night',
+            userId,
+          );
+        } on ApiException {
+          // 💡 방 생성 실패(서버 응답 오류) 시 에러 던지기
           throw Exception("CreateRoomFailed");
         }
       }
 
-      final url = Uri.parse('http://13.209.97.107:8000/chatting/message');
-      final response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-        body: jsonEncode({"session_id": _sessionId, "message": text}),
-      );
+      final data = await chatService.sendMessage(_sessionId, text);
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        setState(() {
-          _isTyping = false;
-          final analysisData = data['analysis'] ?? {};
-          final aiReply = analysisData['ai_reply'] ?? "이야기를 더 들려주세요.";
-          final feelings =
-              List<String>.from(analysisData['suggested_feelings'] ?? []);
+      setState(() {
+        _isTyping = false;
+        final analysisData = data['analysis'] ?? {};
+        final aiReply = analysisData['ai_reply'] ?? "이야기를 더 들려주세요.";
+        final feelings =
+            List<String>.from(analysisData['suggested_feelings'] ?? []);
 
-          _messages.add(ChatMessage(text: aiReply, isMe: false));
+        _messages.add(ChatMessage(text: aiReply, isMe: false));
 
-          if (feelings.isNotEmpty) {
-            _messages.add(ChatMessage(
-              text: "이 꿈에서 가장 가까운 느낌을 선택해주세요.",
-              isMe: false,
-              suggestedFeelings: feelings,
-            ));
-          }
-        });
-        _scrollToBottom();
-      } else {
-        _loadMockAnalyzeResponse();
-      }
+        if (feelings.isNotEmpty) {
+          _messages.add(ChatMessage(
+            text: "이 꿈에서 가장 가까운 느낌을 선택해주세요.",
+            isMe: false,
+            suggestedFeelings: feelings,
+          ));
+        }
+      });
+      _scrollToBottom();
     } catch (e) {
       print("메시지 전송 에러: $e");
       setState(() => _isTyping = false);
@@ -243,29 +193,12 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() => _isTyping = true);
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      final url = Uri.parse('http://13.209.97.107:8000/chatting/diary');
-      final response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-        body: jsonEncode({
-          "session_id": _sessionId,
-          "selected_feelings": _selectedFeelings.toList()
-        }),
-      );
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        Navigator.pushReplacementNamed(context, '/dream_list');
-      } else {
-        setState(() => _isTyping = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('일기 생성 실패: ${response.statusCode}')));
-      }
+      await chatService.generateDiary(_sessionId, _selectedFeelings.toList());
+      Navigator.pushReplacementNamed(context, '/dream_list');
+    } on ApiException catch (e) {
+      setState(() => _isTyping = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('일기 생성 실패: ${e.statusCode}')));
     } catch (e) {
       setState(() => _isTyping = false);
     }

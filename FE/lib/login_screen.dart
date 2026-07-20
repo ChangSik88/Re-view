@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/api_client.dart';
+import 'services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,38 +23,20 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      final url = Uri.parse('http://13.209.97.107:8000/users/login');
+      final token = await authService.login(userId, password);
 
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'userAccount': userId,
-          'password': password,
-        }),
-      );
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('jwt_token', token ?? '');
+      await prefs.setString('user_id', _idController.text);
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final token = data['access_token'];
-        final userIdSaved = _idController.text;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('로그인 성공!')));
 
-        print("로그인 성공! 토큰: $token");
-
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('jwt_token', token);
-        await prefs.setString('user_id', userIdSaved);
-
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('로그인 성공!')));
-
-        Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('로그인 실패: ${response.statusCode}')));
-      }
+      Navigator.pushReplacementNamed(context, '/home');
+    } on ApiException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('로그인 실패: ${e.statusCode}')));
     } catch (e) {
-      print("에러 발생: $e");
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 연결할 수 없습니다.')));
     }

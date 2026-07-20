@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'services/api_client.dart';
+import 'services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -47,30 +47,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     try {
-      final url = Uri.parse('http://13.209.97.107:8000/users/signup');
-
-      final response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'id': userId,
-          'password': password,
-          'name': name,
-          'birth': birth,
-          'gender': _selectedGender
-        }),
+      await authService.signup(
+        id: userId,
+        password: password,
+        name: name,
+        birth: birth,
+        gender: _selectedGender!,
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('회원가입 완료! 로그인해주세요.')));
-        Navigator.pop(context);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('회원가입 실패: ${response.statusCode}')));
-      }
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('회원가입 완료! 로그인해주세요.')));
+      Navigator.pop(context);
+    } on ApiException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('회원가입 실패: ${e.statusCode}')));
     } catch (e) {
-      print("에러 발생: $e");
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 연결할 수 없습니다.')));
     }

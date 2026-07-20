@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/store_service.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -23,24 +22,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _fetchStorePreview() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      final url = Uri.parse('http://13.209.97.107:8000/item/list');
-      final response = await http.get(url, headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+      final result = await storeService.getItems();
+      setState(() {
+        _storeData['다이어리'] = result['다이어리'] ?? [];
+        _storeData['악세서리'] = result['악세서리'] ?? [];
+        _storeData['기타'] = result['기타'] ?? [];
+        _isStoreLoading = false;
       });
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        setState(() {
-          _storeData['다이어리'] = data['result']['다이어리'] ?? [];
-          _storeData['악세서리'] = data['result']['악세서리'] ?? [];
-          _storeData['기타'] = data['result']['기타'] ?? [];
-          _isStoreLoading = false;
-        });
-      }
     } catch (e) {
       setState(() => _isStoreLoading = false);
     }
