@@ -125,6 +125,10 @@ api (라우터)  →  services (로직)  →  repositories (DB)  →  Prisma / P
 - async 갭 뒤 `mounted` 가드 추가(크래시 방지) + `print` 제거 (#28)
 - 화면을 `screens/` 기능별 폴더로 정리, `ChatMessage` 모델 분리 (#29)
 
+**안정성 · 기타 (로컬 작업분)**
+- 이미지 생성 비동기화(`AsyncInferenceClient`) — 동기 호출이 이벤트 루프를 막아 같은 프로세스의 다른 요청까지 멈추던 문제 해결 (#31)
+- bcrypt 72바이트 입력 처리, 일기 `title`/`tags` 길이 제한(`VarChar(50)`), 회원가입 응답 `password` 노출 제거 (#31)
+
 **문서**
 - `CLAUDE.md`, 이 온보딩 가이드, `docs/design-tokens.md` 추가 (#24, #27)
 
