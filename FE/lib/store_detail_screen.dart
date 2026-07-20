@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/session_service.dart';
+import 'services/store_service.dart';
 
 class StoreDetailScreen extends StatefulWidget {
   @override
@@ -27,22 +27,11 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
 
   Future<void> _fetchItemDetail() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      final url = Uri.parse('http://13.209.97.107:8000/item/detail/$_itemId');
-      final response =
-          await http.get(url, headers: {'Authorization': 'Bearer $token'});
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        setState(() {
-          _itemData = data['result'];
-          _isLoading = false;
-        });
-      } else {
-        setState(() => _isLoading = false);
-      }
+      final result = await storeService.getItemDetail(_itemId!);
+      setState(() {
+        _itemData = result;
+        _isLoading = false;
+      });
     } catch (e) {
       setState(() => _isLoading = false);
     }
@@ -58,18 +47,13 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
 
   void _showDiarySelectionDialog() async {
     final prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('jwt_token');
     final String? userId = prefs.getString('user_id');
 
-    final url = Uri.parse(
-        'http://13.209.97.107:8000/chatting/session/all?user_id=$userId');
-    final response =
-        await http.get(url, headers: {'Authorization': 'Bearer $token'});
-
     List<dynamic> sessionList = [];
-    if (response.statusCode == 200) {
-      final data = jsonDecode(utf8.decode(response.bodyBytes));
-      sessionList = data['result'] ?? [];
+    try {
+      sessionList = await sessionService.getAllSessions(userId);
+    } catch (e) {
+      sessionList = [];
     }
 
     Set<int> selectedRoomIds = {};
@@ -301,29 +285,18 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
     String imageUrl = "https://placehold.co/400x300?text=No+Image";
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
+      final result = await sessionService.getSession(roomId);
 
-      final url = Uri.parse(
-          'http://13.209.97.107:8000/chatting/session/single/$roomId');
-      final response =
-          await http.get(url, headers: {'Authorization': 'Bearer $token'});
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        final result = data['result'];
-
-        if (result != null) {
-          if (result['content'] != null &&
-              result['content'].toString().trim().isNotEmpty) {
-            content = result['content'];
-          }
-          if (result['image_url'] != null &&
-              result['image_url'].toString().trim().isNotEmpty) {
-            imageUrl = result['image_url']
-                .toString()
-                .replaceAll('localhost', '13.209.97.107');
-          }
+      if (result != null) {
+        if (result['content'] != null &&
+            result['content'].toString().trim().isNotEmpty) {
+          content = result['content'];
+        }
+        if (result['image_url'] != null &&
+            result['image_url'].toString().trim().isNotEmpty) {
+          imageUrl = result['image_url']
+              .toString()
+              .replaceAll('localhost', '13.209.97.107');
         }
       }
     } catch (e) {

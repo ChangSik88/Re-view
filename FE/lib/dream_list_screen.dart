@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'services/api_client.dart';
+import 'services/session_service.dart';
+import 'services/report_service.dart';
 
 class DreamListScreen extends StatefulWidget {
   @override
@@ -27,26 +28,11 @@ class _DreamListScreenState extends State<DreamListScreen> {
   Future<void> _fetchDreams() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
       final String? userId = prefs.getString('user_id');
 
-      if (token == null || userId == null) return;
+      final sessionList = await sessionService.getAllSessions(userId);
 
-      final url = Uri.parse(
-          'http://13.209.97.107:8000/chatting/session/all?user_id=$userId');
-      final response = await http.get(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        final List<dynamic> sessionList = data['result'] ?? [];
-
-        setState(() {
+      setState(() {
           _dreamList = sessionList.map((session) {
             String rawDate = session['updated_at'] ?? '';
             String formattedDate =
@@ -70,9 +56,6 @@ class _DreamListScreenState extends State<DreamListScreen> {
           }).toList();
           _isLoading = false;
         });
-      } else {
-        _loadMockData();
-      }
     } catch (e) {
       _loadMockData();
     }
@@ -81,27 +64,11 @@ class _DreamListScreenState extends State<DreamListScreen> {
   Future<void> _fetchReport() async {
     setState(() => _isReportLoading = true);
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      final url = Uri.parse('http://13.209.97.107:8000/report');
-      final response = await http.get(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final data = jsonDecode(utf8.decode(response.bodyBytes));
-        setState(() {
-          _reportData = data['result'];
-          _isReportLoading = false;
-        });
-      } else {
-        setState(() => _isReportLoading = false);
-      }
+      final result = await reportService.getReport();
+      setState(() {
+        _reportData = result;
+        _isReportLoading = false;
+      });
     } catch (e) {
       setState(() => _isReportLoading = false);
     }
@@ -110,26 +77,13 @@ class _DreamListScreenState extends State<DreamListScreen> {
   Future<void> _generateReport() async {
     setState(() => _isReportGenerating = true);
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      final url = Uri.parse('http://13.209.97.107:8000/report/analyze');
-      final response = await http.post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token'
-        },
-      );
-
-      if (response.statusCode == 200) {
-        await _fetchReport();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('감정 통계가 새롭게 업데이트 되었습니다! 🔮')));
-      } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('통계 생성에 실패했습니다.')));
-      }
+      await reportService.generateReport();
+      await _fetchReport();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('감정 통계가 새롭게 업데이트 되었습니다! 🔮')));
+    } on ApiException catch (_) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('통계 생성에 실패했습니다.')));
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 통신할 수 없습니다.')));

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'services/session_service.dart';
 
 class DreamDetailScreen extends StatefulWidget {
   @override
@@ -27,33 +25,11 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
 
   Future<void> _fetchDreamDetail(int roomId) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final String? token = prefs.getString('jwt_token');
-
-      if (token == null) {
-        _loadMockData();
-        return;
-      }
-
-      final url = Uri.parse(
-          'http://13.209.97.107:8000/chatting/session/single/$roomId');
-      final response = await http.get(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes));
-        setState(() {
-          _dreamData = decodedResponse['result'];
-          _isLoading = false;
-        });
-      } else {
-        _loadMockData();
-      }
+      final result = await sessionService.getSession(roomId);
+      setState(() {
+        _dreamData = result;
+        _isLoading = false;
+      });
     } catch (e) {
       _loadMockData();
     }
