@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'services/api_client.dart';
-import 'services/auth_service.dart';
+import '../../services/api_client.dart';
+import '../../services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

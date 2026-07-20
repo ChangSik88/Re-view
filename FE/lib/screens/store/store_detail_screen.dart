@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'services/session_service.dart';
-import 'services/store_service.dart';
+import '../../services/session_service.dart';
+import '../../services/store_service.dart';
 
 class StoreDetailScreen extends StatefulWidget {
   @override

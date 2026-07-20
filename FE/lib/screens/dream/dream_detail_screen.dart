@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'services/session_service.dart';
+import '../../services/session_service.dart';
 
 class DreamDetailScreen extends StatefulWidget {
   @override
