@@ -109,8 +109,9 @@ class ChatService:
             save_path = os.path.join(file_dir, file_name)
             image.save(save_path)
 
-            # 고정 IP 기반의 URL 생성
-            image_url = f"http://13.209.97.107:8000/static/images/{file_name}"
+            # 서버 베이스 URL 기반의 이미지 URL 생성 (.env의 SERVER_BASE_URL 사용)
+            base_url = os.getenv("SERVER_BASE_URL", "http://13.209.97.107:8000").rstrip("/")
+            image_url = f"{base_url}/static/images/{file_name}"
 
             # 4. 이미지 URL DB 저장 (Repository 호출)
             await self.chat_repo.save_chat_image(room_id, image_url)
