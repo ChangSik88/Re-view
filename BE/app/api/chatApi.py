@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest
 from app.services.chatService import ChatService
 from app.api.dependencies import get_current_user_id
@@ -16,16 +16,23 @@ async def create_session(request: SessionCreateRequest,user_id:int=Depends(get_c
 
 # 2. 메시지 보내기 & AI 응답 받기 (채팅 칠 때마다 호출)
 @router.post("/message", response_model=ChatMessageResponse)
-async def send_message(request: ChatMessageRequest):
-    # 토큰 검사 없이 바로 서비스 계층으로 넘깁니다.
-    # request 안에 이미 몇 번 방(session_id)인지 적혀있어서 유저 정보가 없어도 돌아갑니다.
-    result = await chat_service.process_message(request.session_id, request.message)
-    return result
+async def send_message(request: ChatMessageRequest, user_id: int = Depends(get_current_user_id)):
+    # 토큰의 user_id로 방 소유권을 검증한 뒤 서비스 계층으로 넘깁니다.
+    try:
+        return await chat_service.process_message(user_id, request.session_id, request.message)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
 
 #image_url도 함께 받기 위해서 response_model 없앰
 @router.post("/diary")
-async def generate_diary(request: DiaryRequest):
-    # 키워드도 서비스로 전송
-    result = await chat_service.create_diary(request.session_id, request.selected_keywords)
-    return result
+async def generate_diary(request: DiaryRequest, user_id: int = Depends(get_current_user_id)):
+    # 토큰의 user_id로 방 소유권을 검증한 뒤 키워드를 서비스로 전송
+    try:
+        return await chat_service.create_diary(user_id, request.session_id, request.selected_keywords)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
 

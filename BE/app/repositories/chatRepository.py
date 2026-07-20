@@ -58,9 +58,8 @@ class ChatRepository:
 
 
 
-    #루틴타입을 가져오는 함수
-    async def get_routine_type(self, room_id: int):
-        result= await db.chatsession.find_unique(
+    #채팅방(세션) 단건 조회 - 루틴타입 확인 및 소유권 검증에 사용
+    async def get_session(self, room_id: int):
+        return await db.chatsession.find_unique(
             where={"room_id": room_id}
         )
-        return result.routine_type if result else None
