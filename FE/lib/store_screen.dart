@@ -20,6 +20,7 @@ class _StoreScreenState extends State<StoreScreen> {
   Future<void> _fetchStoreItems() async {
     try {
       final result = await storeService.getItems();
+      if (!mounted) return;
       setState(() {
         _storeData['다이어리'] = result['다이어리'] ?? [];
         _storeData['악세서리'] = result['악세서리'] ?? [];
@@ -27,6 +28,7 @@ class _StoreScreenState extends State<StoreScreen> {
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }

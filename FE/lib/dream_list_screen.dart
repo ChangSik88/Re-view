@@ -32,6 +32,7 @@ class _DreamListScreenState extends State<DreamListScreen> {
 
       final sessionList = await sessionService.getAllSessions(userId);
 
+      if (!mounted) return;
       setState(() {
           _dreamList = sessionList.map((session) {
             String rawDate = session['updated_at'] ?? '';
@@ -57,6 +58,7 @@ class _DreamListScreenState extends State<DreamListScreen> {
           _isLoading = false;
         });
     } catch (e) {
+      if (!mounted) return;
       _loadMockData();
     }
   }
@@ -65,11 +67,13 @@ class _DreamListScreenState extends State<DreamListScreen> {
     setState(() => _isReportLoading = true);
     try {
       final result = await reportService.getReport();
+      if (!mounted) return;
       setState(() {
         _reportData = result;
         _isReportLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isReportLoading = false);
     }
   }
@@ -79,16 +83,19 @@ class _DreamListScreenState extends State<DreamListScreen> {
     try {
       await reportService.generateReport();
       await _fetchReport();
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('감정 통계가 새롭게 업데이트 되었습니다! 🔮')));
     } on ApiException catch (_) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('통계 생성에 실패했습니다.')));
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 통신할 수 없습니다.')));
     } finally {
-      setState(() => _isReportGenerating = false);
+      if (mounted) setState(() => _isReportGenerating = false);
     }
   }
 

@@ -26,11 +26,13 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
   Future<void> _fetchDreamDetail(int roomId) async {
     try {
       final result = await sessionService.getSession(roomId);
+      if (!mounted) return;
       setState(() {
         _dreamData = result;
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       _loadMockData();
     }
   }

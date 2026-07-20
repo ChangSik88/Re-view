@@ -65,6 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
     try {
       final historyList = await chatService.getHistory(_sessionId);
 
+      if (!mounted) return;
       setState(() {
         _messages = historyList.map((msg) {
           String msgText =
@@ -141,6 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       final data = await chatService.sendMessage(_sessionId, text);
 
+      if (!mounted) return;
       setState(() {
         _isTyping = false;
         final analysisData = data['analysis'] ?? {};
@@ -160,7 +162,7 @@ class _ChatScreenState extends State<ChatScreen> {
       });
       _scrollToBottom();
     } catch (e) {
-      print("메시지 전송 에러: $e");
+      if (!mounted) return;
       setState(() => _isTyping = false);
 
       // 💡 [개선 3] 에러 종류에 따라 다르게 대처
@@ -194,12 +196,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
     try {
       await chatService.generateDiary(_sessionId, _selectedFeelings.toList());
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/dream_list');
     } on ApiException catch (e) {
+      if (!mounted) return;
       setState(() => _isTyping = false);
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('일기 생성 실패: ${e.statusCode}')));
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isTyping = false);
     }
   }
