@@ -23,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       lastDate: DateTime.now(),
     );
     if (picked != null) {
+      if (!mounted) return;
       setState(() {
         _birthController.text =
             "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
@@ -55,13 +56,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
         gender: _selectedGender!,
       );
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('회원가입 완료! 로그인해주세요.')));
       Navigator.pop(context);
     } on ApiException catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('회원가입 실패: ${e.statusCode}')));
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 연결할 수 없습니다.')));
     }

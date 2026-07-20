@@ -29,14 +29,17 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.setString('jwt_token', token ?? '');
       await prefs.setString('user_id', _idController.text);
 
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('로그인 성공!')));
 
       Navigator.pushReplacementNamed(context, '/home');
     } on ApiException catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('로그인 실패: ${e.statusCode}')));
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('서버와 연결할 수 없습니다.')));
     }

@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _fetchStorePreview() async {
     try {
       final result = await storeService.getItems();
+      if (!mounted) return;
       setState(() {
         _storeData['다이어리'] = result['다이어리'] ?? [];
         _storeData['악세서리'] = result['악세서리'] ?? [];
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _isStoreLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isStoreLoading = false);
     }
   }
@@ -38,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('jwt_token');
     await prefs.remove('user_id');
+    if (!mounted) return;
     Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
 

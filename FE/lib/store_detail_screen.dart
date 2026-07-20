@@ -28,11 +28,13 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
   Future<void> _fetchItemDetail() async {
     try {
       final result = await storeService.getItemDetail(_itemId!);
+      if (!mounted) return;
       setState(() {
         _itemData = result;
         _isLoading = false;
       });
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }
@@ -55,6 +57,8 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
     } catch (e) {
       sessionList = [];
     }
+
+    if (!mounted) return;
 
     Set<int> selectedRoomIds = {};
     bool isSortLatest = true;
@@ -300,8 +304,10 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
         }
       }
     } catch (e) {
-      print("미리보기 에러 방어 완료: $e");
+      // 미리보기 실패 시 위에서 정한 기본 안내 문구를 그대로 사용
     }
+
+    if (!mounted) return;
 
     // 2. 데이터 가져오기 완료되면 로딩 창 닫기
     Navigator.pop(context);
