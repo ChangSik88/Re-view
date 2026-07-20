@@ -21,11 +21,12 @@ class ChatService {
     return data as Map<String, dynamic>;
   }
 
-  /// 선택한 감정으로 일기 생성을 요청한다.
-  Future<void> generateDiary(int sessionId, List<String> selectedFeelings) async {
+  /// 선택한 감정 키워드로 일기 생성을 요청한다.
+  /// BE의 DiaryRequest는 selected_keywords 필드를 읽는다.
+  Future<void> generateDiary(int sessionId, List<String> selectedKeywords) async {
     await apiClient.post(
       Api.diary,
-      body: {'session_id': sessionId, 'selected_feelings': selectedFeelings},
+      body: {'session_id': sessionId, 'selected_keywords': selectedKeywords},
     );
   }
 
