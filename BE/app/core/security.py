@@ -10,8 +10,9 @@ if not SECRET_KEY:
 ALGORITHM = "HS256"
 
 def create_access_token(user_id: int):
-    # 테스트 편의성을 위해 토큰 유효기간을 넉넉하게 30일로 잡습니다.
-    expire = datetime.now() + timedelta(days=30)
+    # 토큰 탈취 시 노출 창을 줄이기 위해 유효기간을 7일로 제한합니다.
+    # (refresh 토큰 도입 시 이 값을 더 짧게 조정할 수 있습니다.)
+    expire = datetime.now() + timedelta(days=7)
     
     # 토큰 안에 담을 내용 (sub: 유저 고유 ID, exp: 만료 시간)
     payload = {
