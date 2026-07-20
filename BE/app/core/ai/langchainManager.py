@@ -45,7 +45,7 @@ NIGHT_CHAT_PROMPT = """당신은 사용자의 오늘 하루 일과를 듣고 위
 
 async def analyze_dream_chat(history: str, new_message: str, routine_type: str) -> AIAnalysisResponse:
     # 넘어온 채팅방의 루틴 타입에 따라 시스템 대본을 갈아 끼웁니다.
-    system_instruction = MORNING_CHAT_PROMPT if routine_type == "MORNING" else NIGHT_CHAT_PROMPT
+    system_instruction = MORNING_CHAT_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_CHAT_PROMPT
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", system_instruction),
@@ -112,7 +112,7 @@ NIGHT_DIARY_PROMPT = """당신은 사용자의 하루 일과 대화를 바탕으
 {format_instructions}"""
 
 async def generate_diary_content(history: str, selected_keywords: list[str], routine_type: str) -> DiaryGenerationResponse:
-    system_instruction = MORNING_DIARY_PROMPT if routine_type == "MORNING" else NIGHT_DIARY_PROMPT
+    system_instruction = MORNING_DIARY_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_DIARY_PROMPT
     keywords_str = ", ".join(selected_keywords) if selected_keywords else "특별히 선택된 키워드 없음"
     
     prompt = ChatPromptTemplate.from_messages([
