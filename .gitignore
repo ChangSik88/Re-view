@@ -12,3 +12,8 @@ venv/
 
 # BE 생성 이미지
 BE/app/static/images/
+
+# BE 산출물/로그/바이너리
+BE/nohup.out
+BE/flux_provider_result.png
+BE/prisma-query-engine-windows.exe
