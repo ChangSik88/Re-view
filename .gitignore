@@ -10,5 +10,5 @@ venv/
 # VS Code
 .vscode/
 
-#생성 이미지
-app/static/images/
+# BE 생성 이미지
+BE/app/static/images/
