@@ -1,10 +1,10 @@
 from app.core.db import db
 
 class ReportRepository:
-    # 1. 최근 3개 꿈 가져오기 (시간 역순)
+    # 1. 최근 3개 꿈 가져오기 (일기 본문이 작성된 방만, 시간 역순)
     async def get_latest_sessions(self, user_id: int, limit: int = 3):
         return await db.chatsession.find_many(
-            where={"user_id": user_id},
+            where={"user_id": user_id, "content": {"not": None}},
             order={"created_at": "desc"},
             take=limit
         )
