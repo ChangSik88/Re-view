@@ -132,6 +132,66 @@ api (라우터)  →  services (로직)  →  repositories (DB)  →  Prisma / P
 **문서**
 - `CLAUDE.md`, 이 온보딩 가이드, `docs/design-tokens.md` 추가 (#24, #27)
 
+<details>
+<summary><b>변경 파일 목록 (파일 단위) — 펼치기</b></summary>
+
+이번 세션에서 실제로 변경된 파일을 파일 단위로 정리합니다.
+
+#### 백엔드 (`BE/app`)
+| 파일 | 변경 |
+|---|---|
+| `api/chatApi.py` | `/message`·`/diary`에 인증·소유권 검증 및 에러코드 처리 추가, 미사용 import 제거 |
+| `core/ai/imageManager.py` | 동기→비동기 클라이언트(`AsyncInferenceClient`) 전환 |
+| `core/ai/langchainManager.py` | 모델 `gemini-3.1-flash-lite` 교체, 모닝 프롬프트 개선, `routine_type` 대소문자 정규화 |
+| `core/ai/reportManager.py` | 모델 교체 |
+| `core/db.py` | 미사용 `connect_db`/`disconnect_db` 제거 |
+| `core/security.py` | bcrypt 해싱 함수 추가, JWT 만료 30→7일, 72바이트 입력 처리 |
+| `main.py` | 미사용 import 제거 |
+| `repositories/chatRepository.py` | 변수명 정합(`room_id`/`role`), `get_session` 통합, 저장 트랜잭션, `tags` 문자열화 |
+| `repositories/chatSessionRepository.py` | 메서드명 정정(`get_messages_by_room_id`) |
+| `repositories/reportRepository.py` | 분석 대상에 `content` not null 필터 |
+| `repositories/userRepositories.py` | 파라미터명 `account_id`로 정정 |
+| `schemas/reportSchema.py` | 중복 `WeeklySessionDTO` 분리 |
+| `schemas/userSchema.py` | `UserData`에서 `password` 필드 제거 |
+| `services/chatService.py` | 변수명 정합, 방 소유권 검증, `title`/`tags` 길이 제한 |
+| `services/chatSessionService.py` | 레포 메서드명 반영 |
+| `services/reportService.py` | `content` 필터 반영, 주석 정정 |
+| `services/userServices.py` | 비밀번호 해싱/검증 적용 |
+
+#### 프론트엔드 (`FE/lib`)
+| 파일 | 변경 |
+|---|---|
+| `main.dart` | 화면 import 경로(screens/), 테마 연결 |
+| `config/api.dart` | **신규** — API 베이스 URL·엔드포인트 |
+| `services/api_client.dart` | **신규** — http 래퍼(토큰 주입·디코드·예외 통일) |
+| `services/{auth,chat,session,report,store}_service.dart` | **신규** — 도메인별 API 호출 |
+| `models/chat_message.dart` | **신규** — `ChatMessage` 분리 |
+| `theme/app_theme.dart` | **신규** — `AppColors`/`AppTextStyles`/`AppTheme` |
+| `screens/auth/login_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/auth/signup_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/home/home_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/chat/chat_screen.dart` | 이동 + API 계층 전환 + mounted 가드 + `ChatMessage` import |
+| `screens/chat/routine_select_screen.dart` | 이동 |
+| `screens/dream/dream_list_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/dream/dream_detail_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/store/store_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+| `screens/store/store_detail_screen.dart` | 이동 + API 계층 전환 + mounted 가드 |
+
+#### 구조 · 설정 · 문서
+| 파일 | 변경 |
+|---|---|
+| `.gitignore` (루트) | **신규** — 통합 |
+| `requirements.txt` (루트) | `BE/`에서 이동 |
+| `CLAUDE.md` | **신규** — AI 어시스턴트용 가이드 |
+| `README.md` (루트) | **신규** — 설치·실행 통합 |
+| `docs/ONBOARDING.md` | **신규** — 이 문서 |
+| `docs/design-tokens.md` | **신규** — 디자인 토큰 |
+| `docs/superpowers/specs/*.md` | **신규** — 설계 문서 |
+| `BE/{README.md, .gitignore, requirements.txt}` | 루트로 이동/통합(삭제) |
+| `BE/{flux_provider_result.png, nohup.out, prisma-query-engine-windows.exe}` | git 추적 해제 |
+
+</details>
+
 ## 9. 더 읽을거리
 
 - [README.md](../README.md) — 설치·실행 명령어
