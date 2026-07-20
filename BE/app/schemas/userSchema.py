@@ -23,8 +23,7 @@ class UserData(BaseModel):
     user_id: int
     id: str
     name: str
-    password: str
-    
+
     class Config:
         from_attributes = True # Prisma 모델 객체를 자동으로 Schema로 변환해줌
 
