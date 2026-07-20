@@ -26,10 +26,13 @@ def create_access_token(user_id: int):
 
 def hash_password(plain_password: str) -> str:
     # 평문 비밀번호를 bcrypt 해시 문자열로 변환합니다.
-    hashed = bcrypt.hashpw(plain_password.encode("utf-8"), bcrypt.gensalt())
+    # bcrypt는 72바이트 초과 입력에 ValueError를 던진다. 한글은 1글자=3바이트라
+    # 30자 제한(userSchema)만으로는 통과해도 여기서 터질 수 있어 바이트 단위로 자른다.
+    hashed = bcrypt.hashpw(plain_password.encode("utf-8")[:72], bcrypt.gensalt())
     return hashed.decode("utf-8")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     # 평문 비밀번호가 저장된 해시와 일치하는지 검증합니다.
-    return bcrypt.checkpw(plain_password.encode("utf-8"), hashed_password.encode("utf-8"))
+    # hash_password와 동일하게 72바이트로 잘라야 긴 비밀번호도 검증이 일치한다.
+    return bcrypt.checkpw(plain_password.encode("utf-8")[:72], hashed_password.encode("utf-8"))

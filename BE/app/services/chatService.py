@@ -77,12 +77,17 @@ class ChatService:
         text_to_embed = f"제목: {diary_result.title}\n내용: {diary_result.content}"
         vector_data = await generate_vector_embedding(text_to_embed)
 
+        # title/tags는 DB 컬럼이 VarChar(50)이라 AI 생성 텍스트가 넘치면 저장 시 예외 발생 →
+        # 여기서 미리 잘라 트랜잭션 실패(및 LLM 호출 낭비)를 막는다.
+        title = diary_result.title[:50]
+        tags_str = ", ".join(diary_result.tags)[:50]
+
         # 생성된 모든 데이터를 ChatSession DB에 저장
         await self.chat_repo.update_session_with_diary(
             room_id=room_id,
-            title=diary_result.title,
+            title=title,
             content=diary_result.content,
-            tags=diary_result.tags,
+            tags=tags_str,
             vector=vector_data
         )
 
