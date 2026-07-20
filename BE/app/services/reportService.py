@@ -13,11 +13,10 @@ class ReportService:
         if not sessions:
             raise ValueError("분석할 꿈 기록이 존재하지 않습니다.")
 
-        # 2. AI에게 먹일 텍스트 조립하기
+        # 2. AI에게 먹일 텍스트 조립하기 (본문 있는 방만 조회되지만 빈 문자열은 방어)
         dreams_text_list = []
         for i, session in enumerate(sessions):
-            # 내용이 없으면 건너뜁니다.
-            content = session.content or "내용 없음" 
+            content = session.content or "내용 없음"
             dreams_text_list.append(f"[꿈 {i+1}] 날짜: {session.created_at} \n내용: {content}")
             
         combined_dreams_text = "\n\n".join(dreams_text_list)
