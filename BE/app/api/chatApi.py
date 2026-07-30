@@ -47,3 +47,13 @@ async def set_session_mark(session_id: int, request: SessionMarkRequest, user_id
     except PermissionError as e:
         raise HTTPException(status_code=403, detail=str(e))
 
+# 5. 채팅 세션(꿈 일기) 삭제
+@router.delete("/session/{session_id}")
+async def delete_session(session_id: int, user_id: int = Depends(get_current_user_id)):
+    try:
+        await chat_service.delete_session(user_id, session_id)
+        return {"message": "채팅방 삭제 완료", "room_id": session_id}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))

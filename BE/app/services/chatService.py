@@ -5,6 +5,7 @@ from app.core.ai.imageManager import ImageManager
 from typing import List
 import uuid
 import os
+from urllib.parse import urlparse
 
 
 class ChatService:
@@ -131,3 +132,19 @@ class ChatService:
         except Exception as e:
             print(f"이미지 생성 중 오류 발생: {e}")
             return None
+
+    # 세션 삭제: 소유권 검증 후 DB 삭제, 성공하면 이미지 파일도 정리한다(실패해도 삭제 자체는 이미 끝난 상태이므로 무시).
+    async def delete_session(self, user_id: int, room_id: int) -> None:
+        await self._get_owned_session(user_id, room_id)
+        image_urls = await self.chat_repo.delete_session(room_id)
+        for url in image_urls:
+            self._delete_image_file(url)
+
+    def _delete_image_file(self, image_url: str) -> None:
+        try:
+            file_name = os.path.basename(urlparse(image_url).path)
+            file_path = os.path.join("app/static/images", file_name)
+            if os.path.exists(file_path):
+                os.remove(file_path)
+        except Exception as e:
+            print(f"이미지 파일 삭제 중 오류 발생: {e}")

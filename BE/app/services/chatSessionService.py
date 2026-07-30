@@ -44,7 +44,8 @@ class ChatSessionService:
                 "content": session.content,
                 "created_at":session.created_at,
                 "updated_at": str(session.updated_at),
-                "image_url": extracted_url
+                "image_url": extracted_url,
+                "is_marked": session.is_marked
             }
     
     
