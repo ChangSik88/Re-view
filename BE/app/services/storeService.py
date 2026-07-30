@@ -17,7 +17,7 @@ class StoreService:
 
         for item in raw_items:
             # 💡 1:N 관계이므로 리스트로 옵니다. 첫 번째 이미지가 있다면 꺼내고, 없으면 None 반환
-            img_url = item.Item_Url[0].image_url if item.Item_Url else None
+            img_url = item.ItemImage[0].image_url if item.ItemImage else None
 
             item_data = {
                 "item_id": item.item_id,
@@ -27,7 +27,8 @@ class StoreService:
             }
 
             # 아이템의 카테고리를 확인하고 알맞은 그룹에 넣습니다. (분류가 안 되어있으면 '기타'로)
-            category = item.category if item.category in categorized_items else "기타"
+            category_name = item.Category.name if item.Category else None
+            category = category_name if category_name in categorized_items else "기타"
             categorized_items[category].append(item_data)
 
         return categorized_items
@@ -40,7 +41,7 @@ class StoreService:
             raise ValueError("해당 상품을 찾을 수 없습니다.")
 
         # 상세 페이지에서도 이미지를 안전하게 추출합니다.
-        img_url = item.Item_Url[0].image_url if item.Item_Url else None
+        img_url = item.ItemImage[0].image_url if item.ItemImage else None
 
         return {
             "item_id": item.item_id,

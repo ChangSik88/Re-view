@@ -6,7 +6,8 @@ class StoreRepository:
     async def get_all_items(self):
         return await db.item.find_many(
             include={
-                "Item_Url": True  # 연결된 이미지 URL 데이터도 함께 가져옵니다!
+                "ItemImage": True,  # 연결된 이미지 URL 데이터도 함께 가져옵니다!
+                "Category": True
             }
         )
 
@@ -17,6 +18,7 @@ class StoreRepository:
                 "item_id": item_id
             },
             include={
-                "Item_Url": True
+                "ItemImage": True,
+                "Category": True
             }
         )
