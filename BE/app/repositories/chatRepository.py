@@ -1,11 +1,11 @@
-from prisma.models import ChatSession, ChatMessage
+from prisma.models import ChatRoom, ChatMessage
 from app.core.db import db # main.py에서 연결한 prisma db 객체
 from datetime import datetime
 class ChatRepository:
     # 1. 새로운 채팅방 생성
     async def create_session(self, user_id: int,routine_type:str):
         # 채팅방을 만들고 방 번호(객체)를 반환합니다.
-        return await db.chatsession.create(
+        return await db.chatroom.create(
             data={"user_id": user_id,
                   "routine_type": routine_type}
         )
@@ -33,7 +33,7 @@ class ChatRepository:
         # 일기 본문 저장과 벡터 갱신을 하나의 트랜잭션으로 묶어 부분 저장(반쪽 일기)을 방지
         vector_str = str(vector)
         async with db.tx() as tx:
-            await tx.chatsession.update(
+            await tx.chatroom.update(
                 where={
                     "room_id": room_id
                 },
@@ -43,7 +43,7 @@ class ChatRepository:
                     "tags": tags,
                 })
             await tx.execute_raw(
-                'UPDATE "ChatSession" SET content_vector = $1::vector WHERE room_id = $2',
+                'UPDATE "chat_rooms" SET content_vector = $1::vector WHERE room_id = $2',
                 vector_str,
                 room_id
             )
@@ -62,6 +62,6 @@ class ChatRepository:
 
     #채팅방(세션) 단건 조회 - 루틴타입 확인 및 소유권 검증에 사용
     async def get_session(self, room_id: int):
-        return await db.chatsession.find_unique(
+        return await db.chatroom.find_unique(
             where={"room_id": room_id}
         )
