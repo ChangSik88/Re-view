@@ -3,7 +3,7 @@ from typing import Optional
 from datetime import datetime
 
 class WeeklySessionDTO(BaseModel):
-    content_id: int
+    weekly_session_id: int
     weekly_content: Optional[str]
     start_date: Optional[datetime]
     end_date: Optional[datetime]
@@ -13,7 +13,7 @@ class ReportResponse(BaseModel):
     result: WeeklySessionDTO
 
 class WeeklySessionDetailDTO(BaseModel):
-    content_id: int
+    weekly_session_id: int
     user_id: int
     weekly_content: str
     start_date: datetime

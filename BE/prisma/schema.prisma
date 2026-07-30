@@ -9,92 +9,337 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model AuthToken {
+  auth_token_id BigInt      @id(map: "PK_AUTH_TOKENS") @default(autoincrement())
+  user_id       BigInt
+  refresh_token String      @db.VarChar(512)
+  device_id     BigInt?
+  expires_at    DateTime    @db.Timestamptz(6)
+  revoked_at    DateTime?   @db.Timestamptz(6)
+  created_at    DateTime    @default(now()) @db.Timestamptz(6)
+  User          User        @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_AUTH_TOKENS_USER")
+  UserDevice    UserDevice? @relation(fields: [device_id], references: [device_id], onDelete: SetNull, onUpdate: NoAction, map: "FK_AT_DEVICE")
+
+  @@map("auth_tokens")
+}
+
+model Category {
+  category_id BigInt   @id(map: "PK_CATEGORIES") @default(autoincrement())
+  name        String   @db.VarChar(50)
+  is_active   Boolean  @default(true)
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  Item        Item[]
+
+  @@map("categories")
+}
+
 model ChatImage {
-  chat_image_id Int         @id(map: "PK_CHATIMAGE") @default(autoincrement())
-  room_id       Int
-  image_url     String?     @db.VarChar(2048)
-  created_at    DateTime?   @default(now()) @db.Timestamp(6)
-  ChatSession   ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatImage")
+  chat_image_id BigInt   @id(map: "PK_CHAT_IMAGES") @default(autoincrement())
+  room_id       BigInt
+  image_url     String   @db.VarChar(2048)
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  ChatRoom      ChatRoom @relation(fields: [room_id], references: [room_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_CI_ROOM")
+
+  @@map("chat_images")
 }
 
 model ChatMessage {
-  room_id     Int
-  role        String?     @default("user") @db.VarChar(10)
-  content     String?
-  created_at  DateTime?   @default(now()) @db.Timestamp(6)
-  message_id  Int         @id(map: "PK_CHATMESSAGE") @default(autoincrement())
-  ChatSession ChatSession @relation(fields: [room_id], references: [room_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ChatSession_TO_ChatMessage")
+  message_id BigInt   @id(map: "PK_CHAT_MESSAGES") @default(autoincrement())
+  room_id    BigInt
+  role       String   @db.VarChar(10)
+  content    String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  ChatRoom   ChatRoom @relation(fields: [room_id], references: [room_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_CM_ROOM")
+
+  @@map("chat_messages")
 }
 
-model ChatSession {
-  room_id        Int                    @id(map: "PK_CHATSESSION") @default(autoincrement())
-  user_id        Int
+model ChatRoom {
+  room_id        BigInt                 @id(map: "PK_CHAT_ROOMS") @default(autoincrement())
+  user_id        BigInt
   title          String?                @db.VarChar(50)
   content        String?
-  is_marked      Boolean?               @default(false)
-  routine_type   String?                @db.VarChar(20)
-  created_at     DateTime?              @default(now()) @db.Timestamp(6)
-  updated_at     DateTime?              @default(now()) @db.Timestamp(6)
-  content_vector Unsupported("vector")?
   tags           String?                @db.VarChar(50)
+  is_marked      Boolean                @default(false)
+  routine_type   String?                @db.VarChar(20)
+  content_vector Unsupported("vector(3072)")? // gemini-embedding-001 기본 출력 차원(실측 확인, 768 아님)
+  created_at     DateTime               @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime               @default(now()) @db.Timestamptz(6)
+  User           User                   @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_CHAT_ROOMS_USER")
   ChatImage      ChatImage[]
   ChatMessage    ChatMessage[]
-  User           User                   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_ChatSession")
+  DiaryEntry     DiaryEntry[]
+
+  @@map("chat_rooms")
 }
 
-model Diary_Info {
-  diary_info_id Int       @id(map: "PK_DIARY_INFO") @default(autoincrement())
-  shopping_id   Int
-  selected_date DateTime? @db.Date
-  shopping      shopping  @relation(fields: [shopping_id], references: [shopping_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_shopping_TO_Diary_Info")
+model CustomerInquiry {
+  inquiry_id  BigInt    @id(map: "PK_CUSTOMER_INQUIRIES") @default(autoincrement())
+  user_id     BigInt
+  category    String?   @db.VarChar(30)
+  title       String    @db.VarChar(100)
+  content     String
+  status      String    @default("pending") @db.VarChar(20)
+  answer      String?
+  answered_at DateTime? @db.Timestamptz(6)
+  created_at  DateTime  @default(now()) @db.Timestamptz(6)
+  User        User      @relation(fields: [user_id], references: [user_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_CI_USER")
+
+  @@map("customer_inquiries")
+}
+
+model DiaryEntry {
+  diary_entry_id BigInt    @id(map: "PK_DIARY_ENTRIES") @default(autoincrement())
+  purchase_id    BigInt
+  room_id        BigInt?
+  selected_date  DateTime  @db.Date
+  created_at     DateTime  @default(now()) @db.Timestamptz(6)
+  Purchase       Purchase  @relation(fields: [purchase_id], references: [purchase_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_DE_PURCHASE")
+  ChatRoom       ChatRoom? @relation(fields: [room_id], references: [room_id], onDelete: SetNull, onUpdate: NoAction, map: "FK_DE_ROOM")
+
+  @@map("diary_entries")
 }
 
 model Item {
-  item_id     Int        @id(map: "PK_ITEM") @default(autoincrement())
-  item_name   String?    @db.VarChar(50)
-  headline    String?    @db.VarChar(50)
+  item_id     BigInt      @id(map: "PK_ITEMS") @default(autoincrement())
+  category_id BigInt
+  item_name   String      @db.VarChar(50)
+  headline    String?     @db.VarChar(50)
   description String?
-  price       Int?
-  category    String?    @db.VarChar(10)
-  Item_Url    Item_Url[]
-  shopping    shopping[]
+  price       Int
+  created_at  DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime    @default(now()) @db.Timestamptz(6)
+  Category    Category    @relation(fields: [category_id], references: [category_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_ITEMS_CATEGORY")
+  ItemImage   ItemImage[]
+  Purchase    Purchase[]
+
+  @@map("items")
 }
 
-model Item_Url {
-  item_image_id Int     @id(map: "PK_ITEM_URL") @default(autoincrement())
-  item_id       Int
-  image_url     String? @db.VarChar(2048)
-  Item          Item    @relation(fields: [item_id], references: [item_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Item_TO_Item_Url")
+model ItemImage {
+  item_image_id BigInt   @id(map: "PK_ITEM_IMAGES") @default(autoincrement())
+  item_id       BigInt
+  image_url     String   @db.VarChar(2048)
+  sort_order    Int      @default(0)
+  created_at    DateTime @default(now()) @db.Timestamptz(6)
+  Item          Item     @relation(fields: [item_id], references: [item_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_II_ITEM")
+
+  @@map("item_images")
+}
+
+model LoginHistory {
+  login_history_id BigInt      @id(map: "PK_LOGIN_HISTORIES") @default(autoincrement())
+  user_id          BigInt
+  device_id        BigInt?
+  ip_address       String?     @db.VarChar(45)
+  is_success       Boolean
+  logged_in_at     DateTime    @default(now()) @db.Timestamptz(6)
+  User             User        @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_LOGIN_HISTORIES_USER")
+  UserDevice       UserDevice? @relation(fields: [device_id], references: [device_id], onDelete: SetNull, onUpdate: NoAction, map: "FK_LH_DEVICE")
+
+  @@map("login_histories")
+}
+
+model NotificationLog {
+  notification_log_id  BigInt           @id(map: "PK_NOTIFICATION_LOGS") @default(autoincrement())
+  user_id              BigInt
+  notification_type_id BigInt
+  title                String?          @db.VarChar(100)
+  body                 String?
+  is_success           Boolean
+  sent_at              DateTime         @default(now()) @db.Timestamptz(6)
+  User                 User             @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_NOTIFICATION_LOGS_USER")
+  NotificationType     NotificationType @relation(fields: [notification_type_id], references: [notification_type_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_NL_TYPE")
+
+  @@map("notification_logs")
+}
+
+model NotificationType {
+  notification_type_id    BigInt                    @id(map: "PK_NOTIFICATION_TYPES") @default(autoincrement())
+  code                    String                    @unique(map: "UQ_NOTIFICATION_TYPES_CODE") @db.VarChar(30)
+  description             String?                   @db.VarChar(100)
+  NotificationLog         NotificationLog[]
+  UserNotificationSetting UserNotificationSetting[]
+
+  @@map("notification_types")
+}
+
+model Payment {
+  payment_id        BigInt    @id(map: "PK_PAYMENTS") @default(autoincrement())
+  purchase_id       BigInt
+  pg_provider       String?   @db.VarChar(30)
+  pg_transaction_id String?   @db.VarChar(100)
+  payment_method    String?   @db.VarChar(20)
+  amount            Int
+  status            String    @default("pending") @db.VarChar(20)
+  paid_at           DateTime? @db.Timestamptz(6)
+  refunded_at       DateTime? @db.Timestamptz(6)
+  created_at        DateTime  @default(now()) @db.Timestamptz(6)
+  Purchase          Purchase  @relation(fields: [purchase_id], references: [purchase_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_PAY_PURCHASE")
+
+  @@map("payments")
+}
+
+model Purchase {
+  purchase_id BigInt       @id(map: "PK_PURCHASES") @default(autoincrement())
+  user_id     BigInt
+  item_id     BigInt
+  is_bought   Boolean      @default(false)
+  bought_at   DateTime?    @db.Timestamptz(6)
+  created_at  DateTime     @default(now()) @db.Timestamptz(6)
+  User        User         @relation(fields: [user_id], references: [user_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_PURCHASES_USER")
+  Item        Item         @relation(fields: [item_id], references: [item_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_PURCHASES_ITEM")
+  DiaryEntry  DiaryEntry[]
+  Shipment    Shipment[]
+  Payment     Payment[]
+
+  @@map("purchases")
+}
+
+model Shipment {
+  shipment_id     BigInt      @id(map: "PK_SHIPMENTS") @default(autoincrement())
+  purchase_id     BigInt
+  address_id      BigInt
+  courier         String?     @db.VarChar(30)
+  tracking_number String?     @db.VarChar(50)
+  status          String      @default("preparing") @db.VarChar(20)
+  shipped_at      DateTime?   @db.Timestamptz(6)
+  delivered_at    DateTime?   @db.Timestamptz(6)
+  Purchase        Purchase    @relation(fields: [purchase_id], references: [purchase_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_SHIP_PURCHASE")
+  UserAddress     UserAddress @relation(fields: [address_id], references: [address_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_SHIP_ADDRESS")
+
+  @@map("shipments")
+}
+
+model Term {
+  term_id      BigInt        @id(map: "PK_TERMS") @default(autoincrement())
+  term_type    String        @db.VarChar(30)
+  version      String        @db.VarChar(20)
+  title        String        @db.VarChar(100)
+  content_url  String?       @db.VarChar(2048)
+  is_required  Boolean       @default(true)
+  effective_at DateTime      @db.Timestamptz(6)
+  created_at   DateTime      @default(now()) @db.Timestamptz(6)
+  UserConsent  UserConsent[]
+
+  @@map("terms")
 }
 
 model User {
-  user_id        Int              @id(map: "PK_USER") @default(autoincrement())
-  id             String           @unique @db.VarChar(30)
-  password       String           @db.VarChar(255)
-  name           String?          @db.VarChar(30)
-  birth          DateTime?        @db.Date
-  gender         String?          @db.VarChar(10)
-  ChatSession    ChatSession[]
-  Weekly_Session Weekly_Session[]
-  shopping       shopping[]
+  user_id                 BigInt                    @id(map: "PK_USERS") @default(autoincrement())
+  login_id                String                    @unique(map: "UQ_USERS_LOGIN_ID") @db.VarChar(50)
+  password_hash           String                    @db.VarChar(255)
+  name                    String                    @db.VarChar(30)
+  birth                   DateTime?                 @db.Date
+  gender                  String?                   @db.VarChar(10)
+  created_at              DateTime                  @default(now()) @db.Timestamptz(6)
+  updated_at              DateTime                  @default(now()) @db.Timestamptz(6)
+  WeeklySession           WeeklySession[]
+  NotificationLog         NotificationLog[]
+  LoginHistory            LoginHistory[]
+  UserAddress             UserAddress[]
+  UserNotificationSetting UserNotificationSetting[]
+  UserSocialAccount       UserSocialAccount[]
+  Purchase                Purchase[]
+  AuthToken               AuthToken[]
+  UserWithdrawal          UserWithdrawal[]
+  UserConsent             UserConsent[]
+  ChatRoom                ChatRoom[]
+  CustomerInquiry         CustomerInquiry[]
+  UserDevice              UserDevice[]
+
+  @@map("users")
 }
 
-model Weekly_Session {
-  content_id     Int       @id(map: "PK_WEEKLY_SESSION") @default(autoincrement())
-  user_id        Int
-  weekly_content String?
-  start_date     DateTime? @db.Date
-  end_date       DateTime? @db.Date
-  User           User      @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_Weekly_Session")
+model UserAddress {
+  address_id     BigInt     @id(map: "PK_USER_ADDRESSES") @default(autoincrement())
+  user_id        BigInt
+  recipient_name String     @db.VarChar(30)
+  phone_number   String     @db.VarChar(20)
+  zipcode        String?    @db.VarChar(10)
+  address_line1  String     @db.VarChar(200)
+  address_line2  String?    @db.VarChar(200)
+  is_default     Boolean    @default(false)
+  created_at     DateTime   @default(now()) @db.Timestamptz(6)
+  User           User       @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_USER_ADDRESSES_USER")
+  Shipment       Shipment[]
+
+  @@map("user_addresses")
 }
 
-model shopping {
-  shopping_id Int          @id(map: "PK_SHOPPING") @default(autoincrement())
-  user_id     Int
-  item_id     Int
-  bought_at   DateTime?    @default(now()) @db.Timestamp(6)
-  is_bought   String?      @default("N") @db.VarChar(20)
-  Diary_Info  Diary_Info[]
-  Item        Item         @relation(fields: [item_id], references: [item_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_Item_TO_shopping")
-  User        User         @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction, map: "FK_User_TO_shopping")
+model UserConsent {
+  consent_id BigInt    @id(map: "PK_USER_CONSENTS") @default(autoincrement())
+  user_id    BigInt
+  term_id    BigInt
+  is_agreed  Boolean
+  agreed_at  DateTime  @default(now()) @db.Timestamptz(6)
+  revoked_at DateTime? @db.Timestamptz(6)
+  User       User      @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_UC_USER")
+  Term       Term      @relation(fields: [term_id], references: [term_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_UC_TERM")
+
+  @@map("user_consents")
+}
+
+model UserDevice {
+  device_id      BigInt         @id(map: "PK_USER_DEVICES") @default(autoincrement())
+  user_id        BigInt
+  push_token     String?        @db.VarChar(255)
+  device_type    String         @db.VarChar(20)
+  app_version    String?        @db.VarChar(20)
+  last_active_at DateTime?      @db.Timestamptz(6)
+  created_at     DateTime       @default(now()) @db.Timestamptz(6)
+  User           User           @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_UD_USER")
+  LoginHistory   LoginHistory[]
+  AuthToken      AuthToken[]
+
+  @@map("user_devices")
+}
+
+model UserNotificationSetting {
+  user_notification_setting_id BigInt           @id(map: "PK_USER_NOTIFICATION_SETTINGS") @default(autoincrement())
+  user_id                      BigInt
+  notification_type_id         BigInt
+  is_enabled                   Boolean          @default(true)
+  updated_at                   DateTime         @default(now()) @db.Timestamptz(6)
+  User                         User             @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_UNS_USER")
+  NotificationType             NotificationType @relation(fields: [notification_type_id], references: [notification_type_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_UNS_TYPE")
+
+  @@map("user_notification_settings")
+}
+
+model UserSocialAccount {
+  social_account_id BigInt   @id(map: "PK_USER_SOCIAL_ACCOUNTS") @default(autoincrement())
+  user_id           BigInt
+  provider          String   @db.VarChar(20)
+  provider_user_id  String   @db.VarChar(100)
+  connected_at      DateTime @default(now()) @db.Timestamptz(6)
+  User              User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_USA_USER")
+
+  @@unique([provider, provider_user_id], map: "UQ_USA_PROVIDER")
+  @@map("user_social_accounts")
+}
+
+model UserWithdrawal {
+  withdrawal_id      BigInt    @id(map: "PK_USER_WITHDRAWALS") @default(autoincrement())
+  user_id            BigInt
+  reason             String?   @db.VarChar(200)
+  withdrawn_at       DateTime  @default(now()) @db.Timestamptz(6)
+  purge_scheduled_at DateTime? @db.Timestamptz(6)
+  // TODO: users 실제 파기(purge) 방식 미정 — 하드 삭제면 이 FK(RESTRICT)가 막는다.
+  // 개인정보 익명화 배치로 갈지, user_id를 nullable+SetNull로 풀지 결정 필요.
+  User               User      @relation(fields: [user_id], references: [user_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_UW_USER")
+
+  @@map("user_withdrawals")
+}
+
+model WeeklySession {
+  weekly_session_id BigInt   @id(map: "PK_WEEKLY_SESSIONS") @default(autoincrement())
+  user_id           BigInt
+  weekly_content    String?
+  start_date        DateTime @db.Date
+  end_date          DateTime @db.Date
+  created_at        DateTime @default(now()) @db.Timestamptz(6)
+  User              User     @relation(fields: [user_id], references: [user_id], onDelete: Cascade, onUpdate: NoAction, map: "FK_WEEKLY_SESSIONS_USER")
+
+  @@map("weekly_sessions")
 }

@@ -8,7 +8,7 @@ class ChatSessionRepository:
             where_filter["is_marked"] = is_marked
         
         # 순수하게 DB에서 데이터를 가져오는 역할만 합니다.
-        sessions = await db.chatsession.find_many(
+        sessions = await db.chatroom.find_many(
             where=where_filter,
             order={
                 "updated_at": "desc" # 최신순 정렬
@@ -21,7 +21,7 @@ class ChatSessionRepository:
     
     async def get_one_session_by_id(self, user_id: int, room_id: int):
             # find_first를 사용하여 조건에 맞는 단 하나의 데이터만 가져옵니다.
-            session = await db.chatsession.find_first(
+            session = await db.chatroom.find_first(
                 where={
                     "room_id": room_id,
                     "user_id": user_id  # 내 세션이 맞는지 확인하는 필수 보안 장치!
