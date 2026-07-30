@@ -17,6 +17,12 @@ class ChatService:
     async def create_new_chat(self, user_id: int,routine_type:str):
         return await self.chat_repo.create_session(user_id, routine_type)
 
+    # 즐겨찾기 상태 설정 (명시적 설정 — 토글 아님)
+    async def set_marked(self, user_id: int, room_id: int, is_marked: bool) -> bool:
+        await self._get_owned_session(user_id, room_id)
+        session = await self.chat_repo.set_marked(room_id, is_marked)
+        return session.is_marked
+
     # 방 소유권 검증 공통 로직
     async def _get_owned_session(self, user_id: int, room_id: int):
         session = await self.chat_repo.get_session(room_id)

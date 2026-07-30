@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest
+from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest,SessionMarkRequest
 from app.services.chatService import ChatService
 from app.api.dependencies import get_current_user_id
 
@@ -31,6 +31,17 @@ async def generate_diary(request: DiaryRequest, user_id: int = Depends(get_curre
     # 토큰의 user_id로 방 소유권을 검증한 뒤 키워드를 서비스로 전송
     try:
         return await chat_service.create_diary(user_id, request.session_id, request.selected_keywords)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+
+# 4. 즐겨찾기 상태 명시적 설정 (body로 원하는 최종 상태를 지정)
+@router.patch("/session/{session_id}/mark")
+async def set_session_mark(session_id: int, request: SessionMarkRequest, user_id: int = Depends(get_current_user_id)):
+    try:
+        is_marked = await chat_service.set_marked(user_id, session_id, request.is_marked)
+        return {"message": "즐겨찾기 상태 변경 완료", "room_id": session_id, "is_marked": is_marked}
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except PermissionError as e:

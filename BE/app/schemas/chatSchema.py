@@ -34,3 +34,6 @@ class DiaryGenerationResponse(BaseModel):
 class DiaryRequest(BaseModel):
     session_id: int
     selected_keywords: List[str] = []
+
+class SessionMarkRequest(BaseModel):
+    is_marked: bool
