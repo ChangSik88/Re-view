@@ -13,6 +13,7 @@ class _DreamListScreenState extends State<DreamListScreen> {
   List<dynamic> _dreamList = [];
   bool _isLoading = true;
   bool _isMenuOpen = false;
+  bool _showOnlyMarked = false;
 
   Map<String, dynamic>? _reportData;
   bool _isReportLoading = true;
@@ -30,7 +31,8 @@ class _DreamListScreenState extends State<DreamListScreen> {
       final prefs = await SharedPreferences.getInstance();
       final String? userId = prefs.getString('user_id');
 
-      final sessionList = await sessionService.getAllSessions(userId);
+      final sessionList = await sessionService.getAllSessions(userId,
+          isMarked: _showOnlyMarked ? true : null);
 
       if (!mounted) return;
       setState(() {
@@ -52,7 +54,8 @@ class _DreamListScreenState extends State<DreamListScreen> {
               "date": formattedDate,
               "title": session['title'] ?? "제목 없는 꿈",
               "content": session['content'] ?? "일기 내용이 없습니다.",
-              "image_url": displayImageUrl
+              "image_url": displayImageUrl,
+              "is_marked": session['is_marked'] == true
             };
           }).toList();
           _isLoading = false;
@@ -60,6 +63,22 @@ class _DreamListScreenState extends State<DreamListScreen> {
     } catch (e) {
       if (!mounted) return;
       _loadMockData();
+    }
+  }
+
+  Future<void> _toggleMarked(int index) async {
+    final dream = _dreamList[index];
+    final bool newValue = !(dream['is_marked'] == true);
+    try {
+      await sessionService.setMarked(dream['id'], newValue);
+      if (!mounted) return;
+      setState(() {
+        _dreamList[index]['is_marked'] = newValue;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('즐겨찾기 변경에 실패했습니다.')));
     }
   }
 
@@ -169,6 +188,36 @@ class _DreamListScreenState extends State<DreamListScreen> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
+              child: Row(
+                children: [
+                  ChoiceChip(
+                    label: Text('전체'),
+                    selected: !_showOnlyMarked,
+                    selectedColor: Color(0xFF8F6CFF),
+                    backgroundColor: Color(0xFF1F1B21),
+                    labelStyle: TextStyle(color: Colors.white),
+                    onSelected: (_) {
+                      setState(() => _showOnlyMarked = false);
+                      _fetchDreams();
+                    },
+                  ),
+                  SizedBox(width: 8),
+                  ChoiceChip(
+                    label: Text('즐겨찾기'),
+                    selected: _showOnlyMarked,
+                    selectedColor: Color(0xFF8F6CFF),
+                    backgroundColor: Color(0xFF1F1B21),
+                    labelStyle: TextStyle(color: Colors.white),
+                    onSelected: (_) {
+                      setState(() => _showOnlyMarked = true);
+                      _fetchDreams();
+                    },
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: _isLoading
                   ? Center(
@@ -178,7 +227,7 @@ class _DreamListScreenState extends State<DreamListScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       itemCount: _dreamList.length,
                       itemBuilder: (context, index) {
-                        return _buildDreamCard(_dreamList[index]);
+                        return _buildDreamCard(_dreamList[index], index);
                       },
                     ),
             ),
@@ -310,10 +359,13 @@ class _DreamListScreenState extends State<DreamListScreen> {
     );
   }
 
-  Widget _buildDreamCard(Map<String, dynamic> dream) {
+  Widget _buildDreamCard(Map<String, dynamic> dream, int index) {
+    final bool isMarked = dream['is_marked'] == true;
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/chat_detail', arguments: dream['id']);
+      onTap: () async {
+        final result = await Navigator.pushNamed(context, '/chat_detail',
+            arguments: dream['id']);
+        if (result == true) _fetchDreams();
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16),
@@ -326,37 +378,60 @@ class _DreamListScreenState extends State<DreamListScreen> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [Colors.black.withValues(alpha: 0.8), Colors.transparent],
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [Colors.black.withValues(alpha: 0.8), Colors.transparent],
+                ),
+              ),
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(dream['date'] ?? '',
+                      style: TextStyle(color: Color(0xFF746E7A), fontSize: 12)),
+                  SizedBox(height: 4),
+                  Text(dream['title'] ?? '',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis),
+                  SizedBox(height: 4),
+                  Text(dream['content'] ?? '',
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis),
+                ],
+              ),
             ),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(dream['date'] ?? '',
-                  style: TextStyle(color: Color(0xFF746E7A), fontSize: 12)),
-              SizedBox(height: 4),
-              Text(dream['title'] ?? '',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis),
-              SizedBox(height: 4),
-              Text(dream['content'] ?? '',
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
-            ],
-          ),
+            Positioned(
+              top: 8,
+              right: 8,
+              child: GestureDetector(
+                onTap: () => _toggleMarked(index),
+                child: Container(
+                  padding: EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.4),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isMarked ? Icons.favorite : Icons.favorite_border,
+                    color: isMarked ? Color(0xFFF6339A) : Colors.white,
+                    size: 18,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

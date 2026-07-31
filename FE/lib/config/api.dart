@@ -22,6 +22,8 @@ class Api {
   static const String allSessions = '/chatting/session/all';
   static String singleSession(int roomId) =>
       '/chatting/session/single/$roomId';
+  static String sessionMark(int roomId) => '/chatting/session/$roomId/mark';
+  static String deleteSession(int roomId) => '/chatting/session/$roomId';
 
   // Report
   static const String report = '/report';

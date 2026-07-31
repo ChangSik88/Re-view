@@ -45,6 +45,23 @@ class ApiClient {
     return _decode(res);
   }
 
+  Future<dynamic> patch(String path, {Object? body, bool auth = true}) async {
+    final res = await http.patch(
+      Uri.parse('${Api.baseUrl}$path'),
+      headers: await _headers(auth: auth),
+      body: body == null ? null : jsonEncode(body),
+    );
+    return _decode(res);
+  }
+
+  Future<dynamic> delete(String path, {bool auth = true}) async {
+    final res = await http.delete(
+      Uri.parse('${Api.baseUrl}$path'),
+      headers: await _headers(auth: auth),
+    );
+    return _decode(res);
+  }
+
   dynamic _decode(http.Response res) {
     if (res.statusCode >= 200 && res.statusCode < 300) {
       if (res.bodyBytes.isEmpty) return null;

@@ -10,6 +10,7 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
   Map<String, dynamic>? _dreamData;
   bool _isLoading = true;
   int? _currentRoomId;
+  bool _isMarked = false;
 
   @override
   void didChangeDependencies() {
@@ -29,6 +30,7 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
       if (!mounted) return;
       setState(() {
         _dreamData = result;
+        _isMarked = result?['is_marked'] == true;
         _isLoading = false;
       });
     } catch (e) {
@@ -59,6 +61,61 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
     });
   }
 
+  Future<void> _toggleMarked() async {
+    if (_currentRoomId == null) return;
+    final bool newValue = !_isMarked;
+    try {
+      await sessionService.setMarked(_currentRoomId!, newValue);
+      if (!mounted) return;
+      setState(() => _isMarked = newValue);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('즐겨찾기 변경에 실패했습니다.')));
+    }
+  }
+
+  Future<void> _confirmDelete() async {
+    final bool? confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1F1B21),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Text('꿈 일기 삭제',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          content: Text('이 꿈 일기를 삭제할까요? 되돌릴 수 없습니다.',
+              style: TextStyle(color: Colors.white70)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text('취소', style: TextStyle(color: Colors.white54)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text('삭제',
+                  style: TextStyle(
+                      color: Color(0xFFF6339A), fontWeight: FontWeight.bold)),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed != true || _currentRoomId == null) return;
+
+    try {
+      await sessionService.deleteSession(_currentRoomId!);
+      if (!mounted) return;
+      Navigator.pop(context, true);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('삭제에 실패했습니다.')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +130,19 @@ class _DreamDetailScreenState extends State<DreamDetailScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isMarked ? Icons.favorite : Icons.favorite_border,
+              color: _isMarked ? Color(0xFFF6339A) : Colors.white,
+            ),
+            onPressed: _toggleMarked,
+          ),
+          IconButton(
+            icon: Icon(Icons.delete_outline, color: Colors.white),
+            onPressed: _confirmDelete,
+          ),
+        ],
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())

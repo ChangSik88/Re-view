@@ -28,6 +28,7 @@ class SingleSessionData(BaseModel):
     created_at:Optional[datetime]
     updated_at: Optional[datetime]
     image_url: Optional[str] = None
+    is_marked: Optional[bool] = None
     class Config:
         from_attributes = True
 
