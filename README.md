@@ -71,7 +71,16 @@ flutter pub get
 | `GEMINI_API_KEY` | 채팅 해몽·일기 생성·임베딩 (langchain이 자동 인식) | Google AI Studio 발급 키 |
 | `FLUX_API_KEY` | 꿈 이미지 생성 | FLUX 발급 키 |
 | `JWT_SECRET_KEY` | 액세스/리프레시 토큰 서명 | 임의의 긴 난수 문자열 |
-| `SERVER_BASE_URL` | 생성된 이미지 URL의 앞부분 | **AWS 종료로 기존 `http://172.31.40.95:8000`은 무효.** Render 주소 `https://<서비스명>.onrender.com`으로 교체 |
+| `S3_ENDPOINT` | 스토리지 S3 엔드포인트 | `https://<project_ref>.storage.supabase.co/storage/v1/s3` |
+| `S3_ACCESS_KEY_ID` | S3 액세스 키 | Supabase → Project Settings → Storage → S3 access keys |
+| `S3_SECRET_ACCESS_KEY` | S3 시크릿 키 | 위와 동일 |
+| `S3_BUCKET` | 버킷 이름 | 예: `dream-images` |
+| `S3_REGION` | 버킷 리전 | 예: `ap-southeast-1` |
+| `S3_PUBLIC_BASE_URL` | 이미지 공개 URL 앞부분 (**버킷명까지 포함**) | `https://<project_ref>.supabase.co/storage/v1/object/public/dream-images` |
+
+생성 이미지는 Supabase Storage에 올린다. `S3_*`는 S3 호환 규격이라 엔드포인트·리전만 바꾸면 Cloudflare R2나 AWS S3에서도 코드 수정 없이 동작한다.
+
+`SERVER_BASE_URL`은 이 이관 이후 코드에서 읽지 않는다. 남겨두어도 무해하다.
 
 `DATABASE_URL`은 개발 위치에 따라 갈아끼운다:
 
@@ -151,6 +160,7 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 
 ### 무료 티어 제약
 
-- **Render**: 15분 무활동 시 슬립(콜드 스타트 수십 초), 영구 디스크 없음 → `app/static/images/`에 저장되는 생성 이미지는 재배포 시 소실된다. 장기적으로는 오브젝트 스토리지(Cloudflare R2 등)로 옮겨야 한다.
+- **Render**: 15분 무활동 시 슬립(콜드 스타트 수십 초), 영구 디스크 없음. 생성 이미지는 Supabase Storage에 올리므로 재배포와 무관하게 유지된다. 로컬 디스크에 남는 건 git 추적 파일인 상점 이미지뿐이다.
 - **Neon**: 5분 유휴 시 자동 정지, 스토리지 0.5GB.
-- 슬립 방지는 외부 cron(cron-job.org 등)으로 `/`를 10분 간격 호출한다.
+- **Supabase Storage**: 무료 1GB(이미지 1장 약 1.2MB 기준 800장 남짓). 프로젝트가 1주일 무활동 시 일시정지되므로 장기 방치에 주의.
+- 슬립 방지는 외부 cron(cron-job.org 등)으로 `/`를 **4분 간격** 호출한다. Render(15분)보다 Neon(5분)이 먼저 정지하므로 주기를 여기에 맞춘다.

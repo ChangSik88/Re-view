@@ -2,10 +2,8 @@ from app.repositories.chatRepository import ChatRepository
 from app.schemas.chatSchema import AIAnalysisResponse
 from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_vector_embedding
 from app.core.ai.imageManager import ImageManager
+from app.core import storage
 from typing import List
-import uuid
-import os
-from urllib.parse import urlparse
 
 
 class ChatService:
@@ -112,18 +110,8 @@ class ChatService:
             # AI 이미지 생성
             image = await self.image_manager.generate_flux_image(image_prompt)
 
-            # 파일 저장 경로 설정 (static/images/UUID.png)
-            file_name = f"{uuid.uuid4()}.png"
-            file_dir = "app/static/images"
-            if not os.path.exists(file_dir):
-                os.makedirs(file_dir)
-
-            save_path = os.path.join(file_dir, file_name)
-            image.save(save_path)
-
-            # 서버 베이스 URL 기반의 이미지 URL 생성 (.env의 SERVER_BASE_URL 사용)
-            base_url = os.getenv("SERVER_BASE_URL", "http://13.209.97.107:8000").rstrip("/")
-            image_url = f"{base_url}/static/images/{file_name}"
+            # 오브젝트 스토리지 업로드 후 공개 URL 확보
+            image_url = await storage.upload_image(image)
 
             # 4. 이미지 URL DB 저장 (Repository 호출)
             await self.chat_repo.save_chat_image(room_id, image_url)
@@ -138,13 +126,10 @@ class ChatService:
         await self._get_owned_session(user_id, room_id)
         image_urls = await self.chat_repo.delete_session(room_id)
         for url in image_urls:
-            self._delete_image_file(url)
+            await self._delete_image(url)
 
-    def _delete_image_file(self, image_url: str) -> None:
+    async def _delete_image(self, image_url: str) -> None:
         try:
-            file_name = os.path.basename(urlparse(image_url).path)
-            file_path = os.path.join("app/static/images", file_name)
-            if os.path.exists(file_path):
-                os.remove(file_path)
+            await storage.delete_image(image_url)
         except Exception as e:
             print(f"이미지 파일 삭제 중 오류 발생: {e}")
