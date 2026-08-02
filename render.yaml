@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: dream-diary-be
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt && cd BE && prisma generate
+    startCommand: cd BE && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.4
+      # 한글이 포함된 스키마/응답 처리 시 로케일 인코딩 오류 방지
+      - key: PYTHONUTF8
+        value: "1"
+      # 아래 값들은 Render 대시보드에서 직접 입력한다
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FLUX_API_KEY
+        sync: false
+      - key: JWT_SECRET_KEY
+        sync: false
+      - key: SERVER_BASE_URL
+        sync: false
