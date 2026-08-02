@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../config/api.dart';
 import '../../services/session_service.dart';
 import '../../services/store_service.dart';
 
@@ -298,9 +299,7 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
         }
         if (result['image_url'] != null &&
             result['image_url'].toString().trim().isNotEmpty) {
-          imageUrl = result['image_url']
-              .toString()
-              .replaceAll('localhost', '13.209.97.107');
+          imageUrl = Api.imageUrl(result['image_url'].toString());
         }
       }
     } catch (e) {
@@ -415,7 +414,7 @@ class _StoreDetailScreenState extends State<StoreDetailScreen> {
     }
 
     String rawUrl = _itemData!['image_url'] ?? "https://placehold.co/400";
-    String safeImageUrl = rawUrl.replaceAll('localhost', '13.209.97.107');
+    String safeImageUrl = Api.imageUrl(rawUrl);
 
     return Scaffold(
       backgroundColor: Colors.white,

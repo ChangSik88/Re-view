@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../config/api.dart';
 import '../../services/api_client.dart';
 import '../../services/session_service.dart';
 import '../../services/report_service.dart';
@@ -43,8 +44,7 @@ class _DreamListScreenState extends State<DreamListScreen> {
             String? realImageUrl = session['image_url'];
             String displayImageUrl = (realImageUrl != null &&
                     realImageUrl.isNotEmpty)
-                ? realImageUrl.replaceAll(
-                    'localhost', '13.209.97.107') // 혹시 모를 로컬호스트 에러 방어
+                ? Api.imageUrl(realImageUrl) // 혹시 모를 로컬호스트 에러 방어
                 : (session['routine_type'] == 'night'
                     ? "https://placehold.co/400x300/2C2530/FFFFFF/png?text=Night+Dream"
                     : "https://placehold.co/400x300/1F1B21/FFFFFF/png?text=Morning+Dream");

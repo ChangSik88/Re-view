@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../config/api.dart';
 import '../../services/store_service.dart';
 
 class StoreScreen extends StatefulWidget {
@@ -138,7 +139,7 @@ class _StoreScreenState extends State<StoreScreen> {
 
   Widget _buildItemCard(Map<String, dynamic> item) {
     String rawUrl = item['image_url'] ?? "https://placehold.co/400x200";
-    String safeImageUrl = rawUrl.replaceAll('localhost', '13.209.97.107');
+    String safeImageUrl = Api.imageUrl(rawUrl);
 
     return GestureDetector(
       onTap: () {

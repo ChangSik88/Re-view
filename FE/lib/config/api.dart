@@ -5,8 +5,12 @@
 class Api {
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://13.209.97.107:8000',
+    defaultValue: 'https://re-view-uxww.onrender.com',
   );
+
+  /// 서버가 localhost 주소를 담아 보내는 경우(로컬 개발)를 대비한 이미지 URL 보정.
+  static String imageUrl(String raw) =>
+      raw.replaceAll('http://localhost:8000', baseUrl);
 
   // Auth
   static const String login = '/users/login';
