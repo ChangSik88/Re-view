@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     region: singapore
-    buildCommand: pip install -r requirements.txt && cd BE && prisma generate
+    buildCommand: pip install -r requirements.txt && cd BE && prisma generate && prisma py fetch
     startCommand: cd BE && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /
     envVars:
@@ -13,6 +13,11 @@ services:
       # 한글이 포함된 스키마/응답 처리 시 로케일 인코딩 오류 방지
       - key: PYTHONUTF8
         value: "1"
+      # Prisma 쿼리 엔진 바이너리를 프로젝트 디렉터리 안에 받는다.
+      # 기본값(~/.cache)은 프로젝트 밖이라 빌드 산출물에 포함되지 않아
+      # 실행 컨테이너에서 BinaryNotFoundError가 발생한다.
+      - key: PRISMA_BINARY_CACHE_DIR
+        value: /opt/render/project/src/.prisma
       # 아래 값들은 Render 대시보드에서 직접 입력한다
       - key: DATABASE_URL
         sync: false
