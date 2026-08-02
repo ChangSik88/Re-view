@@ -15,12 +15,23 @@ Re-view(dream_diary)는 꿈/하루를 기록하는 풀스택 프로젝트다.
 
 모든 BE 명령은 **루트에서 venv를 활성화한 뒤 `BE/`로 들어가** 실행한다. `.env`는 루트에 있지만 python-dotenv가 상위 폴더로 탐색하므로 `BE/`에서 실행해도 인식된다.
 
+**단, `prisma migrate` 계열은 예외다.** Prisma CLI(Node)는 `.env`를 cwd 기준 `./.env`·`./prisma/.env`에서만 찾고 상위 폴더로 올라가지 않는다. `BE/`에서 실행하면 `P1012 Environment variable not found: DATABASE_URL`이 난다. **루트에서 `--schema`로 지정해 실행할 것.**
+
 ```bash
 # 최초 설치 (루트)
 python -m venv venv
 venv\Scripts\activate            # Windows / macOS·Linux: source venv/bin/activate
 pip install -r requirements.txt
-cd BE && prisma generate         # venv 재생성 시 항상 다시 실행해야 prisma client가 생김
+
+# prisma client 생성 (venv 재생성 시 항상 다시 실행)
+cd BE
+PYTHONUTF8=1 prisma generate     # Windows PowerShell: $env:PYTHONUTF8="1"; prisma generate
+                                 # 이 플래그 없으면 schema.prisma의 한글 주석 때문에
+                                 # cp949 UnicodeEncodeError로 생성이 중간에 깨진다
+
+# DB 마이그레이션 적용 (반드시 루트에서)
+cd C:\dev\dream_diary
+prisma migrate deploy --schema=BE/prisma/schema.prisma
 
 # BE 서버 실행
 venv\Scripts\activate
@@ -55,7 +66,8 @@ api/ (라우터, HTTP·인증·에러코드)
 
 - **LLM 모델 ID**: 채팅·리포트 모두 `gemini-3.1-flash-lite`. 임베딩은 `gemini-embedding-001`. 모델을 바꾸면 `langchainManager.py`와 `reportManager.py` 두 곳을 함께 바꾼다.
 - **API 키**: Gemini는 `.env`의 `GEMINI_API_KEY`를 langchain이 자동 인식한다. 이미지 생성은 `FLUX_API_KEY`.
-- **이미지 URL**: `.env`의 `SERVER_BASE_URL`을 사용하며, 없으면 코드 폴백값(고정 IP)을 쓴다. 배포 주소가 바뀌면 이 키를 갱신한다.
+- **이미지 URL**: `.env`의 `SERVER_BASE_URL`을 사용하며, 없으면 코드 폴백값(`chatService.py`의 고정 IP)을 쓴다. 이 폴백값은 **폐기된 EC2 IP라 더 이상 유효하지 않으므로** 반드시 `.env`에 실제 배포 주소를 넣어야 한다.
+- **배포 구성**: AWS EC2는 종료됐다. 현재는 DB = Neon(PostgreSQL 18 + pgvector), 앱 = Render 무료 웹 서비스(`render.yaml` Blueprint). nginx는 Render가 TLS를 종료하므로 쓰지 않는다. 자세한 절차는 `README.md`의 배포 항목 참고.
 - **비밀번호**: bcrypt 해시(`core/security.py`의 `hash_password`/`verify_password`). 평문 저장 금지.
-- **Prisma 스키마 변경**: `prisma/schema.prisma` 수정 후 `prisma generate` 필수. 실 DB 반영은 별도 마이그레이션이 필요하다.
+- **Prisma 스키마 변경**: `prisma/schema.prisma` 수정 후 `prisma generate` 필수. 실 DB 반영은 루트에서 `prisma migrate deploy --schema=BE/prisma/schema.prisma`로 한다. `content_vector`는 3072차원이라 HNSW/IVFFlat 인덱스(2000차원 한계)를 걸 수 없어 의도적으로 보류된 상태다.
 - **파일명 컨벤션 불일치**: `user*`만 복수형(`userServices.py`, `userRepositories.py`), 나머지 도메인은 단수형(`chatService.py` 등). 기존 파일을 수정할 때 그 파일의 관례를 따른다.
