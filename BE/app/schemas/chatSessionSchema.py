@@ -23,8 +23,10 @@ class ChatSessionResponse(BaseModel):
 #단일 세션 데이터
 class SingleSessionData(BaseModel):
     room_id: int
-    title: str
-    content: str
+    # 일기 작성 전에는 DB에서 NULL이다(schema.prisma의 ChatRoom.title/content는 String?).
+    # str로 두면 응답 검증이 터져 상세 조회가 500이 된다.
+    title: Optional[str]
+    content: Optional[str]
     created_at:Optional[datetime]
     updated_at: Optional[datetime]
     image_url: Optional[str] = None
