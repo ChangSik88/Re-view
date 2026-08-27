@@ -68,7 +68,7 @@ api/ (라우터, HTTP·인증·에러코드)
 - **API 키**: Gemini는 `.env`의 `GEMINI_API_KEY`를 langchain이 자동 인식한다. 이미지 생성은 `FLUX_API_KEY`.
 - **생성 이미지 저장**: `core/storage.py`가 S3 호환 오브젝트 스토리지(Supabase Storage)에 올리고 공개 URL을 DB에 넣는다. Render 무료 티어는 영구 디스크가 없어 로컬 저장이 재배포마다 날아가기 때문이다. `S3_*` 환경 변수 6개가 필요하며, 엔드포인트·리전만 바꾸면 R2/S3에서도 동일하게 동작한다. 삭제 시 키는 URL에서 `S3_PUBLIC_BASE_URL` 접두사를 걷어내 구한다(공개 URL 경로가 곧 키가 아닌 스토리지가 있다). `SERVER_BASE_URL`은 이 이관 이후 코드에서 읽지 않는다.
 - **`/static` 마운트**: 상점 이미지(`app/static/storeImages/`)용으로 남아 있다. 이쪽은 git 추적 파일이라 재배포해도 유지된다.
-- **배포 구성**: AWS EC2는 종료됐다. 현재는 DB = Neon(PostgreSQL 18 + pgvector), 앱 = Render 무료 웹 서비스(`render.yaml` Blueprint). nginx는 Render가 TLS를 종료하므로 쓰지 않는다. 자세한 절차는 `README.md`의 배포 항목 참고.
+- **배포 구성**: AWS EC2는 종료됐다. 현재는 DB = Supabase(PostgreSQL + pgvector, Storage와 동일 프로젝트), 앱 = Render 무료 웹 서비스(`render.yaml` Blueprint). nginx는 Render가 TLS를 종료하므로 쓰지 않는다. `DATABASE_URL`은 **Session pooler(포트 5432)** 문자열만 쓴다. direct 호스트는 IPv6 전용이라 Render에서 못 붙고, transaction pooler(6543)는 Prisma prepared statement가 깨진다. 처음엔 Neon을 썼으나 외부 cron 핑이 Prisma 커넥션을 24시간 유지시켜 무료 compute 쿼터를 소진시킨 탓에 이관했다 — **슬립 방지 cron은 다시 걸지 말 것.** 자세한 절차는 `README.md`의 배포 항목 참고.
 - **비밀번호**: bcrypt 해시(`core/security.py`의 `hash_password`/`verify_password`). 평문 저장 금지.
 - **Prisma 스키마 변경**: `prisma/schema.prisma` 수정 후 `prisma generate` 필수. 실 DB 반영은 루트에서 `prisma migrate deploy --schema=BE/prisma/schema.prisma`로 한다. `content_vector`는 3072차원이라 HNSW/IVFFlat 인덱스(2000차원 한계)를 걸 수 없어 의도적으로 보류된 상태다.
 - **파일명 컨벤션 불일치**: `user*`만 복수형(`userServices.py`, `userRepositories.py`), 나머지 도메인은 단수형(`chatService.py` 등). 기존 파일을 수정할 때 그 파일의 관례를 따른다.
