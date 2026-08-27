@@ -10,14 +10,20 @@ load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # 서버가 켜질 때 실행
-    await db.connect()
-    print("DB 연결 성공")
-    
+    # 여기서 예외가 나면 기동이 중단돼 "/" 헬스체크까지 막히고 배포 자체가 실패한다.
+    # DB가 죽어도 앱은 뜨게 두고, DB를 쓰는 엔드포인트만 실패하도록 한다.
+    try:
+        await db.connect()
+        print("DB 연결 성공")
+    except Exception as e:
+        print(f"DB 연결 실패 (앱은 기동함): {e}")
+
     yield # 여기서 서버가 돌아가며 요청을 처리함
-    
+
     # 서버가 꺼질 때 실행
-    await db.disconnect()
-    print("DB 연결 종료")
+    if db.is_connected():
+        await db.disconnect()
+        print("DB 연결 종료")
 
 app = FastAPI(lifespan=lifespan)
 
