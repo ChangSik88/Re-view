@@ -31,5 +31,14 @@ class ReportManager:
         # LangChain v0.1.0 이상 권장 방식 (LCEL 파이프라인)
         chain = prompt | self.llm
         response = await chain.ainvoke({"dreams": dreams_text})
-        
+
+        # Gemini는 content를 [{"type": "text", "text": ...}] 형태의 블록 리스트로 돌려준다.
+        # 리스트 그대로 넘기면 weekly_content(String?) 저장이 타입 오류로 깨진다.
+        if isinstance(response.content, list):
+            return "".join(
+                block.get("text", "")
+                for block in response.content
+                if isinstance(block, dict)
+            )
+
         return response.content
