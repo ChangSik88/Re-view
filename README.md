@@ -5,7 +5,7 @@
 - **BE**: FastAPI + Prisma (PostgreSQL) — `BE/`
 - **FE**: Flutter — `FE/`
 
-> 처음 합류했다면 [팀 온보딩 가이드](docs/ONBOARDING.md)부터 읽어보세요.
+> 처음 합류했다면 [팀 온보딩 가이드](docs/20-engineering/01-onboarding.md)부터 읽어보세요.
 
 ## 프로젝트 구조
 

@@ -66,7 +66,7 @@ api (라우터)  →  services (로직)  →  repositories (DB)  →  Prisma / P
 
 ## 5. 로컬 환경 세팅
 
-> 자세한 명령어는 [README.md](../README.md)에 있습니다. 여기서는 흐름만 정리합니다.
+> 자세한 명령어는 [README.md](../../README.md)에 있습니다. 여기서는 흐름만 정리합니다.
 
 1. **저장소 클론** 후 루트로 이동
 2. **`.env` 파일 받기** — git에 없습니다. 팀에 요청해 루트에 두세요. (필요 키: `DATABASE_URL`, `JWT_SECRET_KEY`, `GEMINI_API_KEY`, `FLUX_API_KEY`, `SERVER_BASE_URL`)
@@ -134,6 +134,6 @@ api (라우터)  →  services (로직)  →  repositories (DB)  →  Prisma / P
 
 ## 9. 더 읽을거리
 
-- [README.md](../README.md) — 설치·실행 명령어
-- [CLAUDE.md](../CLAUDE.md) — 아키텍처·주의사항 요약(AI 어시스턴트용이지만 사람이 읽어도 유용)
+- [README.md](../../README.md) — 설치·실행 명령어
+- [CLAUDE.md](../../CLAUDE.md) — 아키텍처·주의사항 요약(AI 어시스턴트용이지만 사람이 읽어도 유용)
 - `docs/superpowers/specs/` — 주요 변경의 설계 문서
