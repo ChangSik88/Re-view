@@ -28,7 +28,8 @@
 - [0001-neon-to-supabase.md](40-decisions/0001-neon-to-supabase.md) — DB 이관, 크론 사고 전말
 
 **50-specs**
-- 날짜-주제 형식으로 쌓인다. 예: `2026-07-20-favorite-delete-api-design.md`
+- [2026-09-09-promo-web-page-design.md](50-specs/2026-09-09-promo-web-page-design.md) — 홍보 웹페이지(날씨 테마 + 해몽 데모 + 꿈 랭킹)
+- 그 외는 날짜-주제 형식으로 쌓인다.
 
 **60-plans**
 - 날짜-주제 형식으로 쌓인다. 예: `2026-07-20-favorite-delete-api.md`
