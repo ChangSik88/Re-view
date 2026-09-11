@@ -29,9 +29,20 @@ PYTHONUTF8=1 prisma generate     # Windows PowerShell: $env:PYTHONUTF8="1"; pris
                                  # 이 플래그 없으면 schema.prisma의 한글 주석 때문에
                                  # cp949 UnicodeEncodeError로 생성이 중간에 깨진다
 
-# DB 마이그레이션 적용 (반드시 루트에서)
+# DB 마이그레이션 (반드시 루트에서)
 cd C:\dev\dream_diary
-prisma migrate deploy --schema=BE/prisma/schema.prisma
+
+# ① 스키마를 고쳤으면 로컬 DB에 대고 마이그레이션 '파일을 만든다'
+#    migrate deploy는 파일을 만들지 않는다. 파일 없이 deploy하면 "No pending migrations"만 뜨고
+#    테이블은 생기지 않는다. PYTHONUTF8=1이 없으면 뒤이어 자동 실행되는 generate가 cp949로 깨진다.
+PYTHONUTF8=1 prisma migrate dev --name <변경_요약> --schema=BE/prisma/schema.prisma
+
+# ② 생성된 BE/prisma/migrations/<타임스탬프>_<이름>/ 을 schema.prisma와 함께 커밋한다.
+#    운영 반영은 배포가 한다 — render.yaml의 buildCommand가 migrate deploy를 실행한다.
+
+# ③ 예외적으로 운영 DB에 수동 적용해야 할 때만, URL을 명시해서 실행한다
+#    (.env 기본값은 로컬이다. 운영 URL을 기본값 자리에 두지 않는다)
+DATABASE_URL="<supabase-url>" prisma migrate deploy --schema=BE/prisma/schema.prisma
 
 # BE 서버 실행
 venv\Scripts\activate
@@ -70,5 +81,8 @@ api/ (라우터, HTTP·인증·에러코드)
 - **`/static` 마운트**: 상점 이미지(`app/static/storeImages/`)용으로 남아 있다. 이쪽은 git 추적 파일이라 재배포해도 유지된다.
 - **배포 구성**: AWS EC2는 종료됐다. 현재는 DB = Supabase(PostgreSQL + pgvector, Storage와 동일 프로젝트), 앱 = Render 무료 웹 서비스(`render.yaml` Blueprint). nginx는 Render가 TLS를 종료하므로 쓰지 않는다. `DATABASE_URL`은 **Session pooler(포트 5432)** 문자열만 쓴다. direct 호스트는 IPv6 전용이라 Render에서 못 붙고, transaction pooler(6543)는 Prisma prepared statement가 깨진다. 처음엔 Neon을 썼으나 외부 cron 핑이 Prisma 커넥션을 24시간 유지시켜 무료 compute 쿼터를 소진시킨 탓에 이관했다. **Supabase는 compute 시간을 재지 않으므로 슬립 방지 cron은 유지한다** — 단 `/`가 아니라 `/item/list`를 10분 간격, 07:00–02:00 KST로 호출한다(`/`는 DB를 안 건드려 Supabase 무활동 타이머를 리셋 못 한다). 전말은 `docs/40-decisions/0001-neon-to-supabase.md`, 절차는 `README.md`의 배포 항목 참고.
 - **비밀번호**: bcrypt 해시(`core/security.py`의 `hash_password`/`verify_password`). 평문 저장 금지.
-- **Prisma 스키마 변경**: `prisma/schema.prisma` 수정 후 `prisma generate` 필수. 실 DB 반영은 루트에서 `prisma migrate deploy --schema=BE/prisma/schema.prisma`로 한다. `content_vector`는 3072차원이라 HNSW/IVFFlat 인덱스(2000차원 한계)를 걸 수 없어 의도적으로 보류된 상태다.
+- **Prisma 스키마 변경**: `prisma/schema.prisma` 수정 → `migrate dev`로 마이그레이션 파일 생성(로컬 DB 기준) → 파일 커밋 → 배포가 `migrate deploy`로 운영에 적용. 명령은 위 "명령어" 항목 참고. `content_vector`는 3072차원이라 HNSW/IVFFlat 인덱스(2000차원 한계)를 걸 수 없어 의도적으로 보류된 상태다.
+- **개발 DB와 운영 DB**: 개발은 로컬 PostgreSQL(`localhost:5432/dream_diary`, pgvector 설치됨), 운영은 Supabase다. `.env`의 `DATABASE_URL`은 **로컬을 기본값으로 둔다** — 운영을 기본값에 두면 `migrate reset` 같은 파괴적 명령이 실수로 운영에 꽂힌다. Render는 이 `.env`를 읽지 않고 대시보드 환경변수를 쓴다(`render.yaml`에서 `sync: false`).
+- **Prisma Python 타입 주의**: `@db.Date` 컬럼에 `datetime.date`를 넘기면 `TypeError: Type <class 'datetime.date'> not serializable`로 터진다. **naive `datetime`(자정)으로 변환해 넘길 것.** tz-aware로 넘기면 UTC 변환 때문에 날짜가 하루 밀릴 수 있다.
+- **타임존**: Windows에는 IANA tz DB가 없어 `zoneinfo.ZoneInfo("Asia/Seoul")`이 `ZoneInfoNotFoundError`로 실패한다(Linux인 Render에서는 동작해서, 로컬에서만 깨지는 형태가 된다). 한국은 DST가 없으므로 `timezone(timedelta(hours=9))` 고정 오프셋을 쓴다.
 - **파일명 컨벤션 불일치**: `user*`만 복수형(`userServices.py`, `userRepositories.py`), 나머지 도메인은 단수형(`chatService.py` 등). 기존 파일을 수정할 때 그 파일의 관례를 따른다.

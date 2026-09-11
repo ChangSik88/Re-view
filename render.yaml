@@ -4,7 +4,10 @@ services:
     runtime: python
     plan: free
     region: singapore
-    buildCommand: pip install -r requirements.txt && cd BE && prisma generate && prisma py fetch
+    # migrate deploy는 이미 커밋된 마이그레이션 파일만 적용한다(파괴적 동작 없음).
+    # 배포당 1회만 돌도록 startCommand가 아니라 여기에 둔다 — startCommand에 두면
+    # 슬립에서 깨어날 때마다 실행돼 스키마 변경 시점이 배포와 무관해진다.
+    buildCommand: pip install -r requirements.txt && prisma migrate deploy --schema=BE/prisma/schema.prisma && cd BE && prisma generate && prisma py fetch
     startCommand: cd BE && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /
     envVars:
