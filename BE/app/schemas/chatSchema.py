@@ -17,6 +17,7 @@ class AIAnalysisResponse(BaseModel):
     #동적 생성. 핵심 감정 키워드 3개를 대화에서 추출
     suggested_feelings: List[str] = Field(description="유저가 느꼈을 법한 핵심 감정 키워드 3개")
     ai_reply: str = Field(description="유저에게 건네는 AI의 공감 멘트 및 다음 질문")
+    dream_category: str = Field(description="아래 목록 중 정확히 하나: 쫓김, 이빨, 똥, 돼지, 조상님, 뱀, 불, 물, 높은곳, 피, 시험, 죽음, 기타")
 
 # --- [3. 서버 -> 프론트엔드 (응답 스키마)] ---
 class ChatMessageResponse(BaseModel):
