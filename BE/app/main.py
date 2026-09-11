@@ -1,8 +1,10 @@
+import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from app.core.db import db
 from fastapi.staticfiles import StaticFiles
-from app.api import userApi, chatApi, chatSessionApi,storeApi,reportApi
+from app.api import userApi, chatApi, chatSessionApi, storeApi, reportApi, demoApi
 from contextlib import asynccontextmanager
 
 load_dotenv()
@@ -27,6 +29,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+_web_origins = [o.strip() for o in os.getenv("WEB_ORIGIN", "").split(",") if o.strip()]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_web_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 def read_root():
     return {"status": "success", "message": "서버가 정상적으로 시작되었습니다"}
@@ -38,3 +49,4 @@ app.include_router(chatApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(chatSessionApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(reportApi.router,prefix="/report",tags=["Chat"])
 app.include_router(storeApi.router,prefix="/item",tags=["Store"])
+app.include_router(demoApi.router, prefix="/demo", tags=["Demo"])
