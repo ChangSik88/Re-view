@@ -1,0 +1,97 @@
+:root {
+  --bg: #eef1f7;
+  --fg: #1f2430;
+  --accent: #5b6bff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Pretendard", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background 0.4s ease;
+}
+
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+.weather-widget {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: vertical;
+}
+
+button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #d33;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.result {
+  margin-top: 32px;
+  padding: 16px;
+  border-radius: 12px;
+  background: white;
+}
+
+.ranking-link {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 320px;
+  text-align: center;
+}
+
+/* 날씨 테마 5종 — 색값은 docs/30-design/01-design-tokens.md 기준으로 추후 조정 */
+body.theme-clear { --bg: #eaf4ff; }
+body.theme-cloudy { --bg: #e3e6ea; }
+body.theme-fog { --bg: #ececec; }
+body.theme-rain { --bg: #cfd8e3; }
+body.theme-snow { --bg: #f5f8ff; }
