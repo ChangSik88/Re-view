@@ -64,27 +64,44 @@ class DemoService:
         today = _today_kst()
         self._global_count = (today, self._get_global_count() + 1)
 
+    def _decrement_ip(self, client_ip: str) -> None:
+        today = _today_kst()
+        self._ip_counts[client_ip] = (today, max(0, self._get_ip_count(client_ip) - 1))
+
+    def _decrement_global(self) -> None:
+        today = _today_kst()
+        self._global_count = (today, max(0, self._get_global_count() - 1))
+
     async def interpret(self, dream: str, client_ip: str) -> DemoInterpretResponse:
         if not (1 <= len(dream) <= 500):
             raise ValueError("꿈 내용은 1~500자로 입력해 주세요.")
 
-        # 두 제한 모두 증가 없이 먼저 확인한다. 하나라도 거부되면 카운터를 건드리지 않는다.
+        # 확인과 증가 사이에 await를 두지 않는다. asyncio는 단일 스레드라 await가 없는
+        # 구간은 원자적이다. 증가를 LLM 호출 뒤로 미루면 그 await에서 다른 요청들이
+        # 전부 '증가 이전' 카운터를 보고 통과해 상한이 동시 요청 수만큼 새어나간다.
         if self._get_ip_count(client_ip) >= IP_DAILY_LIMIT:
             raise DemoRateLimitError("ip")
         if self._get_global_count() >= self._global_limit:
             raise DemoRateLimitError("global")
 
-        try:
-            ai_result = await analyze_dream_chat(history="", new_message=dream, routine_type="MORNING")
-        except Exception as e:
-            print(f"데모 해몽 LLM 호출 실패: {e}")
-            raise DemoUnavailableError()
-
         new_ip_count = self._increment_ip(client_ip)
         self._increment_global()
 
+        try:
+            ai_result = await analyze_dream_chat(history="", new_message=dream, routine_type="MORNING")
+        except Exception as e:
+            # 실패한 시도가 사용자의 하루 2회를 깎지 않도록 되돌린다.
+            self._decrement_ip(client_ip)
+            self._decrement_global()
+            print(f"데모 해몽 LLM 호출 실패: {e}")
+            raise DemoUnavailableError()
+
         category = ai_result.dream_category if ai_result.dream_category in CATEGORY_LIST else "기타"
-        await self.demo_repo.increment_category_count(_today_kst_for_db(), category)
+        try:
+            await self.demo_repo.increment_category_count(_today_kst_for_db(), category)
+        except Exception as e:
+            # 랭킹 집계는 부가 기능이다. 여기서 실패해도 해몽 결과는 그대로 돌려준다.
+            print(f"데모 랭킹 집계 실패: {e}")
 
         return DemoInterpretResponse(
             theme=ai_result.theme,
