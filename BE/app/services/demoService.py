@@ -64,6 +64,10 @@ class DemoService:
         today = _today_kst()
         self._global_count = (today, self._get_global_count() + 1)
 
+    # 되돌리기는 증가 당시의 날짜(counted_date)를 받는다. 증가와 되돌리기 사이에는
+    # LLM 호출(수 초)이 있어 그 사이 KST 자정을 넘길 수 있는데, 그러면 카운터는 이미
+    # 새 날짜로 리셋됐고 거기 쌓인 값은 다른 요청의 것이다. 그때 빼면 남의 카운트를
+    # 지우게 되므로, 날짜가 바뀌었으면 아무것도 하지 않는다(내 증가분은 이미 사라졌다).
     def _decrement_ip(self, client_ip: str, counted_date: date) -> None:
         stored_date, count = self._ip_counts.get(client_ip, (counted_date, 0))
         if stored_date != counted_date:
