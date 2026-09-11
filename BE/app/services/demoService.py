@@ -64,13 +64,17 @@ class DemoService:
         today = _today_kst()
         self._global_count = (today, self._get_global_count() + 1)
 
-    def _decrement_ip(self, client_ip: str) -> None:
-        today = _today_kst()
-        self._ip_counts[client_ip] = (today, max(0, self._get_ip_count(client_ip) - 1))
+    def _decrement_ip(self, client_ip: str, counted_date: date) -> None:
+        stored_date, count = self._ip_counts.get(client_ip, (counted_date, 0))
+        if stored_date != counted_date:
+            return
+        self._ip_counts[client_ip] = (stored_date, max(0, count - 1))
 
-    def _decrement_global(self) -> None:
-        today = _today_kst()
-        self._global_count = (today, max(0, self._get_global_count() - 1))
+    def _decrement_global(self, counted_date: date) -> None:
+        stored_date, count = self._global_count
+        if stored_date != counted_date:
+            return
+        self._global_count = (stored_date, max(0, count - 1))
 
     async def interpret(self, dream: str, client_ip: str) -> DemoInterpretResponse:
         if not (1 <= len(dream) <= 500):
@@ -84,6 +88,7 @@ class DemoService:
         if self._get_global_count() >= self._global_limit:
             raise DemoRateLimitError("global")
 
+        counted_date = _today_kst()
         new_ip_count = self._increment_ip(client_ip)
         self._increment_global()
 
@@ -91,8 +96,8 @@ class DemoService:
             ai_result = await analyze_dream_chat(history="", new_message=dream, routine_type="MORNING")
         except Exception as e:
             # 실패한 시도가 사용자의 하루 2회를 깎지 않도록 되돌린다.
-            self._decrement_ip(client_ip)
-            self._decrement_global()
+            self._decrement_ip(client_ip, counted_date)
+            self._decrement_global(counted_date)
             print(f"데모 해몽 LLM 호출 실패: {e}")
             raise DemoUnavailableError()
 
