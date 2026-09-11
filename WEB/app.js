@@ -15,13 +15,30 @@ function themeForWmoCode(code) {
   return "clear";
 }
 
-async function loadWeather() {
-  try {
-    const geoRes = await fetch("https://ipapi.co/json/");
-    if (!geoRes.ok) throw new Error("ipapi 실패");
-    const geo = await geoRes.json();
-    const { latitude, longitude, city } = geo;
+// ipapi.co가 차단되거나 레이트리밋에 걸려도 날씨는 보여준다. 스펙상 폴백 좌표는 서울이다.
+const SEOUL_COORDS = { latitude: 37.5665, longitude: 126.978 };
 
+async function fetchLocation() {
+  try {
+    const res = await fetch("https://ipapi.co/json/");
+    if (!res.ok) throw new Error("ipapi 응답 실패");
+    const geo = await res.json();
+    // 레이트리밋에 걸리면 200이면서 {"error": true}를 준다. ok만으로는 판정할 수 없어 좌표 유무로 본다.
+    if (typeof geo.latitude !== "number" || typeof geo.longitude !== "number") {
+      throw new Error("ipapi 좌표 없음");
+    }
+    return { latitude: geo.latitude, longitude: geo.longitude, city: geo.city || "" };
+  } catch (e) {
+    // 폴백 시 도시명은 비운다 — 추측한 위치를 사실처럼 표시하지 않기 위해서다.
+    console.warn("위치 조회 실패, 서울 좌표로 폴백:", e);
+    return { ...SEOUL_COORDS, city: "" };
+  }
+}
+
+async function loadWeather() {
+  const { latitude, longitude, city } = await fetchLocation();
+
+  try {
     const weatherRes = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
     );
@@ -30,12 +47,11 @@ async function loadWeather() {
     const code = weather.current_weather.weathercode;
 
     document.body.className = `theme-${themeForWmoCode(code)}`;
-    const widget = document.getElementById("weather-widget");
-    document.getElementById("weather-city").textContent = city || "";
+    document.getElementById("weather-city").textContent = city;
     document.getElementById("weather-desc").textContent = `현재 기온 ${weather.current_weather.temperature}°C`;
-    widget.hidden = false;
+    document.getElementById("weather-widget").hidden = false;
   } catch (e) {
-    // 실패해도 기본 테마 유지, 위젯은 숨김 (스펙 5장)
+    // 날씨가 죽어도 페이지는 뜬다 — 기본 테마를 유지하고 위젯만 숨긴다.
     console.warn("날씨 로딩 실패:", e);
   }
 }
@@ -64,6 +80,7 @@ async function submitDream(event) {
   }
 
   submitBtn.disabled = true;
+  submitBtn.textContent = "해몽하는 중…";
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000);
@@ -116,6 +133,7 @@ async function submitDream(event) {
     errorEl.hidden = false;
   } finally {
     submitBtn.disabled = false;
+    submitBtn.textContent = "해몽하기";
   }
 }
 
