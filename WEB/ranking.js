@@ -15,11 +15,10 @@ function buildRow(item, myCategory) {
 
   const li = document.createElement("li");
   li.className = "ranking-item" + (isMine ? " is-mine" : "");
-  li.dataset.category = item.category;
   li.innerHTML = `
     <button class="ranking-row" aria-expanded="false">
       <span class="rank">${item.rank}</span>
-      <span class="name">${item.category}</span>
+      <span class="name"></span>
       ${luckBadgeHtml(item.category)}
       <span class="summary">${entry.summary}</span>
       ${isMine ? '<span class="mine-tag">내 꿈</span>' : ""}
@@ -30,6 +29,11 @@ function buildRow(item, myCategory) {
       ${isMine ? '<p class="ranking-panel-foot">오늘 이 꿈을 해몽했습니다.</p>' : ""}
     </div>
   `;
+
+  // 카테고리 이름만 서버에서 오는 값이다. innerHTML에 끼워 넣지 않고 textContent로 채운다.
+  // 지금은 BE가 13종 화이트리스트로 정규화해 안전하지만, 카테고리 목록을 넓힐 때
+  // 그 정규화를 놓치면 여기가 그대로 XSS 통로가 된다.
+  li.querySelector(".name").textContent = item.category;
 
   li.querySelector(".ranking-row").addEventListener("click", () => {
     const expanded = li.classList.toggle("open");
@@ -57,8 +61,11 @@ async function loadRanking() {
 
     const list = document.getElementById("ranking-list");
     list.innerHTML = "";
+    let mineRow = null;
     for (const item of data.items) {
-      list.appendChild(buildRow(item, myCategory));
+      const row = buildRow(item, myCategory);
+      if (item.category === myCategory) mineRow = row;
+      list.appendChild(row);
     }
 
     const mine = data.items.find((item) => item.category === myCategory);
@@ -66,9 +73,10 @@ async function loadRanking() {
       document.getElementById("mine-name").textContent = mine.category;
       document.getElementById("mine-rank").textContent = `오늘 ${mine.rank}위`;
       document.getElementById("mine-card").hidden = false;
+      // 행을 만들 때 잡아둔 참조로 스크롤한다. 카테고리 이름으로 속성 선택자를 만들면
+      // 이름에 따옴표가 섞이는 순간 선택자 자체가 깨진다.
       document.getElementById("mine-goto").addEventListener("click", () => {
-        const target = list.querySelector(`[data-category="${mine.category}"]`);
-        target?.scrollIntoView({ behavior: "smooth", block: "center" });
+        mineRow?.scrollIntoView({ behavior: "smooth", block: "center" });
       });
     }
   } catch (e) {
