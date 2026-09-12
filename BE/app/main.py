@@ -1,13 +1,16 @@
+from dotenv import load_dotenv
+
+# 아래 라우터 모듈들은 임포트 시점에 os.getenv를 읽는다(demoApi의 DemoService가
+# DEMO_DAILY_GLOBAL_LIMIT을 읽는 것이 그 예다). 그래서 임포트보다 먼저 불러야 한다.
+load_dotenv()
+
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
 from app.core.db import db
 from fastapi.staticfiles import StaticFiles
 from app.api import userApi, chatApi, chatSessionApi, storeApi, reportApi, demoApi
 from contextlib import asynccontextmanager
-
-load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):

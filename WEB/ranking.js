@@ -46,9 +46,14 @@ function buildRow(item, myCategory) {
 
 async function loadRanking() {
   const myCategory = sessionStorage.getItem("lastDreamCategory");
+  const loadingEl = document.getElementById("ranking-loading");
 
   try {
-    const res = await fetch(`${API_BASE_URL}/demo/ranking`);
+    // 크론이 쉬는 02:00~07:00 KST에는 Render 콜드 스타트로 수십 초가 걸릴 수 있다.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 60000);
+    const res = await fetch(`${API_BASE_URL}/demo/ranking`, { signal: controller.signal });
+    clearTimeout(timeout);
     if (!res.ok) throw new Error("랭킹 실패");
     const data = await res.json();
 
@@ -82,6 +87,8 @@ async function loadRanking() {
   } catch (e) {
     console.warn("랭킹 로딩 실패:", e);
     document.getElementById("ranking-error").hidden = false;
+  } finally {
+    loadingEl.hidden = true;
   }
 }
 

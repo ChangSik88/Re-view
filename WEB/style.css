@@ -6,6 +6,12 @@
 
 * { box-sizing: border-box; }
 
+/* hidden 속성은 브라우저 기본 스타일의 display:none이라, 아래 클래스들의
+   display:flex에 캐스케이드에서 진다. !important로 되돌려야 hidden이 실제로 먹는다. */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, "Pretendard", sans-serif;
@@ -194,4 +200,10 @@ body.theme-snow { --bg: #f5f8ff; }
 
 @media (max-width: 480px) {
   .ranking-row .summary { display: none; }
+}
+
+.ranking-loading {
+  color: #888;
+  text-align: center;
+  margin-top: 32px;
 }

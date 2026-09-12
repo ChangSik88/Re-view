@@ -81,6 +81,7 @@ class DemoService:
         self._global_count = (stored_date, max(0, count - 1))
 
     async def interpret(self, dream: str, client_ip: str) -> DemoInterpretResponse:
+        dream = dream.strip()
         if not (1 <= len(dream) <= 500):
             raise ValueError("꿈 내용은 1~500자로 입력해 주세요.")
 

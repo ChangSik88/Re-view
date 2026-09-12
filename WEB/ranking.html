@@ -6,7 +6,7 @@
   <title>Re-view — 오늘 사람들이 많이 꾼 꿈</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="theme-clear">
   <main class="page ranking-page">
     <a href="index.html" class="back-link">‹ 뒤로</a>
 
@@ -22,6 +22,7 @@
       <button id="mine-goto" class="mine-goto">순위 보기</button>
     </div>
 
+    <p id="ranking-loading" class="ranking-loading">불러오는 중…</p>
     <ol id="ranking-list" class="ranking-list"></ol>
     <p id="ranking-empty" class="ranking-empty" hidden>아직 오늘 해몽된 꿈이 없어요.</p>
     <p id="ranking-error" class="error-message" hidden>랭킹을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</p>
