@@ -2,6 +2,12 @@
   --bg: #eef1f7;
   --fg: #1f2430;
   --accent: #5b6bff;
+
+  --font-serif: "Gowun Batang", "Noto Serif KR", serif;
+  --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  /* 360px 화면에서 0px, 1280px 화면에서 1px.
+     clamp(모바일값, calc(모바일값 + 차이 * var(--f)), 데스크탑값)으로 두 시안 사이를 선형 보간한다. */
+  --f: calc((100vw - 360px) / 920);
 }
 
 * { box-sizing: border-box; }
@@ -206,4 +212,51 @@ body.theme-snow { --bg: #f5f8ff; }
   color: #888;
   text-align: center;
   margin-top: 32px;
+}
+
+/* 길흉 도장 — Figma "Seal · 길흉 도장"(672:15). 기준 40px 안에 36px 바깥 원·30px 안쪽 원.
+   Figma의 -9°는 반시계 기준이라 CSS에서는 +9deg다. */
+.seal {
+  --seal-size: 40px;
+  --seal-color: #be241f;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--seal-size);
+  height: var(--seal-size);
+  transform: rotate(9deg);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: calc(var(--seal-size) * 0.425);
+  line-height: 1.18;
+  color: var(--seal-color);
+}
+.seal::before,
+.seal::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: var(--seal-color);
+  border-radius: 50%;
+}
+.seal::before {
+  inset: 5%;
+  border-width: calc(var(--seal-size) * 0.04);
+  opacity: 0.85;
+}
+.seal::after {
+  inset: 12.5%;
+  border-width: calc(var(--seal-size) * 0.02);
+  opacity: 0.45;
+}
+.seal > span { opacity: 0.9; }
+.seal-g { --seal-color: #be241f; }
+.seal-h { --seal-color: #1e2836; }
+.seal-b {
+  --seal-color: #49525f;
+  font-size: calc(var(--seal-size) * 0.25);
+  line-height: 1.05;
 }

@@ -15,4 +15,24 @@ const CATEGORY_DICTIONARY = {
   "기타": { luck: "b", summary: "정해진 상징에 딱 들어맞지 않는 꿈", text: "위 12종 어디에도 뚜렷이 속하지 않는 꿈이다. 전통 해몽에 고정된 풀이가 없으므로 특정 길흉으로 단정하지 않는다." },
 };
 
-const LUCK_LABEL = { g: "길몽", h: "흉몽", b: "양면" };
+const LUCK_LABEL = { g: "길몽", h: "흉몽", b: "조건에 따라 갈림" };
+const LUCK_GLYPHS = { g: ["吉"], h: ["凶"], b: ["吉", "凶"] };
+
+function luckOf(category) {
+  const entry = CATEGORY_DICTIONARY[category];
+  return entry ? entry.luck : "b";
+}
+
+// 홈 결과 화면과 랭킹 목록이 같은 도장을 쓴다. 글자는 상수라도 DOM으로 만들어 innerHTML을 피한다.
+function createSeal(luck) {
+  const seal = document.createElement("span");
+  seal.className = `seal seal-${luck}`;
+  seal.setAttribute("role", "img");
+  seal.setAttribute("aria-label", LUCK_LABEL[luck]);
+  for (const glyph of LUCK_GLYPHS[luck]) {
+    const span = document.createElement("span");
+    span.textContent = glyph;
+    seal.appendChild(span);
+  }
+  return seal;
+}
