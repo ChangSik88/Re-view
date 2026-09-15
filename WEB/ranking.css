@@ -1,0 +1,376 @@
+/* Task 3 전까지 style.css에 옛 홈용 body·button 규칙이 남아 있어 폰트·버튼 여백을 여기서 명시한다. */
+.ranking-body {
+  min-height: 100vh;
+  background: #fbf8f0;
+  color: #211d14;
+  font-family: var(--font-sans);
+}
+
+/* ── 네비게이션 ── */
+.rk-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(16px, calc(16px + 6 * var(--f)), 22px) clamp(20px, calc(20px + 26 * var(--f)), 46px);
+  border-bottom: 1px solid #ebe4d3;
+  color: #9e6630;
+}
+.rk-logo {
+  order: -1;
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 700;
+}
+.rk-back {
+  margin-left: auto;
+  color: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.rk-nav-title {
+  display: none;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* ── 본문 ── */
+.rk-content {
+  box-sizing: content-box;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding:
+    clamp(22px, calc(22px + 18 * var(--f)), 40px)
+    clamp(20px, calc(20px + 120 * var(--f)), 140px)
+    clamp(48px, calc(48px + 32 * var(--f)), 80px);
+}
+
+.rk-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 48px;
+  padding-bottom: 24px;
+}
+.rk-title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.rk-title h1 {
+  margin: 0;
+  font-size: clamp(22px, calc(22px + 10 * var(--f)), 32px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.rk-date {
+  margin: 0;
+  font-size: clamp(12px, calc(12px + 1 * var(--f)), 13px);
+  color: #7c7360;
+}
+
+/* ── 내가 해몽한 꿈 (F1/F4) ── */
+.mine-card {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 13px;
+  width: min(372px, 100%);
+  padding: 13px 16px;
+  border: 1.4px solid #e2d9c3;
+  border-radius: 13px;
+  background: #f5f0e2;
+}
+.mine-label {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 14px;
+  color: #7c7360;
+}
+.mine-name {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.mine-rank {
+  margin-left: auto;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.mine-goto {
+  width: auto;
+  margin: 0;
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 7px;
+  background: #211d14;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* ── 해몽 전 (F3): 같은 요소를 두 줄 문구 + 버튼 격자로 재배치 ── */
+.mine-card.is-empty {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 13px;
+  row-gap: 3px;
+  border-style: dashed;
+  background: none;
+}
+.mine-card.is-empty .mine-label { display: none; }
+.mine-card.is-empty .mine-name {
+  grid-column: 1;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+.mine-card.is-empty .mine-rank {
+  grid-column: 1;
+  margin-left: 0;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #7c7360;
+}
+.mine-card.is-empty .mine-goto {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  padding: 7px 12px;
+}
+
+/* ── 범례 ── */
+.rk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0 0 10px 16px;
+  list-style: none;
+}
+.rk-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #7c7360;
+}
+.rk-legend .seal {
+  --seal-size: 24px;
+  transform: none;
+}
+
+/* ── 목록 ── */
+.ranking-list {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #ebe4d3;
+  list-style: none;
+}
+.ranking-list:empty { border-top: 0; }
+.ranking-item { border-bottom: 1px solid #ebe4d3; }
+.ranking-item.is-mine { background: #f5f0e2; }
+
+.ranking-row {
+  display: grid;
+  grid-template-columns: 56px 118px 56px minmax(0, max-content) auto 1fr 20px;
+  grid-template-areas: "rank name seal summary tag . chev";
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 12px 16px;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ranking-row:focus-visible {
+  outline: 2px solid #9e6630;
+  outline-offset: -2px;
+}
+.ranking-row .rank {
+  grid-area: rank;
+  font-size: 15px;
+  font-weight: 700;
+  color: #aba290;
+}
+.ranking-item.is-mine .rank,
+.ranking-item.open .rank { color: #211d14; }
+.ranking-row .name {
+  grid-area: name;
+  overflow: hidden;
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ranking-row .seal-slot {
+  grid-area: seal;
+  display: flex;
+}
+.ranking-row .summary {
+  grid-area: summary;
+  overflow: hidden;
+  font-size: 13.5px;
+  color: #7c7360;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ranking-row .mine-tag {
+  grid-area: tag;
+  margin-left: 10px;
+  padding: 2px 7px;
+  border: 1px solid #e2d9c3;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #7c7360;
+  white-space: nowrap;
+}
+.ranking-row .chevron {
+  grid-area: chev;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #aba290;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+.ranking-item.open .chevron {
+  transform: rotate(180deg);
+  stroke: #211d14;
+}
+
+/* ── 펼침 패널: max-height 트랜지션. 열린 뒤에는 JS가 none으로 풀어 준다. ── */
+.ranking-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.ranking-panel-inner {
+  display: grid;
+  grid-template-columns: 118px minmax(0, 620px);
+  align-items: baseline;
+  padding: 2px 64px 20px 72px;
+}
+.panel-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: #aba290;
+}
+.panel-summary {
+  display: none;
+  margin: 0;
+}
+.panel-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* ── 상태 문구 ── */
+.rk-status {
+  margin: 40px 0 0;
+  font-size: 13px;
+  color: #7c7360;
+  text-align: center;
+}
+.rk-error { color: #a03f3a; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ranking-panel,
+  .ranking-row .chevron { transition: none; }
+}
+
+/* ── 모바일: 네비·헤더·행 구성이 바뀐다 (Figma M · 전체보기) ── */
+@media (max-width: 640px) {
+  .rk-logo { display: none; }
+  .rk-back {
+    margin-left: 0;
+    font-size: 15px;
+  }
+  .rk-back-text { display: none; }
+  .rk-nav-title { display: inline; }
+
+  .rk-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding-bottom: 12px;
+  }
+  .rk-title { gap: 6px; }
+
+  .mine-card {
+    width: auto;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: 12px;
+  }
+  .mine-card.is-empty { column-gap: 10px; }
+  .mine-label {
+    font-size: 10px;
+    line-height: 13px;
+  }
+  .mine-name { font-size: 16px; }
+  .mine-rank { font-size: 12px; }
+  .mine-goto {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .rk-legend {
+    gap: 12px;
+    padding: 8px 0 8px 4px;
+  }
+  .rk-legend li {
+    gap: 5px;
+    font-size: 11px;
+  }
+  .rk-legend .seal { --seal-size: 20px; }
+
+  .ranking-row {
+    grid-template-columns: 24px minmax(0, max-content) auto 1fr 40px 18px;
+    grid-template-areas: "rank name tag . seal chev";
+    column-gap: 6px;
+    padding: 9px 10px;
+  }
+  .ranking-row .rank { font-size: 13px; }
+  .ranking-row .name { font-size: 15.5px; }
+  .ranking-row .summary { display: none; }
+  .ranking-row .seal { --seal-size: 34px; }
+  .ranking-row .mine-tag {
+    margin-left: 0;
+    padding: 1px 6px;
+    font-size: 10px;
+  }
+  .ranking-row .chevron {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ranking-panel-inner {
+    grid-template-columns: 1fr;
+    row-gap: 6px;
+    padding: 0 14px 16px 40px;
+  }
+  .panel-label { font-size: 10.5px; }
+  .panel-summary {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+  .panel-text {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
