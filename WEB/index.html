@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Re-view — 오늘의 꿈 해몽</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-clear">
+  <main class="page">
+    <section id="weather-widget" class="weather-widget" hidden>
+      <span id="weather-city"></span>
+      <span id="weather-desc"></span>
+    </section>
+
+    <h1>오늘 꾼 꿈, 무슨 의미일까요?</h1>
+
+    <form id="interpret-form">
+      <textarea id="dream-input" maxlength="500" placeholder="꿈 내용을 적어 주세요 (최대 500자)"></textarea>
+      <button type="submit" id="submit-btn">해몽하기</button>
+      <p id="input-error" class="error-message" hidden></p>
+    </form>
+
+    <section id="result" class="result" hidden>
+      <h2 id="result-theme"></h2>
+      <p id="result-vibe"></p>
+      <ul id="result-feelings"></ul>
+      <p id="result-reply"></p>
+    </section>
+
+    <a href="ranking.html" class="ranking-link">오늘 사람들이 많이 꾼 꿈 전체보기 →</a>
+  </main>
+
+  <div id="exhausted-modal" class="modal" hidden>
+    <div class="modal-content">
+      <p id="exhausted-message">앱에서 더 해보세요! 앱 설치 시 추가 기회를 무료로 드려요.</p>
+      <a href="#" id="app-store-link">앱 설치하러 가기</a>
+      <button id="modal-close">닫기</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

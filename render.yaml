@@ -4,7 +4,10 @@ services:
     runtime: python
     plan: free
     region: singapore
-    buildCommand: pip install -r requirements.txt && cd BE && prisma generate && prisma py fetch
+    # migrate deploy는 이미 커밋된 마이그레이션 파일만 적용한다(파괴적 동작 없음).
+    # 배포당 1회만 돌도록 startCommand가 아니라 여기에 둔다 — startCommand에 두면
+    # 슬립에서 깨어날 때마다 실행돼 스키마 변경 시점이 배포와 무관해진다.
+    buildCommand: pip install -r requirements.txt && prisma migrate deploy --schema=BE/prisma/schema.prisma && cd BE && prisma generate && prisma py fetch
     startCommand: cd BE && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /
     envVars:
@@ -18,8 +21,17 @@ services:
       # 실행 컨테이너에서 BinaryNotFoundError가 발생한다.
       - key: PRISMA_BINARY_CACHE_DIR
         value: /opt/render/project/src/.prisma
+      # 데모 API 전역 일일 상한. 비밀값이 아니라 정책값이라 여기서 관리한다.
+      # 코드에도 기본값 200이 있지만, 값을 조정할 때 이 파일만 보면 되도록 명시한다.
+      - key: DEMO_DAILY_GLOBAL_LIMIT
+        value: "200"
       # 아래 값들은 Render 대시보드에서 직접 입력한다
       - key: DATABASE_URL
+        sync: false
+      # 홍보 웹페이지(WEB/)의 배포 출처. 쉼표로 여러 개 가능.
+      # 비워두면 allow_origins=[]가 되어 브라우저 호출이 전부 차단된다.
+      # 정적 호스팅 업체가 확정되면 그 URL을 대시보드에 넣어야 데모가 동작한다.
+      - key: WEB_ORIGIN
         sync: false
       - key: GEMINI_API_KEY
         sync: false

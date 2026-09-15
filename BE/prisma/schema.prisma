@@ -88,6 +88,16 @@ model CustomerInquiry {
   @@map("customer_inquiries")
 }
 
+model DemoDreamCount {
+  demo_count_id BigInt   @id(map: "PK_DEMO_DREAM_COUNTS") @default(autoincrement())
+  date          DateTime @db.Date
+  category      String   @db.VarChar(20)
+  count         Int      @default(0)
+
+  @@unique([date, category], map: "UQ_DEMO_COUNT_DATE_CATEGORY")
+  @@map("demo_dream_counts")
+}
+
 model DiaryEntry {
   diary_entry_id BigInt    @id(map: "PK_DIARY_ENTRIES") @default(autoincrement())
   purchase_id    BigInt

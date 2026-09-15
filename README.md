@@ -161,10 +161,14 @@ python seed_store.py    # 이미 있는 행은 건너뛰므로 여러 번 실행
 
 Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `render.yaml`을 읽어 아래 설정이 자동 적용된다.
 
-- 빌드: `pip install -r requirements.txt && cd BE && prisma generate`
+- 빌드: `pip install -r requirements.txt && prisma migrate deploy --schema=BE/prisma/schema.prisma && cd BE && prisma generate && prisma py fetch`
 - 시작: `cd BE && uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 
-환경 변수 5개(`DATABASE_URL`, `GEMINI_API_KEY`, `FLUX_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
+빌드 단계의 `prisma migrate deploy`가 커밋된 마이그레이션 파일을 운영 DB에 적용한다. 즉 **스키마 변경은 배포로 반영되며, 사람이 운영 DB에 직접 명령을 날릴 일이 없다.** 마이그레이션 파일을 만드는 쪽은 로컬이다 — 아래 "DB 마이그레이션 파이프라인" 참고.
+
+환경 변수 6개(`DATABASE_URL`, `GEMINI_API_KEY`, `FLUX_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`, `WEB_ORIGIN`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
+
+`WEB_ORIGIN`은 홍보 웹페이지(`WEB/`)의 배포 출처다(쉼표로 여러 개 가능). **비워두면 `allow_origins=[]`가 되어 브라우저에서 오는 데모 API 호출이 전부 차단된다.** 정적 호스팅 업체가 확정되면 그 URL을 넣어야 데모가 동작한다. `*`는 쓰지 않는다 — 아무 사이트나 데모를 임베드해 Gemini 쿼터를 태울 수 있다.
 
 ### 3. 프론트엔드 연동
 
