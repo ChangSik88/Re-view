@@ -46,7 +46,7 @@ function buildRow(item, myCategory) {
     </div>
   `;
 
-  // 카테고리 이름만 서버에서 오는 값이다. innerHTML에 끼워 넣지 않고 textContent로 채운다.
+  // 서버에서 오는 값 중 문자열은 카테고리 이름뿐이다. innerHTML에 끼워 넣지 않고 textContent로 채운다.
   // 지금은 BE가 13종 화이트리스트로 정규화해 안전하지만, 카테고리 목록을 넓힐 때
   // 그 정규화를 놓치면 여기가 그대로 XSS 통로가 된다.
   li.querySelector(".name").textContent = item.category;

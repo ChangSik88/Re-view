@@ -90,7 +90,11 @@ async function loadWeather() {
 
 async function loadRankingPreview() {
   try {
-    const res = await fetch(`${API_BASE_URL}/demo/ranking`);
+    // 크론이 쉬는 02:00~07:00 KST에는 Render 콜드 스타트로 수십 초가 걸릴 수 있다.
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 60000);
+    const res = await fetch(`${API_BASE_URL}/demo/ranking`, { signal: controller.signal });
+    clearTimeout(timeout);
     if (!res.ok) throw new Error("랭킹 실패");
     const data = await res.json();
     if (data.items.length === 0) return;

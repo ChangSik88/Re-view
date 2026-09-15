@@ -411,7 +411,8 @@ body.home {
 }
 .preview-list {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  /* 서버가 6개 미만을 줄 수 있어(이른 아침) auto-fit으로 빈 칸 없이 채운다. */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: clamp(8px, calc(8px + 4 * var(--f)), 12px);
   margin: 0;
   padding: 0;
@@ -605,7 +606,7 @@ body.home {
   .btn-arrow { display: inline; }
 
   .preview-label-long { display: none; }
-  .preview-list { grid-template-columns: repeat(3, 1fr); }
+  .preview-list { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
   .preview-list li:nth-child(n + 4) { display: none; }
 
   .result-date-long { display: none; }
@@ -613,6 +614,7 @@ body.home {
   .long { display: none; }
 }
 
+/* 주의: 모바일 분기(위)보다 뒤에 온다. 여기 추가하는 규칙이 모바일 전용 규칙과 겹치면 이 순서 때문에 이겨버린다. */
 /* ════════════ 단계 연출 (F2~F5) ════════════ */
 /* F2 종이가 올라온다: 하늘 496→352 (모바일 값은 데스크탑 비율로 환산) */
 body.home.stage-paper {
