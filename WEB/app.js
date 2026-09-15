@@ -119,6 +119,114 @@ async function loadRankingPreview() {
   }
 }
 
+const STAGES = ["stage-input", "stage-paper", "stage-writing", "stage-done"];
+const TYPE_INTERVAL_MS = 45;
+// 하늘이 줄어드는 CSS 트랜지션(0.6s)이 끝난 뒤 타이핑해야 글자가 움직이는 박스 위에 찍히지 않는다.
+const SKY_SHIFT_MS = 600;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let typingTimer = null;
+// 연출 도중 "다시 풀어보기"나 재제출이 끼어들면 이전 연출의 남은 단계를 버리기 위한 번호.
+let playToken = 0;
+
+function setStage(stage) {
+  document.body.classList.remove(...STAGES);
+  document.body.classList.add(stage);
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, reduceMotion ? 0 : ms));
+}
+
+function stopTyping() {
+  clearInterval(typingTimer);
+  typingTimer = null;
+}
+
+function typeText(el, text) {
+  stopTyping();
+  const chars = Array.from(text);
+  if (reduceMotion || chars.length === 0) {
+    el.textContent = text;
+    return Promise.resolve();
+  }
+  el.textContent = "";
+  return new Promise((resolve) => {
+    let i = 0;
+    typingTimer = setInterval(() => {
+      el.textContent += chars[i];
+      i += 1;
+      if (i === chars.length) {
+        stopTyping();
+        resolve();
+      }
+    }, TYPE_INTERVAL_MS);
+  });
+}
+
+function fillResultMeta() {
+  const { month, day, weekday } = kstDateParts();
+  const suffix = weatherLabel ? ` · ${weatherLabel}` : "";
+  document.getElementById("result-date-long").textContent = `${month}월 ${day}일 ${weekday}${suffix}`;
+  document.getElementById("result-date-short").textContent = `${month}/${day} ${weekday.charAt(0)}${suffix}`;
+}
+
+// F2: 제출 즉시. BE 응답을 기다리는 동안 빈 박스 + 커서가 로딩 표시를 겸한다.
+function showPaper(dream) {
+  playToken += 1;
+  stopTyping();
+  fillResultMeta();
+  document.getElementById("result-quote").textContent = `"${dream}"`;
+  document.getElementById("result-theme").textContent = "";
+  document.getElementById("result-vibe").textContent = "";
+  document.getElementById("result-feelings").replaceChildren();
+  document.getElementById("result-reply").textContent = "";
+  document.getElementById("result-seal-slot").replaceChildren();
+  document.getElementById("result").hidden = false;
+  setStage("stage-paper");
+}
+
+// F3~F5
+async function playResult(result) {
+  const token = playToken;
+  document.getElementById("result-vibe").textContent = result.vibe;
+  const feelingsEl = document.getElementById("result-feelings");
+  for (const feeling of result.suggested_feelings) {
+    const li = document.createElement("li");
+    li.textContent = feeling;
+    feelingsEl.appendChild(li);
+  }
+  document.getElementById("result-reply").textContent = result.ai_reply;
+  document.getElementById("result-seal-slot").appendChild(createSeal(luckOf(result.dream_category)));
+
+  setStage("stage-writing");
+  await wait(SKY_SHIFT_MS);
+  if (token !== playToken) return;
+  await typeText(document.getElementById("result-theme"), result.theme);
+  if (token !== playToken) return;
+  setStage("stage-done");
+}
+
+function backToInput() {
+  playToken += 1;
+  stopTyping();
+  document.getElementById("result").hidden = true;
+  setStage("stage-input");
+}
+
+function showInputError(message) {
+  const errorEl = document.getElementById("input-error");
+  errorEl.textContent = message;
+  errorEl.hidden = false;
+}
+
+function retry() {
+  backToInput();
+  const input = document.getElementById("dream-input");
+  input.value = "";
+  input.focus();
+}
+
 function showExhaustedModal(reason) {
   const message = document.getElementById("exhausted-message");
   message.textContent =
@@ -131,18 +239,18 @@ function showExhaustedModal(reason) {
 async function submitDream(event) {
   event.preventDefault();
   const input = document.getElementById("dream-input");
-  const errorEl = document.getElementById("input-error");
   const submitBtn = document.getElementById("submit-btn");
-  errorEl.hidden = true;
+  document.getElementById("input-error").hidden = true;
 
   const dream = input.value.trim();
   if (dream.length < 1 || dream.length > 500) {
-    errorEl.textContent = "꿈 내용은 1~500자로 입력해 주세요.";
-    errorEl.hidden = false;
+    showInputError("꿈 내용은 1~500자로 입력해 주세요.");
     return;
   }
 
   submitBtn.disabled = true;
+  showPaper(dream);
+  let result;
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000);
@@ -156,49 +264,42 @@ async function submitDream(event) {
 
     if (res.status === 429) {
       const body = await res.json();
+      backToInput();
       showExhaustedModal(body.reason);
       return;
     }
     if (res.status === 400) {
       const body = await res.json();
-      errorEl.textContent = body.detail;
-      errorEl.hidden = false;
+      backToInput();
+      showInputError(body.detail);
       return;
     }
     if (!res.ok) {
-      errorEl.textContent = "잠시 후 다시 시도해 주세요.";
-      errorEl.hidden = false;
+      backToInput();
+      showInputError("잠시 후 다시 시도해 주세요.");
       return;
     }
-
-    const result = await res.json();
-    document.getElementById("result-theme").textContent = result.theme;
-    document.getElementById("result-vibe").textContent = result.vibe;
-    const feelingsEl = document.getElementById("result-feelings");
-    feelingsEl.innerHTML = "";
-    for (const feeling of result.suggested_feelings) {
-      const li = document.createElement("li");
-      li.textContent = feeling;
-      feelingsEl.appendChild(li);
-    }
-    document.getElementById("result-reply").textContent = result.ai_reply;
-    document.getElementById("result").hidden = false;
-
-    // "내가 해몽한 꿈" — 서버는 방문자를 식별하지 않으므로 클라이언트가 세션 동안만 들고 있는다.
-    sessionStorage.setItem("lastDreamCategory", result.dream_category);
-
-    if (result.remaining <= 0) {
-      showExhaustedModal("ip");
-    }
+    result = await res.json();
   } catch (e) {
-    errorEl.textContent = "잠시 후 다시 시도해 주세요.";
-    errorEl.hidden = false;
+    backToInput();
+    showInputError("잠시 후 다시 시도해 주세요.");
+    return;
   } finally {
+    // 연출 대기(await playResult) 전에 풀어야 연출 중 "다시 풀어보기" 후 재제출이 막히지 않는다.
     submitBtn.disabled = false;
+  }
+
+  // "내가 해몽한 꿈" — 서버는 방문자를 식별하지 않으므로 클라이언트가 세션 동안만 들고 있는다.
+  sessionStorage.setItem("lastDreamCategory", result.dream_category);
+  await playResult(result);
+
+  if (result.remaining <= 0) {
+    showExhaustedModal("ip");
   }
 }
 
 document.getElementById("interpret-form").addEventListener("submit", submitDream);
+document.getElementById("retry-btn").addEventListener("click", retry);
 document.getElementById("modal-close").addEventListener("click", () => {
   document.getElementById("exhausted-modal").hidden = true;
 });

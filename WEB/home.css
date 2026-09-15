@@ -612,3 +612,95 @@ body.home {
   .result-date-short { display: inline; }
   .long { display: none; }
 }
+
+/* ════════════ 단계 연출 (F2~F5) ════════════ */
+/* F2 종이가 올라온다: 하늘 496→352 (모바일 값은 데스크탑 비율로 환산) */
+body.home.stage-paper {
+  --sky-h: clamp(264px, calc(264px + 88 * var(--f)), 352px);
+  --sun: clamp(130px, calc(130px + 70 * var(--f)), 200px);
+  --sun-sink: -0.41;
+  --cloud-bottom: -6px;
+}
+/* F3~F5: 하늘 →256 (Figma 588:87, 588:117 / 595:117) */
+body.home.stage-writing,
+body.home.stage-done {
+  --sky-h: clamp(192px, calc(192px + 64 * var(--f)), 256px);
+  --sun: clamp(108px, calc(108px + 59 * var(--f)), 167px);
+  --sun-sink: -0.31;
+  --cloud-bottom: clamp(-46px, calc(-32px - 14 * var(--f)), -32px);
+}
+
+.sky { transition: height 0.6s ease; }
+.sun { transition: width 0.6s ease, height 0.6s ease, bottom 0.6s ease; }
+.cloud { transition: bottom 0.6s ease; }
+
+/* 경계선 위로 종이색이 번지는 띠 (Figma 588:78, 36px) */
+.sky::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 36px;
+  background: linear-gradient(to bottom, transparent, var(--paper-bg));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body.home:not(.stage-input) .sky::after { opacity: 1; }
+
+.hero-copy { transition: opacity 0.3s ease, visibility 0.3s; }
+body.home:not(.stage-input) .hero-copy {
+  visibility: hidden;
+  opacity: 0;
+}
+body.home:not(.stage-input) .dream-form,
+body.home:not(.stage-input) .preview { display: none; }
+body.home:not(.stage-input) .ground { background: var(--paper-bg); }
+
+/* F2·F3 커서 */
+.stage-paper #result-theme::after,
+.stage-writing #result-theme::after {
+  content: "|";
+  margin-left: 2px;
+  font-weight: 400;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* F4~F5 순차 등장 */
+.result .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.stage-done .result .reveal {
+  opacity: 1;
+  transform: none;
+}
+.stage-done #result-vibe { transition-delay: 0s; }
+.stage-done #result-feelings { transition-delay: 0.15s; }
+.stage-done .result-body { transition-delay: 0.3s; }
+.stage-done .result-actions { transition-delay: 1.1s; }
+
+/* 낙관: 설명이 뜬 뒤 도장이 찍히듯 줄어들며 나타난다 */
+.result-seal {
+  opacity: 0;
+  transform: scale(1.4);
+  transition: opacity 0.35s ease 0.9s, transform 0.35s cubic-bezier(0.2, 1.6, 0.4, 1) 0.9s;
+}
+.stage-done .result-seal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home *,
+  body.home *::before,
+  body.home *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
