@@ -4,28 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Re-view — 오늘 사람들이 많이 꾼 꿈</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" />
+  <!-- Gowun Batang에 凶 글리프가 없을 때를 대비한 폴백. 두 글자만 서브셋으로 받는다. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&text=%E5%90%89%E5%87%B6&display=swap" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ranking.css" />
 </head>
-<body class="theme-clear">
-  <main class="page ranking-page">
-    <a href="index.html" class="back-link">‹ 뒤로</a>
+<body class="ranking-body">
+  <nav class="rk-nav">
+    <a href="index.html" class="rk-back" aria-label="홈으로">←<span class="rk-back-text"> 홈으로</span></a>
+    <span class="rk-logo">굿모닝 드림</span>
+    <span class="rk-nav-title">전체보기</span>
+  </nav>
 
-    <div class="ranking-header">
-      <h1>오늘 사람들이 많이 꾼 꿈</h1>
-      <p id="ranking-date" class="date"></p>
-    </div>
+  <main class="rk-content">
+    <header class="rk-header">
+      <div class="rk-title">
+        <h1>오늘 사람들이 많이 꾼 꿈</h1>
+        <p id="ranking-date" class="rk-date"></p>
+      </div>
 
-    <div id="mine-card" class="mine-card" hidden>
-      <span class="mine-label">내가<br />해몽한 꿈</span>
-      <span id="mine-name" class="mine-name"></span>
-      <span id="mine-rank" class="mine-rank"></span>
-      <button id="mine-goto" class="mine-goto">순위 보기</button>
-    </div>
+      <div id="mine-card" class="mine-card" hidden>
+        <span class="mine-label">내가<br />해몽한 꿈</span>
+        <span id="mine-name" class="mine-name"></span>
+        <span id="mine-rank" class="mine-rank"></span>
+        <button id="mine-goto" class="mine-goto" type="button">순위 보기</button>
+      </div>
+    </header>
 
-    <p id="ranking-loading" class="ranking-loading">불러오는 중…</p>
+    <!-- 도장 글자·문구는 categoryDictionary.js의 LUCK_GLYPHS/LUCK_LABEL과 맞춘다. 그쪽을 바꾸면 여기도 같이 바꿀 것. -->
+    <ul class="rk-legend" aria-label="길흉 표시 안내">
+      <li><span class="seal seal-g" aria-hidden="true"><span>吉</span></span>길몽</li>
+      <li><span class="seal seal-h" aria-hidden="true"><span>凶</span></span>흉몽</li>
+      <li><span class="seal seal-b" aria-hidden="true"><span>吉</span><span>凶</span></span>조건에 따라 갈림</li>
+    </ul>
+
+    <p id="ranking-loading" class="rk-status">불러오는 중…</p>
     <ol id="ranking-list" class="ranking-list"></ol>
-    <p id="ranking-empty" class="ranking-empty" hidden>아직 오늘 해몽된 꿈이 없어요.</p>
-    <p id="ranking-error" class="error-message" hidden>랭킹을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</p>
+    <p id="ranking-empty" class="rk-status" hidden>아직 오늘 해몽된 꿈이 없어요.</p>
+    <p id="ranking-error" class="rk-status rk-error" hidden>랭킹을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.</p>
   </main>
 
   <script src="categoryDictionary.js"></script>
