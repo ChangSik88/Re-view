@@ -1,0 +1,708 @@
+/* ════════════ 테마 토큰 ════════════ */
+body.home {
+  --sky-bg: #fdf6e9;
+  --ground-bg: #fbf0dd;
+  --paper-bg: #fdf6e9;
+  --horizon: #f0d1b7;
+  --logo: #9e6630;
+  --meta: #947b65;
+  --dot: #fcc364;
+  --hero-sub: #9d6f47;
+  --hero-title: #604734;
+  --pill-bg: rgba(255, 253, 249, 0.85);
+  --pill-border: #f2e2d0;
+  --placeholder: rgba(80, 62, 47, 0.55);
+  --btn-bg: #f9d28a;
+  --btn-fg: #593b1f;
+  --link: #9e6630;
+  --card-bg: #fff7ea;
+  --card-border: #ebd7c3;
+  --card-name: #7d5b40;
+  --r-meta: #8d7563;
+  --r-box: rgba(171, 90, 72, 0.45);
+  --r-title: #412614;
+  --r-quote: #8d7563;
+  --r-text: #705848;
+  --ghost-bg: #fef4e5;
+  --ghost-border: #ead3bc;
+  --ghost-fg: #7c5335;
+  --seal-good: #be241f;
+  --cloud-side: #eceff2;
+  --cloud-center: #f6f9fb;
+}
+
+/* 안개는 Figma 시안이 없어 흐림을 그대로 쓴다(스펙 2장). */
+body.home.theme-cloudy,
+body.home.theme-fog {
+  --sky-bg: linear-gradient(#e8ebef, #dde2e7 60%, #d5dbe2);
+  --ground-bg: linear-gradient(#d8dfe6, #cdd5de);
+  --paper-bg: #f2f5f9;
+  --horizon: #c3cbd4;
+  --logo: #586b80;
+  --meta: #687686;
+  --dot: #b0b8c1;
+  --hero-sub: #586b80;
+  --hero-title: #262f38;
+  --pill-bg: rgba(242, 245, 249, 0.85);
+  --pill-border: #c3cbd4;
+  --placeholder: rgba(38, 47, 56, 0.55);
+  --btn-bg: #96aec7;
+  --btn-fg: #fff;
+  --link: #586b80;
+  --card-bg: #d8dfe6;
+  --card-border: #c3cbd4;
+  --card-name: #565f68;
+  --r-meta: #747b83;
+  --r-box: rgba(88, 107, 128, 0.45);
+  --r-title: #262f38;
+  --r-quote: #747b83;
+  --r-text: #565f68;
+  --ghost-bg: #eff2f6;
+  --ghost-border: #ced5dc;
+  --ghost-fg: #4c5a69;
+  --seal-good: #a03f3a;
+  --cloud-side: #eceff2;
+  --cloud-center: #f6f9fb;
+}
+
+body.home.theme-rain {
+  --sky-bg: linear-gradient(#d8e7f2, #cadeeb 60%, #c2d8e6);
+  --ground-bg: linear-gradient(#c3d8e6, #adc9d9);
+  --paper-bg: #eff5f9;
+  --horizon: #a6c2d4;
+  --logo: #456d8f;
+  --meta: #597288;
+  --dot: #7da4c0;
+  --hero-sub: #456d8f;
+  --hero-title: #22303b;
+  --pill-bg: rgba(239, 245, 249, 0.85);
+  --pill-border: #a6c2d4;
+  --placeholder: rgba(34, 48, 59, 0.55);
+  --btn-bg: #6dabdf;
+  --btn-fg: #fff;
+  --link: #456d8f;
+  --card-bg: #c3d8e6;
+  --card-border: #a6c2d4;
+  --card-name: #4f5d68;
+  --r-meta: #6e7983;
+  --r-box: rgba(69, 103, 131, 0.45);
+  --r-title: #22303b;
+  --r-quote: #6e7983;
+  --r-text: #4f5d68;
+  --ghost-bg: #edf3f7;
+  --ghost-border: #cad6df;
+  --ghost-fg: #455b6d;
+  --seal-good: #a43b36;
+  --cloud-side: #a1b8c8;
+  --cloud-center: #b8cad8;
+}
+
+body.home.theme-snow {
+  --sky-bg: linear-gradient(#dae2ee, #d0d8e8 60%, #cbd0e4);
+  --ground-bg: linear-gradient(#f1f3f9, #e6e9f2);
+  --paper-bg: #f7f8fc;
+  --horizon: #fafcff;
+  --logo: #656b97;
+  --meta: #6e728f;
+  --dot: #fbfcff;
+  --hero-sub: #656b97;
+  --hero-title: #2c2f3d;
+  --pill-bg: rgba(247, 248, 252, 0.85);
+  --pill-border: #fafcff;
+  --placeholder: rgba(44, 47, 61, 0.55);
+  --btn-bg: #c7cef9;
+  --btn-fg: #3a385b;
+  --link: #656b97;
+  --card-bg: #f1f3f9;
+  --card-border: #fafcff;
+  --card-name: #5a5d6a;
+  --r-meta: #777a85;
+  --r-box: rgba(96, 103, 134, 0.45);
+  --r-title: #2c2f3d;
+  --r-quote: #777a85;
+  --r-text: #5a5d6a;
+  --ghost-bg: #f3f5f9;
+  --ghost-border: #d7dae4;
+  --ghost-fg: #545972;
+  --seal-good: #a83634;
+  --cloud-side: #e3e8f2;
+  --cloud-center: #f2f5fb;
+}
+
+/* ════════════ 크기 토큰 (F1 기준. 단계별 값은 Task 4) ════════════ */
+body.home {
+  --gutter: clamp(20px, calc(20px + 26 * var(--f)), 46px);
+  --sky-h: clamp(459px, calc(459px + 37 * var(--f)), 496px);
+  --sun: clamp(150px, calc(150px + 67 * var(--f)), 217px);
+  --sun-sink: -0.32;
+  --cloud-bottom: clamp(23px, calc(23px + 11 * var(--f)), 34px);
+  --pill-h: clamp(56px, calc(56px + 12 * var(--f)), 68px);
+  --pill-btn-h: clamp(42px, calc(42px + 8 * var(--f)), 50px);
+
+  background: var(--paper-bg);
+  color: var(--hero-title);
+}
+
+/* ════════════ 하늘 ════════════ */
+.sky {
+  position: relative;
+  height: var(--sky-h);
+  overflow: hidden;
+  border-bottom: 2px solid var(--horizon);
+  background: var(--sky-bg);
+}
+
+.decor {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.decor span { position: absolute; }
+.theme-cloudy .decor-soft,
+.theme-fog .decor-soft,
+.theme-rain .decor-rain,
+.theme-snow .decor-snow { display: block; }
+
+/* 흐림: 흐릿한 배경 구름 (340×170, 300×150, 280×140 @1280×496) */
+.decor-soft span {
+  aspect-ratio: 2 / 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(15px);
+}
+.decor-soft span:nth-child(1) { left: -10%; top: 4%; width: 26.6%; }
+.decor-soft span:nth-child(2) { left: 64%; top: 2%; width: 23.4%; }
+.decor-soft span:nth-child(3) { left: -4%; top: 20%; width: 21.9%; }
+
+/* 비·눈 장식은 상단바 아래에서 시작해 날씨 표기 글자를 가로지르지 않게 한다(스펙 6.2). */
+.decor-rain,
+.decor-snow { top: 64px; }
+
+.decor-rain span {
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: rgba(86, 146, 197, 0.7);
+}
+/* Figma 1번 빗줄기는 좌표가 순환해 (0,0)에 떨어져 있었다. 패턴상 오른쪽 끝으로 옮긴다. */
+.decor-rain span:nth-child(1) { left: calc(100% - 3px); top: 5%; }
+.decor-rain span:nth-child(2) { left: 97%; top: 23%; }
+.decor-rain span:nth-child(3) { left: 94%; top: 41%; }
+.decor-rain span:nth-child(4) { left: 91%; top: 59%; }
+.decor-rain span:nth-child(5) { left: 88%; top: 5%; }
+.decor-rain span:nth-child(6) { left: 85%; top: 23%; }
+.decor-rain span:nth-child(7) { left: 82%; top: 41%; }
+.decor-rain span:nth-child(8) { left: 79%; top: 59%; }
+.decor-rain span:nth-child(9) { left: 76%; top: 5%; }
+.decor-rain span:nth-child(10) { left: 73%; top: 23%; }
+
+.decor-snow span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+}
+.decor-snow span:nth-child(3n + 2) { width: 4px; height: 4px; }
+.decor-snow span:nth-child(3n) { width: 5.5px; height: 5.5px; }
+.decor-snow span:nth-child(1) { left: 0%; top: 0%; }
+.decor-snow span:nth-child(2) { left: 53%; top: 29%; }
+.decor-snow span:nth-child(3) { left: 6%; top: 58%; }
+.decor-snow span:nth-child(4) { left: 59%; top: 87%; }
+.decor-snow span:nth-child(5) { left: 12%; top: 16%; }
+.decor-snow span:nth-child(6) { left: 65%; top: 45%; }
+.decor-snow span:nth-child(7) { left: 18%; top: 74%; }
+.decor-snow span:nth-child(8) { left: 71%; top: 3%; }
+.decor-snow span:nth-child(9) { left: 24%; top: 32%; }
+.decor-snow span:nth-child(10) { left: 77%; top: 61%; }
+.decor-snow span:nth-child(11) { left: 30%; top: 90%; }
+.decor-snow span:nth-child(12) { left: 83%; top: 19%; }
+.decor-snow span:nth-child(13) { left: 36%; top: 48%; }
+.decor-snow span:nth-child(14) { left: 89%; top: 77%; }
+.decor-snow span:nth-child(15) { left: 42%; top: 6%; }
+.decor-snow span:nth-child(16) { left: 95%; top: 35%; }
+.decor-snow span:nth-child(17) { left: 48%; top: 64%; }
+.decor-snow span:nth-child(18) { left: 1%; top: 93%; }
+
+/* 맑음: 태양 (그라디언트 #FFE490→#FFC57A, 글로우 rgba(255,228,144,.5)) */
+.sun {
+  position: absolute;
+  bottom: calc(var(--sun) * var(--sun-sink));
+  left: 50%;
+  display: none;
+  width: var(--sun);
+  height: var(--sun);
+  border-radius: 50%;
+  background: linear-gradient(#ffe490, #ffc57a);
+  box-shadow: 0 0 90px rgba(255, 228, 144, 0.5);
+  transform: translateX(-50%);
+}
+.theme-clear .sun { display: block; }
+
+/* 흐림·비·눈: 원 3개 + 둥근 받침 (묶음 410×242 @1280) */
+.cloud {
+  position: absolute;
+  bottom: var(--cloud-bottom);
+  left: 50%;
+  display: none;
+  width: clamp(283px, calc(283px + 127 * var(--f)), 410px);
+  aspect-ratio: 410 / 242;
+  transform: translateX(-50%);
+}
+.theme-cloudy .cloud,
+.theme-fog .cloud,
+.theme-rain .cloud,
+.theme-snow .cloud { display: block; }
+.cloud span {
+  position: absolute;
+  border-radius: 50%;
+}
+.cloud .c1 { left: 0; top: 23.97%; width: 39.02%; aspect-ratio: 1; background: var(--cloud-side); }
+.cloud .c2 { left: 27.56%; top: 0; width: 48.05%; aspect-ratio: 1; background: var(--cloud-center); }
+.cloud .c3 { left: 64.15%; top: 27.27%; width: 35.85%; aspect-ratio: 1; background: var(--cloud-side); }
+.cloud .base {
+  left: 4.39%;
+  top: 57.85%;
+  width: 93.41%;
+  height: 42.15%;
+  border-radius: 999px;
+  background: var(--cloud-center);
+}
+
+/* ── 상단바: 로고와 날씨를 같은 거터로 정렬 ── */
+.topbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px var(--gutter) 0;
+}
+.logo {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, calc(15px + 6 * var(--f)), 21px);
+  font-weight: 700;
+  color: var(--logo);
+}
+.weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(10px, calc(10px + 2.5 * var(--f)), 12.5px);
+  color: var(--meta);
+}
+.weather-dot {
+  width: clamp(7px, calc(7px + 1 * var(--f)), 8px);
+  height: clamp(7px, calc(7px + 1 * var(--f)), 8px);
+  border-radius: 50%;
+  background: var(--dot);
+}
+
+/* ── 부제·헤드라인 ── */
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: clamp(104px, calc(104px + 14 * var(--f)), 118px) 24px 0;
+  text-align: center;
+}
+.hero-sub {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(14px, calc(14px + 3 * var(--f)), 17px);
+  color: var(--hero-sub);
+}
+.hero-title {
+  max-width: 720px;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(24px, calc(24px + 14 * var(--f)), 38px);
+  font-weight: 700;
+  line-height: clamp(34px, calc(34px + 18 * var(--f)), 52px);
+  color: var(--hero-title);
+}
+
+/* ════════════ 땅 ════════════ */
+.ground {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--sky-h));
+  min-height: calc(100svh - var(--sky-h));
+  background: var(--ground-bg);
+}
+
+/* ── 한 줄 입력: 경계선 정중앙에 걸친다 ── */
+.dream-form {
+  position: relative;
+  z-index: 2;
+  width: min(680px, 100% - 72px);
+  margin: calc(var(--pill-h) / -2 - 1px) auto 0;
+}
+.dream-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--pill-h);
+  /* 버튼을 사방 같은 간격으로 중앙 정렬한다(스펙 6.2). */
+  padding: 0 calc((var(--pill-h) - var(--pill-btn-h)) / 2) 0 clamp(16px, calc(16px + 8 * var(--f)), 24px);
+  border: 1px solid var(--pill-border);
+  border-radius: 999px;
+  background: var(--pill-bg);
+}
+.dream-pill:focus-within { box-shadow: 0 0 0 3px var(--pill-border); }
+#dream-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: clamp(12.5px, calc(12.5px + 2.5 * var(--f)), 15px);
+  color: var(--hero-title);
+}
+#dream-input::placeholder { color: var(--placeholder); }
+#submit-btn {
+  flex-shrink: 0;
+  min-width: 140px;
+  height: var(--pill-btn-h);
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#submit-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.btn-arrow { display: none; }
+
+.error-message {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #a03f3a;
+  text-align: center;
+}
+
+/* ── 오늘 아침 많이 찾는 꿈: 화면 하단에 붙는다 ── */
+.preview {
+  margin-top: auto;
+  padding: 40px var(--gutter) clamp(26px, calc(26px + 4 * var(--f)), 30px);
+}
+.preview-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: clamp(8px, calc(8px + 4 * var(--f)), 12px);
+  font-size: clamp(10px, calc(10px + 2.5 * var(--f)), 12.5px);
+}
+.preview-label { color: var(--meta); }
+.ranking-link {
+  color: var(--link);
+  font-weight: 700;
+  text-decoration: none;
+}
+.preview-list {
+  display: grid;
+  /* 서버가 6개 미만을 줄 수 있어(이른 아침) auto-fit으로 빈 칸 없이 채운다. */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: clamp(8px, calc(8px + 4 * var(--f)), 12px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: clamp(56px, calc(56px + 8 * var(--f)), 64px);
+  padding: clamp(9px, calc(9px + 3 * var(--f)), 12px) clamp(10px, calc(10px + 4 * var(--f)), 14px);
+  border: 1px solid var(--card-border);
+  border-radius: clamp(12px, calc(12px + 2 * var(--f)), 14px);
+  background: var(--card-bg);
+  text-decoration: none;
+}
+.preview-rank {
+  font-size: clamp(9px, calc(9px + 1.5 * var(--f)), 10.5px);
+  color: var(--meta);
+}
+.preview-name {
+  overflow: hidden;
+  font-size: clamp(10.5px, calc(10.5px + 1.5 * var(--f)), 12px);
+  font-weight: 500;
+  color: var(--card-name);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ════════════ 결과 (정적 배치. 단계 연출은 Task 4) ════════════ */
+.result {
+  width: min(970px, 100% - 48px);
+  margin: 0 auto;
+  padding: clamp(26px, calc(26px + 26 * var(--f)), 52px) 0 clamp(28px, calc(28px + 20 * var(--f)), 48px);
+  color: var(--r-text);
+}
+.result-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: clamp(9px, calc(9px + 2 * var(--f)), 11px);
+  color: var(--r-meta);
+}
+.result-date-short { display: none; }
+.result-box {
+  margin-top: clamp(16px, calc(16px + 12 * var(--f)), 28px);
+  padding: clamp(13px, calc(13px + 7 * var(--f)), 20px) clamp(14px, calc(14px + 14 * var(--f)), 28px);
+  border: 1.5px solid var(--r-box);
+  border-radius: 2px;
+}
+#result-theme {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(18px, calc(18px + 14 * var(--f)), 32px);
+  font-weight: 700;
+  line-height: clamp(25px, calc(25px + 20 * var(--f)), 45px);
+  color: var(--r-title);
+}
+.result-quote {
+  margin: 16px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(11.5px, calc(11.5px + 4.5 * var(--f)), 16px);
+  line-height: clamp(19px, calc(19px + 11 * var(--f)), 30px);
+  color: var(--r-quote);
+}
+#result-vibe {
+  margin: 20px 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(13.5px, calc(13.5px + 7.5 * var(--f)), 21px);
+  line-height: clamp(21px, calc(21px + 14 * var(--f)), 35px);
+}
+#result-feelings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+#result-feelings li {
+  padding: 3px 10px;
+  border: 1px solid var(--ghost-border);
+  border-radius: 999px;
+  background: var(--ghost-bg);
+  font-size: clamp(11px, calc(11px + 1.5 * var(--f)), 12.5px);
+  color: var(--ghost-fg);
+}
+/* 좁아지면 설명(기준 620px)이 한 줄을 다 쓰고 도장이 다음 줄 오른쪽으로 내려간다(Figma M F5). */
+.result-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 20px;
+}
+#result-reply {
+  flex: 1 1 620px;
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(11.5px, calc(11.5px + 4.5 * var(--f)), 16px);
+  line-height: clamp(20px, calc(20px + 13 * var(--f)), 33px);
+}
+.result-seal { margin-left: auto; }
+.result-seal .seal { --seal-size: clamp(46px, calc(46px + 46 * var(--f)), 92px); }
+.result-seal .seal-g { --seal-color: var(--seal-good); }
+/* F5 낙관은 목록용 도장보다 원이 굵고 옅다(Figma 588:133~135). */
+.result-seal .seal::before {
+  inset: 0;
+  border-width: calc(var(--seal-size) * 0.027);
+  opacity: 0.72;
+}
+.result-seal .seal::after {
+  inset: 7.6%;
+  border-width: 1px;
+  opacity: 0.36;
+}
+.result-seal .seal > span { opacity: 0.72; }
+
+.result-actions {
+  display: flex;
+  gap: clamp(8px, calc(8px + 4 * var(--f)), 12px);
+  margin-top: clamp(24px, calc(24px + 9 * var(--f)), 33px);
+}
+.btn-ghost,
+.btn-fill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(36px, calc(36px + 8 * var(--f)), 44px);
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: clamp(11px, calc(11px + 2.5 * var(--f)), 13.5px);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-ghost {
+  min-width: clamp(110px, calc(110px + 40 * var(--f)), 150px);
+  border: 1px solid var(--ghost-border);
+  background: var(--ghost-bg);
+  color: var(--ghost-fg);
+}
+.btn-fill {
+  min-width: clamp(150px, calc(150px + 20 * var(--f)), 170px);
+  border: 0;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+}
+
+/* ════════════ 소진 팝업 ════════════ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(33, 29, 20, 0.45);
+}
+.modal-content {
+  width: min(340px, 100%);
+  padding: 28px 24px 22px;
+  border-radius: 16px;
+  background: var(--paper-bg);
+  text-align: center;
+}
+#exhausted-message {
+  margin: 0 0 20px;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--r-title);
+}
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ════════════ 모바일 구조 분기 ════════════ */
+@media (max-width: 640px) {
+  #submit-btn {
+    width: var(--pill-btn-h);
+    min-width: 0;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .btn-label { display: none; }
+  .btn-arrow { display: inline; }
+
+  .preview-label-long { display: none; }
+  .preview-list { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+  .preview-list li:nth-child(n + 4) { display: none; }
+
+  .result-date-long { display: none; }
+  .result-date-short { display: inline; }
+  .long { display: none; }
+}
+
+/* 주의: 모바일 분기(위)보다 뒤에 온다. 여기 추가하는 규칙이 모바일 전용 규칙과 겹치면 이 순서 때문에 이겨버린다. */
+/* ════════════ 단계 연출 (F2~F5) ════════════ */
+/* F2 종이가 올라온다: 하늘 496→352 (모바일 값은 데스크탑 비율로 환산) */
+body.home.stage-paper {
+  --sky-h: clamp(264px, calc(264px + 88 * var(--f)), 352px);
+  --sun: clamp(130px, calc(130px + 70 * var(--f)), 200px);
+  --sun-sink: -0.41;
+  --cloud-bottom: -6px;
+}
+/* F3~F5: 하늘 →256 (Figma 588:87, 588:117 / 595:117) */
+body.home.stage-writing,
+body.home.stage-done {
+  --sky-h: clamp(192px, calc(192px + 64 * var(--f)), 256px);
+  --sun: clamp(108px, calc(108px + 59 * var(--f)), 167px);
+  --sun-sink: -0.31;
+  --cloud-bottom: clamp(-46px, calc(-32px - 14 * var(--f)), -32px);
+}
+
+.sky { transition: height 0.6s ease; }
+.sun { transition: width 0.6s ease, height 0.6s ease, bottom 0.6s ease; }
+.cloud { transition: bottom 0.6s ease; }
+
+/* 경계선 위로 종이색이 번지는 띠 (Figma 588:78, 36px) */
+.sky::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 36px;
+  background: linear-gradient(to bottom, transparent, var(--paper-bg));
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body.home:not(.stage-input) .sky::after { opacity: 1; }
+
+.hero-copy { transition: opacity 0.3s ease, visibility 0.3s; }
+body.home:not(.stage-input) .hero-copy {
+  visibility: hidden;
+  opacity: 0;
+}
+body.home:not(.stage-input) .dream-form,
+body.home:not(.stage-input) .preview { display: none; }
+body.home:not(.stage-input) .ground { background: var(--paper-bg); }
+
+/* F2·F3 커서 */
+.stage-paper #result-theme::after,
+.stage-writing #result-theme::after {
+  content: "|";
+  margin-left: 2px;
+  font-weight: 400;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* F4~F5 순차 등장 */
+.result .reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.stage-done .result .reveal {
+  opacity: 1;
+  transform: none;
+}
+.stage-done #result-vibe { transition-delay: 0s; }
+.stage-done #result-feelings { transition-delay: 0.15s; }
+.stage-done .result-body { transition-delay: 0.3s; }
+.stage-done .result-actions { transition-delay: 1.1s; }
+
+/* 낙관: 설명이 뜬 뒤 도장이 찍히듯 줄어들며 나타난다 */
+.result-seal {
+  opacity: 0;
+  transform: scale(1.4);
+  transition: opacity 0.35s ease 0.9s, transform 0.35s cubic-bezier(0.2, 1.6, 0.4, 1) 0.9s;
+}
+.stage-done .result-seal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home *,
+  body.home *::before,
+  body.home *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
