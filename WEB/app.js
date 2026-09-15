@@ -15,6 +15,38 @@ function themeForWmoCode(code) {
   return "clear";
 }
 
+// 안개는 Figma에 전용 시안이 없어 흐림 문구를 그대로 쓰고 날씨 표기만 "안개"로 둔다.
+const THEME_COPY = {
+  clear: { label: "맑음", sub: "맑은 아침이에요", title: ["햇살 좋은 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
+  cloudy: { label: "흐림", sub: "흐린 아침이에요", title: ["구름 낀 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
+  fog: { label: "안개", sub: "흐린 아침이에요", title: ["구름 낀 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
+  rain: { label: "비", sub: "비 오는 아침이에요", title: ["빗소리 듣는 아침,", "간밤의 꿈은요?"], placeholder: "비를 맞으며 걷는 꿈을 꿨어요" },
+  snow: { label: "눈", sub: "눈 내리는 아침이에요", title: ["포근한 눈 오는 날,", "어떤 꿈을 꿨어요?"], placeholder: "눈 쌓인 길을 걷는 꿈을 꿨어요" },
+};
+
+// 날씨 조회에 성공했을 때만 채운다. 실패 시 결과 화면 날짜 줄에 날씨를 붙이지 않는다.
+let weatherLabel = null;
+
+function applyTheme(theme) {
+  document.body.classList.remove(...Object.keys(THEME_COPY).map((t) => `theme-${t}`));
+  document.body.classList.add(`theme-${theme}`);
+  const copy = THEME_COPY[theme];
+  document.getElementById("hero-sub").textContent = copy.sub;
+  document.getElementById("hero-title").replaceChildren(copy.title[0], document.createElement("br"), copy.title[1]);
+  document.getElementById("dream-input").placeholder = copy.placeholder;
+}
+
+function kstDateParts() {
+  const parts = new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    month: "numeric",
+    day: "numeric",
+    weekday: "long",
+  }).formatToParts(new Date());
+  const pick = (type) => parts.find((p) => p.type === type).value;
+  return { month: pick("month"), day: pick("day"), weekday: pick("weekday") };
+}
+
 // ipapi.co가 차단되거나 레이트리밋에 걸려도 날씨는 보여준다. 스펙상 폴백 좌표는 서울이다.
 const SEOUL_COORDS = { latitude: 37.5665, longitude: 126.978 };
 
@@ -27,16 +59,15 @@ async function fetchLocation() {
     if (typeof geo.latitude !== "number" || typeof geo.longitude !== "number") {
       throw new Error("ipapi 좌표 없음");
     }
-    return { latitude: geo.latitude, longitude: geo.longitude, city: geo.city || "" };
+    return { latitude: geo.latitude, longitude: geo.longitude };
   } catch (e) {
-    // 폴백 시 도시명은 비운다 — 추측한 위치를 사실처럼 표시하지 않기 위해서다.
     console.warn("위치 조회 실패, 서울 좌표로 폴백:", e);
-    return { ...SEOUL_COORDS, city: "" };
+    return { ...SEOUL_COORDS };
   }
 }
 
 async function loadWeather() {
-  const { latitude, longitude, city } = await fetchLocation();
+  const { latitude, longitude } = await fetchLocation();
 
   try {
     const weatherRes = await fetch(
@@ -44,15 +75,47 @@ async function loadWeather() {
     );
     if (!weatherRes.ok) throw new Error("open-meteo 실패");
     const weather = await weatherRes.json();
-    const code = weather.current_weather.weathercode;
+    const theme = themeForWmoCode(weather.current_weather.weathercode);
 
-    document.body.className = `theme-${themeForWmoCode(code)}`;
-    document.getElementById("weather-city").textContent = city;
-    document.getElementById("weather-desc").textContent = `현재 기온 ${weather.current_weather.temperature}°C`;
+    applyTheme(theme);
+    weatherLabel = THEME_COPY[theme].label;
+    const { month, day } = kstDateParts();
+    document.getElementById("weather-desc").textContent = `${weatherLabel} · ${month}/${day}`;
     document.getElementById("weather-widget").hidden = false;
   } catch (e) {
     // 날씨가 죽어도 페이지는 뜬다 — 기본 테마를 유지하고 위젯만 숨긴다.
     console.warn("날씨 로딩 실패:", e);
+  }
+}
+
+async function loadRankingPreview() {
+  try {
+    const res = await fetch(`${API_BASE_URL}/demo/ranking`);
+    if (!res.ok) throw new Error("랭킹 실패");
+    const data = await res.json();
+    if (data.items.length === 0) return;
+
+    const list = document.getElementById("home-ranking-list");
+    for (const item of data.items.slice(0, 6)) {
+      const card = document.createElement("a");
+      card.href = "ranking.html";
+      card.className = "preview-card";
+      const rank = document.createElement("span");
+      rank.className = "preview-rank";
+      rank.textContent = String(item.rank).padStart(2, "0");
+      const name = document.createElement("span");
+      name.className = "preview-name";
+      // 서버에서 온 카테고리 이름은 textContent로만 넣는다(랭킹 페이지와 같은 이유).
+      name.textContent = item.category;
+      card.append(rank, name);
+      const li = document.createElement("li");
+      li.appendChild(card);
+      list.appendChild(li);
+    }
+    document.getElementById("home-ranking").hidden = false;
+  } catch (e) {
+    // 스펙 5장: 랭킹이 죽으면 섹션만 숨긴다.
+    console.warn("랭킹 미리보기 로딩 실패:", e);
   }
 }
 
@@ -80,7 +143,6 @@ async function submitDream(event) {
   }
 
   submitBtn.disabled = true;
-  submitBtn.textContent = "해몽하는 중…";
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000);
@@ -133,7 +195,6 @@ async function submitDream(event) {
     errorEl.hidden = false;
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = "해몽하기";
   }
 }
 
@@ -143,3 +204,4 @@ document.getElementById("modal-close").addEventListener("click", () => {
 });
 
 loadWeather();
+loadRankingPreview();
