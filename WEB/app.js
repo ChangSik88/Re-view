@@ -126,6 +126,7 @@ const SKY_SHIFT_MS = 600;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 let typingTimer = null;
+let typingResolve = null;
 // 연출 도중 "다시 풀어보기"나 재제출이 끼어들면 이전 연출의 남은 단계를 버리기 위한 번호.
 let playToken = 0;
 
@@ -141,6 +142,9 @@ function wait(ms) {
 function stopTyping() {
   clearInterval(typingTimer);
   typingTimer = null;
+  const resolve = typingResolve;
+  typingResolve = null;
+  if (resolve) resolve();
 }
 
 function typeText(el, text) {
@@ -152,13 +156,13 @@ function typeText(el, text) {
   }
   el.textContent = "";
   return new Promise((resolve) => {
+    typingResolve = resolve;
     let i = 0;
     typingTimer = setInterval(() => {
       el.textContent += chars[i];
       i += 1;
       if (i === chars.length) {
         stopTyping();
-        resolve();
       }
     }, TYPE_INTERVAL_MS);
   });
