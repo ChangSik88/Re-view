@@ -7,22 +7,30 @@ router = APIRouter()
 demo_service = DemoService()
 
 
-def _get_client_ip(request: Request) -> str:
+def _get_visitor_id(request: Request) -> str:
+    # 정상 경로: 클라이언트(app.js)가 localStorage에 만든 익명 ID를 헤더로 보낸다(ADR 0002).
+    # IP가 아니라 이 값으로 방문자를 구분해야 공유 와이파이·CGNAT 뒤 오탐 차단이 없다.
+    header_id = request.headers.get("x-demo-visitor-id")
+    if header_id:
+        return header_id.strip()[:100]  # 방어적 길이 제한. 카운터 dict 키로만 쓰이는 값이다.
+
+    # 폴백 경로: JS 비활성·localStorage 차단·API 직접 호출처럼 헤더가 없는 드문 경우.
     # Render는 프록시 뒤에 있어 request.client.host는 방문자가 아니라 내부 프록시 IP다.
-    # 아래 print는 배포 후 실제 헤더 순서를 확인하기 위한 1회성 로그다(스펙 3.4 "구현 시 반드시 검증할 것").
-    # 확인 후에도 남겨둘지, 파싱 로직을 교정할지는 로그 결과를 보고 결정한다.
     forwarded_for = request.headers.get("x-forwarded-for")
-    print(f"[demo] X-Forwarded-For={forwarded_for!r} client.host={request.client.host if request.client else None}")
-    if forwarded_for:
-        return forwarded_for.split(",")[0].strip()
-    return request.client.host if request.client else "unknown"
+    fallback_ip = forwarded_for.split(",")[0].strip() if forwarded_for else (
+        request.client.host if request.client else "unknown"
+    )
+    # 정상 브라우저 트래픽은 이 분기를 안 타므로, 매 요청 IP를 로그에 남기던 이전 방식보다
+    # "방문자 IP를 저장하지 않는다"(스펙 3.7)는 원칙과의 긴장이 훨씬 적다.
+    print(f"[demo] 방문자 ID 헤더 없음, IP로 폴백: {fallback_ip!r}")
+    return fallback_ip
 
 
 @router.post("/interpret", response_model=DemoInterpretResponse)
 async def interpret_dream(body: DemoInterpretRequest, request: Request):
-    client_ip = _get_client_ip(request)
+    visitor_id = _get_visitor_id(request)
     try:
-        return await demo_service.interpret(body.dream, client_ip)
+        return await demo_service.interpret(body.dream, visitor_id)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except DemoRateLimitError as e:

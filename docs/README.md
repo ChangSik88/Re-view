@@ -26,6 +26,7 @@
 
 **40-decisions**
 - [0001-neon-to-supabase.md](40-decisions/0001-neon-to-supabase.md) — DB 이관, 크론 사고 전말
+- [0002-demo-rate-limit-by-visitor-id.md](40-decisions/0002-demo-rate-limit-by-visitor-id.md) — 데모 남용 방지를 IP에서 방문자 ID로
 
 **50-specs**
 - [2026-09-09-promo-web-page-design.md](50-specs/2026-09-09-promo-web-page-design.md) — 홍보 웹페이지(날씨 테마 + 해몽 데모 + 꿈 랭킹)
