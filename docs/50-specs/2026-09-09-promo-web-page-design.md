@@ -1,8 +1,8 @@
 # 홍보용 웹페이지 설계 — 날씨 테마 + 꿈 해몽 데모
 
 - 작성일: 2026-09-09
-- 상태: 설계 확정, 구현 전
-- 관련: [아키텍처 가이드](../00-overview/02-architecture.md), [ADR 0001](../40-decisions/0001-neon-to-supabase.md)
+- 상태: 구현 완료(PR #46). 남용 방지 방식은 [ADR 0002](../40-decisions/0002-demo-rate-limit-by-visitor-id.md)로 변경됨 — 이 문서의 IP 기반 서술은 그 결정으로 대체됐다.
+- 관련: [아키텍처 가이드](../00-overview/02-architecture.md), [ADR 0001](../40-decisions/0001-neon-to-supabase.md), [ADR 0002](../40-decisions/0002-demo-rate-limit-by-visitor-id.md)
 
 ## 1. 목적과 범위
 
@@ -79,10 +79,10 @@ POST /demo/interpret
            "vibe": "...",
            "suggested_feelings": ["...", "...", "..."],
            "ai_reply": "...",
-           "remaining": 1                       # 이 IP의 남은 횟수
+           "remaining": 1                       # 이 방문자의 남은 횟수(ADR 0002 — IP 아니라 방문자 ID 기준)
          }
          400 { "detail": "꿈 내용은 1~500자로 입력해 주세요." }
-         429 { "detail": "...", "reason": "ip" | "global" }
+         429 { "detail": "...", "reason": "visitor" | "global" }   # "ip"였다가 ADR 0002로 변경
          503 { "detail": "지금은 해몽을 불러올 수 없어요." }   # LLM 실패
 ```
 
@@ -271,7 +271,7 @@ python -m py_compile BE/app/api/demoApi.py BE/app/services/demoService.py \
 | 확인 항목 | 합격 조건 |
 |---|---|
 | 정상 해몽 | `POST /demo/interpret` 200, 4개 필드 + `remaining: 1` |
-| IP 제한 | 같은 IP 3회째 호출이 429, `reason: "ip"` |
+| 방문자 한도 | 같은 방문자 ID 6회째 호출이 429, `reason: "visitor"` (ADR 0002 — 한도 5회, "ip"였던 값이 변경됨) |
 | 길이 초과 | 501자 입력이 400 |
 | 빈 입력 | 빈 문자열이 400 |
 | 카테고리 정규화 | 목록 밖 값이 와도 DB에 `기타`로 저장 |

@@ -1,5 +1,19 @@
 const API_BASE_URL = "http://localhost:8000"; // 배포 시 Render URL로 교체
 
+// 데모 남용 방지용 방문자 식별자(ADR 0002). 쿠키가 아니라 localStorage — WEB과 BE가
+// 다른 도메인이라 쿠키를 쓰면 서드파티 쿠키가 되어 Safari 등에서 조용히 차단된다.
+// 이 값은 우리 JS가 직접 헤더에 담아 보내므로 그 문제가 없다.
+const VISITOR_ID_KEY = "demoVisitorId";
+
+function getVisitorId() {
+  let id = localStorage.getItem(VISITOR_ID_KEY);
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem(VISITOR_ID_KEY, id);
+  }
+  return id;
+}
+
 const WMO_THEME_MAP = {
   clear: [0, 1],
   cloudy: [2, 3],
@@ -264,7 +278,7 @@ async function submitDream(event) {
     const timeout = setTimeout(() => controller.abort(), 60000);
     const res = await fetch(`${API_BASE_URL}/demo/interpret`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-Demo-Visitor-Id": getVisitorId() },
       body: JSON.stringify({ dream }),
       signal: controller.signal,
     });
@@ -302,7 +316,7 @@ async function submitDream(event) {
   await playResult(result);
 
   if (result.remaining <= 0) {
-    showExhaustedModal("ip");
+    showExhaustedModal("visitor");
   }
 }
 

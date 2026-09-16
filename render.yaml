@@ -22,9 +22,12 @@ services:
       - key: PRISMA_BINARY_CACHE_DIR
         value: /opt/render/project/src/.prisma
       # 데모 API 전역 일일 상한. 비밀값이 아니라 정책값이라 여기서 관리한다.
-      # 코드에도 기본값 200이 있지만, 값을 조정할 때 이 파일만 보면 되도록 명시한다.
+      # 코드에도 기본값 300이 있지만, 값을 조정할 때 이 파일만 보면 되도록 명시한다.
+      # Gemini 계정 자체의 일일 상한이 300이라 그 이상 올려도 의미가 없다(ADR 0002).
+      # 로그인 사용자의 실제 채팅 해몽과 같은 API 키·쿼터를 공유하므로, 데모가 이 쿼터를
+      # 다 쓰면 그날 진짜 사용자에게 남는 여유가 없어진다는 점에 주의할 것.
       - key: DEMO_DAILY_GLOBAL_LIMIT
-        value: "200"
+        value: "300"
       # 아래 값들은 Render 대시보드에서 직접 입력한다
       - key: DATABASE_URL
         sync: false
