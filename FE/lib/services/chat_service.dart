@@ -3,6 +3,15 @@ import 'api_client.dart';
 
 /// 채팅방 생성 / 메시지 전송 / 일기 생성 / 대화 내역 (chatApi).
 class ChatService {
+  /// Save the confirmed details to history first; never generate if that fails.
+  Future<void> confirmAndGenerate(
+      int sessionId, String confirmation, List<String> feelings) async {
+    await sendMessage(sessionId, confirmation)
+        .timeout(const Duration(seconds: 90));
+    await generateDiary(sessionId, feelings)
+        .timeout(const Duration(seconds: 150));
+  }
+
   /// 채팅방을 만들고 session_id를 반환한다.
   Future<int> createSession(String routineType, String? userId) async {
     final data = await apiClient.post(
@@ -13,7 +22,8 @@ class ChatService {
   }
 
   /// 메시지를 보내고 응답(analysis 등 포함)을 그대로 반환한다.
-  Future<Map<String, dynamic>> sendMessage(int sessionId, String message) async {
+  Future<Map<String, dynamic>> sendMessage(
+      int sessionId, String message) async {
     final data = await apiClient.post(
       Api.message,
       body: {'session_id': sessionId, 'message': message},
@@ -23,7 +33,8 @@ class ChatService {
 
   /// 선택한 감정 키워드로 일기 생성을 요청한다.
   /// BE의 DiaryRequest는 selected_keywords 필드를 읽는다.
-  Future<void> generateDiary(int sessionId, List<String> selectedKeywords) async {
+  Future<void> generateDiary(
+      int sessionId, List<String> selectedKeywords) async {
     await apiClient.post(
       Api.diary,
       body: {'session_id': sessionId, 'selected_keywords': selectedKeywords},

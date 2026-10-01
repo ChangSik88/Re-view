@@ -1,0 +1,249 @@
+const imgIconUser = "https://www.figma.com/api/mcp/asset/3138ed0a-8f0b-41ae-902c-54a1affaa183.svg";
+const imgIconClock = "https://www.figma.com/api/mcp/asset/7f5bbfd9-d94a-4e26-81ee-4bd7103d4453.svg";
+const imgToggleOn = "https://www.figma.com/api/mcp/asset/b1810cb3-7190-4b47-9f17-0af1bf86e338.svg";
+const imgIconFile = "https://www.figma.com/api/mcp/asset/1252ed9c-b1b4-49d5-9c66-5004be68bc87.svg";
+const imgIconCal = "https://www.figma.com/api/mcp/asset/8098cac0-8b5f-44d9-835b-9629bcf0cb2d.svg";
+const imgToggleOff = "https://www.figma.com/api/mcp/asset/a3b96062-b2d1-489f-bbfd-97170124a0d8.svg";
+const imgIconChev = "https://www.figma.com/api/mcp/asset/e7a1059e-9e9b-4d82-963e-5a8db561e68e.svg";
+const imgIconShield = "https://www.figma.com/api/mcp/asset/0e13fe83-4867-42ef-87a3-1f8b69f040fd.svg";
+const imgIconHistory = "https://www.figma.com/api/mcp/asset/9a5072e2-c89b-4ebc-9d10-a2b206b60914.svg";
+const imgIconLogout = "https://www.figma.com/api/mcp/asset/b586b0d7-66a5-4824-9282-9eb364ada082.svg";
+const imgIconUserx = "https://www.figma.com/api/mcp/asset/94214173-0119-462e-a085-eaa0bd294d0a.svg";
+const imgIconChev1 = "https://www.figma.com/api/mcp/asset/459f7c31-0692-4136-8d95-b22134b58507.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/ac297fb2-32bd-48f3-89f6-463fcd1c000f.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/f9608bf4-5747-45a9-b1c1-b3d4ba5c2892.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/c637de46-1b04-4337-9339-29d6a27d4a28.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/db9a8480-4b00-4c33-a478-424c52cea47b.svg";
+
+export default function Component() {
+  return (
+    <div className="bg-white border border-[#cfc9ff] border-solid relative size-full" data-node-id="734:135" data-name="설정 · 기본">
+      <div className="absolute content-stretch flex flex-col gap-[16px] h-[688px] items-start left-[19px] overflow-x-clip overflow-y-auto top-[55px] w-[353px]" data-node-id="734:136" data-name="Body">
+        <div className="[word-break:break-word] content-stretch flex flex-col gap-[6px] items-start leading-[normal] not-italic relative shrink-0 w-full whitespace-nowrap" data-node-id="734:137" data-name="Hero">
+          <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[26px] text-black" data-node-id="734:138">
+            설정
+          </p>
+          <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#555] text-[16px]" data-node-id="734:139">
+            계정과 알림을 관리해요.
+          </p>
+        </div>
+        <div className="bg-[#f5f3ff] border border-[#e0d9ff] border-solid content-stretch flex gap-[14px] items-center p-[16px] relative rounded-[20px] shrink-0 w-full" data-node-id="734:140" data-name="Profile Card">
+          <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[26px] shrink-0 size-[52px]" data-node-id="734:144" data-name="Icon Circle">
+            <div className="relative shrink-0 size-[26px]" data-node-id="734:141" data-name="icon/user">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconUser} />
+            </div>
+          </div>
+          <div className="[word-break:break-word] content-stretch flex flex-col gap-[3px] items-start leading-[normal] not-italic relative shrink-0 whitespace-nowrap" data-node-id="734:145" data-name="Profile Text">
+            <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[16px] text-black" data-node-id="734:146">
+              홍길동
+            </p>
+            <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#7a7a7a] text-[12px]" data-node-id="734:147">
+              @reviewer01
+            </p>
+            <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#555] text-[12px]" data-node-id="734:148">
+              1998.03.14 · 여성
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="734:184" data-name="Section/알림">
+          <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#7a7a7a] text-[13px] whitespace-nowrap" data-node-id="734:185">
+            알림
+          </p>
+          <div className="bg-white content-stretch drop-shadow-[0px_0px_13.5px_rgba(113,101,246,0.18)] flex flex-col items-start relative rounded-[20px] shrink-0 w-full" data-node-id="734:186" data-name="Card">
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:151" data-name="Row/루틴 리마인더">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:155" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:152" data-name="icon/clock">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconClock} />
+                </div>
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic relative whitespace-nowrap" data-node-id="734:156" data-name="Text">
+                <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[14px] text-black" data-node-id="734:157">
+                  루틴 리마인더
+                </p>
+                <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#7a7a7a] text-[11px]" data-node-id="734:158">
+                  정해둔 시간에 꿈·하루 기록을 알려드려요
+                </p>
+              </div>
+              <div className="h-[24px] relative shrink-0 w-[42px]" data-node-id="734:149" data-name="Toggle On">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgToggleOn} />
+              </div>
+            </div>
+            <div className="bg-[#eceaf5] h-px relative shrink-0 w-full" data-node-id="734:187" data-name="Divider" />
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:161" data-name="Row/리포트 완성">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:168" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:162" data-name="icon/file">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconFile} />
+                </div>
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic relative whitespace-nowrap" data-node-id="734:169" data-name="Text">
+                <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[14px] text-black" data-node-id="734:170">
+                  리포트 완성
+                </p>
+                <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#7a7a7a] text-[11px]" data-node-id="734:171">
+                  AI 경향 분석 리포트가 완성되면 알려드려요
+                </p>
+              </div>
+              <div className="h-[24px] relative shrink-0 w-[42px]" data-node-id="734:159" data-name="Toggle On">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgToggleOn} />
+              </div>
+            </div>
+            <div className="bg-[#eceaf5] h-px relative shrink-0 w-full" data-node-id="734:188" data-name="Divider" />
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:174" data-name="Row/주간 요약">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:180" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:175" data-name="icon/cal">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconCal} />
+                </div>
+              </div>
+              <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic relative whitespace-nowrap" data-node-id="734:181" data-name="Text">
+                <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[14px] text-black" data-node-id="734:182">
+                  주간 요약
+                </p>
+                <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#7a7a7a] text-[11px]" data-node-id="734:183">
+                  매주 월요일, 지난 한 주를 요약해드려요
+                </p>
+              </div>
+              <div className="h-[24px] relative shrink-0 w-[42px]" data-node-id="734:172" data-name="Toggle Off">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgToggleOff} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="734:220" data-name="Section/약관 및 정책">
+          <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#7a7a7a] text-[13px] whitespace-nowrap" data-node-id="734:221">
+            약관 및 정책
+          </p>
+          <div className="bg-white content-stretch drop-shadow-[0px_0px_13.5px_rgba(113,101,246,0.18)] flex flex-col items-start relative rounded-[20px] shrink-0 w-full" data-node-id="734:222" data-name="Card">
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:191" data-name="Row/이용약관">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:198" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:192" data-name="icon/file">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconFile} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-node-id="734:199" data-name="Text">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[14px] text-black whitespace-nowrap" data-node-id="734:200">
+                  이용약관
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[18px]" data-node-id="734:189" data-name="icon/chev">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+              </div>
+            </div>
+            <div className="bg-[#eceaf5] h-px relative shrink-0 w-full" data-node-id="734:223" data-name="Divider" />
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:203" data-name="Row/개인정보 처리방침">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:207" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:204" data-name="icon/shield">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconShield} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-node-id="734:208" data-name="Text">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[14px] text-black whitespace-nowrap" data-node-id="734:209">
+                  개인정보 처리방침
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[18px]" data-node-id="734:201" data-name="icon/chev">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+              </div>
+            </div>
+            <div className="bg-[#eceaf5] h-px relative shrink-0 w-full" data-node-id="734:224" data-name="Divider" />
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:212" data-name="Row/약관 동의 이력">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:217" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:213" data-name="icon/history">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconHistory} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-node-id="734:218" data-name="Text">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[14px] text-black whitespace-nowrap" data-node-id="734:219">
+                  약관 동의 이력
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[18px]" data-node-id="734:210" data-name="icon/chev">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" data-node-id="734:246" data-name="Section/계정">
+          <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#7a7a7a] text-[13px] whitespace-nowrap" data-node-id="734:247">
+            계정
+          </p>
+          <div className="bg-white content-stretch drop-shadow-[0px_0px_13.5px_rgba(113,101,246,0.18)] flex flex-col items-start relative rounded-[20px] shrink-0 w-full" data-node-id="734:248" data-name="Card">
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:227" data-name="Row/로그아웃">
+              <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:232" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:228" data-name="icon/logout">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconLogout} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-node-id="734:233" data-name="Text">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[14px] text-black whitespace-nowrap" data-node-id="734:234">
+                  로그아웃
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[18px]" data-node-id="734:225" data-name="icon/chev">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+              </div>
+            </div>
+            <div className="bg-[#eceaf5] h-px relative shrink-0 w-full" data-node-id="734:249" data-name="Divider" />
+            <div className="content-stretch flex gap-[12px] items-center px-[16px] py-[12px] relative shrink-0 w-full" data-node-id="734:237" data-name="Row/회원 탈퇴">
+              <div className="bg-[#ffecec] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="734:243" data-name="Icon Circle">
+                <div className="relative shrink-0 size-[16px]" data-node-id="734:238" data-name="icon/userx">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconUserx} />
+                </div>
+              </div>
+              <div className="content-stretch flex flex-[1_0_0] flex-col items-start min-w-px relative" data-node-id="734:244" data-name="Text">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#e5484d] text-[14px] whitespace-nowrap" data-node-id="734:245">
+                  회원 탈퇴
+                </p>
+              </div>
+              <div className="relative shrink-0 size-[18px]" data-node-id="734:235" data-name="icon/chev">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev1} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex h-[64px] items-center justify-between left-[19px] px-[30px] py-[10px] top-[767px] w-[353px]" data-node-id="734:250" data-name="Header">
+        <a className="content-stretch cursor-pointer flex flex-col h-[44px] items-center justify-between relative shrink-0" data-node-id="734:251" data-name="홈">
+          <div className="relative shrink-0 size-[30px]" data-node-id="734:252" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+          </div>
+          <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#17172b] text-[10px] text-center whitespace-nowrap" data-node-id="734:253">
+            홈
+          </p>
+        </a>
+        <a className="content-stretch cursor-pointer flex flex-col h-[44px] items-center justify-between relative shrink-0" data-node-id="734:254" data-name="채팅">
+          <div className="relative shrink-0 size-[30px]" data-node-id="734:255" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+          </div>
+          <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[10px] text-black text-center whitespace-nowrap" data-node-id="734:256">
+            AI-채팅
+          </p>
+        </a>
+        <a className="content-stretch cursor-pointer flex flex-col h-[42px] items-center justify-between relative shrink-0" data-node-id="734:257" data-name="스토어">
+          <div className="relative shrink-0 size-[30px]" data-node-id="734:258" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
+          </div>
+          <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] min-w-full not-italic relative shrink-0 text-[10px] text-black text-center w-[min-content]" data-node-id="734:259">
+            스토어
+          </p>
+        </a>
+        <div className="content-stretch flex flex-col h-[44px] items-center justify-between relative shrink-0" data-node-id="734:260" data-name="설정">
+          <div className="relative shrink-0 size-[30px]" data-node-id="734:261" data-name="Vector">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector3} />
+          </div>
+          <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[10px] text-black text-center whitespace-nowrap" data-node-id="734:262">
+            설정
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

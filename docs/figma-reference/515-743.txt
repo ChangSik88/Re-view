@@ -1,0 +1,438 @@
+const imgRectangle2 = "https://www.figma.com/api/mcp/asset/9725c8ee-9a4e-458f-b7d6-fd521372c87c.png";
+const imgVector = "https://www.figma.com/api/mcp/asset/9bbdec96-0164-4380-93de-0cf3e62534f7.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/0ec4fa75-9e89-41ae-84fa-e607207fcc8a.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/67c0cf1e-1e0b-4ecf-b916-eb0df2ddb5ec.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/26bc6352-4b30-465d-9522-af956e45838b.svg";
+const imgVector4 = "https://www.figma.com/api/mcp/asset/ee94cd31-b74e-4805-840d-a6929622c23f.svg";
+const imgVector5 = "https://www.figma.com/api/mcp/asset/2f91ce10-4f5b-4412-ae25-8e6960a2aaef.svg";
+const imgVector6 = "https://www.figma.com/api/mcp/asset/3830da06-df21-4cac-82d9-f5d22abe5f5b.svg";
+const imgVector7 = "https://www.figma.com/api/mcp/asset/709cd6c8-c580-4bf0-bf72-97da32c2607d.svg";
+const imgVector8 = "https://www.figma.com/api/mcp/asset/6265ccce-d4a5-4476-b44f-87df4e2bb09d.svg";
+const img = "https://www.figma.com/api/mcp/asset/04f4949e-5a32-45af-916a-28e86f07356a.svg";
+
+export default function Component() {
+  return (
+    <div className="bg-white content-stretch flex flex-col gap-[12px] items-center pb-[20px] pt-[56px] px-[20px] relative size-full" data-node-id="515:743" data-name="홈>캘린더 전체보기 클릭">
+      <div className="content-stretch flex h-[40px] items-center justify-between overflow-clip px-[10px] relative shrink-0 w-[353px]" data-node-id="515:748" data-name="Header">
+        <div className="h-[18px] relative shrink-0 w-[17px]" data-node-id="515:758" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+        </div>
+        <p className="[word-break:break-word] font-['Pretendard:Bold'] leading-[normal] not-italic relative shrink-0 text-[20px] text-black text-center whitespace-nowrap" data-node-id="515:749">
+          Dream Calendar
+        </p>
+        <div className="relative shrink-0 size-[20px]" data-node-id="515:754" data-name="Vector">
+          <div className="absolute inset-[-5%]">
+            <img alt="" className="block max-w-none size-full" src={imgVector1} />
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex items-center justify-between overflow-clip p-[10px] relative shrink-0 w-full" data-node-id="515:1160">
+        <div className="flex h-[8px] items-center justify-center relative shrink-0 w-[5px]" data-node-id="516:457">
+          <div className="flex-none rotate-90">
+            <div className="h-[5px] relative w-[8px]" data-name="Vector">
+              <div className="absolute inset-[-20%_-12.5%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector2} />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[8px] items-center justify-center relative shrink-0 w-[165px]" data-node-id="516:461">
+          <div className="[word-break:break-word] flex flex-col font-['Pretendard:ExtraBold'] justify-center leading-[0] not-italic relative shrink-0 text-[15px] text-black whitespace-nowrap" data-node-id="515:1161">
+            <p className="leading-[normal]">2026년 4월</p>
+          </div>
+          <div className="h-[5px] relative shrink-0 w-[8px]" data-node-id="516:459" data-name="Vector">
+            <div className="absolute inset-[-20%_-12.5%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector3} />
+            </div>
+          </div>
+        </div>
+        <div className="flex h-[8px] items-center justify-center relative shrink-0 w-[5px]" data-node-id="516:455">
+          <div className="-rotate-90 flex-none">
+            <div className="h-[5px] relative w-[8px]" data-name="Vector">
+              <div className="absolute inset-[-20%_-12.5%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector4} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white content-stretch flex flex-col h-[416px] items-center justify-center overflow-clip px-[10px] py-[16px] relative rounded-[20px] shadow-[0px_0px_13.5px_2px_#cfd0ff] shrink-0 w-[357px]" data-node-id="509:728" data-name="Dream Calendar">
+        <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative shrink-0 w-[337px]" data-node-id="509:736" data-name="Calendar Header">
+          <div className="gap-y-[25px] grid grid-cols-[repeat(7,minmax(0,1fr))] grid-rows-[repeat(6,fit-content(100%))] overflow-clip relative shrink-0 w-full" data-node-id="509:737" data-name="2026 Month 04 4월">
+            <div className="[word-break:break-word] col-2 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:739">
+              <p className="leading-[normal]">화</p>
+            </div>
+            <div className="[word-break:break-word] col-3 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:740">
+              <p className="leading-[normal]">수</p>
+            </div>
+            <div className="[word-break:break-word] col-4 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:741">
+              <p className="leading-[normal]">목</p>
+            </div>
+            <div className="[word-break:break-word] col-5 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:742">
+              <p className="leading-[normal]">금</p>
+            </div>
+            <div className="[word-break:break-word] col-6 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:743">
+              <p className="leading-[normal]">토</p>
+            </div>
+            <div className="[word-break:break-word] col-7 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-center leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:744">
+              <p className="leading-[normal]">일</p>
+            </div>
+            <div className="col-4 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-2 self-stretch shrink-0" data-node-id="509:745" data-name="2">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:746">
+                <p className="leading-[normal]">2</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:747" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-5 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-2 self-stretch shrink-0" data-node-id="509:748" data-name="3">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:749">
+                <p className="leading-[normal]">3</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:750" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-6 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 py-[5px] relative row-2 self-stretch shrink-0" data-node-id="509:751" data-name="4">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:752">
+                <p className="leading-[normal]">4</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:753" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+              </div>
+            </div>
+            <div className="col-7 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 py-[5px] relative row-2 self-stretch shrink-0" data-node-id="509:754" data-name="5">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:755">
+                <p className="leading-[normal]">5</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:756" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-2 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-3 self-stretch shrink-0" data-node-id="509:760" data-name="7">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:761">
+                <p className="leading-[normal]">7</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:762" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <a className="col-3 content-stretch cursor-pointer flex flex-col gap-[5px] items-center justify-center justify-self-stretch relative row-3 self-stretch shrink-0" data-node-id="509:763" data-name="8">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black text-left whitespace-nowrap" data-node-id="509:764">
+                <p className="leading-[normal]">8</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:765" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </a>
+            <div className="col-4 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-3 self-stretch shrink-0" data-node-id="509:766" data-name="9">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:767">
+                <p className="leading-[normal]">9</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:768" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-5 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-3 self-stretch shrink-0" data-node-id="509:769" data-name="10">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:770">
+                <p className="leading-[normal]">10</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:771" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-6 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-3 self-stretch shrink-0" data-node-id="509:772" data-name="11">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:773">
+                <p className="leading-[normal]">11</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:774" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <a className="col-7 content-stretch cursor-pointer flex flex-col gap-[5px] items-center justify-center justify-self-stretch relative row-3 self-stretch shrink-0" data-node-id="509:775" data-name="12">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black text-left whitespace-nowrap" data-node-id="509:776">
+                <p className="leading-[normal]">12</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:777" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </a>
+            <div className="col-2 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-2 self-stretch shrink-0" data-node-id="509:778" data-name="3/31">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[#b3b3b3] text-[11px] text-center whitespace-nowrap" data-node-id="509:779">
+                <p className="leading-[normal]">31</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:780" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+              </div>
+            </div>
+            <div className="col-3 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-2 self-stretch shrink-0" data-node-id="509:781" data-name="1">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:782">
+                <p className="leading-[normal]">1</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:783" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="border-[#b5b5ff] border-[1.5px] border-solid col-1 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch py-[5px] relative rounded-[10px] row-3 self-stretch shrink-0" data-node-id="509:757" data-name="6">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="509:758">
+                <p className="leading-[normal]">6</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="509:759" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <a className="col-1 content-stretch cursor-pointer flex flex-col gap-[5px] items-center justify-center justify-self-stretch py-[5px] relative row-4 self-stretch shrink-0" data-node-id="515:760" data-name="13">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black text-left whitespace-nowrap" data-node-id="515:761">
+                <p className="leading-[normal]">13</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:762" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </a>
+            <div className="col-2 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:763" data-name="14">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:764">
+                <p className="leading-[normal]">14</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:765" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-3 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:766" data-name="15">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:767">
+                <p className="leading-[normal]">15</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:768" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-4 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:769" data-name="16">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:770">
+                <p className="leading-[normal]">16</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:771" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-5 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:772" data-name="17">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:773">
+                <p className="leading-[normal]">17</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:774" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-6 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:775" data-name="18">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:776">
+                <p className="leading-[normal]">18</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:777" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-7 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-4 self-stretch shrink-0" data-node-id="515:778" data-name="19">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:779">
+                <p className="leading-[normal]">19</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:780" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <a className="col-1 content-stretch cursor-pointer flex flex-col gap-[5px] items-center justify-center justify-self-stretch py-[5px] relative row-5 self-stretch shrink-0" data-node-id="515:1134" data-name="20">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black text-left whitespace-nowrap" data-node-id="515:1135">
+                <p className="leading-[normal]">20</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1136" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </a>
+            <div className="col-2 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1137" data-name="21">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1138">
+                <p className="leading-[normal]">21</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1139" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-3 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1140" data-name="22">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1141">
+                <p className="leading-[normal]">22</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1142" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-4 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1143" data-name="23">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1144">
+                <p className="leading-[normal]">23</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1145" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-5 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1146" data-name="24">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1147">
+                <p className="leading-[normal]">24</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1148" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-6 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1149" data-name="25">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1150">
+                <p className="leading-[normal]">25</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1151" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-7 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-5 self-stretch shrink-0" data-node-id="515:1152" data-name="26">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:1153">
+                <p className="leading-[normal]">26</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1154" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-1 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-2 self-stretch shrink-0" data-node-id="515:958" data-name="3/30">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[#b3b3b3] text-[11px] whitespace-nowrap" data-node-id="515:959">
+                <p className="leading-[normal]">{`30 `}</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="516:413" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+              </div>
+            </div>
+            <div className="col-1 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 py-[5px] relative row-6 self-stretch shrink-0" data-node-id="515:961" data-name="27">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:962">
+                <p className="leading-[normal]">27</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:963" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-2 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:964" data-name="28">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:965">
+                <p className="leading-[normal]">28</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:966" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-3 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:967" data-name="29">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:968">
+                <p className="leading-[normal]">29</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:969" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-4 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:970" data-name="30">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[13px] text-black whitespace-nowrap" data-node-id="515:971">
+                <p className="leading-[normal]">30</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:972" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-5 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:973" data-name="5/1">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 size-[16px] text-[#b3b3b3] text-[11px] text-center" data-node-id="515:974">
+                <p className="leading-[normal]">1</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:975" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-6 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:976" data-name="5/2">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 size-[16px] text-[#b3b3b3] text-[11px] text-center" data-node-id="515:977">
+                <p className="leading-[normal]">2</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:978" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="col-7 content-stretch flex flex-col gap-[5px] items-center justify-center justify-self-stretch opacity-35 relative row-6 self-stretch shrink-0" data-node-id="515:1156" data-name="5/3">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 size-[16px] text-[#b3b3b3] text-[11px] text-center" data-node-id="515:1157">
+                <p className="leading-[normal]">3</p>
+              </div>
+              <div className="relative shrink-0 size-[20px]" data-node-id="515:1158" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] col-1 flex flex-col font-['Pretendard:Regular'] justify-center justify-self-stretch leading-[0] not-italic relative row-1 self-start shrink-0 text-[#b3b3b3] text-[11px] text-center" data-node-id="516:415">
+              <p className="leading-[normal]">월</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex flex-col gap-[5px] items-center justify-center py-[5px] relative shrink-0 w-full" data-node-id="516:444">
+        <div className="content-stretch flex items-center justify-between overflow-clip px-[10px] py-[5px] relative shrink-0 w-full" data-node-id="516:445">
+          <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-black whitespace-nowrap" data-node-id="516:448">
+            <p className="leading-[normal]">4월 6일의 꿈</p>
+          </div>
+          <a className="bg-[#e8e8ff] content-stretch cursor-pointer flex gap-[5px] h-[25px] items-center justify-center overflow-clip px-[3px] relative rounded-[10px] shrink-0 w-[76px]" data-node-id="516:449">
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[12px] text-center whitespace-nowrap" data-node-id="516:450">
+              <p className="leading-[normal]">전체보기</p>
+            </div>
+            <div className="flex h-[7px] items-center justify-center relative shrink-0 w-[5px]" data-node-id="516:451">
+              <div className="-rotate-90 flex-none">
+                <div className="h-[5px] relative w-[7px]" data-name="Vector">
+                  <div className="absolute inset-[-10%_-7.14%]">
+                    <img alt="" className="block max-w-none size-full" src={imgVector8} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div className="bg-white h-[200px] overflow-clip relative rounded-[24px] shadow-[0px_0px_27px_0px_rgba(113,101,246,0.18)] shrink-0 w-full" data-node-id="516:462" data-name="Dream Summary Card">
+          <div className="absolute blur-[1px] h-[256px] left-[-16px] opacity-45 rounded-[16px] top-[-35px] w-[450px]" data-node-id="516:463">
+            <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[16px]">
+              <div className="absolute inset-0 overflow-hidden rounded-[16px]">
+                <img alt="" className="absolute h-full left-[-0.63%] max-w-none top-0 w-[100.95%]" src={imgRectangle2} />
+              </div>
+              <div className="absolute inset-0 rounded-[16px]" style={{ backgroundImage: "linear-gradient(269.7153151649658deg, rgba(255, 255, 255, 0) 42.36%, rgba(255, 255, 255, 0.178) 46.076%, rgb(255, 255, 255) 74.451%)" }} />
+            </div>
+          </div>
+          <div className="absolute bg-[rgba(255,255,255,0.39)] content-stretch flex flex-col items-start left-[-10px] p-[20px] top-[-9px] w-[365px]" data-node-id="516:464">
+            <div className="content-stretch flex flex-col h-[199px] items-start p-[10px] relative shrink-0 w-full" data-node-id="516:465" data-name="Content">
+              <div className="content-stretch flex flex-col h-[24px] items-start overflow-clip pb-[10px] pr-[10px] relative shrink-0" data-node-id="516:466" data-name="Header">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[#222] text-[18px] tracking-[-0.432px] w-full" data-node-id="516:467">
+                  오늘의 꿈 요약
+                </p>
+              </div>
+              <div className="content-stretch flex flex-col items-start overflow-clip pr-[10px] py-[10px] relative shrink-0" data-node-id="516:468" data-name="Dream Preview">
+                <div className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[0] not-italic relative shrink-0 text-[#6f63f6] text-[14px] tracking-[-0.336px] whitespace-nowrap" data-node-id="516:469">
+                  <p className="leading-[1.35] mb-0">“체육관에서 입학식을 했는데</p>
+                  <p className="leading-[1.35]">모든 사람이 낯설었어요”</p>
+                </div>
+              </div>
+              <div className="content-stretch flex flex-col h-[33px] items-start overflow-clip pb-[20px] pr-[10px] pt-[2px] relative shrink-0" data-node-id="516:470" data-name="AI Summary">
+                <p className="[word-break:break-word] font-['Pretendard:Light'] leading-[1.35] not-italic relative shrink-0 text-[#797979] text-[12px] tracking-[-0.288px] whitespace-nowrap" data-node-id="516:471">
+                  긴장과 적응 심리가 반영되었을 가능성이 있어요.
+                </p>
+              </div>
+              <a className="bg-[#f5f3ff] content-stretch cursor-pointer flex gap-[10px] h-[36px] items-start overflow-clip px-[16px] py-[10px] relative rounded-[18px] shrink-0" data-node-id="516:472" data-name="Button">
+                <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[17px] leading-[1.35] not-italic relative shrink-0 text-[#8b7eff] text-[12px] text-left tracking-[-0.288px] w-[55px]" data-node-id="516:473">
+                  AI 해석보기
+                </p>
+                <div className="h-[15px] relative shrink-0 w-0" data-node-id="516:474" data-name="화살표">
+                  <div className="absolute inset-[0_-3.5px]">
+                    <img alt="" className="block max-w-none size-full" src={img} />
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

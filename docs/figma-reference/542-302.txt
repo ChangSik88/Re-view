@@ -1,0 +1,121 @@
+const imgCloseButton = "https://www.figma.com/api/mcp/asset/cf433388-bca1-4178-a5b4-a3e47b846ba0.svg";
+const imgFrame483 = "https://www.figma.com/api/mcp/asset/3597578b-ab06-49ac-acbf-cd03079b18a4.svg";
+const imgMaterialSymbolsCheckRounded = "https://www.figma.com/api/mcp/asset/d7c102e0-c019-4cce-95e0-9ee5d491a4eb.svg";
+const imgMaterialSymbolsCheckRounded1 = "https://www.figma.com/api/mcp/asset/648ebc02-c1d3-4162-960d-04b1f0fe9739.svg";
+
+export default function Component() {
+  return (
+    <div className="bg-white content-stretch flex flex-col gap-[16px] items-start overflow-clip p-[20px] relative rounded-[24px] size-full" data-node-id="542:302" data-name="등장인물 수정 오버레이">
+      <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-node-id="542:307">
+        <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[26px] text-black tracking-[-0.624px] whitespace-nowrap" data-node-id="542:303">
+          등장인물 수정
+        </p>
+        <button className="block cursor-pointer relative shrink-0 size-[40px]" data-node-id="542:304" data-name="Close Button">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCloseButton} />
+        </button>
+      </div>
+      <div className="[word-break:break-word] font-['Pretendard:Regular'] leading-[0] not-italic relative shrink-0 text-[#555] text-[14px] tracking-[-0.336px] whitespace-nowrap" data-node-id="542:308">
+        <p className="leading-[1.35] mb-0">꿈에 등장한 인물을 선택하거나 입력해주세요.</p>
+        <p className="leading-[1.35]">여러 명을 선택할 수 있어요.</p>
+      </div>
+      <div className="content-stretch flex items-center justify-between overflow-clip p-[10px] relative shrink-0 w-full" data-node-id="542:309">
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-start justify-center min-w-px px-[13px] relative rounded-[20px]" data-node-id="542:310">
+          <div className="border border-[#6e63ff] border-solid content-stretch flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:324" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:327">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:320">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black tracking-[-0.336px] whitespace-nowrap" data-node-id="542:323">
+                친구
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:325" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded} />
+            </div>
+          </div>
+          <div className="border border-[#e9e9ff] border-solid content-stretch flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:342" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:343">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:344">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black tracking-[-0.336px] whitespace-nowrap" data-node-id="542:346">
+                가족
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:347" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded1} />
+            </div>
+          </div>
+          <div className="border border-[#e9e9ff] border-solid content-stretch flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:349" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:350">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:351">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black tracking-[-0.336px] whitespace-nowrap" data-node-id="542:353">
+                선, 후배
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:354" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded1} />
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-start justify-center min-w-px px-[13px] relative rounded-[20px]" data-node-id="542:356">
+          <div className="border border-[#6e63ff] border-solid content-stretch flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:357" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:358">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:359">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black tracking-[-0.336px] whitespace-nowrap" data-node-id="542:361">
+                선생님
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:362" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded} />
+            </div>
+          </div>
+          <div className="border border-[#e9e9ff] border-solid content-stretch flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:364" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:365">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:366">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black tracking-[-0.336px] whitespace-nowrap" data-node-id="542:368">
+                연인
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:369" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded1} />
+            </div>
+          </div>
+          <button className="border border-[#e9e9ff] border-solid content-stretch cursor-pointer flex items-center justify-between p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:371" data-name="left">
+            <div className="content-stretch flex gap-[8px] items-center relative shrink-0" data-node-id="542:372">
+              <div className="relative shrink-0 size-[20px]" data-node-id="542:373">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame483} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-black text-left tracking-[-0.336px] whitespace-nowrap" data-node-id="542:375">
+                기타
+              </p>
+            </div>
+            <div className="relative shrink-0 size-[20px]" data-node-id="542:376" data-name="material-symbols:check-rounded">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMaterialSymbolsCheckRounded1} />
+            </div>
+          </button>
+        </div>
+      </div>
+      <button className="bg-[#6e63ff] content-stretch cursor-pointer flex items-center justify-center p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="542:378" data-name="Record Dream Button">
+        <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-center text-white tracking-[-0.432px] whitespace-nowrap" data-node-id="542:379">
+          <p className="leading-[1.35]">수정 완료</p>
+        </div>
+      </button>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
