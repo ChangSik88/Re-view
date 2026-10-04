@@ -1,0 +1,248 @@
+const imgRectangle2 = "https://www.figma.com/api/mcp/asset/cc6874b1-405f-44fd-adb1-e94e5bb6725a.png";
+const imgCloseButton = "https://www.figma.com/api/mcp/asset/d0d8c677-2586-486a-9850-005415f798eb.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/13661f43-80a5-4b45-a7d4-9bee4af0e5dc.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/bd5572fc-65c3-49ea-8438-3b66085d3b6c.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/6dc6cbff-76e7-4c82-8ac7-166870fe6a94.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/92a97022-ca71-4cf9-ae29-324741c37483.svg";
+const imgVector4 = "https://www.figma.com/api/mcp/asset/7b27a11f-718c-4f7f-9a36-ad3323ffa685.svg";
+const imgVector5 = "https://www.figma.com/api/mcp/asset/fce8d0c4-6ef7-440b-8da4-f5d96d5b5508.svg";
+const imgVector6 = "https://www.figma.com/api/mcp/asset/96d47cc2-58e7-4d4f-92b2-7ced127b6264.svg";
+const imgVector7 = "https://www.figma.com/api/mcp/asset/1576468f-3dac-489f-93ac-f288e8f1d880.svg";
+const img = "https://www.figma.com/api/mcp/asset/809ca412-1114-437c-81da-5ef5917b3d89.svg";
+const imgVector8 = "https://www.figma.com/api/mcp/asset/f526f7ad-9181-4698-8dda-f9026076c9b6.svg";
+
+export default function AiChatHome() {
+  return (
+    <div className="bg-white border border-[#cfc9ff] border-solid content-stretch flex flex-col gap-[12px] items-start pb-[24px] pt-[56px] px-[24px] relative size-full" data-node-id="409:738" data-name="AI Chat Home(모닝루틴)">
+      <div className="content-stretch flex h-[40px] items-center justify-between pl-[12px] relative shrink-0 w-full" data-node-id="411:746" data-name="Header">
+        <button className="block cursor-pointer relative shrink-0 size-[40px]" data-node-id="415:757" data-name="Close Button">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCloseButton} />
+        </button>
+        <div className="relative shrink-0 size-[40px]" data-node-id="415:761" data-name="Right Spacer" />
+      </div>
+      <div className="content-stretch flex flex-col items-start justify-center px-[5px] relative shrink-0 w-full" data-node-id="423:764" data-name="Hero">
+        <div className="bg-white content-stretch flex items-start justify-between overflow-clip relative shrink-0 w-full" data-node-id="429:776" data-name="Hero Row">
+          <div className="[word-break:break-word] bg-white content-stretch flex flex-col gap-[8px] items-start leading-[1.35] mr-[-83px] not-italic overflow-clip relative shrink-0 w-[324px] whitespace-nowrap" data-node-id="429:777" data-name="Hero Text">
+            <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[28px] text-black tracking-[-0.672px]" data-node-id="423:767">
+              내 꿈나라
+            </p>
+            <p className="font-['Pretendard:Regular'] relative shrink-0 text-[#555] text-[16px] tracking-[-0.384px]" data-node-id="423:768">
+              꿈을 기록하고, AI와 함께 나를 알아가요.
+            </p>
+          </div>
+          <div className="content-stretch flex gap-[19px] h-[56px] items-center justify-center overflow-clip relative shrink-0 w-[94px]" data-node-id="428:770" data-name="Icon Group">
+            <a className="block cursor-pointer relative shrink-0 size-[20px]" data-node-id="431:783" data-name="Vector">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector} />
+            </a>
+            <div className="relative shrink-0 size-[20px]" data-node-id="433:789" data-name="Vector">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector1} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="content-stretch flex items-center justify-between overflow-clip px-[5px] relative shrink-0 w-full" data-node-id="445:792" data-name="Filter Row">
+        <button className="bg-[#f5f3ff] border border-[#cfc9ff] border-solid content-stretch cursor-pointer flex h-[40px] items-center justify-between px-[16px] py-[10px] relative rounded-[14px] shrink-0 w-[114px]" data-node-id="445:812" data-name="전체 꿈">
+          <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[#6e63ff] text-[14px] text-left tracking-[-0.336px] whitespace-nowrap" data-node-id="445:811">
+            모닝루틴
+          </p>
+          <div className="h-[5px] relative shrink-0 w-[8px]" data-node-id="446:833" data-name="Vector">
+            <div className="absolute inset-[-15%_-9.38%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector2} />
+            </div>
+          </div>
+        </button>
+        <div className="bg-[#f8f7ff] border border-[#e4e0ff] border-solid content-stretch flex items-center justify-end relative rounded-[14px] shrink-0" data-node-id="445:823" data-name="목록/캘린더">
+          <div className="bg-[#f1efff] border border-[#e4e0ff] border-solid content-stretch flex gap-[6px] h-[36px] items-center justify-center px-[12px] py-[8px] relative rounded-[14px] shrink-0" data-node-id="445:818" data-name="목록">
+            <div className="relative shrink-0 size-[12px]" data-node-id="445:831" data-name="Vector">
+              <div className="absolute inset-[-4.17%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector3} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[#6e63ff] text-[12px] tracking-[-0.288px] whitespace-nowrap" data-node-id="445:820">
+              캘린더
+            </p>
+          </div>
+          <a className="bg-white border border-[#e4e0ff] border-solid content-stretch cursor-pointer flex gap-[4px] h-[36px] items-center justify-center px-[12px] py-[8px] relative rounded-[14px] shrink-0" data-node-id="445:819" data-name="캘린더">
+            <div className="h-[12px] relative shrink-0 w-[9px]" data-node-id="519:1430" data-name="Vector">
+              <div className="absolute inset-[-4.17%_-5.56%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector4} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[12px] text-black text-left tracking-[-0.288px] whitespace-nowrap" data-node-id="445:816">
+              북마크
+            </p>
+          </a>
+        </div>
+      </div>
+      <div className="[word-break:break-word] content-stretch flex font-['Pretendard:Regular'] gap-[10px] items-center justify-center leading-[1.35] not-italic overflow-clip relative shrink-0 w-full whitespace-nowrap" data-node-id="446:834" data-name="Date Selector">
+        <div className="bg-[#f5f3ff] border border-[#b9b2ff] border-solid content-stretch flex flex-col h-[72px] items-center justify-center px-[10px] py-[8px] relative rounded-[18px] shrink-0 w-[60px]" data-node-id="446:836" data-name="4월 6일">
+          <p className="mb-[-2px] relative shrink-0 text-[10px] text-black tracking-[-0.24px]" data-node-id="446:837">
+            4월
+          </p>
+          <p className="mb-[-2px] relative shrink-0 text-[#1f1f1f] text-[24px] tracking-[-0.576px]" data-node-id="446:838">
+            6
+          </p>
+          <p className="relative shrink-0 text-[10px] text-black tracking-[-0.24px]" data-node-id="446:840">
+            월
+          </p>
+        </div>
+        <a className="bg-white border border-[#b9b2ff] border-solid content-stretch cursor-pointer flex flex-col h-[72px] items-center justify-center px-[10px] py-[8px] relative rounded-[18px] shrink-0 text-[#c7c7c7] text-left w-[60px]" data-node-id="446:848" data-name="4월 8일">
+          <p className="mb-[-2px] relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:849">
+            4월
+          </p>
+          <p className="mb-[-2px] relative shrink-0 text-[24px] tracking-[-0.576px]" data-node-id="446:850">
+            8
+          </p>
+          <p className="relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:851">
+            수
+          </p>
+        </a>
+        <a className="bg-white border border-[#b9b2ff] border-solid content-stretch cursor-pointer flex flex-col h-[72px] items-center justify-center px-[10px] py-[8px] relative rounded-[18px] shrink-0 text-[#c7c7c7] text-left w-[60px]" data-node-id="446:853" data-name="4월 12일">
+          <p className="mb-[-2px] relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:854">
+            4월
+          </p>
+          <p className="mb-[-2px] relative shrink-0 text-[24px] tracking-[-0.576px]" data-node-id="446:855">
+            12
+          </p>
+          <p className="relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:856">
+            일
+          </p>
+        </a>
+        <a className="bg-white border border-[#b9b2ff] border-solid content-stretch cursor-pointer flex flex-col h-[72px] items-center justify-center px-[10px] py-[8px] relative rounded-[18px] shrink-0 text-[#c7c7c7] text-left w-[60px]" data-node-id="446:858" data-name="4월 13일">
+          <p className="mb-[-2px] relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:859">
+            4월
+          </p>
+          <p className="mb-[-2px] relative shrink-0 text-[24px] tracking-[-0.576px]" data-node-id="446:860">
+            13
+          </p>
+          <p className="relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="446:861">
+            월
+          </p>
+        </a>
+        <a className="bg-white border border-[#b9b2ff] border-solid content-stretch cursor-pointer flex flex-col h-[72px] items-center justify-center px-[10px] py-[8px] relative rounded-[18px] shrink-0 text-[#c7c7c7] text-left w-[60px]" data-node-id="843:106" data-name="4월 20일">
+          <p className="mb-[-2px] relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="843:107">
+            4월
+          </p>
+          <p className="mb-[-2px] relative shrink-0 text-[24px] tracking-[-0.576px]" data-node-id="843:108">
+            20
+          </p>
+          <p className="relative shrink-0 text-[10px] tracking-[-0.24px]" data-node-id="843:109">
+            월
+          </p>
+        </a>
+      </div>
+      <div className="bg-white content-stretch flex flex-col items-start overflow-clip p-[15px] relative rounded-[24px] shadow-[0px_0px_27px_0px_rgba(113,101,246,0.18)] shrink-0 w-full" data-node-id="552:427" data-name="Emotion Card">
+        <div className="content-stretch flex gap-[7px] items-center overflow-clip relative shrink-0 w-full" data-node-id="552:428" data-name="Left Section">
+          <div className="[word-break:break-word] content-stretch flex flex-col gap-[7px] items-start not-italic relative shrink-0 whitespace-nowrap" data-node-id="552:429">
+            <p className="font-['Pretendard:SemiBold'] leading-[1.35] relative shrink-0 text-[16px] text-black tracking-[-0.384px]" data-node-id="552:430">
+              꿈 감정 통계
+            </p>
+            <p className="font-['Pretendard:Regular'] leading-[0] relative shrink-0 text-[#7a7a7a] text-[0px] tracking-[-0.24px]" data-node-id="552:431">
+              <span className="leading-[1.35] text-[10px]">{`최근 4개의 꿈에서 자주 나타난 `}</span>
+              <span className="font-['Pretendard:SemiBold'] leading-[1.35] text-[10px]">감정</span>
+              <span className="leading-[1.35] text-[10px]">이에요.</span>
+            </p>
+          </div>
+        </div>
+        <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip p-[10px] relative shrink-0 w-full" data-node-id="552:434" data-name="Right Section">
+          <div className="border-5 border-[rgba(110,99,255,0.5)] border-solid content-stretch flex items-center justify-center relative rounded-[79.5px] shrink-0 size-[88px]" data-node-id="552:435" data-name="Donut Wrapper 2st">
+            <div className="content-stretch flex flex-col gap-[2px] items-center justify-center overflow-clip p-[2px] relative shrink-0" data-node-id="552:436" data-name="Center Content">
+              <div className="relative shrink-0 size-[20px]" data-node-id="552:437" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector5} />
+              </div>
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[10px] text-black text-center tracking-[-0.24px] whitespace-nowrap" data-node-id="552:438">
+                <p className="leading-[1.35]">행복</p>
+              </div>
+              <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[16px] text-[rgba(110,99,255,0.5)] text-center tracking-[-0.384px] whitespace-nowrap" data-node-id="552:439">
+                31%
+              </p>
+            </div>
+          </div>
+          <div className="border-8 border-[#6e63ff] border-solid content-stretch flex flex-col items-center justify-center relative rounded-[72px] shrink-0 size-[119px]" data-node-id="552:440" data-name="Donut Wrapper">
+            <div className="content-stretch flex flex-col gap-[5px] h-[104px] items-center justify-center overflow-clip p-[2px] relative shrink-0" data-node-id="552:441" data-name="Center Content">
+              <div className="relative shrink-0 size-[20px]" data-node-id="552:442" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector6} />
+              </div>
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center tracking-[-0.336px] whitespace-nowrap" data-node-id="552:443">
+                <p className="leading-[1.35]">불안</p>
+              </div>
+              <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[#6e63ff] text-[20px] tracking-[-0.48px] whitespace-nowrap" data-node-id="552:444">
+                42%
+              </p>
+            </div>
+          </div>
+          <div className="border-3 border-[rgba(110,99,255,0.25)] border-solid content-stretch flex items-center justify-center relative rounded-[79.5px] shrink-0 size-[60px]" data-node-id="552:445" data-name="Donut Wrapper">
+            <div className="content-stretch flex flex-[1_0_0] flex-col gap-px items-center justify-center min-w-px p-[2px] relative" data-node-id="552:446" data-name="Center Content">
+              <div className="relative shrink-0 size-[15px]" data-node-id="552:447" data-name="Vector">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector7} />
+              </div>
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[8px] text-black text-center tracking-[-0.192px] w-[14px]" data-node-id="552:448">
+                <p className="leading-[1.35]">편안</p>
+              </div>
+              <p className="[text-box-edge:cap_alphabetic] [text-box-trim:trim-both] [word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[14px] text-[rgba(110,99,255,0.25)] text-center tracking-[-0.336px] whitespace-nowrap" data-node-id="552:449">
+                17%
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="bg-white h-[185px] overflow-clip relative rounded-[24px] shadow-[0px_0px_27px_0px_rgba(113,101,246,0.18)] shrink-0 w-full" data-node-id="460:788" data-name="Dream Summary Card">
+        <div className="absolute blur-[1px] h-[256px] left-[-16px] opacity-45 rounded-[16px] top-[-35px] w-[450px]" data-node-id="461:1063">
+          <div aria-hidden className="absolute inset-0 pointer-events-none rounded-[16px]">
+            <div className="absolute inset-0 overflow-hidden rounded-[16px]">
+              <img alt="" className="absolute h-full left-[-0.63%] max-w-none top-0 w-[100.95%]" src={imgRectangle2} />
+            </div>
+            <div className="absolute inset-0 rounded-[16px]" style={{ backgroundImage: "linear-gradient(269.7153151649658deg, rgba(255, 255, 255, 0) 42.36%, rgba(255, 255, 255, 0.178) 46.076%, rgb(255, 255, 255) 74.451%)" }} />
+          </div>
+        </div>
+        <div className="absolute bg-[rgba(255,255,255,0.39)] content-stretch flex flex-col items-start left-[-10px] p-[20px] top-[-9px] w-[365px]" data-node-id="461:1069">
+          <div className="content-stretch flex flex-col items-start p-[10px] relative shrink-0 w-full" data-node-id="460:816" data-name="Content">
+            <div className="content-stretch flex flex-col h-[24px] items-start overflow-clip pb-[10px] pr-[10px] relative shrink-0" data-node-id="460:819" data-name="Header">
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[1.35] not-italic relative shrink-0 text-[18px] text-black tracking-[-0.432px] w-full" data-node-id="460:820">
+                오늘의 꿈 요약
+              </p>
+            </div>
+            <div className="content-stretch flex flex-col items-start overflow-clip pr-[10px] py-[10px] relative shrink-0" data-node-id="460:821" data-name="Dream Preview">
+              <div className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[14px] tracking-[-0.336px] whitespace-nowrap" data-node-id="460:826">
+                <p className="leading-[1.35] mb-0">“체육관에서 입학식을 했는데</p>
+                <p className="leading-[1.35]">모든 사람이 낯설었어요”</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col h-[33px] items-start overflow-clip pb-[20px] pr-[10px] pt-[2px] relative shrink-0" data-node-id="460:824" data-name="AI Summary">
+              <p className="[word-break:break-word] font-['Pretendard:Light'] leading-[1.35] not-italic relative shrink-0 text-[#555] text-[12px] tracking-[-0.288px] whitespace-nowrap" data-node-id="460:828">
+                긴장과 적응 심리가 반영되었을 가능성이 있어요.
+              </p>
+            </div>
+            <a className="bg-[#f5f3ff] content-stretch cursor-pointer flex gap-[10px] h-[36px] items-start overflow-clip px-[16px] py-[10px] relative rounded-[18px] shrink-0" data-node-id="460:825" data-name="Button">
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[17px] leading-[1.35] not-italic relative shrink-0 text-[#6e63ff] text-[12px] text-left tracking-[-0.288px] w-[55px]" data-node-id="460:827">
+                AI 해석보기
+              </p>
+              <div className="h-[15px] relative shrink-0 w-0" data-node-id="461:550" data-name="화살표">
+                <div className="absolute inset-[0_-3.5px]">
+                  <img alt="" className="block max-w-none size-full" src={img} />
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a className="bg-[#6e63ff] content-stretch cursor-pointer flex gap-[12px] items-center justify-center overflow-clip px-[24px] py-[16px] relative rounded-[30px] shrink-0 w-full" data-node-id="461:1070" data-name="Record Dream Button">
+        <div className="relative shrink-0 size-[14px]" data-node-id="461:1074" data-name="Vector">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector8} />
+        </div>
+        <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[18px] text-center text-white tracking-[-0.432px] whitespace-nowrap" data-node-id="461:1072">
+          <p className="leading-[1.35]">꿈 기록하기</p>
+        </div>
+      </a>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

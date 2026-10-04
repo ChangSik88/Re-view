@@ -1,42 +1,67 @@
-// 💡 메모장에 미리 복사해둘 완성형 main.dart 코드
 import 'package:flutter/material.dart';
-import 'theme/app_theme.dart';
-// 💡 이 줄을 맨 위에 추가해 주세요!
+import 'package:provider/provider.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
-import 'screens/home/home_screen.dart';
-import 'screens/dream/dream_list_screen.dart';
-import 'screens/dream/dream_detail_screen.dart';
-import 'screens/chat/chat_screen.dart';
-import 'screens/store/store_screen.dart';
-import 'screens/store/store_detail_screen.dart';
-import 'screens/chat/routine_select_screen.dart';
+import 'review/design.dart';
+import 'review/review_state.dart';
+import 'review/diary_pages.dart';
+import 'review/chat_page.dart';
+import 'review/store_pages.dart';
+import 'review/settings_page.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AI-Diary',
-      theme: AppTheme.theme,
-      // 💡 첫 화면을 로그인 화면으로 지정합니다.
-      home: LoginScreen(),
-      routes: {
-        '/login': (context) => LoginScreen(), // 1. 로그인
-        '/signup': (context) => SignUpScreen(), // 2. 회원가입
-        '/home': (context) => HomeScreen(), // 3. 홈 화면 (메인)
-        '/dream_list': (context) => DreamListScreen(), // 4. 꿈나라 대시보드 리스트
-        '/chat_detail': (context) => DreamDetailScreen(), // 5. 꿈 상세 기록 화면
-        '/chat_input': (context) => ChatScreen(), // 6. AI 채팅 화면
-        '/store': (context) => StoreScreen(), //7. 스토어 메인 화면
-        '/store_detail': (context) => StoreDetailScreen(), //8. 스토어 제품 화면
-        '/routine_select': (context) => RoutineSelectScreen(),
-      },
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (_) => ReviewState(),
+      child: MaterialApp(
+        title: 'Re-view',
+        debugShowCheckedModeBanner: false,
+        theme: reviewTheme(),
+        home: LoginScreen(),
+        routes: {
+          '/login': (_) => LoginScreen(),
+          '/signup': (_) => SignUpScreen(),
+          '/home': (_) => const HomePage(),
+          '/dream_list': (_) => const DiaryHomePage(),
+          '/store': (_) => const ShopPage(),
+          '/settings': (_) => const SettingsPage(),
+          '/notifications': (_) =>
+              const InformationPage(title: '알림', text: '아직 도착한 알림이 없어요.'),
+          '/preview': (_) => const StartPage(preview: true),
+          '/start': (_) => const StartPage(),
+          '/chat_input': (ctx) {
+            final args = ModalRoute.of(ctx)?.settings.arguments as Map?;
+            return ReviewChatPage(
+                routine: args?['routine'] == 'night'
+                    ? Routine.night
+                    : Routine.morning);
+          },
+          '/routine_select': (_) => const DiaryHomePage(),
+        },
+      ));
 }
 
-// 💡 여기에 아까 제가 짜드린 _LoginScreenState 포함된 LoginScreen 코드를 통째로 이어 붙여두세요!
+class StartPage extends StatefulWidget {
+  final bool preview;
+  const StartPage({super.key, this.preview = false});
+  @override
+  State<StartPage> createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await context.read<ReviewState>().start(demo: widget.preview);
+      if (mounted) Navigator.pushReplacementNamed(context, '/home');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => const Scaffold(
+      body: SafeArea(child: Center(child: CircularProgressIndicator())));
+}

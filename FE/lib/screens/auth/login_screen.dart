@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('로그인 성공!')));
 
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/start');
     } on ApiException catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -113,6 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 10),
                       Text('Sign in to continue to AI-Diary',
                           style: TextStyle(color: Colors.grey)),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, '/preview'),
+                        child: const Text('디자인 미리보기 (예시 데이터)'),
+                      ),
                       SizedBox(height: 40),
 
                       // 아이디 입력

@@ -1,0 +1,452 @@
+const imgCloseButton = "https://www.figma.com/api/mcp/asset/6539586a-2329-4fa7-a156-964b3b2426d1.svg";
+const imgIcRoundRefresh = "https://www.figma.com/api/mcp/asset/b9673ab3-fa77-40e4-90d7-6a813c61a7d7.svg";
+const imgVector = "https://www.figma.com/api/mcp/asset/bac28ff4-d292-4789-b692-229abe77d1fe.svg";
+const imgVector1 = "https://www.figma.com/api/mcp/asset/7e3fec0d-7e56-4ba3-a15d-1d83f150a307.svg";
+const imgVector2 = "https://www.figma.com/api/mcp/asset/be82e71a-f2bf-40c5-89ae-a7085505e398.svg";
+const imgMoonWrap = "https://www.figma.com/api/mcp/asset/223550f5-8f2c-4b89-a3f4-b1564d4f5b16.svg";
+const imgVector3 = "https://www.figma.com/api/mcp/asset/3dba9721-ff12-4637-a7df-1b5d0be26442.svg";
+const imgGroup = "https://www.figma.com/api/mcp/asset/5ef1ddfa-f8aa-4901-99a9-eee52e82d34e.svg";
+const imgFrame473 = "https://www.figma.com/api/mcp/asset/e95333ae-7ea1-42e3-bff6-ed3b8d4b66ad.svg";
+const imgLine = "https://www.figma.com/api/mcp/asset/c0a28134-1763-4b0f-b16b-ca43a3d04351.svg";
+const imgLine1 = "https://www.figma.com/api/mcp/asset/ecc4fdff-ae1d-4f41-b88c-48682785b730.svg";
+const imgYLines = "https://www.figma.com/api/mcp/asset/c0e45feb-2557-43af-a67e-80e641cd35c9.svg";
+const imgSingleLine2 = "https://www.figma.com/api/mcp/asset/c6cfe786-e2a8-4de8-bd84-a29bc64ed554.svg";
+const imgEllipseLine = "https://www.figma.com/api/mcp/asset/ba6797d0-290f-4def-89e7-cc726d98aa59.svg";
+const imgSingleLine1 = "https://www.figma.com/api/mcp/asset/ebb4804a-f364-43cf-9604-79ecb4063ed5.svg";
+const imgEllipseLine1 = "https://www.figma.com/api/mcp/asset/15bb3a70-c956-4240-be8c-ecbe3d0310ba.svg";
+const imgSingleLine0 = "https://www.figma.com/api/mcp/asset/7c79e07b-d8c2-423b-9e27-493bb50fa685.svg";
+const imgEllipseLine2 = "https://www.figma.com/api/mcp/asset/5f3ec89d-b452-4ffa-a8b3-a9b944ece6d2.svg";
+const imgBasicNode = "https://www.figma.com/api/mcp/asset/e600603a-e745-46f4-8b99-c57134c4f998.svg";
+const imgBasicNode1 = "https://www.figma.com/api/mcp/asset/d4fdab63-663f-4eca-8a2c-42a709676e5c.svg";
+const imgBasicNode2 = "https://www.figma.com/api/mcp/asset/9cce22d1-e824-49bf-b157-57f13f59d71c.svg";
+const imgFrame569 = "https://www.figma.com/api/mcp/asset/ed1b6594-a3dd-44b8-89f8-d944f2178852.svg";
+const imgFrame570 = "https://www.figma.com/api/mcp/asset/5208c837-479b-4940-984a-ef80f7fcee3e.svg";
+const imgFrame571 = "https://www.figma.com/api/mcp/asset/cf869ec8-96ea-455c-b553-858ce222a8c3.svg";
+
+function ConfigAndDataLineDontRemove({ className }: { className?: string }) {
+  return <div className={className || "relative size-[8px]"} data-node-id="557:1001" data-name="ConfigAndData-Line-Don't remove!" />;
+}
+
+export default function AiAnalysisScreen() {
+  return (
+    <div className="bg-[#f8f8ff] content-stretch flex flex-col gap-[12px] items-start pb-[24px] pt-[56px] px-[24px] relative size-full" data-node-id="731:135" data-name="AI Analysis Screen(감정 인사이트)_모닝루틴">
+      <div className="bg-white content-stretch flex h-[40px] items-center justify-between overflow-clip pl-[12px] relative rounded-[20px] shrink-0 w-full" data-node-id="731:136" data-name="Header">
+        <a className="block cursor-pointer relative shrink-0 size-[40px]" data-node-id="731:137" data-name="Close Button">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCloseButton} />
+        </a>
+        <div className="content-stretch flex gap-[20px] h-[40px] items-center justify-center overflow-clip pr-[16px] relative rounded-[20px] shrink-0 w-[77px]" data-node-id="731:141" data-name="Action Group">
+          <div className="relative shrink-0 size-[24px]" data-node-id="731:142" data-name="ic:round-refresh">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIcRoundRefresh} />
+          </div>
+          <button className="block cursor-pointer h-[16px] relative shrink-0 w-[12px]" data-node-id="731:144" data-name="Vector">
+            <div className="absolute inset-[-4.69%_-6.25%]">
+              <img alt="" className="block max-w-none size-full" src={imgVector} />
+            </div>
+          </button>
+        </div>
+      </div>
+      <div className="bg-white content-stretch flex flex-[1_0_0] flex-col gap-[16px] items-start min-h-px overflow-x-clip overflow-y-auto p-[24px] relative rounded-[14px] shadow-[0px_0px_27px_0px_rgba(151,153,255,0.27)] w-full" data-node-id="731:145" data-name="Analysis Container">
+        <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[24px] text-black text-center tracking-[-0.576px] whitespace-nowrap" data-node-id="731:146">
+          <p className="leading-[1.35]">고등학교 입학하는 꿈</p>
+        </div>
+        <div className="bg-[#f5f3ff] content-stretch flex gap-[12px] h-[39px] items-start overflow-clip pb-[16px] px-[16px] relative rounded-[14px] shrink-0 w-full" data-node-id="731:147" data-name="Meta Card">
+          <div className="content-stretch flex gap-[10px] items-center justify-center overflow-clip p-[10px] relative shrink-0" data-node-id="731:148" data-name="Date Group">
+            <div className="relative shrink-0 size-[12px]" data-node-id="731:149" data-name="Vector">
+              <div className="absolute inset-[-4.17%]">
+                <img alt="" className="block max-w-none size-full" src={imgVector1} />
+              </div>
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-end leading-[0] not-italic relative shrink-0 text-[#555] text-[0px] text-center tracking-[-0.288px] whitespace-nowrap" data-node-id="731:150">
+              <p className="font-['Pretendard:Regular'] text-[12px]">
+                <span className="leading-[1.35]">2026년 4월 13일</span>
+                <span className="leading-[1.35] text-[#555]">{` `}</span>
+              </p>
+            </div>
+          </div>
+          <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] h-[36px] justify-center leading-[0] not-italic relative shrink-0 text-[#555] text-[12px] text-center tracking-[-0.288px] w-[9px]" data-node-id="731:151">
+            <p className="leading-[1.35]">•</p>
+          </div>
+          <div className="content-stretch flex gap-[8px] items-center justify-end overflow-clip p-[10px] relative shrink-0" data-node-id="731:152" data-name="Dream Type">
+            <div className="h-[14px] relative shrink-0 w-[13px]" data-node-id="731:153" data-name="Vector">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgVector2} />
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[#555] text-[12px] text-center tracking-[-0.288px] whitespace-nowrap" data-node-id="731:154">
+              <p className="leading-[1.35]">꿈</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#f5f3ff] border border-[#d1d1ff] border-solid content-stretch cursor-pointer flex h-[24px] items-start overflow-clip relative rounded-[5px] shrink-0 w-full" data-node-id="731:155" data-name="Tab Section">
+          <a className="bg-white content-stretch flex flex-[1_0_0] flex-col h-[24px] items-center justify-center min-w-px overflow-clip p-[10px] relative rounded-[5px]" data-node-id="731:156" data-name="Tab Button">
+            <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[11px] text-left whitespace-nowrap" data-node-id="731:157">
+              AI 요약
+            </p>
+          </a>
+          <a className="bg-white content-stretch flex flex-[1_0_0] flex-col h-[24px] items-center justify-center min-w-px overflow-clip p-[10px] relative rounded-[5px]" data-node-id="731:158" data-name="Tab Button">
+            <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[11px] text-left whitespace-nowrap" data-node-id="731:159">
+              전문 보기
+            </p>
+          </a>
+          <button className="bg-[#f1efff] content-stretch flex flex-[1_0_0] flex-col h-[24px] items-center justify-center min-w-px overflow-clip p-[10px] relative rounded-[5px]" data-node-id="731:160" data-name="Tab Button">
+            <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[11px] text-left whitespace-nowrap" data-node-id="731:161">
+              AI 감정 인사이트
+            </p>
+          </button>
+        </div>
+        <div className="bg-white content-stretch flex gap-[5px] items-center justify-center py-[5px] relative shrink-0 w-full" data-node-id="731:205" data-name="키워드">
+          <div className="flex flex-row items-center self-stretch" data-node-id="731:206">
+            <div className="content-stretch flex flex-col gap-[5px] h-full items-center justify-center pl-[10px] relative shrink-0 w-[120px]">
+              <div className="relative shrink-0 size-[36px]" data-node-id="732:135" data-name="Moon Wrap">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgMoonWrap} />
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[8px] whitespace-nowrap" data-node-id="731:586">
+                어제 하루
+              </p>
+              <div className="content-stretch flex flex-[1_0_0] gap-[3px] items-center justify-center min-h-px overflow-clip pt-[5px] px-[10px] relative w-full" data-node-id="731:208" data-name="Keyword List">
+                <div className="bg-[#ececff] border-[#d1d1ff] border-[0.8px] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px px-[15px] py-[5px] relative rounded-[8px]" data-node-id="731:211">
+                  <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[6px] text-center tracking-[-0.144px] whitespace-nowrap" data-node-id="731:212">
+                    <p className="leading-[1.35]">피로</p>
+                  </div>
+                </div>
+                <div className="bg-[#ececff] border-[#d1d1ff] border-[0.8px] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px px-[15px] py-[5px] relative rounded-[8px]" data-node-id="731:213">
+                  <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[6px] text-center tracking-[-0.144px] whitespace-nowrap" data-node-id="731:214">
+                    <p className="leading-[1.35]">불안</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-[1_0_0] flex-row items-center self-stretch" data-node-id="731:215">
+            <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-center justify-center min-w-px overflow-clip relative" data-name="akar-icons:arrow-right">
+              <div className="h-[14px] relative shrink-0 w-[16px]" data-node-id="731:216" data-name="Vector">
+                <div className="absolute inset-[-5.36%_-4.69%]">
+                  <img alt="" className="block max-w-none size-full" src={imgVector3} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row items-center self-stretch" data-node-id="731:217">
+            <div className="content-stretch flex flex-col gap-[5px] h-full items-center justify-center pr-[10px] relative shrink-0 w-[120px]">
+              <div className="overflow-clip relative shrink-0 size-[36px]" data-node-id="731:218" data-name="ph:sun-duotone">
+                <div className="absolute inset-[3.13%]" data-node-id="731:219" data-name="Group">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgGroup} />
+                </div>
+              </div>
+              <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[8px] whitespace-nowrap" data-node-id="731:587">
+                이 꿈
+              </p>
+              <div className="content-stretch flex gap-[5px] items-start overflow-clip px-[10px] py-[5px] relative shrink-0 w-full" data-node-id="731:222" data-name="Keyword List">
+                <div className="bg-[#ececff] border-[#d1d1ff] border-[0.8px] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px px-[15px] py-[5px] relative rounded-[8px]" data-node-id="731:223">
+                  <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[6px] text-center tracking-[-0.144px] whitespace-nowrap" data-node-id="731:224">
+                    <p className="leading-[1.35]">불안</p>
+                  </div>
+                </div>
+                <div className="bg-[#ececff] border-[#d1d1ff] border-[0.8px] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px px-[15px] py-[5px] relative rounded-[8px]" data-node-id="731:225">
+                  <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[6px] text-center tracking-[-0.144px] whitespace-nowrap" data-node-id="731:226">
+                    <p className="leading-[1.35]">기대</p>
+                  </div>
+                </div>
+                <div className="bg-[#ececff] border-[#d1d1ff] border-[0.8px] border-solid content-stretch flex flex-[1_0_0] items-center justify-center min-w-px px-[15px] py-[5px] relative rounded-[8px]" data-node-id="731:227">
+                  <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[6px] text-center tracking-[-0.144px] whitespace-nowrap" data-node-id="731:228">
+                    <p className="leading-[1.35]">설렘</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center relative shrink-0" data-node-id="731:229">
+          <div className="-scale-y-100 flex-none">
+            <div className="bg-[#eceaf5] h-px relative w-[297px]" />
+          </div>
+        </div>
+        <div className="bg-[rgba(242,238,255,0.53)] content-stretch flex flex-col gap-[2px] items-start justify-center overflow-clip p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="731:230">
+          <div className="content-stretch flex gap-[5px] items-center relative shrink-0 w-full" data-node-id="731:231" data-name="Header">
+            <div className="relative shrink-0 size-[20px]" data-node-id="731:232">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame473} />
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[10px] text-center tracking-[-0.24px] whitespace-nowrap" data-node-id="731:234">
+              <p className="leading-[1.35]">어제 하루의 ‘불안’이 오늘 꿈에서도 이어졌어요.</p>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-center px-[25px] relative shrink-0" data-node-id="731:235">
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:Regular'] justify-center leading-[0] not-italic relative shrink-0 text-[#555] text-[9px] tracking-[-0.216px] whitespace-nowrap" data-node-id="731:236">
+              <p className="leading-[1.6] mb-0">하지만 ‘기대’와 ‘설렘’ 감정이 함께 나타나며</p>
+              <p className="leading-[1.6]">새로운 시작에 대한 긍정적인 에너지로 커지고 있어요!</p>
+            </div>
+          </div>
+        </div>
+        <div className="content-stretch flex flex-col gap-[7px] items-start relative shrink-0 w-full" data-node-id="731:237" data-name="ai해석">
+          <div className="content-stretch flex h-[28px] items-center overflow-clip px-[15px] py-[10px] relative shrink-0 w-[214px]" data-node-id="731:238" data-name="Keyword Section">
+            <div className="content-stretch flex items-center relative shrink-0" data-node-id="731:239" data-name="Header">
+              <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black text-center tracking-[-0.336px] whitespace-nowrap" data-node-id="731:240">
+                <p className="leading-[1.35]">주요 감정 변화</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white content-stretch flex h-[145px] items-start relative shrink-0 w-full" data-node-id="731:241" data-name="BarLineChart">
+            <div className="content-stretch flex flex-[1_0_0] flex-col h-full items-start min-w-px relative" data-node-id="731:242" data-name="Chart&Axis">
+              <div className="content-stretch flex flex-[1_0_0] items-center mb-[-2px] min-h-px relative w-full" data-node-id="731:243" data-name="MainChart">
+                <div className="flex-[1_0_0] h-full min-w-px relative" data-node-id="731:244" data-name="Graphi&Grid">
+                  <div className="absolute flex inset-[0_46.63px_0_17.63px] items-center justify-center" data-node-id="731:245" style={{ containerType: "size" }}>
+                    <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+                      <div className="content-stretch flex flex-col items-end justify-between px-px py-[6px] relative size-full" data-name="xLines">
+                        <div className="h-0 relative shrink-0 w-[191px]" data-node-id="731:246" data-name="Line">
+                          <div className="absolute inset-[-1px_0_0_0]">
+                            <img alt="" className="block max-w-none size-full" src={imgLine} />
+                          </div>
+                        </div>
+                        <div className="h-0 relative shrink-0 w-[191px]" data-node-id="731:247" data-name="Line">
+                          <div className="absolute inset-[-1px_0_0_0]">
+                            <img alt="" className="block max-w-none size-full" src={imgLine} />
+                          </div>
+                        </div>
+                        <div className="h-0 relative shrink-0 w-[191px]" data-node-id="731:248" data-name="Line">
+                          <div className="absolute inset-[-1px_0_0_0]">
+                            <img alt="" className="block max-w-none size-full" src={imgLine1} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute flex inset-[0_20px_0_18px] items-center justify-center" data-node-id="731:249" style={{ containerType: "size" }}>
+                    <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+                      <div className="relative size-full" data-name="yLines">
+                        <div className="absolute inset-[0_0_0_-0.33%]">
+                          <img alt="" className="block max-w-none size-full" src={imgYLines} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute flex inset-[7px_20px_7px_18px] items-center justify-center" data-node-id="731:254" style={{ containerType: "size" }}>
+                    <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+                      <div className="relative size-full" data-name="LineArea">
+                        <div className="absolute contents inset-[83%_-0.27%_11.58%_0]" data-node-id="731:255" data-name="LineGroup2">
+                          <div className="absolute inset-[83%_0_12%_0]" data-node-id="731:256" data-name="singleLine2">
+                            <div className="absolute inset-[-32%_0_-32.13%_0]">
+                              <img alt="" className="block max-w-none size-full" src={imgSingleLine2} />
+                            </div>
+                          </div>
+                          <div className="absolute contents inset-[83%_-0.27%_11.58%_0]" data-node-id="731:257" data-name="LineNodes2">
+                            <div className="absolute inset-[86%_99.73%_13.58%_0]" data-node-id="731:258" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:259" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine} />
+                              </div>
+                            </div>
+                            <div className="absolute inset-[87%_66.4%_12.58%_33.33%]" data-node-id="731:260" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:261" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine} />
+                              </div>
+                            </div>
+                            <div className="absolute inset-[88%_33.06%_11.58%_66.67%]" data-node-id="731:262" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:263" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine} />
+                              </div>
+                            </div>
+                            <div className="absolute bottom-[16.58%] left-full right-[-0.27%] top-[83%]" data-node-id="731:264" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:265" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="absolute contents inset-[69%_-0.27%_20.58%_0]" data-node-id="731:266" data-name="LineGroup1">
+                          <div className="absolute inset-[69%_0_21%_0]" data-node-id="731:267" data-name="singleLine1">
+                            <div className="absolute inset-[-15.83%_-0.15%_-16.15%_0]">
+                              <img alt="" className="block max-w-none size-full" src={imgSingleLine1} />
+                            </div>
+                          </div>
+                          <div className="absolute contents inset-[69%_-0.27%_20.58%_0]" data-node-id="731:268" data-name="LineNodes1">
+                            <div className="absolute inset-[78%_99.73%_21.58%_0]" data-node-id="731:269" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:270" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine1} />
+                              </div>
+                            </div>
+                            <div className="absolute bottom-[24.58%] left-[33.33%] right-[66.4%] top-3/4" data-node-id="731:271" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:272" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine1} />
+                              </div>
+                            </div>
+                            <div className="absolute inset-[79%_33.06%_20.58%_66.67%]" data-node-id="731:273" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:274" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine1} />
+                              </div>
+                            </div>
+                            <div className="absolute bottom-[30.58%] left-full right-[-0.27%] top-[69%]" data-node-id="731:275" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:276" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine1} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="absolute contents inset-[45%_-0.27%_41.58%_0]" data-node-id="731:277" data-name="LineGroup0">
+                          <div className="absolute inset-[45%_0_42%_0]" data-node-id="731:278" data-name="singleLine0">
+                            <div className="absolute inset-[-12.53%_-0.19%_-12.06%_0]">
+                              <img alt="" className="block max-w-none size-full" src={imgSingleLine0} />
+                            </div>
+                          </div>
+                          <div className="absolute contents inset-[45%_-0.27%_41.58%_0]" data-node-id="731:279" data-name="LineNodes0">
+                            <div className="absolute inset-[49%_99.73%_50.58%_0]" data-node-id="731:280" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:281" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine2} />
+                              </div>
+                            </div>
+                            <div className="absolute inset-[53%_66.4%_46.58%_33.33%]" data-node-id="731:282" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:283" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine2} />
+                              </div>
+                            </div>
+                            <div className="absolute inset-[45%_33.06%_54.58%_66.67%]" data-node-id="731:284" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:285" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine2} />
+                              </div>
+                            </div>
+                            <div className="absolute bottom-[41.58%] left-full right-[-0.27%] top-[58%]" data-node-id="731:286" data-name="basicNode">
+                              <div className="absolute left-[-4.5px] size-[9px] top-[-4.5px]" data-node-id="731:287" data-name="EllipseLine">
+                                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipseLine2} />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ConfigAndDataLineDontRemove className="absolute left-0 size-[8px] top-0" />
+                </div>
+              </div>
+              <div className="content-stretch flex h-[24px] items-start relative shrink-0 w-full" data-node-id="731:289" data-name="xAxis">
+                <div className="content-stretch flex flex-[1_0_0] flex-col items-end min-w-px relative" data-node-id="731:290" data-name="xLabelBox">
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] text-center w-full" data-node-id="731:291">
+                    4/10
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col items-end min-w-px relative" data-node-id="731:292" data-name="xLabelBox">
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] text-center w-full" data-node-id="731:293">
+                    4/11
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col items-end min-w-px relative" data-node-id="731:294" data-name="xLabelBox">
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] text-center w-full" data-node-id="731:295">
+                    4/12
+                  </p>
+                </div>
+                <div className="content-stretch flex flex-[1_0_0] flex-col items-end min-w-px relative" data-node-id="731:296" data-name="xLabelBox">
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] text-center w-full" data-node-id="731:297">
+                    4/13
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col h-full items-start justify-center overflow-clip relative shrink-0" data-node-id="731:298" data-name="Legends">
+              <div className="content-stretch flex flex-col gap-[8px] items-center justify-center overflow-clip px-[8px] relative shrink-0" data-node-id="731:299" data-name="LineLegends">
+                <div className="content-stretch flex gap-[4px] items-center overflow-clip p-[4px] relative shrink-0" data-node-id="731:300" data-name="Legend">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="731:301" data-name="LegendNode">
+                    <div className="absolute bg-[#8979ff] h-[2px] left-0 top-[7px] w-[16px]" data-node-id="731:302" data-name="Line" />
+                    <div className="absolute left-[8px] size-px top-[8px]" data-node-id="731:303" data-name="basicNode">
+                      <div className="absolute inset-[-400%_-300%_-300%_-400%]">
+                        <img alt="" className="block max-w-none size-full" src={imgBasicNode} />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] whitespace-nowrap" data-node-id="731:305">
+                    불안
+                  </p>
+                </div>
+                <div className="content-stretch flex gap-[4px] items-center overflow-clip p-[4px] relative shrink-0" data-node-id="731:306" data-name="Legend">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="731:307" data-name="LegendNode">
+                    <div className="absolute bg-[#ff928a] h-[2px] left-0 top-[7px] w-[16px]" data-node-id="731:308" data-name="Line" />
+                    <div className="absolute left-[8px] size-px top-[8px]" data-node-id="731:309" data-name="basicNode">
+                      <div className="absolute inset-[-400%_-300%_-300%_-400%]">
+                        <img alt="" className="block max-w-none size-full" src={imgBasicNode1} />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] whitespace-nowrap" data-node-id="731:311">
+                    기대
+                  </p>
+                </div>
+                <div className="content-stretch flex gap-[4px] items-center overflow-clip p-[4px] relative shrink-0" data-node-id="731:312" data-name="Legend">
+                  <div className="relative shrink-0 size-[16px]" data-node-id="731:313" data-name="LegendNode">
+                    <div className="absolute bg-[#3cc3df] h-[2px] left-0 top-[7px] w-[16px]" data-node-id="731:314" data-name="Line" />
+                    <div className="absolute left-[8px] size-px top-[8px]" data-node-id="731:315" data-name="basicNode">
+                      <div className="absolute inset-[-400%_-300%_-300%_-400%]">
+                        <img alt="" className="block max-w-none size-full" src={imgBasicNode2} />
+                      </div>
+                    </div>
+                  </div>
+                  <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(0,0,0,0.7)] whitespace-nowrap" data-node-id="731:317">
+                    설렘
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-[rgba(242,238,255,0.53)] content-stretch flex flex-col items-start justify-center overflow-clip p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="731:318">
+          <div className="content-stretch flex gap-[5px] items-center relative shrink-0 w-full" data-node-id="731:319" data-name="Header">
+            <div className="relative shrink-0 size-[20px]" data-node-id="731:320">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame569} />
+            </div>
+            <div className="[word-break:break-word] flex flex-col font-['Pretendard:SemiBold'] justify-center leading-[0] not-italic relative shrink-0 text-[#6e63ff] text-[10px] text-center tracking-[-0.24px] whitespace-nowrap" data-node-id="731:322">
+              <p className="leading-[1.35]">최근 꿈에서 긍정적인 감정이 점점 늘어나고 있어요!</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-center relative shrink-0" data-node-id="731:323">
+          <div className="-scale-y-100 flex-none">
+            <div className="bg-[#eceaf5] h-px relative w-[297px]" />
+          </div>
+        </div>
+        <div className="bg-[rgba(242,238,255,0.53)] content-stretch flex flex-col gap-[5px] items-center justify-center overflow-clip pr-[10px] pt-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="731:324">
+          <div className="content-stretch flex items-center justify-between overflow-clip px-[10px] relative shrink-0 w-full" data-node-id="731:325">
+            <div className="relative shrink-0 size-[20px]" data-node-id="731:326">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame570} />
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic overflow-clip px-[10px] relative" data-node-id="731:328">
+              <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[#6e63ff] text-[8px] whitespace-nowrap" data-node-id="731:329">
+                조급한 마음을 조심하세요
+              </p>
+              <p className="font-['Pretendard:Regular'] min-w-full relative shrink-0 text-[#555] text-[6px] w-[min-content]" data-node-id="731:330">
+                주변과 비교하기보다 내 속도를 지키면 생각보다 일이 잘 풀릴 거예요.
+              </p>
+            </div>
+          </div>
+          <div className="content-stretch flex flex-col items-center pl-[10px] relative shrink-0" data-node-id="731:331">
+            <div className="flex items-center justify-center relative shrink-0" data-node-id="731:332">
+              <div className="-scale-y-100 flex-none">
+                <div className="bg-[#eceaf5] h-px relative w-[287px]" />
+              </div>
+            </div>
+          </div>
+          <div className="content-stretch flex items-center justify-between overflow-clip pb-[10px] px-[10px] relative shrink-0 w-full" data-node-id="731:333">
+            <div className="relative shrink-0 size-[20px]" data-node-id="731:334">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame571} />
+            </div>
+            <div className="[word-break:break-word] content-stretch flex flex-[1_0_0] flex-col gap-[2px] items-start leading-[normal] min-w-px not-italic overflow-clip px-[10px] relative" data-node-id="731:336">
+              <p className="font-['Pretendard:SemiBold'] relative shrink-0 text-[#6e63ff] text-[8px] whitespace-nowrap" data-node-id="731:337">
+                행운의 아이템 · 따뜻한 음료
+              </p>
+              <p className="font-['Pretendard:Regular'] min-w-full relative shrink-0 text-[#555] text-[6px] w-[min-content]" data-node-id="731:338">
+                잠깐의 여유가 복잡한 마음을 정리해줄 거예요.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## ConfigAndData-Line-Don't remove!
+**Node ID:** 557:1001
+
+{"metadataVersion":2,"chartTypeId":"tab2","chartData":\[\[51,47,55,42\],\[22,25,21,31\],\[14,13,12,17\]\],"dimensionA":\["4/10","4/11","4/12","4/13"\],"dimensionB":\["불안","기대","설렘"\],"chartConfig":{"quickPresetLine":{"nodeSizeLine":9,"lineWidth":3.5,"shadowLevel":"none","areaFillOpacity":30,"areaFillEndOpacity":0,"fixedScaleMinLine":0,"fixedScaleMaxLine":100,"fixedScaleStepLine":2,"dataLabelSizeLine":10,"darkModeChart":false,"stackOnLine":false,"NodeStyle":"EllipseLine","curveCheckbox":false,"areaFillMode":"none","legendsOnLine":true,"legendsPositionLine":"Right","xLinesLine":true,"xLinesStyleLine":"dashed","yLinesLine":true,"yLinesStyleLine":"dashed","xAxisLongTextSkewLine":false,"xAxisLongTextModeLine":"wrap","yAxisOptionLine":"yAxisLeft","followValueLine":false,"scaleRangeModeLine":"custom","unitInput":"%","dataLabelOnLine":false}},"unitValue":"%","selectedPaletteName":"DefaultPalette"}
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.
