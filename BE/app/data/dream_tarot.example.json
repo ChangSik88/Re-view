@@ -1,0 +1,3006 @@
+{
+  "version": 1,
+  "type": "앱 자체 해석 초안",
+  "cards": [
+    {
+      "keyword": "뱀",
+      "category": "동물",
+      "card_title": "변화의 문",
+      "advice": "오늘은 서두르지 말고 바꾸고 싶은 것 한 가지를 적어 보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "익숙한 것을 벗어나 새롭게 성장할 기회가 다가온다."
+    },
+    {
+      "keyword": "돼지",
+      "category": "동물",
+      "card_title": "풍요의 씨앗",
+      "advice": "오늘은 가진 자원을 살피고 꼭 필요한 곳에만 써 보세요.",
+      "source": null,
+      "positive_index": 80,
+      "negative_index": 20,
+      "positive_interpretation": "노력해 온 일이 결실을 맺거나 작은 기쁨을 발견할 수 있다."
+    },
+    {
+      "keyword": "이빨",
+      "category": "신체·생리",
+      "card_title": "흔들리는 자신감",
+      "advice": "오늘은 걱정을 사실과 추측으로 나누어 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "오래 붙잡고 있던 걱정을 돌아보고 새 기준을 세울 기회다."
+    },
+    {
+      "keyword": "하늘",
+      "category": "자연·환경",
+      "card_title": "열린 가능성",
+      "advice": "오늘은 큰 목표를 작은 행동 하나로 바꾸어 보세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "시야가 넓어지고 새로운 목표를 그릴 여유가 생긴다."
+    },
+    {
+      "keyword": "물",
+      "category": "자연·환경",
+      "card_title": "마음의 흐름",
+      "advice": "오늘은 지금 느끼는 감정에 이름을 붙여 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "감정을 자연스럽게 받아들이며 마음을 정리할 수 있다."
+    },
+    {
+      "keyword": "쫓기다",
+      "category": "행동·상황",
+      "card_title": "뒤따르는 그림자",
+      "advice": "오늘은 가장 마음에 걸리는 일 하나를 작게 나누어 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "피해 온 문제를 알아차리고 마주할 준비가 시작된다."
+    },
+    {
+      "keyword": "떨어지다",
+      "category": "행동·상황",
+      "card_title": "흔들리는 발판",
+      "advice": "오늘은 통제할 수 있는 일 한 가지에 집중해 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "기존 방식에서 벗어나 새 균형을 찾을 계기다."
+    },
+    {
+      "keyword": "날다",
+      "category": "행동·상황",
+      "card_title": "가벼운 날개",
+      "advice": "오늘은 시도해 보고 싶은 일을 작은 규모로 시작해 보세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "익숙한 한계를 넘어 더 넓은 가능성을 상상한다."
+    },
+    {
+      "keyword": "시험",
+      "category": "행동·상황",
+      "card_title": "평가의 거울",
+      "advice": "오늘은 결과 대신 준비한 과정 하나를 인정해 주세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "준비해 온 것을 점검하고 실력을 확인할 기회다."
+    },
+    {
+      "keyword": "지각",
+      "category": "행동·상황",
+      "card_title": "빠르게 가는 시계",
+      "advice": "오늘은 꼭 해야 할 일 하나부터 먼저 처리해 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "중요한 일의 우선순위를 다시 정할 계기다."
+    },
+    {
+      "keyword": "길을 잃다",
+      "category": "행동·상황",
+      "card_title": "갈림길의 표지",
+      "advice": "오늘은 원하는 방향을 한 문장으로 적어 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "익숙한 길 밖에서 새로운 선택지를 발견할 수 있다."
+    },
+    {
+      "keyword": "학교",
+      "category": "장소·공간",
+      "card_title": "배움의 교실",
+      "advice": "오늘은 잘해야 한다는 생각보다 배울 점 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "새로운 기술이나 관점을 익힐 준비가 되어 있다."
+    },
+    {
+      "keyword": "집",
+      "category": "장소·공간",
+      "card_title": "마음의 거처",
+      "advice": "오늘은 나를 편안하게 하는 공간을 잠시 정돈해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "안정을 찾고 자신에게 필요한 공간을 돌본다."
+    },
+    {
+      "keyword": "가족",
+      "category": "인물·관계",
+      "card_title": "오래된 연결",
+      "advice": "오늘은 고마움이나 필요한 거리를 솔직하게 표현해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "가까운 관계에서 지지와 소속감을 느낄 수 있다."
+    },
+    {
+      "keyword": "친구",
+      "category": "인물·관계",
+      "card_title": "나란한 길",
+      "advice": "오늘은 떠오르는 친구에게 가벼운 안부를 전해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "믿을 만한 관계가 새로운 활력을 준다."
+    },
+    {
+      "keyword": "옛 연인",
+      "category": "인물·관계",
+      "card_title": "지난 계절",
+      "advice": "오늘은 그 사람보다 그때의 내 감정에 주목해 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "과거의 경험을 돌아보며 지금 원하는 관계를 선명히 한다."
+    },
+    {
+      "keyword": "낯선 사람",
+      "category": "인물·관계",
+      "card_title": "이름 없는 방문자",
+      "advice": "오늘은 낯선 상황에서 느낀 첫 감정을 살펴보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "아직 몰랐던 자신의 모습이나 가능성을 발견한다."
+    },
+    {
+      "keyword": "죽음",
+      "category": "삶의 변화",
+      "card_title": "끝과 시작",
+      "advice": "오늘은 내려놓고 싶은 습관 하나를 생각해 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "한 단계가 끝나고 새로운 흐름을 맞을 준비를 한다."
+    },
+    {
+      "keyword": "아기",
+      "category": "인물·관계",
+      "card_title": "작은 시작",
+      "advice": "오늘은 막 시작한 일을 작은 단계로 돌보아 주세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "새로운 생각이나 관계를 조심스럽게 키워 갈 수 있다."
+    },
+    {
+      "keyword": "임신",
+      "category": "삶의 변화",
+      "card_title": "자라는 가능성",
+      "advice": "오늘은 준비 중인 일에 필요한 도움 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "오래 품어 온 계획이 서서히 모습을 갖춰 간다."
+    },
+    {
+      "keyword": "결혼",
+      "category": "삶의 변화",
+      "card_title": "함께 맺는 약속",
+      "advice": "오늘은 함께하고 싶은 일과 지키고 싶은 경계를 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "관계나 계획에 더 깊이 참여할 준비가 된다."
+    },
+    {
+      "keyword": "이별",
+      "category": "삶의 변화",
+      "card_title": "놓아주는 손",
+      "advice": "오늘은 아쉬운 마음을 부정하지 말고 잠시 기록해 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "끝난 관계나 상황을 정리하며 자신에게 돌아온다."
+    },
+    {
+      "keyword": "싸움",
+      "category": "행동·상황",
+      "card_title": "부딪힌 두 마음",
+      "advice": "오늘은 상대를 판단하기 전에 내가 원하는 것을 말해 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "숨겨 둔 생각을 알아차리고 필요한 경계를 세운다."
+    },
+    {
+      "keyword": "사고",
+      "category": "행동·상황",
+      "card_title": "멈춤의 신호",
+      "advice": "오늘은 일정에 짧은 여유 시간을 남겨 보세요.",
+      "source": null,
+      "positive_index": 30,
+      "negative_index": 70,
+      "positive_interpretation": "속도를 늦추고 놓친 부분을 점검할 기회다."
+    },
+    {
+      "keyword": "불",
+      "category": "자연·환경",
+      "card_title": "깨어나는 불씨",
+      "advice": "오늘은 에너지를 가장 중요한 일 하나에 써 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "열정이 살아나고 변화를 시작할 힘이 생긴다."
+    },
+    {
+      "keyword": "비",
+      "category": "자연·환경",
+      "card_title": "내리는 마음",
+      "advice": "오늘은 마음을 환기할 짧은 휴식을 마련해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "쌓인 감정을 흘려보내고 한결 가벼워질 수 있다."
+    },
+    {
+      "keyword": "바다",
+      "category": "자연·환경",
+      "card_title": "깊은 수평선",
+      "advice": "오늘은 먼 결과보다 눈앞의 다음 걸음을 정해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "넓은 가능성과 아직 말하지 못한 마음을 마주한다."
+    },
+    {
+      "keyword": "홍수",
+      "category": "자연·환경",
+      "card_title": "넘치는 강물",
+      "advice": "오늘은 혼자 감당하지 않아도 되는 일을 골라 보세요.",
+      "source": null,
+      "positive_index": 30,
+      "negative_index": 70,
+      "positive_interpretation": "눌러 둔 감정을 알아차리고 도움을 요청할 계기다."
+    },
+    {
+      "keyword": "산",
+      "category": "자연·환경",
+      "card_title": "높은 봉우리",
+      "advice": "오늘은 정상보다 다음 발걸음 하나를 생각해 보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "시간이 필요한 목표를 향해 꾸준히 나아간다."
+    },
+    {
+      "keyword": "용",
+      "category": "동물",
+      "card_title": "잠든 힘의 각성",
+      "advice": "오늘은 보여 주고 싶은 강점 하나를 작은 일에 써 보세요.",
+      "source": null,
+      "positive_index": 85,
+      "negative_index": 15,
+      "positive_interpretation": "자신의 능력을 더 크게 펼칠 가능성을 발견한다."
+    },
+    {
+      "keyword": "꽃",
+      "category": "자연·환경",
+      "card_title": "피어나는 때",
+      "advice": "오늘은 이미 자라고 있는 변화를 하나 찾아보세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "돌봐 온 관계나 일이 서서히 빛을 낸다."
+    },
+    {
+      "keyword": "나무",
+      "category": "자연·환경",
+      "card_title": "깊은 뿌리",
+      "advice": "오늘은 지킬 것 하나와 바꿀 것 하나를 정해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "꾸준한 노력이 나를 지탱하는 기반이 된다."
+    },
+    {
+      "keyword": "개",
+      "category": "동물",
+      "card_title": "곁을 지키는 존재",
+      "advice": "오늘은 믿을 만한 사람과 편하게 대화해 보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "신뢰와 우정을 통해 든든함을 느낀다."
+    },
+    {
+      "keyword": "고양이",
+      "category": "동물",
+      "card_title": "자유로운 시선",
+      "advice": "오늘은 필요한 공간과 마음을 부드럽게 말해 보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "자신의 감각을 믿고 원하는 거리를 조절한다."
+    },
+    {
+      "keyword": "새",
+      "category": "동물",
+      "card_title": "멀리서 온 소식",
+      "advice": "오늘은 떠오른 생각을 하나 기록해 두세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "새로운 관점이나 반가운 소식에 마음이 열린다."
+    },
+    {
+      "keyword": "벌레",
+      "category": "동물",
+      "card_title": "작은 불편의 신호",
+      "advice": "오늘은 신경 쓰이던 작은 일 하나를 처리해 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "사소하지만 거슬리던 문제를 발견하고 정리한다."
+    },
+    {
+      "keyword": "귀신",
+      "category": "초자연",
+      "card_title": "이름 붙이지 못한 두려움",
+      "advice": "오늘은 두려운 생각의 근거를 차분히 확인해 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "막연한 불안을 구체적인 말로 표현할 계기다."
+    },
+    {
+      "keyword": "피",
+      "category": "신체·생리",
+      "card_title": "강렬한 흔적",
+      "advice": "오늘은 무리하지 말고 회복에 필요한 시간을 주세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "중요한 감정이나 관계를 더 또렷이 알아차린다."
+    },
+    {
+      "keyword": "옷",
+      "category": "사물·재물",
+      "card_title": "보여 주는 모습",
+      "advice": "오늘은 내가 편안한 선택을 하나 해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "새로운 역할에 맞는 자신만의 표현을 찾는다."
+    },
+    {
+      "keyword": "돈",
+      "category": "사물·재물",
+      "card_title": "가치의 저울",
+      "advice": "오늘은 돈뿐 아니라 시간과 에너지도 함께 계산해 보세요.",
+      "source": null,
+      "positive_index": 85,
+      "negative_index": 15,
+      "positive_interpretation": "자신에게 중요한 자원과 기회를 다시 살핀다."
+    },
+    {
+      "keyword": "음식",
+      "category": "사물·재물",
+      "card_title": "채워지는 그릇",
+      "advice": "오늘은 무엇이 나를 진짜로 쉬게 하는지 살펴보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "필요한 위안과 즐거움을 받아들일 여유가 생긴다."
+    },
+    {
+      "keyword": "자동차",
+      "category": "사물·재물",
+      "card_title": "움직이는 방향",
+      "advice": "오늘은 내 선택으로 바꿀 수 있는 일 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "내가 원하는 속도로 삶의 방향을 잡아 간다."
+    },
+    {
+      "keyword": "문",
+      "category": "장소·공간",
+      "card_title": "새로운 입구",
+      "advice": "오늘은 관심 있는 기회에 작은 질문 하나를 던져 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "닫혀 있던 선택지가 열릴 가능성을 본다."
+    },
+    {
+      "keyword": "계단",
+      "category": "장소·공간",
+      "card_title": "한 칸의 전진",
+      "advice": "오늘은 어제보다 나아진 점 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "조금씩 쌓은 노력이 분명한 진전으로 이어진다."
+    },
+    {
+      "keyword": "거울",
+      "category": "사물·재물",
+      "card_title": "마주한 얼굴",
+      "advice": "오늘은 나에 대해 고마운 점 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "스스로의 마음과 변화를 솔직하게 바라본다."
+    },
+    {
+      "keyword": "화장실",
+      "category": "장소·공간",
+      "card_title": "비워 내는 공간",
+      "advice": "오늘은 미뤄 둔 휴식이나 필요한 것을 먼저 챙겨 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "쌓인 긴장이나 부담을 내려놓을 틈이 필요하다."
+    },
+    {
+      "keyword": "똥",
+      "category": "신체·생리",
+      "card_title": "남겨진 것의 가치",
+      "advice": "오늘은 미뤄 둔 정리 하나를 가볍게 끝내 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "불편했던 경험에서도 쓸모 있는 것을 발견할 수 있다."
+    },
+    {
+      "keyword": "조상",
+      "category": "인물·관계",
+      "card_title": "이어지는 기억",
+      "advice": "오늘은 이어받고 싶은 가치와 내려놓을 기대를 구분해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "오래된 가르침이나 가족의 지지에서 힘을 얻는다."
+    },
+    {
+      "keyword": "호랑이",
+      "category": "동물",
+      "card_title": "잠재된 용기",
+      "advice": "오늘은 내 의견을 한 번 분명하게 말해 보세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "어려운 상황에서도 힘 있게 자신을 표현한다."
+    },
+    {
+      "keyword": "몸이 움직이지 않다",
+      "category": "행동·상황",
+      "card_title": "잠시 멈춘 발걸음",
+      "advice": "오늘은 혼자 버티기보다 작은 도움 하나를 요청해 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "서두르기 전에 지금 필요한 도움을 알아차린다."
+    },
+    {
+      "keyword": "말",
+      "category": "동물",
+      "card_title": "달리는 선택",
+      "advice": "오늘 밀고 싶은 일 하나의 첫 단계를 정해 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "마음속 추진력이 다시 살아날 수 있다."
+    },
+    {
+      "keyword": "소",
+      "category": "동물",
+      "card_title": "묵묵한 힘",
+      "advice": "작게 끝낸 일도 기록해 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "꾸준히 쌓아 온 노력을 돌아볼 때다."
+    },
+    {
+      "keyword": "양",
+      "category": "동물",
+      "card_title": "부드러운 무리",
+      "advice": "편한 사람과 짧게 안부를 나눠 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "안전한 관계 안에서 마음을 쉬게 할 수 있다."
+    },
+    {
+      "keyword": "염소",
+      "category": "동물",
+      "card_title": "가파른 발걸음",
+      "advice": "큰 목표를 오늘의 한 단계로 나눠 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "어려운 목표에도 차근차근 접근할 힘이 있다."
+    },
+    {
+      "keyword": "닭",
+      "category": "동물",
+      "card_title": "새벽의 알림",
+      "advice": "오늘 먼저 처리할 일을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "미뤄 둔 일을 시작할 계기가 보일 수 있다."
+    },
+    {
+      "keyword": "오리",
+      "category": "동물",
+      "card_title": "물 위의 균형",
+      "advice": "일정 사이에 짧은 쉼을 넣어 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "겉의 분주함 속에서도 자기 속도를 찾는다."
+    },
+    {
+      "keyword": "거위",
+      "category": "동물",
+      "card_title": "경계의 소리",
+      "advice": "불편했던 요청 하나에 답을 정해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "나에게 필요한 경계를 알아차릴 수 있다."
+    },
+    {
+      "keyword": "비둘기",
+      "category": "동물",
+      "card_title": "돌아오는 소식",
+      "advice": "전하고 싶은 말을 짧게 정리해 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "소통하고 싶은 마음이 선명해질 수 있다."
+    },
+    {
+      "keyword": "독수리",
+      "category": "동물",
+      "card_title": "높은 시야",
+      "advice": "걱정을 한 걸음 떨어져 적어 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "당장의 문제를 멀리서 볼 여지가 생긴다."
+    },
+    {
+      "keyword": "까마귀",
+      "category": "동물",
+      "card_title": "낯선 예감",
+      "advice": "확인되지 않은 걱정은 사실부터 점검하세요.",
+      "source": null,
+      "positive_index": 44,
+      "negative_index": 56,
+      "positive_interpretation": "불확실한 상황을 꼼꼼히 살필 준비가 된다."
+    },
+    {
+      "keyword": "까치",
+      "category": "동물",
+      "card_title": "반가운 방문",
+      "advice": "오래 연락하지 못한 사람을 생각해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "기다리던 연결을 다시 떠올릴 수 있다."
+    },
+    {
+      "keyword": "참새",
+      "category": "동물",
+      "card_title": "작은 활기",
+      "advice": "오늘 좋았던 순간을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "평범한 하루에서 가벼운 기쁨을 발견한다."
+    },
+    {
+      "keyword": "올빼미",
+      "category": "동물",
+      "card_title": "밤의 관찰자",
+      "advice": "잠들기 전 떠오른 생각을 적어 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "조용한 시간에 생각을 정리할 수 있다."
+    },
+    {
+      "keyword": "여우",
+      "category": "동물",
+      "card_title": "영리한 우회",
+      "advice": "익숙한 방법 말고 다른 선택지를 하나 찾아보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "문제를 새로운 방식으로 풀 실마리가 보인다."
+    },
+    {
+      "keyword": "늑대",
+      "category": "동물",
+      "card_title": "무리의 거리",
+      "advice": "함께할 일과 혼자 할 일을 구분해 보세요.",
+      "source": null,
+      "positive_index": 52,
+      "negative_index": 48,
+      "positive_interpretation": "소속감과 독립 사이에서 필요한 거리를 찾는다."
+    },
+    {
+      "keyword": "곰",
+      "category": "동물",
+      "card_title": "잠든 에너지",
+      "advice": "회복에 필요한 시간을 일정에 남겨 두세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "충분히 쉬면 다시 움직일 힘을 얻는다."
+    },
+    {
+      "keyword": "사자",
+      "category": "동물",
+      "card_title": "드러나는 용기",
+      "advice": "오늘 한 번은 의견을 분명히 말해 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "자신의 의견을 표현할 자신감이 자란다."
+    },
+    {
+      "keyword": "사슴",
+      "category": "동물",
+      "card_title": "섬세한 발걸음",
+      "advice": "서두르지 말고 다음 걸음을 확인해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "변화를 조심스럽게 살피는 감각이 살아 있다."
+    },
+    {
+      "keyword": "토끼",
+      "category": "동물",
+      "card_title": "빠른 마음",
+      "advice": "급한 일과 중요한 일을 나눠 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "기회를 알아채는 민첩함을 활용할 수 있다."
+    },
+    {
+      "keyword": "쥐",
+      "category": "동물",
+      "card_title": "작은 단서",
+      "advice": "놓친 세부 사항 하나를 다시 확인해 보세요.",
+      "source": null,
+      "positive_index": 54,
+      "negative_index": 46,
+      "positive_interpretation": "사소한 신호에서 해결의 힌트를 찾는다."
+    },
+    {
+      "keyword": "다람쥐",
+      "category": "동물",
+      "card_title": "모아 둔 씨앗",
+      "advice": "지금 쓸 수 있는 자원을 정리해 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "작은 준비가 안정감으로 이어질 수 있다."
+    },
+    {
+      "keyword": "원숭이",
+      "category": "동물",
+      "card_title": "장난스러운 전환",
+      "advice": "문제를 가볍게 바라볼 방법을 찾아보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "유연한 생각이 막힌 분위기를 바꾼다."
+    },
+    {
+      "keyword": "거북이",
+      "category": "동물",
+      "card_title": "느린 확신",
+      "advice": "남과 비교하지 않고 오늘의 진전을 적어 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "자기 속도를 지킬 때 꾸준히 나아간다."
+    },
+    {
+      "keyword": "물고기",
+      "category": "동물",
+      "card_title": "흐름을 타는 마음",
+      "advice": "변화 속에서 편안한 지점을 찾아보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "새로운 환경에 적응할 여지가 있다."
+    },
+    {
+      "keyword": "고래",
+      "category": "동물",
+      "card_title": "깊은 울림",
+      "advice": "마음에 오래 남은 감정을 말로 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "큰 감정을 차분히 들여다볼 수 있다."
+    },
+    {
+      "keyword": "돌고래",
+      "category": "동물",
+      "card_title": "함께 뛰는 파도",
+      "advice": "도움을 주고받을 사람을 떠올려 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "협력과 대화에서 활력을 얻을 수 있다."
+    },
+    {
+      "keyword": "상어",
+      "category": "동물",
+      "card_title": "날카로운 긴장",
+      "advice": "걱정의 원인을 구체적으로 한 줄로 적어 보세요.",
+      "source": null,
+      "positive_index": 38,
+      "negative_index": 62,
+      "positive_interpretation": "부담스러운 상황의 핵심을 알아차린다."
+    },
+    {
+      "keyword": "문어",
+      "category": "동물",
+      "card_title": "여러 갈래의 손",
+      "advice": "해야 할 일을 우선순위대로 세 개만 남겨 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "동시에 맡은 일을 조율할 능력을 돌아본다."
+    },
+    {
+      "keyword": "나비",
+      "category": "동물",
+      "card_title": "가벼운 변신",
+      "advice": "새롭게 시도할 일을 하나 정해 보세요.",
+      "source": null,
+      "positive_index": 76,
+      "negative_index": 24,
+      "positive_interpretation": "작은 변화가 새로운 모습을 열 수 있다."
+    },
+    {
+      "keyword": "개미",
+      "category": "동물",
+      "card_title": "모이는 노력",
+      "advice": "오늘의 작은 성취를 체크해 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "작은 반복이 눈에 보이는 성과로 쌓인다."
+    },
+    {
+      "keyword": "천사",
+      "category": "초자연",
+      "card_title": "다정한 안내",
+      "advice": "믿을 만한 사람에게 마음을 전해 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "위로와 지지가 필요하다는 마음을 알아차린다."
+    },
+    {
+      "keyword": "악마",
+      "category": "초자연",
+      "card_title": "숨긴 유혹",
+      "advice": "즉각적인 선택 앞에서 잠깐 멈춰 보세요.",
+      "source": null,
+      "positive_index": 35,
+      "negative_index": 65,
+      "positive_interpretation": "내 선택을 흔드는 욕구를 분명히 볼 수 있다."
+    },
+    {
+      "keyword": "유령",
+      "category": "초자연",
+      "card_title": "남은 기억",
+      "advice": "자꾸 떠오르는 장면을 짧게 기록해 보세요.",
+      "source": null,
+      "positive_index": 43,
+      "negative_index": 57,
+      "positive_interpretation": "지나간 경험의 영향을 차분히 살필 수 있다."
+    },
+    {
+      "keyword": "마법",
+      "category": "초자연",
+      "card_title": "뜻밖의 가능성",
+      "advice": "해보고 싶던 방법을 작은 규모로 시험해 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "고정된 생각 밖의 해법을 상상할 수 있다."
+    },
+    {
+      "keyword": "괴물",
+      "category": "초자연",
+      "card_title": "커진 두려움",
+      "advice": "두려운 점을 사실과 상상으로 나눠 보세요.",
+      "source": null,
+      "positive_index": 37,
+      "negative_index": 63,
+      "positive_interpretation": "막연한 걱정의 형태를 구체화할 수 있다."
+    },
+    {
+      "keyword": "머리카락",
+      "category": "신체·생리",
+      "card_title": "자라는 생각",
+      "advice": "요즘 달라진 생각 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "자기 이미지와 변화에 관심이 커진다."
+    },
+    {
+      "keyword": "손",
+      "category": "신체·생리",
+      "card_title": "닿는 선택",
+      "advice": "바로 실행할 수 있는 행동 하나를 해보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "스스로 움직여 바꿀 수 있는 일이 보인다."
+    },
+    {
+      "keyword": "발",
+      "category": "신체·생리",
+      "card_title": "다음 걸음",
+      "advice": "목적지보다 다음 한 걸음을 정해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "지금의 방향과 속도를 다시 정할 수 있다."
+    },
+    {
+      "keyword": "눈",
+      "category": "신체·생리",
+      "card_title": "새로운 시선",
+      "advice": "한 가지 일을 다른 입장에서 생각해 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "익숙한 상황을 다른 관점에서 볼 수 있다."
+    },
+    {
+      "keyword": "귀",
+      "category": "신체·생리",
+      "card_title": "들리는 마음",
+      "advice": "오늘은 상대의 말을 끝까지 들어 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "놓쳤던 말이나 감정을 다시 들을 수 있다."
+    },
+    {
+      "keyword": "코",
+      "category": "신체·생리",
+      "card_title": "낯선 기척",
+      "advice": "막연한 느낌을 구체적인 이유로 적어 보세요.",
+      "source": null,
+      "positive_index": 52,
+      "negative_index": 48,
+      "positive_interpretation": "작은 변화에 민감해진 마음을 살핀다."
+    },
+    {
+      "keyword": "입",
+      "category": "신체·생리",
+      "card_title": "꺼내는 말",
+      "advice": "전하고 싶은 말을 짧게 연습해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "말하지 못한 생각을 정리할 기회가 온다."
+    },
+    {
+      "keyword": "혀",
+      "category": "신체·생리",
+      "card_title": "말의 온도",
+      "advice": "중요한 말은 한 번 더 고르고 전해 보세요.",
+      "source": null,
+      "positive_index": 51,
+      "negative_index": 49,
+      "positive_interpretation": "표현 방식이 관계에 미치는 영향을 살핀다."
+    },
+    {
+      "keyword": "피부",
+      "category": "신체·생리",
+      "card_title": "나의 경계",
+      "advice": "불편한 접촉이나 요청에 경계를 표현해 보세요.",
+      "source": null,
+      "positive_index": 53,
+      "negative_index": 47,
+      "positive_interpretation": "가까워지고 싶은 거리와 지킬 거리를 알아차린다."
+    },
+    {
+      "keyword": "심장",
+      "category": "신체·생리",
+      "card_title": "빠른 박동",
+      "advice": "두근거림 뒤에 있는 감정의 이름을 붙여 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "강한 감정이 무엇을 말하는지 살펴본다."
+    },
+    {
+      "keyword": "배",
+      "category": "신체·생리",
+      "card_title": "속의 신호",
+      "advice": "오늘 식사와 휴식 상태를 함께 살펴보세요.",
+      "source": null,
+      "positive_index": 54,
+      "negative_index": 46,
+      "positive_interpretation": "몸과 마음의 필요를 돌볼 때다."
+    },
+    {
+      "keyword": "손톱",
+      "category": "신체·생리",
+      "card_title": "작은 방어",
+      "advice": "손에 힘이 들어갈 때 잠시 호흡해 보세요.",
+      "source": null,
+      "positive_index": 48,
+      "negative_index": 52,
+      "positive_interpretation": "사소한 긴장을 알아차리고 힘을 풀 수 있다."
+    },
+    {
+      "keyword": "뼈",
+      "category": "신체·생리",
+      "card_title": "단단한 중심",
+      "advice": "양보할 수 없는 기준 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "중요하게 지키는 원칙을 다시 확인한다."
+    },
+    {
+      "keyword": "몸살",
+      "category": "신체·생리",
+      "card_title": "쉬어 갈 신호",
+      "advice": "오늘 할 일을 줄이고 쉬는 시간을 확보하세요.",
+      "source": null,
+      "positive_index": 42,
+      "negative_index": 58,
+      "positive_interpretation": "지친 상태를 인정하고 회복을 우선할 수 있다."
+    },
+    {
+      "keyword": "열",
+      "category": "신체·생리",
+      "card_title": "뜨거운 신호",
+      "advice": "지금 내 속도를 늦출 방법을 찾아보세요.",
+      "source": null,
+      "positive_index": 46,
+      "negative_index": 54,
+      "positive_interpretation": "과한 긴장이나 열의를 조절할 계기가 된다."
+    },
+    {
+      "keyword": "태양",
+      "category": "자연·환경",
+      "card_title": "밝아지는 시야",
+      "advice": "오늘 가장 중요한 일을 밝은 시간에 시작해 보세요.",
+      "source": null,
+      "positive_index": 76,
+      "negative_index": 24,
+      "positive_interpretation": "분명해지는 목표를 향해 힘을 모을 수 있다."
+    },
+    {
+      "keyword": "달",
+      "category": "자연·환경",
+      "card_title": "조용한 빛",
+      "advice": "잠들기 전 마음에 남은 일을 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "혼자만의 시간에 감정을 정돈할 수 있다."
+    },
+    {
+      "keyword": "별",
+      "category": "자연·환경",
+      "card_title": "먼 목표의 반짝임",
+      "advice": "먼 목표에 가까워지는 작은 행동을 정해 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "오래 품은 바람을 다시 떠올릴 수 있다."
+    },
+    {
+      "keyword": "구름",
+      "category": "자연·환경",
+      "card_title": "지나는 생각",
+      "advice": "지금 확실한 것과 불확실한 것을 구분해 보세요.",
+      "source": null,
+      "positive_index": 53,
+      "negative_index": 47,
+      "positive_interpretation": "흐릿했던 감정도 시간이 지나며 바뀔 수 있다."
+    },
+    {
+      "keyword": "무지개",
+      "category": "자연·환경",
+      "card_title": "비 뒤의 색",
+      "advice": "최근 나아진 점 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 78,
+      "negative_index": 22,
+      "positive_interpretation": "어려웠던 시간 뒤의 희망을 상상한다."
+    },
+    {
+      "keyword": "눈보라",
+      "category": "자연·환경",
+      "card_title": "하얀 소용돌이",
+      "advice": "급하지 않은 일은 잠시 미뤄 보세요.",
+      "source": null,
+      "positive_index": 38,
+      "negative_index": 62,
+      "positive_interpretation": "복잡한 상황에서 우선순위를 다시 세운다."
+    },
+    {
+      "keyword": "번개",
+      "category": "자연·환경",
+      "card_title": "순간의 깨달음",
+      "advice": "번뜩인 생각을 잊기 전에 적어 두세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "갑자기 떠오른 생각에서 단서를 얻는다."
+    },
+    {
+      "keyword": "천둥",
+      "category": "자연·환경",
+      "card_title": "크게 울리는 마음",
+      "advice": "마음에 걸리는 일을 안전하게 말해 보세요.",
+      "source": null,
+      "positive_index": 43,
+      "negative_index": 57,
+      "positive_interpretation": "미뤄 둔 감정의 크기를 알아차린다."
+    },
+    {
+      "keyword": "바람",
+      "category": "자연·환경",
+      "card_title": "바뀌는 공기",
+      "advice": "오늘 바꿀 수 있는 작은 습관을 골라 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "익숙한 흐름을 바꾸고 싶은 마음이 움직인다."
+    },
+    {
+      "keyword": "폭풍",
+      "category": "자연·환경",
+      "card_title": "거센 변화",
+      "advice": "지금 통제 가능한 일 하나에 집중하세요.",
+      "source": null,
+      "positive_index": 36,
+      "negative_index": 64,
+      "positive_interpretation": "혼란 속에서도 지킬 중심을 찾을 수 있다."
+    },
+    {
+      "keyword": "안개",
+      "category": "자연·환경",
+      "card_title": "흐린 길",
+      "advice": "결정을 서두르지 말고 필요한 정보를 모아 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "답이 보이지 않아도 천천히 방향을 찾는다."
+    },
+    {
+      "keyword": "이슬",
+      "category": "자연·환경",
+      "card_title": "작은 회복",
+      "advice": "아침에 자신을 위한 시간을 잠깐 남겨 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "사소한 돌봄이 마음을 가볍게 할 수 있다."
+    },
+    {
+      "keyword": "서리",
+      "category": "자연·환경",
+      "card_title": "차가운 경계",
+      "advice": "서운했던 일을 사실과 감정으로 나눠 적으세요.",
+      "source": null,
+      "positive_index": 48,
+      "negative_index": 52,
+      "positive_interpretation": "굳어 있던 마음의 이유를 살펴본다."
+    },
+    {
+      "keyword": "얼음",
+      "category": "자연·환경",
+      "card_title": "멈춘 흐름",
+      "advice": "억지로 움직이기보다 준비할 것을 찾아보세요.",
+      "source": null,
+      "positive_index": 49,
+      "negative_index": 51,
+      "positive_interpretation": "잠시 멈춘 관계나 계획을 다른 눈으로 본다."
+    },
+    {
+      "keyword": "강",
+      "category": "자연·환경",
+      "card_title": "이어지는 길",
+      "advice": "지금까지 해온 일을 세 가지 적어 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "계속 흘러온 경험이 지금의 선택을 돕는다."
+    },
+    {
+      "keyword": "호수",
+      "category": "자연·환경",
+      "card_title": "고요한 표면",
+      "advice": "휴식 중 떠오르는 생각을 기록해 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "조용한 시간을 통해 마음을 비춰 볼 수 있다."
+    },
+    {
+      "keyword": "폭포",
+      "category": "자연·환경",
+      "card_title": "쏟아지는 감정",
+      "advice": "말이나 글로 마음을 안전하게 표현해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "쌓인 감정을 흘려보낼 계기를 찾는다."
+    },
+    {
+      "keyword": "샘",
+      "category": "자연·환경",
+      "card_title": "다시 솟는 힘",
+      "advice": "즐거웠던 활동 하나를 다시 해보세요.",
+      "source": null,
+      "positive_index": 71,
+      "negative_index": 29,
+      "positive_interpretation": "잊고 있던 관심과 활력을 되찾을 수 있다."
+    },
+    {
+      "keyword": "우물",
+      "category": "자연·환경",
+      "card_title": "깊은 생각",
+      "advice": "반복해서 떠오르는 질문을 적어 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "마음 깊은 곳의 바람을 천천히 살핀다."
+    },
+    {
+      "keyword": "사막",
+      "category": "자연·환경",
+      "card_title": "넓은 빈자리",
+      "advice": "지금 필요한 도움을 하나 요청해 보세요.",
+      "source": null,
+      "positive_index": 42,
+      "negative_index": 58,
+      "positive_interpretation": "부족하게 느끼는 것이 무엇인지 알아차린다."
+    },
+    {
+      "keyword": "숲",
+      "category": "자연·환경",
+      "card_title": "여러 갈래의 길",
+      "advice": "나에게 중요한 기준 두 가지를 고르세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "선택지가 많을 때 자기 기준을 세울 수 있다."
+    },
+    {
+      "keyword": "들판",
+      "category": "자연·환경",
+      "card_title": "열린 자리",
+      "advice": "작게 시작하고 싶은 일을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "새로운 시도에 마음을 열 여유가 생긴다."
+    },
+    {
+      "keyword": "섬",
+      "category": "자연·환경",
+      "card_title": "혼자의 공간",
+      "advice": "연락을 잠시 내려놓고 자신을 돌봐 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "혼자 쉬는 시간의 가치를 확인할 수 있다."
+    },
+    {
+      "keyword": "절벽",
+      "category": "자연·환경",
+      "card_title": "끝의 가장자리",
+      "advice": "결정 전 도움을 받을 사람을 정해 보세요.",
+      "source": null,
+      "positive_index": 39,
+      "negative_index": 61,
+      "positive_interpretation": "큰 결정을 앞둔 긴장과 용기를 함께 본다."
+    },
+    {
+      "keyword": "동굴",
+      "category": "자연·환경",
+      "card_title": "안쪽의 시간",
+      "advice": "조용히 있을 시간을 짧게 마련해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "바깥의 소음에서 벗어나 생각을 정리한다."
+    },
+    {
+      "keyword": "화산",
+      "category": "자연·환경",
+      "card_title": "눌린 에너지",
+      "advice": "화가 난 이유를 행동 전에 글로 적어 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "오래 쌓인 감정을 알아차릴 수 있다."
+    },
+    {
+      "keyword": "지진",
+      "category": "자연·환경",
+      "card_title": "흔들린 바닥",
+      "advice": "지금 믿고 의지할 수 있는 것을 확인하세요.",
+      "source": null,
+      "positive_index": 33,
+      "negative_index": 67,
+      "positive_interpretation": "안정감을 다시 만드는 방법을 찾는다."
+    },
+    {
+      "keyword": "파도",
+      "category": "자연·환경",
+      "card_title": "오르내리는 마음",
+      "advice": "하루 중 마음이 달라진 순간을 적어 보세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "변하는 감정을 자연스럽게 받아들일 수 있다."
+    },
+    {
+      "keyword": "갯벌",
+      "category": "자연·환경",
+      "card_title": "천천한 발견",
+      "advice": "결과보다 살펴보는 시간을 허락해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "서두르지 않을 때 새로운 가능성을 본다."
+    },
+    {
+      "keyword": "바위",
+      "category": "자연·환경",
+      "card_title": "지키는 자리",
+      "advice": "어려울 때 도움이 된 내 강점을 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "흔들리지 않는 강점을 되새길 수 있다."
+    },
+    {
+      "keyword": "흙",
+      "category": "자연·환경",
+      "card_title": "기초를 다지는 손",
+      "advice": "시작 전에 필요한 기본을 하나 챙겨 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "새로운 일을 키울 토대를 마련한다."
+    },
+    {
+      "keyword": "모래",
+      "category": "자연·환경",
+      "card_title": "손가락 사이의 시간",
+      "advice": "지나간 일보다 지금 할 일을 선택해 보세요.",
+      "source": null,
+      "positive_index": 50,
+      "negative_index": 50,
+      "positive_interpretation": "붙잡기 어려운 일을 받아들이는 연습을 한다."
+    },
+    {
+      "keyword": "씨앗",
+      "category": "자연·환경",
+      "card_title": "작은 가능성",
+      "advice": "새 아이디어에 첫 번째 시간을 써 보세요.",
+      "source": null,
+      "positive_index": 73,
+      "negative_index": 27,
+      "positive_interpretation": "아직 작지만 자랄 수 있는 생각을 품는다."
+    },
+    {
+      "keyword": "잎",
+      "category": "자연·환경",
+      "card_title": "계절의 신호",
+      "advice": "요즘 달라진 생활 패턴을 살펴보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "작은 변화를 알아차리고 리듬을 조정한다."
+    },
+    {
+      "keyword": "열매",
+      "category": "자연·환경",
+      "card_title": "익어 가는 노력",
+      "advice": "이미 이룬 진전을 스스로 인정해 주세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "오래 쌓은 일이 어떤 결실을 맺는지 살핀다."
+    },
+    {
+      "keyword": "눈물",
+      "category": "신체·생리",
+      "card_title": "흘려보낸 마음",
+      "advice": "안전한 공간에서 마음을 털어놓으세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "참아 온 감정을 표현하며 가벼워질 수 있다."
+    },
+    {
+      "keyword": "땀",
+      "category": "신체·생리",
+      "card_title": "몸의 노력",
+      "advice": "오늘 애쓴 일을 한 가지 인정해 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "보이지 않던 수고를 스스로 알아줄 때다."
+    },
+    {
+      "keyword": "목소리",
+      "category": "신체·생리",
+      "card_title": "들리는 나",
+      "advice": "중요한 의견을 한 문장으로 말해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "자신의 생각을 드러낼 준비가 된다."
+    },
+    {
+      "keyword": "숨",
+      "category": "신체·생리",
+      "card_title": "한 번의 여유",
+      "advice": "잠깐 멈춰 천천히 호흡해 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "빨라진 마음을 잠시 쉬게 할 수 있다."
+    },
+    {
+      "keyword": "키",
+      "category": "신체·생리",
+      "card_title": "자라는 기준",
+      "advice": "예전의 나보다 달라진 점을 찾아보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "스스로의 변화를 비교 없이 바라본다."
+    },
+    {
+      "keyword": "졸업",
+      "category": "삶의 변화",
+      "card_title": "마치는 문장",
+      "advice": "배운 점 하나와 다음 목표 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 73,
+      "negative_index": 27,
+      "positive_interpretation": "끝낸 경험을 다음 단계의 자산으로 삼는다."
+    },
+    {
+      "keyword": "입학",
+      "category": "삶의 변화",
+      "card_title": "새 교실의 문",
+      "advice": "처음부터 완벽하려는 마음을 내려놓으세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "새로운 환경에 적응할 가능성을 본다."
+    },
+    {
+      "keyword": "취업",
+      "category": "삶의 변화",
+      "card_title": "새로운 역할",
+      "advice": "보여주고 싶은 강점 하나를 정리해 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "능력을 펼칠 자리를 기대하고 준비한다."
+    },
+    {
+      "keyword": "퇴사",
+      "category": "삶의 변화",
+      "card_title": "다음 장의 시작",
+      "advice": "떠나고 싶은 이유와 남고 싶은 이유를 적으세요.",
+      "source": null,
+      "positive_index": 51,
+      "negative_index": 49,
+      "positive_interpretation": "지금의 역할을 다시 고를 마음을 살핀다."
+    },
+    {
+      "keyword": "이사",
+      "category": "삶의 변화",
+      "card_title": "옮겨 가는 집",
+      "advice": "새 환경에서 필요한 안정 장치를 챙기세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "생활의 변화를 받아들일 준비를 한다."
+    },
+    {
+      "keyword": "여행",
+      "category": "삶의 변화",
+      "card_title": "떠나는 마음",
+      "advice": "가까운 곳에서 작은 새로움을 찾아보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "일상 밖의 관점이 새로운 활력을 준다."
+    },
+    {
+      "keyword": "귀국",
+      "category": "삶의 변화",
+      "card_title": "돌아온 자리",
+      "advice": "돌아와서 느낀 변화를 적어 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "달라진 자신과 익숙한 환경을 다시 만난다."
+    },
+    {
+      "keyword": "은퇴",
+      "category": "삶의 변화",
+      "card_title": "다른 시간표",
+      "advice": "지금 즐기고 싶은 시간을 하나 정해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "오래 맡은 역할 밖의 삶을 상상한다."
+    },
+    {
+      "keyword": "출산",
+      "category": "삶의 변화",
+      "card_title": "새 생명의 문",
+      "advice": "혼자 감당하지 않아도 되는 도움을 찾아보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "새로운 책임과 가능성을 함께 바라본다."
+    },
+    {
+      "keyword": "입대",
+      "category": "삶의 변화",
+      "card_title": "낯선 규칙",
+      "advice": "준비할 수 있는 것부터 차근차근 챙기세요.",
+      "source": null,
+      "positive_index": 49,
+      "negative_index": 51,
+      "positive_interpretation": "새로운 책임 앞의 긴장을 알아차린다."
+    },
+    {
+      "keyword": "달리다",
+      "category": "행동·상황",
+      "card_title": "앞으로의 박자",
+      "advice": "속도가 필요한 일과 쉬어야 할 일을 나눠 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "목표를 향한 에너지가 살아날 수 있다."
+    },
+    {
+      "keyword": "걷다",
+      "category": "행동·상황",
+      "card_title": "한 걸음의 리듬",
+      "advice": "오늘의 걸음을 한 가지 목표로 정해 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "급하지 않게 자기 방향을 확인한다."
+    },
+    {
+      "keyword": "숨다",
+      "category": "행동·상황",
+      "card_title": "잠시 가린 자리",
+      "advice": "피하고 싶은 일을 작은 질문으로 바꿔 보세요.",
+      "source": null,
+      "positive_index": 43,
+      "negative_index": 57,
+      "positive_interpretation": "부담에서 벗어나고 싶은 마음을 알아차린다."
+    },
+    {
+      "keyword": "헤엄치다",
+      "category": "행동·상황",
+      "card_title": "물속의 움직임",
+      "advice": "어려운 상황에서 이미 해낸 일을 떠올리세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "낯선 감정 속에서도 적응하는 힘을 본다."
+    },
+    {
+      "keyword": "뛰어넘다",
+      "category": "행동·상황",
+      "card_title": "넘어선 선",
+      "advice": "도전하고 싶은 일을 작게 시도해 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "자신이 생각한 한계를 시험해 볼 수 있다."
+    },
+    {
+      "keyword": "미끄러지다",
+      "category": "행동·상황",
+      "card_title": "흔들린 균형",
+      "advice": "급한 일에서 한 번 더 확인해 보세요.",
+      "source": null,
+      "positive_index": 42,
+      "negative_index": 58,
+      "positive_interpretation": "불안정한 부분을 미리 살필 기회다."
+    },
+    {
+      "keyword": "넘어지다",
+      "category": "행동·상황",
+      "card_title": "다시 일어서는 자리",
+      "advice": "실패에서 배운 점 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "실수 뒤에도 회복할 방법을 찾는다."
+    },
+    {
+      "keyword": "올라가다",
+      "category": "행동·상황",
+      "card_title": "높아지는 시야",
+      "advice": "지금의 진전을 작은 목표로 이어 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "노력의 다음 단계를 바라볼 수 있다."
+    },
+    {
+      "keyword": "내려가다",
+      "category": "행동·상황",
+      "card_title": "낮춰 보는 눈",
+      "advice": "쉬어야 할 신호를 확인해 보세요.",
+      "source": null,
+      "positive_index": 51,
+      "negative_index": 49,
+      "positive_interpretation": "속도를 줄이며 놓친 부분을 살핀다."
+    },
+    {
+      "keyword": "춤추다",
+      "category": "행동·상황",
+      "card_title": "자유로운 몸짓",
+      "advice": "좋아하는 음악에 맞춰 잠깐 움직여 보세요.",
+      "source": null,
+      "positive_index": 75,
+      "negative_index": 25,
+      "positive_interpretation": "자기 표현에서 즐거움을 되찾는다."
+    },
+    {
+      "keyword": "노래하다",
+      "category": "행동·상황",
+      "card_title": "나오는 마음",
+      "advice": "마음을 드러낼 편한 방식을 골라 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "말로 못한 감정을 표현할 길을 찾는다."
+    },
+    {
+      "keyword": "웃다",
+      "category": "행동·상황",
+      "card_title": "가벼운 숨",
+      "advice": "오늘 웃게 한 순간을 기억해 보세요.",
+      "source": null,
+      "positive_index": 74,
+      "negative_index": 26,
+      "positive_interpretation": "긴장 속에서도 기쁨을 찾을 수 있다."
+    },
+    {
+      "keyword": "울다",
+      "category": "행동·상황",
+      "card_title": "마음의 물길",
+      "advice": "참아 둔 마음을 믿을 만한 곳에 표현하세요.",
+      "source": null,
+      "positive_index": 54,
+      "negative_index": 46,
+      "positive_interpretation": "슬픔을 인정하며 감정을 정리한다."
+    },
+    {
+      "keyword": "소리치다",
+      "category": "행동·상황",
+      "card_title": "커진 목소리",
+      "advice": "필요한 말을 차분한 문장으로 바꿔 보세요.",
+      "source": null,
+      "positive_index": 44,
+      "negative_index": 56,
+      "positive_interpretation": "억눌린 요구를 알아차릴 수 있다."
+    },
+    {
+      "keyword": "말하다",
+      "category": "행동·상황",
+      "card_title": "건네는 생각",
+      "advice": "미뤄 둔 대화를 짧게 시작해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "대화로 생각을 분명히 할 기회가 있다."
+    },
+    {
+      "keyword": "침묵하다",
+      "category": "행동·상황",
+      "card_title": "말 없는 시간",
+      "advice": "말하기 전 내 마음을 먼저 정리해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "바로 답하지 않고 생각할 여유를 찾는다."
+    },
+    {
+      "keyword": "기다리다",
+      "category": "행동·상황",
+      "card_title": "멈춘 시계",
+      "advice": "기다리는 동안 할 수 있는 일 하나를 정하세요.",
+      "source": null,
+      "positive_index": 48,
+      "negative_index": 52,
+      "positive_interpretation": "결과를 재촉하는 마음을 알아차린다."
+    },
+    {
+      "keyword": "찾다",
+      "category": "행동·상황",
+      "card_title": "잃은 단서",
+      "advice": "찾는 것이 정확히 무엇인지 적어 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "필요한 답을 스스로 묻기 시작한다."
+    },
+    {
+      "keyword": "잃어버리다",
+      "category": "행동·상황",
+      "card_title": "빈손의 질문",
+      "advice": "지금 지킬 수 있는 것부터 챙겨 보세요.",
+      "source": null,
+      "positive_index": 42,
+      "negative_index": 58,
+      "positive_interpretation": "소중한 것이 무엇인지 다시 확인한다."
+    },
+    {
+      "keyword": "도망치다",
+      "category": "행동·상황",
+      "card_title": "멀어지는 발",
+      "advice": "부담의 크기를 나누어 도움을 요청해 보세요.",
+      "source": null,
+      "positive_index": 39,
+      "negative_index": 61,
+      "positive_interpretation": "압박에서 벗어나고 싶은 마음을 본다."
+    },
+    {
+      "keyword": "따라가다",
+      "category": "행동·상황",
+      "card_title": "뒤따르는 길",
+      "advice": "내가 원하는 방향인지 한 번 확인해 보세요.",
+      "source": null,
+      "positive_index": 52,
+      "negative_index": 48,
+      "positive_interpretation": "누구의 기대를 따라가는지 돌아본다."
+    },
+    {
+      "keyword": "문을 열다",
+      "category": "행동·상황",
+      "card_title": "첫 문턱",
+      "advice": "관심 있는 기회에 작은 행동을 해보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "새로운 선택을 시도할 마음이 생긴다."
+    },
+    {
+      "keyword": "문을 닫다",
+      "category": "행동·상황",
+      "card_title": "지키는 문턱",
+      "advice": "지킬 경계 하나를 정해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "필요 없는 요구에서 거리를 둘 수 있다."
+    },
+    {
+      "keyword": "청소하다",
+      "category": "행동·상황",
+      "card_title": "비워지는 자리",
+      "advice": "눈에 보이는 작은 공간부터 정돈해 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "복잡한 마음을 정리할 계기를 찾는다."
+    },
+    {
+      "keyword": "씻다",
+      "category": "행동·상황",
+      "card_title": "새로 시작하는 물",
+      "advice": "오늘 새롭게 시작할 일을 적어 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "지난 감정을 털고 현재에 집중한다."
+    },
+    {
+      "keyword": "요리하다",
+      "category": "행동·상황",
+      "card_title": "만드는 시간",
+      "advice": "작은 결과물을 하나 완성해 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "자원을 모아 자신에게 필요한 것을 만든다."
+    },
+    {
+      "keyword": "먹다",
+      "category": "행동·상황",
+      "card_title": "채우는 행동",
+      "advice": "배고픔과 피로를 함께 돌아보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "지금 필요한 위안과 만족을 살핀다."
+    },
+    {
+      "keyword": "마시다",
+      "category": "행동·상황",
+      "card_title": "목마른 신호",
+      "advice": "오늘 필요한 휴식을 먼저 챙겨 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "부족하다고 느끼는 것을 알아차린다."
+    },
+    {
+      "keyword": "쓰다",
+      "category": "행동·상황",
+      "card_title": "남기는 문장",
+      "advice": "머릿속 생각을 세 줄로 써 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "생각을 정리하고 기록할 여지가 있다."
+    },
+    {
+      "keyword": "읽다",
+      "category": "행동·상황",
+      "card_title": "새로운 문장",
+      "advice": "궁금한 주제의 자료를 조금 읽어 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "다른 관점에서 답을 찾을 수 있다."
+    },
+    {
+      "keyword": "그림 그리다",
+      "category": "행동·상황",
+      "card_title": "색을 고르는 손",
+      "advice": "지금 기분을 색 하나로 그려 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "감정을 말 밖의 방식으로 표현한다."
+    },
+    {
+      "keyword": "사진 찍다",
+      "category": "행동·상황",
+      "card_title": "남긴 장면",
+      "advice": "오늘 눈에 띈 장면을 기록해 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "기억하고 싶은 순간을 알아차린다."
+    },
+    {
+      "keyword": "선물하다",
+      "category": "행동·상황",
+      "card_title": "건네는 마음",
+      "advice": "고마운 사람에게 짧은 말을 전해 보세요.",
+      "source": null,
+      "positive_index": 71,
+      "negative_index": 29,
+      "positive_interpretation": "관계에서 나누고 싶은 마음을 살핀다."
+    },
+    {
+      "keyword": "훔치다",
+      "category": "행동·상황",
+      "card_title": "가져온 것의 의미",
+      "advice": "원하는 것을 정직한 말로 표현해 보세요.",
+      "source": null,
+      "positive_index": 40,
+      "negative_index": 60,
+      "positive_interpretation": "부족하다고 느끼는 욕구를 알아차린다."
+    },
+    {
+      "keyword": "숨기다",
+      "category": "행동·상황",
+      "card_title": "가려 둔 이야기",
+      "advice": "안전한 사람에게 말할 범위를 정해 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "꺼내기 어려운 생각을 천천히 정리한다."
+    },
+    {
+      "keyword": "구하다",
+      "category": "행동·상황",
+      "card_title": "내민 손",
+      "advice": "가능한 도움의 범위를 먼저 확인해 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "도움이 필요할 때 행동할 힘을 찾는다."
+    },
+    {
+      "keyword": "구조되다",
+      "category": "행동·상황",
+      "card_title": "받아든 손",
+      "advice": "필요한 도움을 한 사람에게 요청해 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "혼자 버티지 않아도 된다는 마음을 본다."
+    },
+    {
+      "keyword": "경쟁하다",
+      "category": "행동·상황",
+      "card_title": "나란한 출발선",
+      "advice": "남의 결과보다 내 기준을 적어 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "비교 속에서도 자신의 목표를 다시 고른다."
+    },
+    {
+      "keyword": "선택하다",
+      "category": "행동·상황",
+      "card_title": "갈림길의 손",
+      "advice": "선택 기준 두 가지를 정해 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "스스로 결정할 수 있는 부분이 보인다."
+    },
+    {
+      "keyword": "돌아가다",
+      "category": "행동·상황",
+      "card_title": "되짚는 길",
+      "advice": "과거의 경험 중 도움이 된 점을 적어 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "지나온 경험에서 단서를 찾는다."
+    },
+    {
+      "keyword": "약혼",
+      "category": "삶의 변화",
+      "card_title": "미리 한 약속",
+      "advice": "서로 바라는 미래를 차분히 이야기해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "관계의 기대와 책임을 살펴볼 때다."
+    },
+    {
+      "keyword": "첫 출근",
+      "category": "삶의 변화",
+      "card_title": "새 책상",
+      "advice": "첫날 꼭 알아둘 질문을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "새로운 역할을 배울 준비를 한다."
+    },
+    {
+      "keyword": "합격",
+      "category": "삶의 변화",
+      "card_title": "열리는 결과",
+      "advice": "결과와 별개로 해낸 준비를 돌아보세요.",
+      "source": null,
+      "positive_index": 76,
+      "negative_index": 24,
+      "positive_interpretation": "노력을 인정받고 싶은 마음이 드러난다."
+    },
+    {
+      "keyword": "불합격",
+      "category": "삶의 변화",
+      "card_title": "다시 고르는 길",
+      "advice": "잠시 쉬고 다른 경로를 하나 찾아보세요.",
+      "source": null,
+      "positive_index": 38,
+      "negative_index": 62,
+      "positive_interpretation": "기대와 다른 결과 뒤의 다음 선택을 본다."
+    },
+    {
+      "keyword": "승진",
+      "category": "삶의 변화",
+      "card_title": "넓어지는 자리",
+      "advice": "새 역할에 필요한 도움을 미리 정해 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "역할이 커지는 기대와 부담을 함께 살핀다."
+    },
+    {
+      "keyword": "해고",
+      "category": "삶의 변화",
+      "card_title": "갑작스러운 공백",
+      "advice": "혼자 감당하지 말고 도움받을 곳을 찾아보세요.",
+      "source": null,
+      "positive_index": 31,
+      "negative_index": 69,
+      "positive_interpretation": "불안 속에서 자신을 다시 돌볼 수 있다."
+    },
+    {
+      "keyword": "창업",
+      "category": "삶의 변화",
+      "card_title": "빈 페이지의 시작",
+      "advice": "아이디어를 작게 시험할 방법을 적어 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "새로운 일을 스스로 만들고 싶은 마음이 있다."
+    },
+    {
+      "keyword": "파산",
+      "category": "삶의 변화",
+      "card_title": "무너진 계산",
+      "advice": "현실의 걱정이 있다면 믿을 만한 지원을 찾으세요.",
+      "source": null,
+      "positive_index": 27,
+      "negative_index": 73,
+      "positive_interpretation": "큰 걱정을 구체적인 문제로 나누어 볼 수 있다."
+    },
+    {
+      "keyword": "이혼",
+      "category": "삶의 변화",
+      "card_title": "다른 길의 시작",
+      "advice": "마음을 정리할 시간을 자신에게 허락하세요.",
+      "source": null,
+      "positive_index": 38,
+      "negative_index": 62,
+      "positive_interpretation": "관계의 변화 속에서 필요한 경계를 생각한다."
+    },
+    {
+      "keyword": "재회",
+      "category": "삶의 변화",
+      "card_title": "다시 만난 자리",
+      "advice": "지금 원하는 관계의 모습을 적어 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "오래된 관계를 새 관점에서 살핀다."
+    },
+    {
+      "keyword": "방",
+      "category": "장소·공간",
+      "card_title": "나만의 자리",
+      "advice": "편안히 머물 수 있는 시간을 마련해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "사적인 마음을 살필 공간이 필요하다."
+    },
+    {
+      "keyword": "침실",
+      "category": "장소·공간",
+      "card_title": "쉬는 방",
+      "advice": "잠들기 전 한 가지 자극을 줄여 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "충분한 휴식과 안정에 마음이 향한다."
+    },
+    {
+      "keyword": "거실",
+      "category": "장소·공간",
+      "card_title": "함께 앉는 자리",
+      "advice": "편한 사람과 가벼운 대화를 시작해 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "가까운 사람과 나누고 싶은 이야기가 있다."
+    },
+    {
+      "keyword": "부엌",
+      "category": "장소·공간",
+      "card_title": "채우는 공간",
+      "advice": "자신을 위해 간단한 식사를 챙겨 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "일상을 돌보는 방식에 관심이 쏠린다."
+    },
+    {
+      "keyword": "욕실",
+      "category": "장소·공간",
+      "card_title": "씻어 내는 자리",
+      "advice": "오늘 잠깐 혼자 쉴 시간을 만들어 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "혼자 감정을 정리할 시간이 필요하다."
+    },
+    {
+      "keyword": "복도",
+      "category": "장소·공간",
+      "card_title": "사이의 길",
+      "advice": "서두르지 말고 다음 선택을 정해 보세요.",
+      "source": null,
+      "positive_index": 53,
+      "negative_index": 47,
+      "positive_interpretation": "한 단계에서 다음 단계로 가는 마음을 본다."
+    },
+    {
+      "keyword": "옥상",
+      "category": "장소·공간",
+      "card_title": "높은 쉼터",
+      "advice": "잠시 밖을 바라보며 생각을 정리해 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "일상에서 벗어나 넓게 보고 싶은 마음이 있다."
+    },
+    {
+      "keyword": "지하실",
+      "category": "장소·공간",
+      "card_title": "아래의 기억",
+      "advice": "떠오르는 오래된 기억을 편하게 적어 보세요.",
+      "source": null,
+      "positive_index": 46,
+      "negative_index": 54,
+      "positive_interpretation": "잘 드러나지 않은 생각을 살펴볼 수 있다."
+    },
+    {
+      "keyword": "엘리베이터",
+      "category": "장소·공간",
+      "card_title": "움직이는 층",
+      "advice": "내가 고를 수 있는 다음 단계를 찾아보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "변화의 속도를 남에게 맡긴 듯 느낄 수 있다."
+    },
+    {
+      "keyword": "다리",
+      "category": "장소·공간",
+      "card_title": "이어 주는 길",
+      "advice": "끊긴 대화나 계획을 한 번 이어 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "서로 다른 선택을 연결할 방법을 찾는다."
+    },
+    {
+      "keyword": "터널",
+      "category": "장소·공간",
+      "card_title": "끝을 향한 길",
+      "advice": "오늘 버틸 수 있는 작은 목표를 세우세요.",
+      "source": null,
+      "positive_index": 46,
+      "negative_index": 54,
+      "positive_interpretation": "답이 흐려도 지나가는 과정임을 떠올린다."
+    },
+    {
+      "keyword": "길",
+      "category": "장소·공간",
+      "card_title": "이어지는 발자국",
+      "advice": "가려는 곳을 한 문장으로 적어 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "현재의 방향을 다시 선택할 수 있다."
+    },
+    {
+      "keyword": "골목",
+      "category": "장소·공간",
+      "card_title": "좁은 선택지",
+      "advice": "막혔다면 다른 경로 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 52,
+      "negative_index": 48,
+      "positive_interpretation": "익숙한 방식 밖의 길을 탐색한다."
+    },
+    {
+      "keyword": "광장",
+      "category": "장소·공간",
+      "card_title": "열린 만남",
+      "advice": "함께하고 싶은 활동을 하나 떠올려 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "사람들 사이에서 자신의 자리를 살핀다."
+    },
+    {
+      "keyword": "공원",
+      "category": "장소·공간",
+      "card_title": "숨 쉬는 장소",
+      "advice": "가까운 곳을 천천히 걸어 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "일상에서 휴식과 여유를 찾고 싶다."
+    },
+    {
+      "keyword": "놀이터",
+      "category": "장소·공간",
+      "card_title": "다시 노는 시간",
+      "advice": "작은 놀이를 일정에 넣어 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "목적 없는 즐거움이 필요함을 느낀다."
+    },
+    {
+      "keyword": "도서관",
+      "category": "장소·공간",
+      "card_title": "쌓인 이야기",
+      "advice": "궁금한 주제를 하나 찾아 읽어 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "차분히 배우고 생각할 준비가 된다."
+    },
+    {
+      "keyword": "병원",
+      "category": "장소·공간",
+      "card_title": "돌봄의 자리",
+      "advice": "불편한 점이 있다면 무리하지 말고 살피세요.",
+      "source": null,
+      "positive_index": 48,
+      "negative_index": 52,
+      "positive_interpretation": "몸이나 마음을 더 주의 깊게 살필 때다."
+    },
+    {
+      "keyword": "회사",
+      "category": "장소·공간",
+      "card_title": "일의 무대",
+      "advice": "일에서 중요한 우선순위를 정해 보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "맡은 역할과 기대를 다시 돌아본다."
+    },
+    {
+      "keyword": "교실",
+      "category": "장소·공간",
+      "card_title": "배우는 자리",
+      "advice": "궁금한 질문을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "모르는 것을 배울 여지가 있음을 본다."
+    },
+    {
+      "keyword": "기차역",
+      "category": "장소·공간",
+      "card_title": "출발을 기다리는 곳",
+      "advice": "다음 일정에 필요한 준비를 확인하세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "떠남과 기다림 사이의 마음을 살핀다."
+    },
+    {
+      "keyword": "공항",
+      "category": "장소·공간",
+      "card_title": "멀리 가는 문",
+      "advice": "낯선 일에 필요한 정보를 모아 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "새로운 환경에 대한 기대와 긴장이 있다."
+    },
+    {
+      "keyword": "시장",
+      "category": "장소·공간",
+      "card_title": "많은 선택",
+      "advice": "지금 필요한 것과 끌리는 것을 구분하세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "여러 기회 속에서 내 기준이 필요하다."
+    },
+    {
+      "keyword": "호텔",
+      "category": "장소·공간",
+      "card_title": "잠시 머무는 곳",
+      "advice": "현재 머무는 곳의 편안한 요소를 챙기세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "임시적인 상태에서도 편안함을 찾는다."
+    },
+    {
+      "keyword": "낯선 집",
+      "category": "장소·공간",
+      "card_title": "처음 보는 거처",
+      "advice": "낯선 변화에서 마음에 드는 점을 찾아보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "새로운 자기 모습을 탐색할 수 있다."
+    },
+    {
+      "keyword": "어머니",
+      "category": "인물·관계",
+      "card_title": "돌봄의 기억",
+      "advice": "고마움이나 필요한 거리를 표현해 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "돌봄을 주고받는 관계를 돌아본다."
+    },
+    {
+      "keyword": "아버지",
+      "category": "인물·관계",
+      "card_title": "기대의 그림자",
+      "advice": "내 기준과 남의 기대를 나눠 적어 보세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "기준과 지지에 대한 마음을 살핀다."
+    },
+    {
+      "keyword": "부모",
+      "category": "인물·관계",
+      "card_title": "익숙한 울타리",
+      "advice": "지금 스스로 결정할 일 하나를 골라 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "보호와 독립 사이에서 균형을 찾는다."
+    },
+    {
+      "keyword": "형제",
+      "category": "인물·관계",
+      "card_title": "나란한 성장",
+      "advice": "비교보다 함께한 기억을 떠올려 보세요.",
+      "source": null,
+      "positive_index": 57,
+      "negative_index": 43,
+      "positive_interpretation": "가까운 관계의 비교와 연대를 함께 본다."
+    },
+    {
+      "keyword": "자매",
+      "category": "인물·관계",
+      "card_title": "닮은 목소리",
+      "advice": "편하게 나눌 이야기를 하나 정해 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "오래된 친밀감 속에서 자기 마음을 본다."
+    },
+    {
+      "keyword": "할머니",
+      "category": "인물·관계",
+      "card_title": "오래된 온기",
+      "advice": "나를 위로한 말을 떠올려 적어 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "익숙한 위로나 기억이 힘이 될 수 있다."
+    },
+    {
+      "keyword": "할아버지",
+      "category": "인물·관계",
+      "card_title": "이어진 이야기",
+      "advice": "기억나는 가르침 하나를 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "지난 경험에서 배울 점을 찾는다."
+    },
+    {
+      "keyword": "배우자",
+      "category": "인물·관계",
+      "card_title": "함께 짓는 하루",
+      "advice": "요즘 필요한 대화를 짧게 나눠 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "가까운 관계의 기대와 협력을 살핀다."
+    },
+    {
+      "keyword": "연인",
+      "category": "인물·관계",
+      "card_title": "마주 보는 마음",
+      "advice": "원하는 관계의 모습을 한 문장으로 적으세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "친밀함 속에서 바라는 것을 알아차린다."
+    },
+    {
+      "keyword": "전 배우자",
+      "category": "인물·관계",
+      "card_title": "지난 약속",
+      "advice": "지금 지키고 싶은 경계를 적어 보세요.",
+      "source": null,
+      "positive_index": 47,
+      "negative_index": 53,
+      "positive_interpretation": "끝난 관계의 의미를 현재의 시선으로 본다."
+    },
+    {
+      "keyword": "아이",
+      "category": "인물·관계",
+      "card_title": "작은 질문",
+      "advice": "작게 시작한 일을 조금 돌봐 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "돌봄과 새로운 가능성에 눈을 돌린다."
+    },
+    {
+      "keyword": "아들",
+      "category": "인물·관계",
+      "card_title": "돌봄의 방향",
+      "advice": "기대보다 지금의 관계를 먼저 살펴보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "소중한 사람에게 품은 기대를 돌아본다."
+    },
+    {
+      "keyword": "딸",
+      "category": "인물·관계",
+      "card_title": "이어지는 마음",
+      "advice": "상대의 변화를 있는 그대로 물어보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "가까운 관계의 성장과 변화를 본다."
+    },
+    {
+      "keyword": "동료",
+      "category": "인물·관계",
+      "card_title": "함께하는 일",
+      "advice": "도움이 필요한 부분을 분명히 말해 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "협력 속에서 맡은 몫을 다시 살핀다."
+    },
+    {
+      "keyword": "상사",
+      "category": "인물·관계",
+      "card_title": "평가의 자리",
+      "advice": "사실과 추측을 나눠 업무를 정리해 보세요.",
+      "source": null,
+      "positive_index": 49,
+      "negative_index": 51,
+      "positive_interpretation": "권위 앞에서 자신의 생각을 살핀다."
+    },
+    {
+      "keyword": "선생님",
+      "category": "인물·관계",
+      "card_title": "배움의 안내",
+      "advice": "배우고 싶은 점을 질문으로 바꿔 보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "도움과 평가를 함께 떠올릴 수 있다."
+    },
+    {
+      "keyword": "학생",
+      "category": "인물·관계",
+      "card_title": "배우는 나",
+      "advice": "오늘 새로 알게 된 것을 기록해 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "완벽하지 않아도 배울 수 있음을 본다."
+    },
+    {
+      "keyword": "이웃",
+      "category": "인물·관계",
+      "card_title": "가까운 타인",
+      "advice": "가벼운 인사로 연결을 시작해 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "일상 속 관계의 거리를 살핀다."
+    },
+    {
+      "keyword": "의사",
+      "category": "인물·관계",
+      "card_title": "도움을 구하는 사람",
+      "advice": "몸이나 마음의 신호를 무시하지 마세요.",
+      "source": null,
+      "positive_index": 53,
+      "negative_index": 47,
+      "positive_interpretation": "필요한 돌봄을 받아도 된다는 마음을 본다."
+    },
+    {
+      "keyword": "경찰",
+      "category": "인물·관계",
+      "card_title": "규칙의 얼굴",
+      "advice": "부담스러운 규칙의 이유를 확인해 보세요.",
+      "source": null,
+      "positive_index": 46,
+      "negative_index": 54,
+      "positive_interpretation": "안전과 통제에 대한 감정을 돌아본다."
+    },
+    {
+      "keyword": "유명인",
+      "category": "인물·관계",
+      "card_title": "비춰 보는 욕망",
+      "advice": "그 사람의 어떤 점이 끌렸는지 적어 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "동경하는 모습 속 내 바람을 발견한다."
+    },
+    {
+      "keyword": "낯선 아이",
+      "category": "인물·관계",
+      "card_title": "처음 만난 가능성",
+      "advice": "새로운 일을 작게 시작해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "익숙하지 않은 책임을 조심스럽게 본다."
+    },
+    {
+      "keyword": "잃어버린 사람",
+      "category": "인물·관계",
+      "card_title": "다시 찾는 관계",
+      "advice": "전하고 싶은 말을 보내지 않아도 적어 보세요.",
+      "source": null,
+      "positive_index": 45,
+      "negative_index": 55,
+      "positive_interpretation": "그리움이나 미완의 대화를 알아차린다."
+    },
+    {
+      "keyword": "군중",
+      "category": "인물·관계",
+      "card_title": "많은 시선",
+      "advice": "남의 기대보다 내 생각을 먼저 적어 보세요.",
+      "source": null,
+      "positive_index": 48,
+      "negative_index": 52,
+      "positive_interpretation": "남의 시선 속 자기 목소리를 찾는다."
+    },
+    {
+      "keyword": "나 자신",
+      "category": "인물·관계",
+      "card_title": "거울 속 만남",
+      "advice": "요즘의 나에게 필요한 말을 건네 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "스스로를 새롭게 바라볼 기회가 된다."
+    },
+    {
+      "keyword": "책",
+      "category": "사물·재물",
+      "card_title": "펼쳐진 문장",
+      "advice": "궁금했던 주제를 짧게 읽어 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "새로운 지식을 받아들일 마음이 있다."
+    },
+    {
+      "keyword": "노트",
+      "category": "사물·재물",
+      "card_title": "남겨 둔 생각",
+      "advice": "지금 머릿속의 일을 세 줄로 적어 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "떠오르는 생각을 정리할 수 있다."
+    },
+    {
+      "keyword": "일기장",
+      "category": "사물·재물",
+      "card_title": "나에게 쓴 기록",
+      "advice": "오늘 기억하고 싶은 장면을 기록해 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "하루의 감정을 돌아볼 시간이 필요하다."
+    },
+    {
+      "keyword": "편지",
+      "category": "사물·재물",
+      "card_title": "도착한 마음",
+      "advice": "미뤄 둔 말을 먼저 글로 써 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "전하고 싶거나 듣고 싶은 말이 선명해진다."
+    },
+    {
+      "keyword": "휴대전화",
+      "category": "사물·재물",
+      "card_title": "이어진 화면",
+      "advice": "필요한 연락만 남기고 잠시 쉬어 보세요.",
+      "source": null,
+      "positive_index": 54,
+      "negative_index": 46,
+      "positive_interpretation": "연결되고 싶은 마음과 피로를 함께 살핀다."
+    },
+    {
+      "keyword": "컴퓨터",
+      "category": "사물·재물",
+      "card_title": "복잡한 작업대",
+      "advice": "큰 작업을 작은 파일처럼 나눠 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "여러 생각을 체계적으로 정리할 수 있다."
+    },
+    {
+      "keyword": "시계",
+      "category": "사물·재물",
+      "card_title": "흐르는 숫자",
+      "advice": "오늘 꼭 할 일 하나부터 정해 보세요.",
+      "source": null,
+      "positive_index": 49,
+      "negative_index": 51,
+      "positive_interpretation": "시간에 대한 압박과 우선순위를 알아차린다."
+    },
+    {
+      "keyword": "안경",
+      "category": "사물·재물",
+      "card_title": "다시 보는 렌즈",
+      "advice": "익숙한 판단을 한 번 질문해 보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "상황을 다르게 볼 계기가 생긴다."
+    },
+    {
+      "keyword": "반지",
+      "category": "사물·재물",
+      "card_title": "손가락의 약속",
+      "advice": "지키고 싶은 약속을 한 문장으로 적으세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "소중한 관계나 약속의 의미를 살핀다."
+    },
+    {
+      "keyword": "목걸이",
+      "category": "사물·재물",
+      "card_title": "가까이 둔 가치",
+      "advice": "요즘 중요한 가치를 하나 골라 보세요.",
+      "source": null,
+      "positive_index": 62,
+      "negative_index": 38,
+      "positive_interpretation": "늘 지니고 싶은 마음을 알아차린다."
+    },
+    {
+      "keyword": "신발",
+      "category": "사물·재물",
+      "card_title": "발에 맞는 길",
+      "advice": "지금의 선택이 내게 편한지 확인해 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "자기에게 맞는 속도와 방향을 찾는다."
+    },
+    {
+      "keyword": "가방",
+      "category": "사물·재물",
+      "card_title": "짊어진 것들",
+      "advice": "내려놓아도 되는 일을 하나 찾아보세요.",
+      "source": null,
+      "positive_index": 54,
+      "negative_index": 46,
+      "positive_interpretation": "맡은 책임과 필요한 짐을 구분한다."
+    },
+    {
+      "keyword": "우산",
+      "category": "사물·재물",
+      "card_title": "작은 보호막",
+      "advice": "걱정되는 일에 작은 대비책을 마련하세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "어려움에 대비할 방법을 찾고 있다."
+    },
+    {
+      "keyword": "열쇠",
+      "category": "사물·재물",
+      "card_title": "열 수 있는 문",
+      "advice": "지금 가진 자원을 다시 살펴보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "문제를 풀 실마리를 발견할 수 있다."
+    },
+    {
+      "keyword": "자물쇠",
+      "category": "사물·재물",
+      "card_title": "잠긴 질문",
+      "advice": "답을 재촉하지 말고 필요한 조건을 적으세요.",
+      "source": null,
+      "positive_index": 49,
+      "negative_index": 51,
+      "positive_interpretation": "열리지 않는 마음의 이유를 살펴본다."
+    },
+    {
+      "keyword": "상자",
+      "category": "사물·재물",
+      "card_title": "아직 모르는 내용",
+      "advice": "열어 보고 싶은 질문을 하나 적어 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "숨겨 둔 가능성이나 감정을 탐색한다."
+    },
+    {
+      "keyword": "선물",
+      "category": "사물·재물",
+      "card_title": "건네진 마음",
+      "advice": "작은 감사 인사를 전해 보세요.",
+      "source": null,
+      "positive_index": 71,
+      "negative_index": 29,
+      "positive_interpretation": "관계에서 주고받는 기쁨을 느낄 수 있다."
+    },
+    {
+      "keyword": "꽃병",
+      "category": "사물·재물",
+      "card_title": "담아 두는 자리",
+      "advice": "지금 지키고 싶은 일 하나를 챙겨 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "소중한 것을 오래 돌보고 싶은 마음이 있다."
+    },
+    {
+      "keyword": "의자",
+      "category": "사물·재물",
+      "card_title": "앉을 자리",
+      "advice": "잠깐 앉아 몸과 마음을 살펴보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "나에게 맞는 휴식과 자리를 찾는다."
+    },
+    {
+      "keyword": "침대",
+      "category": "사물·재물",
+      "card_title": "편안한 바닥",
+      "advice": "오늘 잠들기 전 일정을 가볍게 해보세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "회복을 위한 시간이 필요하다는 신호다."
+    },
+    {
+      "keyword": "책상",
+      "category": "사물·재물",
+      "card_title": "정리된 시작",
+      "advice": "책상 위 한 부분부터 정돈해 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "집중할 일을 분명히 할 수 있다."
+    },
+    {
+      "keyword": "창문",
+      "category": "사물·재물",
+      "card_title": "밖을 보는 틈",
+      "advice": "답답할 때 잠시 다른 풍경을 바라보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "새로운 관점을 받아들일 여유가 있다."
+    },
+    {
+      "keyword": "커튼",
+      "category": "사물·재물",
+      "card_title": "가릴 수 있는 권리",
+      "advice": "공유하고 싶지 않은 것은 편히 남겨 두세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "드러낼 것과 지킬 것을 스스로 정한다."
+    },
+    {
+      "keyword": "촛불",
+      "category": "사물·재물",
+      "card_title": "작은 온기",
+      "advice": "오늘 위로가 되는 순간을 하나 만들어 보세요.",
+      "source": null,
+      "positive_index": 69,
+      "negative_index": 31,
+      "positive_interpretation": "조용한 희망을 다시 발견할 수 있다."
+    },
+    {
+      "keyword": "램프",
+      "category": "사물·재물",
+      "card_title": "책상 위의 빛",
+      "advice": "풀 수 있는 작은 질문부터 시작해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "가까운 문제부터 밝힐 방법을 찾는다."
+    },
+    {
+      "keyword": "손전등",
+      "category": "사물·재물",
+      "card_title": "어둠 속의 한 줄기",
+      "advice": "필요한 정보 한 가지를 먼저 확인하세요.",
+      "source": null,
+      "positive_index": 63,
+      "negative_index": 37,
+      "positive_interpretation": "모르는 상황에서도 다음 걸음을 비춘다."
+    },
+    {
+      "keyword": "카메라",
+      "category": "사물·재물",
+      "card_title": "기억의 틀",
+      "advice": "오늘 기억할 장면을 하나 남겨 보세요.",
+      "source": null,
+      "positive_index": 64,
+      "negative_index": 36,
+      "positive_interpretation": "중요한 장면을 어떤 시선으로 볼지 고른다."
+    },
+    {
+      "keyword": "악기",
+      "category": "사물·재물",
+      "card_title": "맞춰 가는 소리",
+      "advice": "좋아하는 소리나 음악을 잠시 들어 보세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "자기 표현의 다른 방법을 찾아본다."
+    },
+    {
+      "keyword": "피아노",
+      "category": "사물·재물",
+      "card_title": "흑백의 건반",
+      "advice": "오늘의 감정을 음악 한 곡에 담아 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "여러 감정을 조화롭게 다루고 싶다."
+    },
+    {
+      "keyword": "자전거",
+      "category": "사물·재물",
+      "card_title": "스스로 굴리는 바퀴",
+      "advice": "무리 없는 속도로 작은 목표를 시작하세요.",
+      "source": null,
+      "positive_index": 67,
+      "negative_index": 33,
+      "positive_interpretation": "자기 힘으로 균형을 잡으며 나아간다."
+    },
+    {
+      "keyword": "버스",
+      "category": "사물·재물",
+      "card_title": "같이 타는 길",
+      "advice": "남의 일정과 내 목표를 구분해 보세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "공동의 흐름 속에서 내 목적지를 살핀다."
+    },
+    {
+      "keyword": "지하철",
+      "category": "사물·재물",
+      "card_title": "정해진 노선",
+      "advice": "익숙한 일상에서 바꿀 점 하나를 찾아보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "반복되는 생활의 방향을 점검한다."
+    },
+    {
+      "keyword": "기차",
+      "category": "사물·재물",
+      "card_title": "길게 이어진 이동",
+      "advice": "먼 목표의 다음 정거장을 정해 보세요.",
+      "source": null,
+      "positive_index": 65,
+      "negative_index": 35,
+      "positive_interpretation": "계획을 따라 꾸준히 나아갈 수 있다."
+    },
+    {
+      "keyword": "비행기",
+      "category": "사물·재물",
+      "card_title": "멀리 보는 창",
+      "advice": "언젠가 해보고 싶은 일을 구체화해 보세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "더 넓은 가능성을 상상할 수 있다."
+    },
+    {
+      "keyword": "선박",
+      "category": "사물·재물",
+      "card_title": "큰 물길의 이동",
+      "advice": "흔들릴 때 의지할 기준을 적어 보세요.",
+      "source": null,
+      "positive_index": 60,
+      "negative_index": 40,
+      "positive_interpretation": "변화 속에서도 중심을 지킬 힘을 찾는다."
+    },
+    {
+      "keyword": "지도",
+      "category": "사물·재물",
+      "card_title": "펼친 방향",
+      "advice": "목적지와 가능한 경로를 나눠 적어 보세요.",
+      "source": null,
+      "positive_index": 68,
+      "negative_index": 32,
+      "positive_interpretation": "여러 선택지를 비교할 준비가 된다."
+    },
+    {
+      "keyword": "나침반",
+      "category": "사물·재물",
+      "card_title": "돌아오는 북쪽",
+      "advice": "결정 전에 가장 중요한 가치를 확인하세요.",
+      "source": null,
+      "positive_index": 70,
+      "negative_index": 30,
+      "positive_interpretation": "혼란 속에서 중요한 기준을 다시 잡는다."
+    },
+    {
+      "keyword": "지갑",
+      "category": "사물·재물",
+      "card_title": "가지고 있는 것",
+      "advice": "지금 쓸 수 있는 자원을 정리해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "자원과 선택의 관계를 돌아본다."
+    },
+    {
+      "keyword": "카드",
+      "category": "사물·재물",
+      "card_title": "뒤집힌 한 장",
+      "advice": "예상 밖의 선택지도 한번 살펴보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "아직 모르는 가능성을 열린 마음으로 본다."
+    },
+    {
+      "keyword": "동전",
+      "category": "사물·재물",
+      "card_title": "작은 가치",
+      "advice": "작게 절약할 시간이나 힘을 찾아보세요.",
+      "source": null,
+      "positive_index": 61,
+      "negative_index": 39,
+      "positive_interpretation": "사소한 자원도 쓸모 있게 보일 수 있다."
+    },
+    {
+      "keyword": "보석",
+      "category": "사물·재물",
+      "card_title": "숨은 빛",
+      "advice": "최근 잘 해낸 일을 하나 인정해 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "스스로 소중히 여기는 재능을 알아차린다."
+    },
+    {
+      "keyword": "약",
+      "category": "사물·재물",
+      "card_title": "돌봄의 도구",
+      "advice": "지친 부분을 돌볼 방법을 찾아보세요.",
+      "source": null,
+      "positive_index": 55,
+      "negative_index": 45,
+      "positive_interpretation": "회복에 필요한 도움을 받아들일 수 있다."
+    },
+    {
+      "keyword": "칼",
+      "category": "사물·재물",
+      "card_title": "날카로운 선택",
+      "advice": "급한 감정으로 결정하지 말고 멈춰 보세요.",
+      "source": null,
+      "positive_index": 42,
+      "negative_index": 58,
+      "positive_interpretation": "무엇을 끊고 지킬지 분명히 할 때다."
+    },
+    {
+      "keyword": "가위",
+      "category": "사물·재물",
+      "card_title": "잘라 내는 선",
+      "advice": "계속 붙잡은 일 하나를 다시 판단해 보세요.",
+      "source": null,
+      "positive_index": 58,
+      "negative_index": 42,
+      "positive_interpretation": "불필요한 일을 정리할 힘이 생긴다."
+    },
+    {
+      "keyword": "줄",
+      "category": "사물·재물",
+      "card_title": "이어진 매듭",
+      "advice": "느슨하게 해도 되는 매듭을 찾아보세요.",
+      "source": null,
+      "positive_index": 52,
+      "negative_index": 48,
+      "positive_interpretation": "관계나 책임의 연결을 돌아본다."
+    },
+    {
+      "keyword": "이직",
+      "category": "삶의 변화",
+      "card_title": "새로운 일터",
+      "advice": "변화에서 얻고 싶은 것을 적어 보세요.",
+      "source": null,
+      "positive_index": 59,
+      "negative_index": 41,
+      "positive_interpretation": "일에서 원하는 방향을 다시 묻는다."
+    },
+    {
+      "keyword": "전학",
+      "category": "삶의 변화",
+      "card_title": "낯선 교실",
+      "advice": "처음부터 잘하려는 부담을 줄여 보세요.",
+      "source": null,
+      "positive_index": 56,
+      "negative_index": 44,
+      "positive_interpretation": "새 환경에서 자신을 다시 소개할 수 있다."
+    },
+    {
+      "keyword": "유학",
+      "category": "삶의 변화",
+      "card_title": "먼 곳의 배움",
+      "advice": "배우고 싶은 주제를 하나 정해 보세요.",
+      "source": null,
+      "positive_index": 66,
+      "negative_index": 34,
+      "positive_interpretation": "새로운 세계를 향한 호기심이 커진다."
+    },
+    {
+      "keyword": "수상",
+      "category": "삶의 변화",
+      "card_title": "받아든 인정",
+      "advice": "남의 평가와 별개로 성취를 기록해 보세요.",
+      "source": null,
+      "positive_index": 72,
+      "negative_index": 28,
+      "positive_interpretation": "노력을 인정받고 싶은 마음을 살핀다."
+    },
+    {
+      "keyword": "장례식",
+      "category": "삶의 변화",
+      "card_title": "보내는 시간",
+      "advice": "상실감이 있다면 혼자 견디지 말고 나누세요.",
+      "source": null,
+      "positive_index": 43,
+      "negative_index": 57,
+      "positive_interpretation": "끝난 일을 애도하며 다음을 준비한다."
+    }
+  ]
+}

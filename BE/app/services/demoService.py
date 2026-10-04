@@ -3,7 +3,7 @@ from datetime import date, datetime, time, timedelta, timezone
 from typing import Dict, Tuple
 
 from app.repositories.demoRepository import DemoRepository
-from app.core.ai.langchainManager import analyze_dream_chat
+from app.core.ai.dreamKeywordHarness import analyze_dream_with_keyword_catalog
 from app.schemas.demoSchema import DemoInterpretResponse, DemoRankingResponse, DemoRankingItem
 
 # 한국은 DST가 없어 고정 오프셋으로 충분하다.
@@ -101,13 +101,26 @@ class DemoService:
         self._increment_global()
 
         try:
-            ai_result = await analyze_dream_chat(history="", new_message=dream, routine_type="MORNING")
+            ai_result, matched_cards = await analyze_dream_with_keyword_catalog(
+                dream=dream,
+                ranking_categories=CATEGORY_LIST,
+            )
         except Exception as e:
             # 실패한 시도가 사용자의 하루 한도를 깎지 않도록 되돌린다.
             self._decrement_visitor(visitor_id, counted_date)
             self._decrement_global(counted_date)
-            print(f"데모 해몽 LLM 호출 실패: {e}")
+            print(f"데모 키워드 해몽 처리 실패: {e}")
             raise DemoUnavailableError()
+
+        if matched_cards:
+            # 카탈로그에서 찾은 키워드는 JSON 내용을 해석의 기준으로 삼는다.
+            # dream_category는 기존 13개 데모 랭킹 분류라 키워드 카테고리와 별개로 유지한다.
+            ai_result.theme = matched_cards[0]["card_title"]
+            ai_result.ai_reply = " ".join(
+                f"{card['keyword']} 꿈은 {card['positive_interpretation']} "
+                f"오늘의 제안: {card['advice']}"
+                for card in matched_cards
+            )
 
         category = ai_result.dream_category if ai_result.dream_category in CATEGORY_LIST else "기타"
         try:
