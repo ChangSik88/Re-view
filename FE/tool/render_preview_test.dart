@@ -13,6 +13,7 @@ import 'package:frontend/review/diary_pages.dart';
 import 'package:frontend/review/chat_page.dart';
 import 'package:frontend/review/store_pages.dart';
 import 'package:frontend/review/settings_page.dart';
+import 'package:frontend/review/emotion_statistics_page.dart';
 
 void main() {
   testWidgets('Export preview screens for visual inspection', (tester) async {
@@ -46,6 +47,7 @@ void main() {
       'home': const HomePage(),
       'morning': DiaryHomePage(selected: record),
       'night': const DiaryHomePage(routine: Routine.night),
+      'emotion-statistics': const EmotionStatisticsPage(routine: Routine.night),
       'analysis': AnalysisPage(record: record),
       'analysis-full': AnalysisPage(record: record),
       'analysis-insights': AnalysisPage(record: record),
