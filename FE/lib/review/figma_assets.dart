@@ -745,6 +745,36 @@ const figmaAssets = <String, ({String path, double width, double height})>{
     width: 30,
     height: 30
   ),
+  '736-135/imgIconBack': (
+    path: 'assets/figma/095e5743-70f8-463e-b0db-bc844dafedea.svg',
+    width: 24,
+    height: 24
+  ),
+  '736-135/imgIconSpark': (
+    path: 'assets/figma/9dfcb62f-a498-4185-b9b2-0260a11d1b85.svg',
+    width: 12,
+    height: 12
+  ),
+  '736-135/imgIconSmile': (
+    path: 'assets/figma/345284d5-14f9-48c5-9923-03635e6d1a3d.svg',
+    width: 16,
+    height: 16
+  ),
+  '736-135/imgIconChev': (
+    path: 'assets/figma/9e36f525-8726-4a50-afd2-f65d1adf231e.svg',
+    width: 16,
+    height: 16
+  ),
+  '736-135/imgIconSmile1': (
+    path: 'assets/figma/7c433ca8-412a-4bd2-8144-b6bacf537b5e.svg',
+    width: 16,
+    height: 16
+  ),
+  '736-135/imgIconChev1': (
+    path: 'assets/figma/cc15db91-cdac-4321-9b27-51e8993c8bda.svg',
+    width: 16,
+    height: 16
+  ),
   '738-135/imgIconBack': (
     path: 'assets/figma/e5d319cd-2bc6-463f-bcc7-38816b4c0173.svg',
     width: 24,

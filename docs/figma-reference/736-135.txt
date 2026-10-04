@@ -1,0 +1,231 @@
+const imgIconBack = "https://www.figma.com/api/mcp/asset/095e5743-70f8-463e-b0db-bc844dafedea.svg";
+const imgIconSpark = "https://www.figma.com/api/mcp/asset/9dfcb62f-a498-4185-b9b2-0260a11d1b85.svg";
+const imgIconSmile = "https://www.figma.com/api/mcp/asset/345284d5-14f9-48c5-9923-03635e6d1a3d.svg";
+const imgIconChev = "https://www.figma.com/api/mcp/asset/9e36f525-8726-4a50-afd2-f65d1adf231e.svg";
+const imgIconSmile1 = "https://www.figma.com/api/mcp/asset/7c433ca8-412a-4bd2-8144-b6bacf537b5e.svg";
+const imgIconChev1 = "https://www.figma.com/api/mcp/asset/cc15db91-cdac-4321-9b27-51e8993c8bda.svg";
+
+export default function Component() {
+  return (
+    <div className="bg-white border border-[#cfc9ff] border-solid relative size-full" data-node-id="736:135" data-name="감정 전체보기 · 기본">
+      <div className="absolute content-stretch flex flex-col gap-[16px] items-start left-[23px] top-[55px] w-[345px]" data-node-id="736:136" data-name="Body">
+        <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0 w-full" data-node-id="736:137" data-name="Header">
+          <button className="block cursor-pointer relative shrink-0 size-[24px]" data-node-id="736:138" data-name="icon/back">
+            <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconBack} />
+          </button>
+          <p className="[word-break:break-word] flex-[1_0_0] font-['Pretendard:Bold'] leading-[normal] min-w-px not-italic relative text-[20px] text-black text-center" data-node-id="736:141">
+            감정 전체보기
+          </p>
+          <div className="relative shrink-0 size-[24px]" data-node-id="736:142" data-name="Spacer" />
+        </div>
+        <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[14px] whitespace-nowrap" data-node-id="736:143">
+          최근 4개의 꿈에서 나타난 감정 비율이에요.
+        </p>
+        <div className="content-stretch flex gap-[8px] items-start relative shrink-0" data-node-id="736:144" data-name="Period Segment">
+          <div className="bg-[#6e63ff] content-stretch flex items-center justify-center overflow-clip px-[14px] py-[6px] relative rounded-[10px] shrink-0" data-node-id="736:145" data-name="Period/최근 4개">
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[12px] text-white whitespace-nowrap" data-node-id="736:146">
+              최근 4개
+            </p>
+          </div>
+          <div className="border border-[#c7c7c7] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[6px] relative rounded-[10px] shrink-0" data-node-id="736:147" data-name="Period/1주">
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[12px] whitespace-nowrap" data-node-id="736:148">
+              1주
+            </p>
+          </div>
+          <div className="border border-[#c7c7c7] border-solid content-stretch flex items-center justify-center overflow-clip px-[14px] py-[6px] relative rounded-[10px] shrink-0" data-node-id="736:149" data-name="Period/1개월">
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#555] text-[12px] whitespace-nowrap" data-node-id="736:150">
+              1개월
+            </p>
+          </div>
+        </div>
+        <div className="bg-[#f5f3ff] content-stretch flex gap-[8px] items-center p-[10px] relative rounded-[10px] shrink-0 w-full" data-node-id="736:151" data-name="Top Emotion Summary">
+          <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[11px] shrink-0 size-[22px]" data-node-id="736:154" data-name="Icon Circle">
+            <div className="relative shrink-0 size-[12px]" data-node-id="736:152" data-name="icon/spark">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSpark} />
+            </div>
+          </div>
+          <p className="[word-break:break-word] font-['Pretendard:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] whitespace-nowrap" data-node-id="736:155">
+            가장 자주 나타난 감정은 ‘불안’이에요.
+          </p>
+        </div>
+        <div className="bg-white content-stretch drop-shadow-[0px_0px_13.5px_rgba(113,101,246,0.18)] flex flex-col gap-[2px] items-start p-[16px] relative rounded-[24px] shrink-0 w-full" data-node-id="736:156" data-name="Emotion List Card">
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:157" data-name="Row/불안">
+            <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:163" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:158" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-[34px]" data-node-id="736:164">
+              불안
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] overflow-clip relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:165" data-name="Track">
+              <div className="absolute bg-[#6e63ff] h-[10px] left-0 rounded-[5px] top-0 w-[79px]" data-node-id="736:166" data-name="Bar" />
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] text-right w-[38px]" data-node-id="736:167">
+              52%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:168" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:170" data-name="Row/행복">
+            <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:176" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:171" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-[34px]" data-node-id="736:177">
+              행복
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] overflow-clip relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:178" data-name="Track">
+              <div className="absolute bg-[#8f87ff] h-[10px] left-0 rounded-[5px] top-0 w-[38px]" data-node-id="736:179" data-name="Bar" />
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] text-right w-[38px]" data-node-id="736:180">
+              25%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:181" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:183" data-name="Row/슬픔">
+            <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:189" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:184" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-[34px]" data-node-id="736:190">
+              슬픔
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] overflow-clip relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:191" data-name="Track">
+              <div className="absolute bg-[#a9a3ff] h-[10px] left-0 rounded-[5px] top-0 w-[15px]" data-node-id="736:192" data-name="Bar" />
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] text-right w-[38px]" data-node-id="736:193">
+              10%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:194" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:196" data-name="Row/설렘">
+            <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:202" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:197" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-[34px]" data-node-id="736:203">
+              설렘
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] overflow-clip relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:204" data-name="Track">
+              <div className="absolute bg-[#bdb8ff] h-[10px] left-0 rounded-[5px] top-0 w-[12px]" data-node-id="736:205" data-name="Bar" />
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] text-right w-[38px]" data-node-id="736:206">
+              8%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:207" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:209" data-name="Row/편안">
+            <div className="bg-[#ececff] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:215" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:210" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-[34px]" data-node-id="736:216">
+              편안
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] overflow-clip relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:217" data-name="Track">
+              <div className="absolute bg-[#cfcbff] h-[10px] left-0 rounded-[5px] top-0 w-[8px]" data-node-id="736:218" data-name="Bar" />
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#6e63ff] text-[13px] text-right w-[38px]" data-node-id="736:219">
+              5%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:220" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:222" data-name="Row/기대">
+            <div className="bg-[#f4f4f8] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:228" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:223" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[14px] w-[34px]" data-node-id="736:229">
+              기대
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:230" data-name="Track" />
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[13px] text-right w-[38px]" data-node-id="736:231">
+              0%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:232" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev1} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:234" data-name="Row/분노">
+            <div className="bg-[#f4f4f8] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:240" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:235" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[14px] w-[34px]" data-node-id="736:241">
+              분노
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:242" data-name="Track" />
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[13px] text-right w-[38px]" data-node-id="736:243">
+              0%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:244" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev1} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:246" data-name="Row/피로">
+            <div className="bg-[#f4f4f8] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:252" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:247" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[14px] w-[34px]" data-node-id="736:253">
+              피로
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:254" data-name="Track" />
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[13px] text-right w-[38px]" data-node-id="736:255">
+              0%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:256" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev1} />
+            </div>
+          </div>
+          <div className="content-stretch flex gap-[10px] items-center py-[6px] relative shrink-0" data-node-id="736:258" data-name="Row/놀람">
+            <div className="bg-[#f4f4f8] content-stretch flex items-center justify-center relative rounded-[16px] shrink-0 size-[32px]" data-node-id="736:264" data-name="Icon Circle">
+              <div className="relative shrink-0 size-[16px]" data-node-id="736:259" data-name="icon/smile">
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconSmile1} />
+              </div>
+            </div>
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[20px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[14px] w-[34px]" data-node-id="736:265">
+              놀람
+            </p>
+            <div className="bg-[#f0eeff] h-[10px] relative rounded-[5px] shrink-0 w-[151px]" data-node-id="736:266" data-name="Track" />
+            <p className="[word-break:break-word] font-['Pretendard:SemiBold'] h-[18px] leading-[normal] not-italic relative shrink-0 text-[#a8a8b5] text-[13px] text-right w-[38px]" data-node-id="736:267">
+              0%
+            </p>
+            <div className="relative shrink-0 size-[16px]" data-node-id="736:268" data-name="icon/chev">
+              <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconChev1} />
+            </div>
+          </div>
+        </div>
+        <p className="[word-break:break-word] font-['Pretendard:Regular'] leading-[normal] not-italic relative shrink-0 text-[#7a7a7a] text-[11px] whitespace-nowrap" data-node-id="737:135">
+          기록 1건당 최대 3개 감정을 반영한 평균 비율이에요.
+        </p>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Images and SVGs will be stored as constants, e.g. const image = 'https://www.figma.com/api/mcp/asset/550e8400-e29b-41d4-a716-446655440000.png'. These constants will be used in the code as the source for the image, ex: <img src={image} />. Image assets are stored on a remote server for 7 days and can be fetched using the provided URLs until they expire.

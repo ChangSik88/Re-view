@@ -4,6 +4,7 @@ import '../services/report_service.dart';
 import 'design.dart';
 import 'review_state.dart';
 import 'chat_page.dart';
+import 'emotion_statistics_page.dart';
 
 void openChat(BuildContext context, Routine routine, [DiaryRecord? record]) =>
     Navigator.push(
@@ -459,8 +460,19 @@ class EmotionCard extends StatelessWidget {
     final demo = context.watch<ReviewState>().preview;
     return Paper(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(routine == Routine.morning ? '꿈 감정 통계' : '하루 감정 통계',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+      Row(children: [
+        Expanded(
+            child: Text(routine == Routine.morning ? '꿈 감정 통계' : '하루 감정 통계',
+                style: const TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.w600))),
+        if (routine == Routine.night)
+          PreviewLink(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) =>
+                          EmotionStatisticsPage(routine: routine)))),
+      ]),
       const SizedBox(height: 6),
       Text(demo ? '최근 4일간 자주 나타난 감정이에요. (예시)' : '기록을 바탕으로 감정을 돌아보세요.',
           style: const TextStyle(fontSize: 10, color: muted)),

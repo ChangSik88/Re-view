@@ -8,9 +8,32 @@ import 'package:frontend/review/diary_pages.dart';
 import 'package:frontend/review/chat_page.dart';
 import 'package:frontend/review/store_pages.dart';
 import 'package:frontend/review/settings_page.dart';
+import 'package:frontend/review/emotion_statistics_page.dart';
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+  testWidgets('Night emotion statistics opens and returns to same home',
+      (tester) async {
+    final state = ReviewState();
+    await state.start(demo: true);
+    await mount(tester, state, const DiaryHomePage(routine: Routine.night));
+    await tester.tap(find.text('전체보기'));
+    await tester.pumpAndSettle();
+    expect(find.byType(EmotionStatisticsPage), findsOneWidget);
+    expect(find.text('최근 4개의 하루 기록에서 나타난 감정 비율이에요.'), findsOneWidget);
+    expect(find.text('52%'), findsOneWidget);
+    await tester.tap(find.byTooltip('뒤로가기'));
+    await tester.pumpAndSettle();
+    expect(find.text('하루 감정 통계'), findsOneWidget);
+    expect(find.text('나이트루틴'), findsOneWidget);
+  });
+  testWidgets('Real statistics never display prototype percentages',
+      (tester) async {
+    await mount(tester, ReviewState(),
+        const EmotionStatisticsPage(routine: Routine.night));
+    expect(find.text('52%'), findsNothing);
+    expect(find.textContaining('감정 비율은 아직 제공되지'), findsOneWidget);
+  });
   test('Previous day lookup matches exact date and NIGHT routine', () async {
     final state = ReviewState();
     await state.start(demo: true);
