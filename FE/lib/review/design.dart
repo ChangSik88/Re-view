@@ -103,6 +103,7 @@ class ReviewPage extends StatelessWidget {
   final Color background;
   final bool scroll;
   final double horizontalPadding;
+  final double footerBottomPadding;
   const ReviewPage(
       {super.key,
       required this.child,
@@ -110,7 +111,8 @@ class ReviewPage extends StatelessWidget {
       this.footer,
       this.background = Colors.white,
       this.scroll = true,
-      this.horizontalPadding = gutter});
+      this.horizontalPadding = gutter,
+      this.footerBottomPadding = 12});
   @override
   Widget build(BuildContext context) {
     final demo = context.watch<ReviewState>().preview;
@@ -138,7 +140,8 @@ class ReviewPage extends StatelessWidget {
                     child: child)),
         if (footer != null)
           Padding(
-              padding: const EdgeInsets.fromLTRB(gutter, 8, gutter, 12),
+              padding:
+                  EdgeInsets.fromLTRB(gutter, 8, gutter, footerBottomPadding),
               child: footer!),
       ])),
       bottomNavigationBar: tab == null

@@ -149,6 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       final prefs = await SharedPreferences.getInstance();
                       await prefs.remove('jwt_token');
                       await prefs.remove('user_id');
+                      await prefs.remove('auto_login');
                     }
                     if (context.mounted) {
                       Navigator.pushNamedAndRemoveUntil(

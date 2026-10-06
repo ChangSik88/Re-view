@@ -12,6 +12,31 @@ import 'package:frontend/review/emotion_statistics_page.dart';
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
+  testWidgets('Morning emotion statistics opens from home', (tester) async {
+    final state = ReviewState();
+    await state.start(demo: true);
+    await mount(tester, state, const DiaryHomePage());
+    await tester.tap(find.text('전체보기'));
+    await tester.pumpAndSettle();
+    expect(find.byType(EmotionStatisticsPage), findsOneWidget);
+    expect(find.text('최근 4개의 꿈에서 나타난 감정 비율이에요.'), findsOneWidget);
+  });
+  testWidgets('Statistics periods switch without fabricating live values',
+      (tester) async {
+    await mount(tester, ReviewState(),
+        const EmotionStatisticsPage(routine: Routine.night));
+    for (final period in ['1주', '1개월', '최근 4개']) {
+      await tester.tap(find.text(period));
+      await tester.pumpAndSettle();
+      expect(
+          find.text(period == '최근 4개'
+              ? '최근 4개의 하루 기록에서 나타난 감정 비율이에요.'
+              : '최근 $period 동안 기록한 하루 기록의 감정 비율이에요.'),
+          findsOneWidget);
+      expect(find.text('52%'), findsNothing);
+      expect(tester.takeException(), isNull);
+    }
+  });
   testWidgets('Night emotion statistics opens and returns to same home',
       (tester) async {
     final state = ReviewState();

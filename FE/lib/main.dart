@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'review/design.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'Re-view',
         debugShowCheckedModeBanner: false,
         theme: reviewTheme(),
-        home: LoginScreen(),
+        home: const AppEntryPage(),
         routes: {
           '/login': (_) => LoginScreen(),
           '/signup': (_) => SignUpScreen(),
@@ -42,6 +43,42 @@ class MyApp extends StatelessWidget {
           '/routine_select': (_) => const DiaryHomePage(),
         },
       ));
+}
+
+class AppEntryPage extends StatefulWidget {
+  const AppEntryPage({super.key});
+  @override
+  State<AppEntryPage> createState() => _AppEntryPageState();
+}
+
+class _AppEntryPageState extends State<AppEntryPage> {
+  bool ready = false;
+  @override
+  void initState() {
+    super.initState();
+    _restore();
+  }
+
+  Future<void> _restore() async {
+    final prefs = await SharedPreferences.getInstance();
+    final remember = prefs.getBool('auto_login') == true &&
+        (prefs.getString('jwt_token') ?? '').isNotEmpty &&
+        (prefs.getString('user_id') ?? '').isNotEmpty;
+    if (!remember) {
+      await prefs.remove('jwt_token');
+      await prefs.remove('user_id');
+    }
+    if (!mounted) return;
+    await context
+        .read<ReviewState>()
+        .start(demo: !remember, asGuest: !remember);
+    if (mounted) setState(() => ready = true);
+  }
+
+  @override
+  Widget build(BuildContext context) => ready
+      ? const HomePage()
+      : const Scaffold(body: Center(child: CircularProgressIndicator()));
 }
 
 class StartPage extends StatefulWidget {

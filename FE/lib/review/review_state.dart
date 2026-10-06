@@ -91,6 +91,7 @@ bool sameDate(DateTime a, DateTime b) =>
 
 class ReviewState extends ChangeNotifier {
   bool preview = false, loading = false;
+  bool guest = false;
   String? error;
   String account = '';
   List<DiaryRecord> records = [];
@@ -110,7 +111,8 @@ class ReviewState extends ChangeNotifier {
     return null;
   }
 
-  Future<void> start({bool demo = false}) async {
+  Future<void> start({bool demo = false, bool asGuest = false}) async {
+    guest = asGuest;
     preview = demo;
     records = [];
     products = [];

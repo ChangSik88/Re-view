@@ -11,6 +11,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _autoLogin = false;
+
+  @override
+  void dispose() {
+    _idController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   Future<void> _login() async {
     final String userId = _idController.text;
@@ -24,20 +32,24 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final token = await authService.login(userId, password);
+      if (token == null || token.isEmpty) {
+        throw StateError('Missing access token');
+      }
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('jwt_token', token ?? '');
+      await prefs.setString('jwt_token', token);
       await prefs.setString('user_id', _idController.text);
+      await prefs.setBool('auto_login', _autoLogin);
 
       if (!mounted) return;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('로그인 성공!')));
 
-      Navigator.pushReplacementNamed(context, '/start');
+      Navigator.pushNamedAndRemoveUntil(context, '/start', (_) => false);
     } on ApiException catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('로그인 실패: ${e.statusCode}')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('로그인 실패: ${e.statusCode}')));
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context)
@@ -114,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text('Sign in to continue to AI-Diary',
                           style: TextStyle(color: Colors.grey)),
                       TextButton(
-                        onPressed: () => Navigator.pushNamed(context, '/preview'),
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/preview'),
                         child: const Text('디자인 미리보기 (예시 데이터)'),
                       ),
                       SizedBox(height: 40),
@@ -180,6 +193,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       SizedBox(height: 30),
 
+                      Material(
+                        color: Colors.transparent,
+                        child: CheckboxListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: const Text('자동로그인'),
+                          controlAffinity: ListTileControlAffinity.leading,
+                          value: _autoLogin,
+                          onChanged: (value) =>
+                              setState(() => _autoLogin = value ?? false),
+                        ),
+                      ),
                       // 로그인 버튼
                       GestureDetector(
                         onTap: _login,

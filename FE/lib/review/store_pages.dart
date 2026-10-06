@@ -181,17 +181,18 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) => ReviewPage(
+      footerBottomPadding: 32,
       footer: Row(children: [
         Expanded(
             child: PrimaryButton('장바구니',
-                height: 40,
+                height: 48,
                 radius: 10,
                 outlined: true,
                 onPressed: adding ? null : _add)),
         const SizedBox(width: 10),
         Expanded(
             child: PrimaryButton('구매하기',
-                height: 40,
+                height: 48,
                 radius: 10,
                 onPressed: adding ? null : () => _add(checkout: true)))
       ]),
@@ -204,7 +205,7 @@ class _ProductPageState extends State<ProductPage> {
               icon: const Icon(Icons.shopping_cart_outlined))
         ]),
         gap,
-        RecordImage(item.image, height: 300, radius: 20),
+        RecordImage(item.image, height: 240, radius: 18),
         const SizedBox(height: 24),
         Text(item.name,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
