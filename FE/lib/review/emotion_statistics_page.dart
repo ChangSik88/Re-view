@@ -3,14 +3,21 @@ import 'package:provider/provider.dart';
 import 'design.dart';
 import 'review_state.dart';
 
-class EmotionStatisticsPage extends StatelessWidget {
+class EmotionStatisticsPage extends StatefulWidget {
   final Routine routine;
   const EmotionStatisticsPage({super.key, required this.routine});
 
   @override
+  State<EmotionStatisticsPage> createState() => _EmotionStatisticsPageState();
+}
+
+class _EmotionStatisticsPageState extends State<EmotionStatisticsPage> {
+  String period = '최근 4개';
+
+  @override
   Widget build(BuildContext context) {
     final preview = context.watch<ReviewState>().preview;
-    final subject = routine == Routine.night ? '하루 기록' : '꿈';
+    final subject = widget.routine == Routine.night ? '하루 기록' : '꿈';
     const values = [52, 25, 10, 8, 5, 0, 0, 0, 0];
     const labels = ['불안', '행복', '슬픔', '설렘', '편안', '기대', '분노', '피로', '놀람'];
     const colors = [0xFF6E63FF, 0xFF8F87FF, 0xFFA9A3FF, 0xFFBDB8FF, 0xFFCFCBFF];
@@ -35,7 +42,10 @@ class EmotionStatisticsPage extends StatelessWidget {
               const SizedBox(width: 24),
             ])),
         const SizedBox(height: 16),
-        Text('최근 4개의 $subject에서 나타난 감정 비율이에요.',
+        Text(
+            period == '최근 4개'
+                ? '최근 4개의 $subject에서 나타난 감정 비율이에요.'
+                : '최근 $period 동안 기록한 $subject의 감정 비율이에요.',
             style: const TextStyle(fontSize: 14, color: Color(0xFF555555))),
         const SizedBox(height: 16),
         Row(
@@ -43,20 +53,18 @@ class EmotionStatisticsPage extends StatelessWidget {
                 .map((label) => Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: Semantics(
-                        selected: label == '최근 4개',
+                        selected: label == period,
                         button: true,
                         child: InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          onTap: label == '최근 4개'
-                              ? null
-                              : () => message(context, '기간별 감정 통계는 준비 중이에요.'),
+                          onTap: () => setState(() => period = label),
                           child: Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 14, vertical: 6),
                             decoration: BoxDecoration(
-                                color: label == '최근 4개' ? purple : Colors.white,
+                                color: label == period ? purple : Colors.white,
                                 border: Border.all(
-                                    color: label == '최근 4개'
+                                    color: label == period
                                         ? purple
                                         : const Color(0xFFC7C7C7)),
                                 borderRadius: BorderRadius.circular(10)),
@@ -64,7 +72,7 @@ class EmotionStatisticsPage extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
-                                    color: label == '최근 4개'
+                                    color: label == period
                                         ? Colors.white
                                         : const Color(0xFF555555))),
                           ),

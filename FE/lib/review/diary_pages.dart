@@ -75,17 +75,21 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Row(children: [
                 Expanded(
-                    child: PrimaryButton('꿈 기록하기',
+                    child: PrimaryButton(state.guest ? '로그인' : '꿈 기록하기',
                         height: 42,
                         radius: 10,
-                        onPressed: () => openChat(context, Routine.morning))),
+                        onPressed: () => state.guest
+                            ? Navigator.pushNamed(context, '/login')
+                            : openChat(context, Routine.morning))),
                 const SizedBox(width: 12),
                 Expanded(
-                    child: PrimaryButton('하루 기록하기',
+                    child: PrimaryButton(state.guest ? '회원가입' : '하루 기록하기',
                         height: 42,
                         radius: 10,
                         outlined: true,
-                        onPressed: () => openChat(context, Routine.night))),
+                        onPressed: () => state.guest
+                            ? Navigator.pushNamed(context, '/signup')
+                            : openChat(context, Routine.night))),
               ])),
           const SizedBox(height: 20),
           if (state.loading) const LinearProgressIndicator(minHeight: 2),
@@ -465,13 +469,11 @@ class EmotionCard extends StatelessWidget {
             child: Text(routine == Routine.morning ? '꿈 감정 통계' : '하루 감정 통계',
                 style: const TextStyle(
                     fontSize: 16, fontWeight: FontWeight.w600))),
-        if (routine == Routine.night)
-          PreviewLink(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) =>
-                          EmotionStatisticsPage(routine: routine)))),
+        PreviewLink(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => EmotionStatisticsPage(routine: routine)))),
       ]),
       const SizedBox(height: 6),
       Text(demo ? '최근 4일간 자주 나타난 감정이에요. (예시)' : '기록을 바탕으로 감정을 돌아보세요.',

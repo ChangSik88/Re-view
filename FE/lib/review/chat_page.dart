@@ -11,14 +11,58 @@ import 'story_field_dialog.dart';
 import 'voice_composer.dart';
 
 class ReviewChatPage extends StatefulWidget {
+  final ChatService? service;
   final Routine routine;
   final DiaryRecord? record;
-  const ReviewChatPage({super.key, required this.routine, this.record});
+  const ReviewChatPage(
+      {super.key, required this.routine, this.record, this.service});
   @override
   State<ReviewChatPage> createState() => _ReviewChatPageState();
 }
 
 class _ReviewChatPageState extends State<ReviewChatPage> {
+  ChatService get service => widget.service ?? chatService;
+  final Set<String> editedFields = {};
+  bool replying = false;
+  String partialReply = '';
+  final replyKey = GlobalKey();
+  final conversationEndKey = GlobalKey();
+
+  Future<void> _reveal(String reply) async {
+    final letters = reply.characters.toList();
+    for (var i = 0; i < letters.length; i += 3) {
+      if (!mounted) return;
+      setState(() => partialReply = letters.take(i + 3).join());
+      _scrollDown();
+      await Future<void>.delayed(const Duration(milliseconds: 24));
+    }
+    if (!mounted) return;
+    setState(() {
+      messages.add((text: reply, me: false));
+      partialReply = '';
+    });
+  }
+
+  void _applyDetails(Map? data) {
+    if (data == null) return;
+    String value(String key) => data[key] is String ? data[key] as String : '';
+    if (!editedFields.contains('장소') && value('place').isNotEmpty) {
+      place = value('place');
+    }
+    if (!editedFields.contains('감정') && value('emotions').isNotEmpty) {
+      emotionText = value('emotions');
+    }
+    if (!editedFields.contains('생활') && value('situation').isNotEmpty) {
+      life = value('situation');
+    }
+    if (!editedFields.contains('기타 메모') && value('memo').isNotEmpty) {
+      memo = value('memo');
+    }
+    if (!editedFields.contains('등장인물') && data['characters'] is List) {
+      characters.addAll((data['characters'] as List).whereType<String>());
+    }
+  }
+
   final input = TextEditingController();
   final scroll = ScrollController();
   final List<({String text, bool me})> messages = [];
@@ -85,7 +129,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
       error = null;
     });
     try {
-      final history = await chatService
+      final history = await service
           .getHistory(session)
           .timeout(const Duration(seconds: 30));
       if (!mounted) return;
@@ -104,6 +148,13 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
   }
 
   void _scrollDown() => WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        final target = replying ? replyKey : conversationEndKey;
+        if (target.currentContext != null) {
+          Scrollable.ensureVisible(target.currentContext!,
+              alignment: 1, duration: const Duration(milliseconds: 100));
+          return;
+        }
         if (scroll.hasClients) {
           scroll.animateTo(scroll.position.maxScrollExtent,
               duration: const Duration(milliseconds: 250),
@@ -116,6 +167,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
     final state = context.read<ReviewState>();
     setState(() {
       busy = true;
+      replying = true;
       error = null;
       input.clear();
       messages.add((text: text, me: true));
@@ -130,22 +182,24 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
         });
       } else {
         if (session == 0) {
-          session = await chatService
+          session = await service
               .createSession(widget.routine.apiValue, state.account)
               .timeout(const Duration(seconds: 30));
           if (session <= 0) throw StateError('세션 생성 실패');
         }
-        final response = await chatService
+        if (!mounted) return;
+        final response = await service
             .sendMessage(session, text)
             .timeout(const Duration(seconds: 90));
         if (!mounted) return;
         final analysis = response['analysis'] as Map?;
+        final reply = '${analysis?['ai_reply'] ?? ''}'.trim();
+        if (reply.isEmpty) throw StateError('Empty reply');
+        await _reveal(reply);
+        if (!mounted) return;
         setState(() {
-          messages.add((
-            text: '${analysis?['ai_reply'] ?? '응답이 비어 있어요. 다시 확인해 주세요.'}',
-            me: false
-          ));
           suggested = List<String>.from(analysis?['suggested_feelings'] ?? []);
+          _applyDetails(analysis?['story_details'] as Map?);
         });
       }
     } catch (_) {
@@ -157,7 +211,10 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
       }
     } finally {
       if (mounted) {
-        setState(() => busy = false);
+        setState(() {
+          busy = false;
+          replying = false;
+        });
         _scrollDown();
       }
     }
@@ -187,12 +244,12 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
         state.records.add(generated);
       } else {
         if (session == 0) {
-          session = await chatService
+          session = await service
               .createSession(widget.routine.apiValue, state.account)
               .timeout(const Duration(seconds: 30));
           if (session <= 0) throw StateError('세션 생성 실패');
         }
-        await chatService.confirmAndGenerate(
+        await service.confirmAndGenerate(
             session,
             confirmed.confirmation,
             [emotionText, ...feelings]
@@ -220,7 +277,11 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
     final result = await showDialog<String>(
         context: context,
         builder: (_) => StoryFieldDialog(label: label, initial: value));
-    if (result != null && mounted) setState(() => save(result));
+    if (result != null && mounted)
+      setState(() {
+        editedFields.add(label);
+        save(result);
+      });
   }
 
   Widget _detailRow(
@@ -261,6 +322,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
         builder: (_) => CharacterDialog(selected: characters));
     if (selected == null || !mounted) return;
     setState(() {
+      editedFields.add('등장인물');
       characters.clear();
       characters.addAll(selected);
     });
@@ -361,6 +423,23 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                 retry: session != 0 && !busy ? _load : null),
                             gap
                           ],
+                          if (replying)
+                            Padding(
+                              key: replyKey,
+                              padding: const EdgeInsets.only(bottom: 16),
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const LumiArt(),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                        child: Paper(
+                                            child: Text(partialReply.isEmpty
+                                                ? '루미가 답장을 생각하고 있어요…'
+                                                : partialReply))),
+                                  ]),
+                            ),
+                          SizedBox(key: conversationEndKey, height: 1),
                           Padding(
                               padding: const EdgeInsets.only(left: 48),
                               child: Paper(
@@ -440,14 +519,16 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                               fontSize: 12, color: muted)),
                                       gap,
                                       PrimaryButton(
-                                          busy ? '이야기 구성 중…' : '정보가 맞아요',
+                                          busy && !replying
+                                              ? '이야기 구성 중…'
+                                              : '정보가 맞아요',
                                           height: 44,
                                           radius: 10,
                                           onPressed: busy ? null : _generate),
                                     ]),
                               )),
                           gap,
-                          if (busy)
+                          if (busy && !replying)
                             const Padding(
                                 padding: EdgeInsets.all(12),
                                 child: Row(children: [
