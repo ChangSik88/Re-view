@@ -11,7 +11,16 @@ class SessionCreateRequest(BaseModel):
 
 
 #출력 형태 구조화
+class StoryDetailsResponse(BaseModel):
+    place: str = ""
+    characters: List[str] = Field(default_factory=list)
+    emotions: str = ""
+    situation: str = ""
+    memo: str = ""
+
+
 class AIAnalysisResponse(BaseModel):
+    story_details: StoryDetailsResponse = Field(default_factory=StoryDetailsResponse)
     theme: str = Field(description="꿈의 핵심 주제")
     vibe: str = Field(description="꿈의 전반적인 분위기")
     #동적 생성. 핵심 감정 키워드 3개를 대화에서 추출

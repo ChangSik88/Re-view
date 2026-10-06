@@ -37,11 +37,11 @@ class ChatService:
         session = await self._get_owned_session(user_id, room_id)
         routine_type = session.routine_type
 
-        # 유저가 보낸 메시지를 DB에 저장
-        await self.chat_repo.save_message(room_id, "USER", user_message)
-
         # 2. 과거 대화 기록을 DB에서 꺼내옵니다.
         history = await self.chat_repo.get_chat_history(room_id)
+
+        # 새 메시지는 모델에 별도로 전달하므로 이전 기록에는 중복하지 않는다.
+        await self.chat_repo.save_message(room_id, "USER", user_message)
 
         formatted_history = "\n".join([f"{msg.role}: {msg.content}" for msg in history])
 
