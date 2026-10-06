@@ -190,12 +190,17 @@ class PreviewLink extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(20),
           child: Container(
+              constraints: const BoxConstraints(minHeight: 44),
               padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
               decoration: BoxDecoration(
                   color: const Color(0xFFEAE6FF),
                   borderRadius: BorderRadius.circular(20)),
               child: const Row(mainAxisSize: MainAxisSize.min, children: [
-                Text('전체보기', style: TextStyle(fontSize: 10, color: purple)),
+                Text('전체보기',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: purple)),
                 SizedBox(width: 4),
                 FIcon('chevron', size: 8)
               ]))));
@@ -259,7 +264,7 @@ class _DiaryHomePageState extends State<DiaryHomePage> {
         Expanded(
             child: Text(routine == Routine.morning ? '내 꿈나라' : '내 일기장',
                 style: const TextStyle(
-                    fontSize: 28, fontWeight: FontWeight.w700))),
+                    fontSize: 28, height: 1.35, fontWeight: FontWeight.w600))),
         IconButton(
             tooltip: '기록 검색',
             onPressed: () => Navigator.push(
@@ -555,21 +560,47 @@ class SummaryCard extends StatelessWidget {
                               ? '오늘의 꿈 요약'
                               : '오늘 하루 요약',
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600)),
-                      gap,
-                      Text(record.title,
-                          style: const TextStyle(
-                              fontSize: 14,
-                              color: purple,
+                              fontSize: 18,
+                              height: 1.35,
                               fontWeight: FontWeight.w600)),
+                      gap,
+                      ConstrainedBox(
+                          constraints: BoxConstraints(
+                              minHeight:
+                                  MediaQuery.textScalerOf(context).scale(14) *
+                                      1.35 *
+                                      2),
+                          child: Text(
+                              record.title
+                                  .replaceAll(RegExp(r'\s+'), ' ')
+                                  .trim(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  height: 1.35,
+                                  color: purple,
+                                  fontWeight: FontWeight.w600))),
                       const SizedBox(height: 8),
-                      Text(
-                          record.content.isEmpty
-                              ? '대화를 이어서 기록을 완성해 보세요.'
-                              : record.content,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 12, color: muted)),
+                      ConstrainedBox(
+                          constraints: BoxConstraints(
+                              minHeight:
+                                  MediaQuery.textScalerOf(context).scale(12) *
+                                      1.5 *
+                                      2),
+                          child: Text(
+                              record.content.isEmpty
+                                  ? '대화를 이어서 기록을 완성해 보세요.'
+                                  : record.content
+                                      .replaceAll(RegExp(r'\s+'), ' ')
+                                      .trim(),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                  color: muted))),
                       const SizedBox(height: 8),
                       Row(children: [
                         FilledButton.tonal(
@@ -581,7 +612,9 @@ class SummaryCard extends StatelessWidget {
                                     ? 'AI 해석보기  ›'
                                     : 'AI 조언 보기  ›',
                                 style: const TextStyle(
-                                    color: purple, fontSize: 12))),
+                                    color: purple,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600))),
                         const Spacer(),
                         IconButton(
                             tooltip: record.marked ? '북마크 해제' : '북마크 추가',
