@@ -113,20 +113,28 @@ void main() {
     expect(find.text('꿈 감정 통계'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
-  testWidgets('Character other dialog closes only overlay and returns to chat',
+  testWidgets('Character direct entry preserves text when reopened',
       (tester) async {
     final state = ReviewState();
     await state.start(demo: true);
     await mount(tester, state, const ReviewChatPage(routine: Routine.morning));
     await tester.tap(find.text('등장인물'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('기타'));
-    await tester.pumpAndSettle();
+    expect(find.text('기타'), findsNothing);
     await tester.enterText(find.byType(TextField).last, '모르는 학생');
     await tester.tap(find.text('수정 완료'));
     await tester.pumpAndSettle();
-    expect(find.byType(CharacterDialog), findsNothing);
+    expect(find.byType(AlertDialog), findsNothing);
     expect(find.byType(ReviewChatPage), findsOneWidget);
+    expect(find.textContaining('모르는 학생'), findsOneWidget);
+    await tester.tap(find.text('등장인물'));
+    await tester.pumpAndSettle();
+    expect(
+        tester.widget<TextField>(find.byType(TextField).last).controller!.text,
+        '모르는 학생');
+    await tester.enterText(find.byType(TextField).last, '취소할 변경');
+    await tester.tap(find.text('취소'));
+    await tester.pumpAndSettle();
     expect(find.textContaining('모르는 학생'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });

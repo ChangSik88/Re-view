@@ -317,10 +317,16 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
               ])));
 
   Future<void> _editCharacters() async {
-    final selected = await showDialog<Set<String>>(
+    final entered = await showDialog<String>(
         context: context,
-        builder: (_) => CharacterDialog(selected: characters));
-    if (selected == null || !mounted) return;
+        builder: (_) =>
+            StoryFieldDialog(label: '등장인물', initial: characters.join(', ')));
+    if (entered == null || !mounted) return;
+    final selected = entered
+        .split(RegExp(r'[,\n]'))
+        .map((s) => s.trim())
+        .where((s) => s.isNotEmpty)
+        .toSet();
     setState(() {
       editedFields.add('등장인물');
       characters.clear();
@@ -550,125 +556,4 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
               onSend: _send),
         ]));
   }
-}
-
-class CharacterDialog extends StatefulWidget {
-  final Set<String> selected;
-  const CharacterDialog({super.key, required this.selected});
-  @override
-  State<CharacterDialog> createState() => _CharacterDialogState();
-}
-
-class _CharacterDialogState extends State<CharacterDialog> {
-  static const options = ['친구', '선생님', '가족', '연인', '선, 후배', '기타'];
-  late Set<String> selected;
-  late TextEditingController custom;
-  bool other = false;
-  @override
-  void initState() {
-    super.initState();
-    selected = widget.selected.intersection(options.toSet());
-    final extra = widget.selected.difference(options.toSet());
-    custom = TextEditingController(text: extra.join(', '));
-    other = extra.isNotEmpty || selected.contains('기타');
-  }
-
-  @override
-  void dispose() {
-    custom.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Dialog(
-      insetPadding: const EdgeInsets.all(20),
-      backgroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(children: [
-                  const Expanded(
-                      child: Text('등장인물 수정',
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.w600))),
-                  IconButton(
-                      tooltip: '수정 취소',
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.close))
-                ]),
-                gap,
-                const Text('꿈에 등장한 인물을 선택하거나 입력해 주세요.\n여러 명을 선택할 수 있어요.',
-                    style: TextStyle(fontSize: 13, color: muted)),
-                const SizedBox(height: 24),
-                GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 3,
-                    crossAxisSpacing: 18,
-                    mainAxisSpacing: 10,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: options
-                        .map((o) => OutlinedButton(
-                            onPressed: () => setState(() {
-                                  if (o == '기타') {
-                                    other = !other;
-                                  } else {
-                                    selected.contains(o)
-                                        ? selected.remove(o)
-                                        : selected.add(o);
-                                  }
-                                }),
-                            style: OutlinedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                side: BorderSide(
-                                    color: (o == '기타'
-                                            ? other
-                                            : selected.contains(o))
-                                        ? purple
-                                        : lineColor),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
-                            child: Row(children: [
-                              const Icon(Icons.person, size: 17, color: purple),
-                              const SizedBox(width: 5),
-                              Expanded(
-                                  child: Text(o,
-                                      style: const TextStyle(
-                                          fontSize: 12, color: Colors.black))),
-                              if (o == '기타' ? other : selected.contains(o))
-                                const Icon(Icons.check_circle,
-                                    size: 20, color: purple)
-                            ])))
-                        .toList()),
-                if (other) ...[
-                  gap,
-                  const Text('직접 입력',
-                      style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-                  gap,
-                  TextField(
-                      controller: custom,
-                      decoration: InputDecoration(
-                          hintText: '등장인물을 입력해 주세요',
-                          suffixIcon: IconButton(
-                              tooltip: '입력 지우기',
-                              onPressed: custom.clear,
-                              icon: const Icon(Icons.close, size: 18))))
-                ],
-                const SizedBox(height: 24),
-                PrimaryButton('수정 완료', height: 44, radius: 10, onPressed: () {
-                  final result = {...selected}..remove('기타');
-                  if (other && custom.text.trim().isEmpty) {
-                    message(context, '기타 등장인물을 입력해 주세요.');
-                    return;
-                  }
-                  if (other) result.add(custom.text.trim());
-                  Navigator.pop(context, result);
-                }),
-              ])));
 }
