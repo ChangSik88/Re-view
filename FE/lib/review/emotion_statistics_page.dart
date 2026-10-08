@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'design.dart';
 import 'review_state.dart';
+import 'emotion_emoji.dart';
 
 class EmotionStatisticsPage extends StatefulWidget {
   final Routine routine;
@@ -124,9 +125,10 @@ class _EmotionStatisticsPageState extends State<EmotionStatisticsPage> {
                                   ? const Color(0xFFECECFF)
                                   : const Color(0xFFF4F4F8)),
                           child: Center(
-                              child: FigmaAsset(active
-                                  ? '736-135/imgIconSmile'
-                                  : '736-135/imgIconSmile1'))),
+                              child: Opacity(
+                                  opacity: active ? 1 : .45,
+                                  child: EmotionEmoji(
+                                      emotion: labels[i], size: 20)))),
                       const SizedBox(width: 10),
                       SizedBox(
                           width: 34,

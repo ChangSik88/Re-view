@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/report_service.dart';
 import 'design.dart';
 import 'review_state.dart';
+import 'emotion_emoji.dart';
 import 'chat_page.dart';
 import 'emotion_statistics_page.dart';
 
@@ -142,7 +143,9 @@ class HomePage extends StatelessWidget {
                             const SizedBox(height: 8),
                             Opacity(
                                 opacity: record == null ? .3 : 1,
-                                child: const FigmaAsset('516-783/imgVector3'))
+                                child: EmotionEmoji(
+                                    emotion:
+                                        recordedEmotion(record?.tags ?? [])))
                           ]));
                     }),
               ])),
@@ -516,11 +519,7 @@ class EmotionCard extends StatelessWidget {
               border: Border.all(
                   color: purple.withValues(alpha: opacity), width: border)),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            FigmaAsset(size < 70
-                ? '409-738/imgVector7'
-                : opacity == 1
-                    ? '409-738/imgVector6'
-                    : '409-738/imgVector5'),
+            EmotionEmoji(emotion: label, size: size < 70 ? 16 : 24),
             Text(label, style: TextStyle(fontSize: size < 70 ? 8 : 11)),
             Text(value,
                 style: TextStyle(
@@ -767,7 +766,10 @@ class _CalendarPageState extends State<CalendarPage> {
                                 const SizedBox(height: 6),
                                 Opacity(
                                     opacity: record == null ? .25 : 1,
-                                    child: const FIcon('smile', size: 21))
+                                    child: EmotionEmoji(
+                                        emotion:
+                                            recordedEmotion(record?.tags ?? []),
+                                        size: 18))
                               ])));
                 }),
           ])),
