@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/chat_service.dart';
@@ -348,16 +347,6 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
         scroll: false,
         child: Column(children: [
           PageHeader(actions: [
-            IconButton(
-                tooltip: '대화 복사',
-                onPressed: messages.isEmpty
-                    ? null
-                    : () async {
-                        await Clipboard.setData(ClipboardData(
-                            text: messages.map((m) => m.text).join('\n\n')));
-                        if (context.mounted) message(context, '대화를 복사했어요.');
-                      },
-                icon: const FigmaAsset('542-212/imgVector')),
             Text(widget.routine.label,
                 style: const TextStyle(fontSize: 12, color: purple)),
             if (r != null)
