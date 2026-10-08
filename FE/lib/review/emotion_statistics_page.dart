@@ -159,10 +159,6 @@ class _EmotionStatisticsPageState extends State<EmotionStatisticsPage> {
                                   color: active
                                       ? purple
                                       : const Color(0xFFA8A8B5)))),
-                      const SizedBox(width: 10),
-                      FigmaAsset(active
-                          ? '736-135/imgIconChev'
-                          : '736-135/imgIconChev1'),
                     ]));
               }))),
           const SizedBox(height: 16),
