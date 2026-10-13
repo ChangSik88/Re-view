@@ -211,22 +211,18 @@ class PreviewLink extends StatelessWidget {
 
 class LumiArt extends StatelessWidget {
   final double width, height;
-  const LumiArt({super.key, this.width = 42, this.height = 42});
+  final Routine? routine;
+  const LumiArt({super.key, this.width = 68, this.height = 55, this.routine});
   @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget build(BuildContext context) => Image.asset(
+      routine == null
+          ? 'assets/figma/lumi_home.png'
+          : routine == Routine.morning
+              ? 'assets/figma/lumi_morning.png'
+              : 'assets/figma/lumi_night.png',
       width: width,
       height: height,
-      child: ClipRect(
-          child: Stack(children: [
-        Positioned(
-            left: -width * .2264,
-            top: -height * .7772,
-            width: width * 1.41,
-            height: height * 2.51,
-            child: Image.asset(
-                'assets/figma/b73dc5d5-779d-44bf-810e-681b0b65df6f.png',
-                fit: BoxFit.fill)),
-      ])));
+      fit: BoxFit.contain);
 }
 
 class DiaryHomePage extends StatefulWidget {
