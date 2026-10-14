@@ -1,0 +1,61 @@
+name: iOS build validation
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, codex/emotion-statistics]
+    paths:
+      - 'FE/**'
+      - '.github/workflows/ios-build.yml'
+  pull_request:
+    paths:
+      - 'FE/**'
+      - '.github/workflows/ios-build.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: FE
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install matching Flutter SDK
+        run: |
+          git clone --depth 1 --branch 3.47.5 https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Check tools and resolve plugins
+        run: |
+          xcodebuild -version
+          flutter --version
+          flutter config --enable-swift-package-manager
+          flutter pub get
+      - name: Check iOS property list
+        run: plutil -lint ios/Runner/Info.plist
+      - name: Test Lumi chat
+        run: flutter test test/lumi_chat_test.dart
+      - name: Build for iPhone without signing
+        run: flutter build ios --release --no-codesign --build-name=1.0.4 --build-number=${{ github.run_number }}
+      - name: Package unsigned device build
+        run: |
+          mkdir -p build/ios/artifacts
+          ditto -c -k --sequesterRsrc --keepParent build/ios/iphoneos/Runner.app build/ios/artifacts/Re-view-unsigned-iphone.zip
+      - name: Build for iOS Simulator
+        run: flutter build ios --simulator --debug --build-name=1.0.4 --build-number=${{ github.run_number }}
+      - name: Package simulator build
+        run: ditto -c -k --sequesterRsrc --keepParent build/ios/iphonesimulator/Runner.app build/ios/artifacts/Re-view-simulator.zip
+      - name: Save builds
+        uses: actions/upload-artifact@v4
+        with:
+          name: Re-view-iOS-${{ github.run_number }}
+          path: FE/build/ios/artifacts/*.zip
+          if-no-files-found: error
+          retention-days: 14
