@@ -1,3 +1,4 @@
+import 'back_navigation_guard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -116,83 +117,85 @@ class ReviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final demo = context.watch<ReviewState>().preview;
-    return Scaffold(
-      backgroundColor: background,
-      body: SafeArea(
-          child: Column(children: [
-        if (demo)
-          Container(
-              width: double.infinity,
-              color: lavender,
-              padding: const EdgeInsets.symmetric(vertical: 3),
-              child: const Text('디자인 미리보기 · 예시 데이터',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 10, color: purple))),
-        Expanded(
-            child: scroll
-                ? SingleChildScrollView(
-                    padding: EdgeInsets.fromLTRB(
-                        horizontalPadding, 8, horizontalPadding, 20),
-                    child: child)
-                : Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        horizontalPadding, 8, horizontalPadding, 12),
-                    child: child)),
-        if (footer != null)
-          Padding(
-              padding:
-                  EdgeInsets.fromLTRB(gutter, 8, gutter, footerBottomPadding),
-              child: footer!),
-      ])),
-      bottomNavigationBar: tab == null
-          ? null
-          : SafeArea(
-              top: false,
-              child: Container(
-                  height: 64,
-                  color: Colors.white,
-                  child: Row(
-                      children: List.generate(
-                          4,
-                          (i) => Expanded(
-                              child: InkWell(
-                                  onTap: () {
-                                    if (i != tab) {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                          context,
-                                          [
-                                            '/home',
-                                            '/dream_list',
-                                            '/store',
-                                            '/settings'
-                                          ][i],
-                                          (r) => false);
-                                    }
-                                  },
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        FIcon(
-                                            [
-                                              'home',
-                                              'chat',
-                                              'store',
-                                              'settings'
-                                            ][i],
-                                            size: 29,
-                                            color: i == tab
-                                                ? purple
-                                                : const Color(0xFFCCCCCC)),
-                                        const SizedBox(height: 3),
-                                        Text(['홈', 'AI-채팅', '스토어', '설정'][i],
-                                            style: TextStyle(
-                                                fontSize: 10,
+    return BackNavigationGuard(
+        isHome: tab == 0,
+        child: Scaffold(
+          backgroundColor: background,
+          body: SafeArea(
+              child: Column(children: [
+            if (demo)
+              Container(
+                  width: double.infinity,
+                  color: lavender,
+                  padding: const EdgeInsets.symmetric(vertical: 3),
+                  child: const Text('디자인 미리보기 · 예시 데이터',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 10, color: purple))),
+            Expanded(
+                child: scroll
+                    ? SingleChildScrollView(
+                        padding: EdgeInsets.fromLTRB(
+                            horizontalPadding, 8, horizontalPadding, 20),
+                        child: child)
+                    : Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            horizontalPadding, 8, horizontalPadding, 12),
+                        child: child)),
+            if (footer != null)
+              Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      gutter, 8, gutter, footerBottomPadding),
+                  child: footer!),
+          ])),
+          bottomNavigationBar: tab == null
+              ? null
+              : SafeArea(
+                  top: false,
+                  child: Container(
+                      height: 64,
+                      color: Colors.white,
+                      child: Row(
+                          children: List.generate(
+                              4,
+                              (i) => Expanded(
+                                  child: InkWell(
+                                      onTap: () {
+                                        if (i != tab) {
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              [
+                                                '/home',
+                                                '/dream_list',
+                                                '/store',
+                                                '/settings'
+                                              ][i],
+                                              (r) => false);
+                                        }
+                                      },
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            FIcon(
+                                                [
+                                                  'home',
+                                                  'chat',
+                                                  'store',
+                                                  'settings'
+                                                ][i],
+                                                size: 29,
                                                 color: i == tab
                                                     ? purple
-                                                    : Colors.black)),
-                                      ]))))))),
-    );
+                                                    : const Color(0xFFCCCCCC)),
+                                            const SizedBox(height: 3),
+                                            Text(['홈', 'AI-채팅', '스토어', '설정'][i],
+                                                style: TextStyle(
+                                                    fontSize: 10,
+                                                    color: i == tab
+                                                        ? purple
+                                                        : Colors.black)),
+                                          ]))))))),
+        ));
   }
 }
 
