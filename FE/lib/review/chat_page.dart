@@ -223,8 +223,10 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
     if (busy || historyLoading) return;
     final state = context.read<ReviewState>();
     final confirmed = details;
-    if (confirmed.isEmpty) {
-      message(context, '이야기에 담을 정보를 하나 이상 입력해 주세요.');
+    final isNight = widget.routine == Routine.night;
+    if (isNight ? !messages.any((m) => m.me) : confirmed.isEmpty) {
+      message(context,
+          isNight ? '루미에게 오늘 이야기를 먼저 들려주세요.' : '이야기에 담을 정보를 하나 이상 입력해 주세요.');
       return;
     }
     FocusScope.of(context).unfocus();
@@ -238,7 +240,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
             routine: widget.routine,
             title: '확인한 정보로 구성한 이야기 (미리보기)',
             content:
-                '문장 구성 미리보기 — 실제 AI 생성은 로그인 후 이용할 수 있어요.\n\n${confirmed.previewStory}',
+                '문장 구성 미리보기 — 실제 AI 생성은 로그인 후 이용할 수 있어요.\n\n${isNight ? messages.where((m) => m.me).map((m) => m.text).join('\n\n') : confirmed.previewStory}',
             tags: [confirmed.emotions].where((s) => s.isNotEmpty).toList());
         state.records.add(generated);
       } else {
@@ -248,12 +250,17 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
               .timeout(const Duration(seconds: 30));
           if (session <= 0) throw StateError('세션 생성 실패');
         }
-        await service.confirmAndGenerate(
-            session,
-            confirmed.confirmation,
-            [emotionText, ...feelings]
-                .where((s) => s.trim().isNotEmpty)
-                .toList());
+        final keywords = [emotionText, ...feelings]
+            .where((s) => s.trim().isNotEmpty)
+            .toList();
+        if (isNight && editedFields.isEmpty) {
+          await service
+              .generateDiary(session, keywords)
+              .timeout(const Duration(seconds: 150));
+        } else {
+          await service.confirmAndGenerate(
+              session, confirmed.confirmation, keywords);
+        }
         await state.refresh();
         generated = state.records.where((r) => r.id == session).firstOrNull;
         if (generated == null) throw StateError('생성 결과 조회 실패');
@@ -272,16 +279,15 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
   }
 
   String _fieldLabel(String label) => label == '생활'
-      ? (widget.routine == Routine.morning
-          ? '꿈속에서 있었던 일'
-          : '오늘 있었던 일')
+      ? (widget.routine == Routine.morning ? '꿈속에서 있었던 일' : '오늘 있었던 일')
       : label;
 
   Future<void> _editText(
       String label, String value, void Function(String) save) async {
     final result = await showDialog<String>(
         context: context,
-        builder: (_) => StoryFieldDialog(label: _fieldLabel(label), initial: value));
+        builder: (_) =>
+            StoryFieldDialog(label: _fieldLabel(label), initial: value));
     if (result != null && mounted)
       setState(() {
         editedFields.add(label);
@@ -311,7 +317,8 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                 const SizedBox(width: 6),
                 SizedBox(
                     width: 90,
-                    child: Text(_fieldLabel(label), style: const TextStyle(fontSize: 11))),
+                    child: Text(_fieldLabel(label),
+                        style: const TextStyle(fontSize: 11))),
                 Expanded(
                     child: Text(value.isEmpty ? '입력하기' : value,
                         maxLines: 3,
@@ -353,6 +360,11 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
         scroll: false,
         child: Column(children: [
           PageHeader(actions: [
+            if (widget.routine == Routine.night)
+              TextButton(
+                onPressed: busy || historyLoading ? null : _generate,
+                child: Text(busy && !replying ? '저장 중…' : '일기로 저장'),
+              ),
             Text(widget.routine.label,
                 style: const TextStyle(fontSize: 12, color: purple)),
             if (r != null)
@@ -384,8 +396,11 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                     Flexible(
                                         child: Container(
                                             constraints: BoxConstraints(
-                                                maxWidth: m.me ? 270 : double.infinity),
-                                            width: m.me ? null : double.infinity,
+                                                maxWidth: m.me
+                                                    ? 270
+                                                    : double.infinity),
+                                            width:
+                                                m.me ? null : double.infinity,
                                             margin: EdgeInsets.only(
                                                 left: m.me ? 44 : 0),
                                             padding: m.me
@@ -442,93 +457,108 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                   ]),
                             ),
                           SizedBox(key: conversationEndKey, height: 1),
-                          Padding(
-                              padding: const EdgeInsets.only(left: 48),
-                              child: Paper(
-                                radius: 16,
-                                padding: const EdgeInsets.all(12),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Text('기록 속 이야기',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600)),
-                                      gap,
-                                      _detailRow(
-                                          '장소',
-                                          place,
-                                          Icons.place_outlined,
-                                          () => _editText(
-                                              '장소', place, (v) => place = v)),
-                                      const Divider(height: 1),
-                                      _detailRow(
-                                          '등장인물',
-                                          characters.join(', '),
-                                          Icons.person_outline,
-                                          _editCharacters),
-                                      const Divider(height: 1),
-                                      _detailRow(
-                                          '감정',
-                                          details.emotions,
-                                          Icons.sentiment_satisfied_outlined,
-                                          () => _editText('감정', emotionText,
-                                              (v) => emotionText = v)),
-                                      const Divider(height: 1),
-                                      _detailRow(
-                                          '생활',
-                                          life,
-                                          Icons.wb_sunny_outlined,
-                                          () => _editText(
-                                              '생활', life, (v) => life = v)),
-                                      const Divider(height: 1),
-                                      _detailRow(
-                                          '기타 메모',
-                                          memo,
-                                          Icons.edit_note,
-                                          () => _editText(
-                                              '기타 메모', memo, (v) => memo = v)),
-                                      if (suggested.isNotEmpty) ...[
-                                        const Divider(),
-                                        const Text('어떤 감정이 느껴졌나요?',
-                                            style: TextStyle(fontSize: 13)),
-                                        const SizedBox(height: 8),
-                                        Wrap(
-                                            spacing: 6,
-                                            children: suggested
-                                                .map((f) => FilterChip(
-                                                    label: Text(f),
-                                                    selected:
-                                                        feelings.contains(f),
-                                                    onSelected: busy
-                                                        ? null
-                                                        : (value) =>
-                                                            setState(() {
-                                                              value
-                                                                  ? feelings
-                                                                      .add(f)
-                                                                  : feelings
-                                                                      .remove(
-                                                                          f);
-                                                            })))
-                                                .toList()),
+                          Builder(builder: (_) {
+                            final card = Padding(
+                                padding: const EdgeInsets.only(left: 48),
+                                child: Paper(
+                                  radius: 16,
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text('기록 속 이야기',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600)),
                                         gap,
-                                      ],
-                                      gap,
-                                      const Text(
-                                          '정보를 확인하면 입력한 내용을 바탕으로 이야기를 구성해요.',
-                                          style: TextStyle(
-                                              fontSize: 12, color: muted)),
-                                      gap,
-                                      PrimaryButton(
-                                          busy && !replying
-                                              ? '이야기 구성 중…'
-                                              : '정보가 맞아요',
-                                          height: 44,
-                                          radius: 10,
-                                          onPressed: busy ? null : _generate),
-                                    ]),
-                              )),
+                                        _detailRow(
+                                            '장소',
+                                            place,
+                                            Icons.place_outlined,
+                                            () => _editText(
+                                                '장소', place, (v) => place = v)),
+                                        const Divider(height: 1),
+                                        _detailRow(
+                                            '등장인물',
+                                            characters.join(', '),
+                                            Icons.person_outline,
+                                            _editCharacters),
+                                        const Divider(height: 1),
+                                        _detailRow(
+                                            '감정',
+                                            details.emotions,
+                                            Icons.sentiment_satisfied_outlined,
+                                            () => _editText('감정', emotionText,
+                                                (v) => emotionText = v)),
+                                        const Divider(height: 1),
+                                        _detailRow(
+                                            '생활',
+                                            life,
+                                            Icons.wb_sunny_outlined,
+                                            () => _editText(
+                                                '생활', life, (v) => life = v)),
+                                        const Divider(height: 1),
+                                        _detailRow(
+                                            '기타 메모',
+                                            memo,
+                                            Icons.edit_note,
+                                            () => _editText('기타 메모', memo,
+                                                (v) => memo = v)),
+                                        if (suggested.isNotEmpty) ...[
+                                          const Divider(),
+                                          const Text('어떤 감정이 느껴졌나요?',
+                                              style: TextStyle(fontSize: 13)),
+                                          const SizedBox(height: 8),
+                                          Wrap(
+                                              spacing: 6,
+                                              children: suggested
+                                                  .map((f) => FilterChip(
+                                                      label: Text(f),
+                                                      selected:
+                                                          feelings.contains(f),
+                                                      onSelected: busy
+                                                          ? null
+                                                          : (value) =>
+                                                              setState(() {
+                                                                value
+                                                                    ? feelings
+                                                                        .add(f)
+                                                                    : feelings
+                                                                        .remove(
+                                                                            f);
+                                                              })))
+                                                  .toList()),
+                                          gap,
+                                        ],
+                                        gap,
+                                        if (widget.routine ==
+                                            Routine.morning) ...[
+                                          const Text(
+                                              '정보를 확인하면 입력한 내용을 바탕으로 이야기를 구성해요.',
+                                              style: TextStyle(
+                                                  fontSize: 12, color: muted)),
+                                          gap,
+                                          PrimaryButton(
+                                              busy && !replying
+                                                  ? '이야기 구성 중…'
+                                                  : '정보가 맞아요',
+                                              height: 44,
+                                              radius: 10,
+                                              onPressed:
+                                                  busy ? null : _generate),
+                                        ],
+                                      ]),
+                                ));
+                            return widget.routine == Routine.night
+                                ? ExpansionTile(
+                                  key: const PageStorageKey('night-story-details'),
+                                  maintainState: true,
+                                    title: const Text('기록 정보 보기',
+                                        style: TextStyle(fontSize: 12)),
+                                    children: [card],
+                                  )
+                                : card;
+                          }),
                           gap,
                           if (busy && !replying)
                             const Padding(
