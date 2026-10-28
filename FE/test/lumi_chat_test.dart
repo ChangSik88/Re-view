@@ -63,7 +63,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(reply), findsOneWidget);
     expect(find.text('정보가 맞아요'), findsNothing);
-    expect(find.text('일기로 저장'), findsOneWidget);
+    expect(find.text('대화 마무리'), findsOneWidget);
     await tester.ensureVisible(find.text('기록 정보 보기'));
     await tester.tap(find.text('기록 정보 보기'));
     await tester.pumpAndSettle();

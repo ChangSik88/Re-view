@@ -238,9 +238,10 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
             id: -DateTime.now().millisecondsSinceEpoch,
             date: DateTime.now(),
             routine: widget.routine,
-            title: '확인한 정보로 구성한 이야기 (미리보기)',
-            content:
-                '문장 구성 미리보기 — 실제 AI 생성은 로그인 후 이용할 수 있어요.\n\n${isNight ? messages.where((m) => m.me).map((m) => m.text).join('\n\n') : confirmed.previewStory}',
+            title: isNight ? '오늘의 하루 리포트 (미리보기)' : '확인한 정보로 구성한 이야기 (미리보기)',
+            content: isNight
+                ? '오늘 있었던 일\n${messages.where((m) => m.me).map((m) => m.text).join('\n\n')}\n\n주요 감정\n${confirmed.emotions.isEmpty ? '아직 표현한 감정이 없어요.' : confirmed.emotions}\n\n하루 돌아보기\n미리보기입니다. 실제 AI 리포트는 로그인 후 생성돼요.'
+                : '문장 구성 미리보기 — 실제 AI 생성은 로그인 후 이용할 수 있어요.\n\n${confirmed.previewStory}',
             tags: [confirmed.emotions].where((s) => s.isNotEmpty).toList());
         state.records.add(generated);
       } else {
@@ -270,8 +271,11 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
           MaterialPageRoute(builder: (_) => AnalysisPage(record: generated!)));
     } catch (_) {
       if (mounted) {
-        message(context,
-            '이야기 구성을 완료하지 못했어요. 입력 정보는 유지돼요. 기록 목록을 확인한 뒤 다시 시도해 주세요.');
+        message(
+            context,
+            isNight
+                ? '리포트를 저장하지 못했어요. 대화는 유지돼요. 기록 목록을 확인한 뒤 다시 시도해 주세요.'
+                : '이야기 구성을 완료하지 못했어요. 입력 정보는 유지돼요. 기록 목록을 확인한 뒤 다시 시도해 주세요.');
       }
     } finally {
       if (mounted) setState(() => busy = false);
@@ -363,7 +367,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
             if (widget.routine == Routine.night)
               TextButton(
                 onPressed: busy || historyLoading ? null : _generate,
-                child: Text(busy && !replying ? '저장 중…' : '일기로 저장'),
+                child: Text(busy && !replying ? '리포트 저장 중…' : '대화 마무리'),
               ),
             Text(widget.routine.label,
                 style: const TextStyle(fontSize: 12, color: purple)),
@@ -551,8 +555,9 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                 ));
                             return widget.routine == Routine.night
                                 ? ExpansionTile(
-                                  key: const PageStorageKey('night-story-details'),
-                                  maintainState: true,
+                                    key: const PageStorageKey(
+                                        'night-story-details'),
+                                    maintainState: true,
                                     title: const Text('기록 정보 보기',
                                         style: TextStyle(fontSize: 12)),
                                     children: [card],

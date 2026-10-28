@@ -985,7 +985,13 @@ class _AnalysisPageState extends State<AnalysisPage> {
                                             border: Border.all(
                                                 color: lineColor, width: .7)),
                                         child: Text(
-                                            ['AI 요약', '전문 보기', 'AI 감정 인사이트'][i],
+                                            [
+                                              r.routine == Routine.night
+                                                  ? '하루 리포트'
+                                                  : 'AI 요약',
+                                              '전문 보기',
+                                              'AI 감정 인사이트'
+                                            ][i],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 10,
@@ -995,7 +1001,20 @@ class _AnalysisPageState extends State<AnalysisPage> {
                     const SizedBox(height: 20),
                     if (tab != 2) ...[
                       RecordImage(r.image, height: 112),
-                      if (tab == 0) ...[
+                      if (tab == 0 && r.routine == Routine.night) ...[
+                        const AnalysisSectionTitle('하루 리포트',
+                            asset: '519-1448/imgFrame474'),
+                        gap,
+                        Text(r.content.isEmpty ? '아직 저장된 리포트가 없어요.' : r.content,
+                            style: const TextStyle(fontSize: 12, height: 1.8)),
+                        gap,
+                        Tags(r.tags),
+                        gap,
+                        PrimaryButton('대화 이어하기',
+                            height: 40,
+                            radius: 20,
+                            onPressed: () => openChat(context, r.routine, r)),
+                      ] else if (tab == 0) ...[
                         const SizedBox(height: 20),
                         const AnalysisSectionTitle('꿈 핵심 키워드',
                             asset: '519-1448/imgFrame473'),
