@@ -271,11 +271,17 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
     }
   }
 
+  String _fieldLabel(String label) => label == '생활'
+      ? (widget.routine == Routine.morning
+          ? '꿈속에서 있었던 일'
+          : '오늘 있었던 일')
+      : label;
+
   Future<void> _editText(
       String label, String value, void Function(String) save) async {
     final result = await showDialog<String>(
         context: context,
-        builder: (_) => StoryFieldDialog(label: label, initial: value));
+        builder: (_) => StoryFieldDialog(label: _fieldLabel(label), initial: value));
     if (result != null && mounted)
       setState(() {
         editedFields.add(label);
@@ -304,8 +310,8 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                         }}'))),
                 const SizedBox(width: 6),
                 SizedBox(
-                    width: 54,
-                    child: Text(label, style: const TextStyle(fontSize: 11))),
+                    width: 90,
+                    child: Text(_fieldLabel(label), style: const TextStyle(fontSize: 11))),
                 Expanded(
                     child: Text(value.isEmpty ? '입력하기' : value,
                         maxLines: 3,

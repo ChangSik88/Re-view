@@ -66,7 +66,7 @@ void main() {
             home: const ReviewChatPage(routine: Routine.morning))));
     await tester.pumpAndSettle();
     for (final entry
-        in {'장소': '학교', '감정': '설렘', '생활': '새 학기', '기타 메모': '비가 옴'}.entries) {
+        in {'장소': '학교', '감정': '설렘', '꿈속에서 있었던 일': '새 학기', '기타 메모': '비가 옴'}.entries) {
       await tester.ensureVisible(find.text(entry.key));
       await tester.tap(find.text(entry.key));
       await tester.pumpAndSettle();
