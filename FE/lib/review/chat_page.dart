@@ -378,7 +378,8 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                     Flexible(
                                         child: Container(
                                             constraints: BoxConstraints(
-                                                maxWidth: m.me ? 270 : 162),
+                                                maxWidth: m.me ? 270 : double.infinity),
+                                            width: m.me ? null : double.infinity,
                                             margin: EdgeInsets.only(
                                                 left: m.me ? 44 : 0),
                                             padding: m.me
