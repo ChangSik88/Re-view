@@ -2,6 +2,17 @@ from app.repositories.chatSessionRepository import ChatSessionRepository
 from typing import Optional 
 
 class ChatSessionService:
+    async def set_location(self, user_id: int, room_id: int, location):
+        session = await self.chat_session_repository.get_one_session_by_id(user_id, room_id)
+        if not session:
+            raise LookupError('기록을 찾을 수 없습니다.')
+        if (session.routine_type or '').lower() != 'night' or not session.content:
+            raise ValueError('저장된 하루 리포트에만 실제 장소를 연결할 수 있어요.')
+        count = await self.chat_session_repository.set_location(user_id, room_id, location.model_dump())
+        if not count:
+            raise LookupError('기록을 찾을 수 없습니다.')
+        return location.model_dump()
+
     def __init__(self):
         # 레포지토리 객체를 생성해서 가지고 있습니다.
         self.chat_session_repository = ChatSessionRepository()
@@ -19,11 +30,15 @@ class ChatSessionService:
                 
             processed_sessions.append({
                 "room_id": session.room_id,
+                "place_name": getattr(session, 'place_name', None),
+                "latitude": getattr(session, 'latitude', None),
+                "longitude": getattr(session, 'longitude', None),
                 "title": session.title,
                 "content": session.content,
                 "tags": session.tags,
                 "routine_type": session.routine_type,
                 "is_marked": session.is_marked,
+                "created_at": session.created_at,
                 "updated_at": str(session.updated_at),
                 "image_url": extracted_url  # 추출된 진짜 주소(또는 None)가 프론트로 전달됨
             })
@@ -40,9 +55,14 @@ class ChatSessionService:
 
             return {
                 "room_id": session.room_id,
+                "place_name": getattr(session, 'place_name', None),
+                "latitude": getattr(session, 'latitude', None),
+                "longitude": getattr(session, 'longitude', None),
                 "title": session.title,
                 "content": session.content,
                 "created_at":session.created_at,
+                "routine_type": session.routine_type,
+                "tags": session.tags,
                 "updated_at": str(session.updated_at),
                 "image_url": extracted_url,
                 "is_marked": session.is_marked

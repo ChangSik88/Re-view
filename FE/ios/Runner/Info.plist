@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>하루 기록에 실제 방문한 장소를 추가할 때 현재 위치를 제안합니다.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>말한 내용을 채팅 입력칸에 작성하기 위해 마이크를 사용합니다.</string>
     <key>NSSpeechRecognitionUsageDescription</key>

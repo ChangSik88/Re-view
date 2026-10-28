@@ -2,6 +2,10 @@ from app.core.db import db
 from typing import Optional
 # 대시보드 구성에 필요한 정보 호출
 class ChatSessionRepository:
+    async def set_location(self, user_id: int, room_id: int, data: dict):
+        return await db.chatroom.update_many(
+            where={"room_id": room_id, "user_id": user_id}, data=data)
+
     async def get_all_sessions_by_user_id(self, user_id: int, is_marked: Optional[bool] = None):
         where_filter = {"user_id":user_id}
         if is_marked is not None:

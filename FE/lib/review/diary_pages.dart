@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/report_service.dart';
 import 'design.dart';
+import 'location_pages.dart';
 import 'review_state.dart';
 import 'emotion_emoji.dart';
 import 'chat_page.dart';
@@ -168,6 +169,8 @@ class HomePage extends StatelessWidget {
                               height: 136, radius: 10)),
                     ])),
               ])),
+          gap,
+          const LocationHomeCard(),
         ]));
   }
 
@@ -1009,6 +1012,8 @@ class _AnalysisPageState extends State<AnalysisPage> {
                             style: const TextStyle(fontSize: 12, height: 1.8)),
                         gap,
                         Tags(r.tags),
+                        gap,
+                        RecordLocationButton(record: r),
                         gap,
                         PrimaryButton('대화 이어하기',
                             height: 40,

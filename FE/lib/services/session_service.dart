@@ -3,6 +3,10 @@ import 'api_client.dart';
 
 /// 꿈 세션 목록/상세 조회, 즐겨찾기 설정, 삭제 (chatSessionApi + chatApi 일부).
 class SessionService {
+  Future<void> setLocation(int roomId, Map<String, dynamic> location) async {
+    await apiClient.patch('/chatting/session/$roomId/location', body: location);
+  }
+
   /// 유저의 전체 세션 목록(result 리스트)을 반환한다.
   /// isMarked가 true면 즐겨찾기한 세션만 필터링해 받아온다.
   Future<List<dynamic>> getAllSessions(String? userId, {bool? isMarked}) async {

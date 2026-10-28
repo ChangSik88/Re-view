@@ -60,6 +60,9 @@ model ChatRoom {
   title          String?                @db.VarChar(50)
   content        String?
   tags           String?                @db.VarChar(50)
+  place_name     String?                @db.VarChar(100)
+  latitude       Float?
+  longitude      Float?
   is_marked      Boolean                @default(false)
   routine_type   String?                @db.VarChar(20)
   content_vector Unsupported("vector(3072)")? // gemini-embedding-001 기본 출력 차원(실측 확인, 768 아님)

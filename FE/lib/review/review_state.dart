@@ -19,12 +19,19 @@ class DiaryRecord {
   final String title, content, image;
   final List<String> tags;
   bool marked;
+  String? placeName;
+  double? latitude, longitude;
+  bool get hasLocation =>
+      placeName != null && latitude != null && longitude != null;
   DiaryRecord(
       {required this.id,
       required this.date,
       required this.routine,
       required this.title,
       required this.content,
+      this.placeName,
+      this.latitude,
+      this.longitude,
       this.image = '',
       this.tags = const [],
       this.marked = false});
@@ -47,6 +54,9 @@ class DiaryRecord {
                 .where((s) => s.isNotEmpty)
                 .toList(),
         marked: json['is_marked'] == true,
+        placeName: json['place_name'] as String?,
+        latitude: (json['latitude'] as num?)?.toDouble(),
+        longitude: (json['longitude'] as num?)?.toDouble(),
       );
   String get dateLabel => '${date.year}년 ${date.month}월 ${date.day}일';
 }
@@ -90,6 +100,9 @@ bool sameDate(DateTime a, DateTime b) =>
     a.year == b.year && a.month == b.month && a.day == b.day;
 
 class ReviewState extends ChangeNotifier {
+  ReviewState({SessionService? sessions})
+      : _sessions = sessions ?? sessionService;
+  final SessionService _sessions;
   bool preview = false, loading = false;
   bool guest = false;
   String? error;
@@ -194,6 +207,26 @@ class ReviewState extends ChangeNotifier {
       error = '기록을 불러오지 못했어요. 연결을 확인하고 다시 시도해 주세요.';
     }
     loading = false;
+    notifyListeners();
+  }
+
+  Future<void> saveLocation(
+      DiaryRecord record, String? name, double? lat, double? lng) async {
+    if (guest || record.routine != Routine.night || record.content.isEmpty) {
+      throw StateError('저장된 하루 리포트에 장소를 추가해 주세요.');
+    }
+    if (!preview) {
+      await _sessions.setLocation(record.id, {
+        'place_name': name,
+        'latitude': lat,
+        'longitude': lng,
+      }).timeout(const Duration(seconds: 30));
+    }
+    for (final target in {record, ...records.where((r) => r.id == record.id)}) {
+      target.placeName = name;
+      target.latitude = lat;
+      target.longitude = lng;
+    }
     notifyListeners();
   }
 

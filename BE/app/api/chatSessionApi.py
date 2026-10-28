@@ -1,11 +1,23 @@
 from fastapi import APIRouter, HTTPException,Depends
 from app.services.chatSessionService import ChatSessionService
-from app.schemas.chatSessionSchema import ChatSessionResponse,SingleSessionResponse,ChatHistoryResponse
+from app.schemas.chatSessionSchema import ChatSessionResponse,SingleSessionResponse,ChatHistoryResponse, RecordLocation
 from typing import Optional
 from app.api.dependencies import get_current_user_id
 
 router = APIRouter()
 chat_service = ChatSessionService()
+
+
+@router.patch('/session/{room_id}/location', response_model=RecordLocation)
+async def set_record_location(room_id: int, location: RecordLocation,
+                              user_id: int = Depends(get_current_user_id)):
+    try:
+        return await chat_service.set_location(user_id, room_id, location)
+    except LookupError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.get("/session/all", response_model=ChatSessionResponse)
 async def get_all_chat_sessions(
