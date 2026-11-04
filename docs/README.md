@@ -30,6 +30,7 @@
 
 **50-specs**
 - [2026-09-09-promo-web-page-design.md](50-specs/2026-09-09-promo-web-page-design.md) — 홍보 웹페이지(날씨 테마 + 해몽 데모 + 꿈 랭킹)
+- [2026-11-04-dream-function-tags.md](50-specs/2026-11-04-dream-function-tags.md): 해몽 태그 31개 초안, 원문 대조, 자동 분류 체크
 - 그 외는 날짜-주제 형식으로 쌓인다.
 
 **60-plans**
