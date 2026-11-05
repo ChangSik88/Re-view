@@ -1,6 +1,7 @@
 from app.repositories.chatRepository import ChatRepository
 from app.schemas.chatSchema import AIAnalysisResponse
-from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_vector_embedding
+from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_diary_text, generate_text_vector_embedding, generate_vector_embedding
+from app.core.ai.dreamKeywordHarness import find_keyword_cards, format_card_context
 from app.core.ai.imageManager import ImageManager
 from app.core import storage
 from typing import List
@@ -78,9 +79,57 @@ class ChatService:
             selected_keywords=selected_keywords,
             routine_type=routine_type)
 
+        await self._save_diary(room_id, diary_result, generate_vector_embedding)
+
+        image_url = await self._generate_and_save_image(room_id, diary_result.image_prompt)
+
+        return {
+        "title": diary_result.title,
+        "content": diary_result.content,
+        "tags": diary_result.tags,
+        "image_url": image_url
+    }
+
+    # 이미지 없이 일기 텍스트만 생성·저장한다. 아침 일기에는 등록 해몽 카드를 반영한다.
+    async def create_diary_text(self, user_id: int, room_id: int, selected_keywords: List[str]):
+        session = await self._get_owned_session(user_id, room_id)
+        routine_type = session.routine_type
+
+        history_records = await self.chat_repo.get_chat_history(room_id)
+        formatted_history = "\n".join([f"{msg.role}: {msg.content}" for msg in history_records])
+
+        card_context = "없음"
+        if (routine_type or "").upper() == "MORNING":
+            card_context = await self._find_card_context(history_records)
+
+        diary_result = await generate_diary_text(
+            history=formatted_history,
+            selected_keywords=selected_keywords,
+            routine_type=routine_type,
+            card_context=card_context)
+
+        await self._save_diary(room_id, diary_result, generate_text_vector_embedding)
+
+        return {
+            "title": diary_result.title,
+            "content": diary_result.content,
+            "tags": diary_result.tags
+        }
+
+    # 카드 조회는 부가 기능이다. 실패해도 일기는 카드 없이 생성한다.
+    async def _find_card_context(self, history_records) -> str:
+        try:
+            dream = "\n".join(msg.content for msg in history_records if msg.role == "USER")
+            cards = await find_keyword_cards(dream)
+            return format_card_context(cards) if cards else "없음"
+        except Exception as e:
+            print(f"해몽 카드 조회 중 오류 발생: {e}")
+            return "없음"
+
+    async def _save_diary(self, room_id: int, diary_result, embed) -> None:
         # Vector 변환 (제목과 내용을 합쳐서 의미를 뭉칩니다)
         text_to_embed = f"제목: {diary_result.title}\n내용: {diary_result.content}"
-        vector_data = await generate_vector_embedding(text_to_embed)
+        vector_data = await embed(text_to_embed)
 
         # title/tags는 DB 컬럼이 VarChar(50)이라 AI 생성 텍스트가 넘치면 저장 시 예외 발생 →
         # 여기서 미리 잘라 트랜잭션 실패(및 LLM 호출 낭비)를 막는다.
@@ -96,15 +145,6 @@ class ChatService:
             vector=vector_data
         )
 
-        image_url = await self._generate_and_save_image(room_id, diary_result.image_prompt)
-
-        return {
-        "title": diary_result.title,
-        "content": diary_result.content,
-        "tags": diary_result.tags,
-        "image_url": image_url
-    }
-    
     async def _generate_and_save_image(self, room_id: int, image_prompt: str):
         try:
             # AI 이미지 생성

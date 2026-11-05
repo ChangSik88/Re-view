@@ -36,10 +36,13 @@ class ChatMessageResponse(BaseModel):
     analysis: Optional[AIAnalysisResponse] = None # 화면에 그려줄 UI 데이터 (주제, 분위기, 추천 감정)
 
 
-class DiaryGenerationResponse(BaseModel):
+class DiaryTextResponse(BaseModel):
     title: str = Field(description="일기의 제목")
     content: str = Field(description="문학적이고 감성적인 일기 본문 (3~4문단)")
     tags: List[str] = Field(description="일기를 대표하는 감성 해시태그 3개")
+
+
+class DiaryGenerationResponse(DiaryTextResponse):
     image_prompt:str=Field(description="FLUX 이미지 생성 AI에 넣을 영어프롬프트")
 
 # [추가] 프론트엔드에서 일기 생성을 요청할 때 쓸 스키마

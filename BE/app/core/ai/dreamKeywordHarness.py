@@ -9,7 +9,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
-from app.core.ai.langchainManager import llm
+from app.core.ai.langchainManager import llm, text_llm
 
 
 class DreamKeywordAnalysis(BaseModel):
@@ -31,13 +31,53 @@ class CatalogDreamSynthesis(BaseModel):
     ai_reply: str = Field(description="등록 키워드 해석들을 하나로 통합한 해몽과 조언")
 
 
+class KeywordMatch(BaseModel):
+    matched_keywords: list[str] = Field(
+        description=(
+            "꿈에 실제로 등장한 등록 표준 키워드 중 핵심 1~2개. "
+            "목록과 정확히 같은 문자열만 반환하고, 없으면 빈 배열"
+        )
+    )
+
+
 _DATA_FILE = Path(__file__).resolve().parents[2] / "data" / "dream_tarot.example.json"
 _parser = PydanticOutputParser(pydantic_object=DreamKeywordAnalysis)
 _synthesis_parser = PydanticOutputParser(pydantic_object=CatalogDreamSynthesis)
+_match_parser = PydanticOutputParser(pydantic_object=KeywordMatch)
 
 
 def _normalize_keyword(value: str) -> str:
     return unicodedata.normalize("NFC", value).strip()
+
+
+def format_card_context(cards: list[dict]) -> str:
+    return json.dumps(
+        [
+            {
+                "keyword": card["keyword"],
+                "interpretation": card["positive_interpretation"],
+                "advice": card["advice"],
+            }
+            for card in cards
+        ],
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
+def _resolve_cards(candidates: list[str], cards_by_keyword: dict[str, dict]) -> list[dict]:
+    """Keep up to two distinct model outputs that exactly match a catalog entry."""
+    matches: list[dict] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        keyword = _normalize_keyword(candidate)
+        card = cards_by_keyword.get(keyword)
+        if card is not None and keyword not in seen:
+            seen.add(keyword)
+            matches.append(card)
+        if len(matches) == 2:
+            break
+    return matches
 
 
 async def _synthesize_catalog_interpretation(
@@ -45,18 +85,7 @@ async def _synthesize_catalog_interpretation(
     matched_cards: list[dict],
 ) -> CatalogDreamSynthesis:
     """Combine matched card meanings into one reading grounded in the dream context."""
-    card_context = json.dumps(
-        [
-            {
-                "keyword": card["keyword"],
-                "interpretation": card["positive_interpretation"],
-                "advice": card["advice"],
-            }
-            for card in matched_cards
-        ],
-        ensure_ascii=False,
-        indent=2,
-    )
+    card_context = format_card_context(matched_cards)
     system_prompt = """당신은 등록된 꿈 키워드 카드의 내용을 근거로 꿈 전체를 해석합니다.
 
 아래 [꿈]의 장면과 [등록 카드 해석]을 함께 읽고 하나의 자연스러운 해몽을 작성하세요.
@@ -174,16 +203,7 @@ dream_category는 랭킹 전용입니다. 아래 [랭킹 카테고리] 중 하�
         }
     )
 
-    matches: list[dict] = []
-    seen: set[str] = set()
-    for candidate in analysis.matched_keywords:
-        keyword = _normalize_keyword(candidate)
-        card = cards_by_keyword.get(keyword)
-        if card is not None and keyword not in seen:
-            seen.add(keyword)
-            matches.append(card)
-        if len(matches) == 2:
-            break
+    matches = _resolve_cards(analysis.matched_keywords, cards_by_keyword)
 
     # Discard model output that did not resolve to an exact catalog entry.
     analysis.matched_keywords = [card["keyword"] for card in matches]
@@ -193,3 +213,30 @@ dream_category는 랭킹 전용입니다. 아래 [랭킹 카테고리] 중 하�
         analysis.ai_reply = synthesis.ai_reply
 
     return analysis
+
+
+async def find_keyword_cards(dream: str) -> list[dict]:
+    """Ask Gemini which registered keywords appear in the dream and return their cards."""
+    cards_by_keyword = _load_keyword_cards()
+    system_prompt = """아래 [등록 키워드]에서 꿈에 실제로 등장하거나 직접 표현된 핵심 키워드를 1~2개까지 선택하세요.
+matched_keywords에는 목록에 있는 표준 키워드 문자열만 정확히 그대로 넣으세요.
+꿈에 맞는 등록 키워드가 하나도 없으면 matched_keywords를 빈 배열로 반환하세요.
+비슷해 보인다는 이유만으로 등록 키워드를 억지로 고르지 마세요.
+
+[등록 키워드]
+{keyword_list}
+
+반드시 아래 JSON 스키마만 반환하세요.
+{format_instructions}"""
+    prompt = ChatPromptTemplate.from_messages(
+        [("system", system_prompt), ("user", "다음 꿈을 분석하세요.\n{dream}")]
+    )
+    chain = prompt | text_llm | _match_parser
+    result = await chain.ainvoke(
+        {
+            "dream": dream,
+            "keyword_list": "\n".join(f"- {keyword}" for keyword in cards_by_keyword),
+            "format_instructions": _match_parser.get_format_instructions(),
+        }
+    )
+    return _resolve_cards(result.matched_keywords, cards_by_keyword)
