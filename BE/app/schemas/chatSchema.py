@@ -30,6 +30,13 @@ class AIAnalysisResponse(BaseModel):
     # 필수로 두면 LLM이 이 필드를 빠뜨리는 순간 파싱이 실패해 앱 채팅까지 죽는다.
     dream_category: str = Field(default="기타", description="아래 목록 중 정확히 하나: 쫓김, 이빨, 똥, 돼지, 조상님, 뱀, 불, 물, 높은곳, 피, 시험, 죽음, 기타")
 
+class NightAnalysisResponse(AIAnalysisResponse):
+    theme: str = Field(default="", description="사용자가 말한 하루 사건의 주제. 불명확하면 빈 문자열")
+    vibe: str = Field(default="", description="사용자가 직접 표현한 분위기. 불명확하면 빈 문자열")
+    suggested_feelings: List[str] = Field(default_factory=list, description="사용자가 표현한 감정만. 없으면 빈 목록이며 개수를 채우지 않음")
+    ai_reply: str = Field(description="현재 사건에 대한 짧은 반응과 필요할 때만 미확인 내용 하나를 묻는 1~3문장. 질문은 최대 하나")
+
+
 # --- [3. 서버 -> 프론트엔드 (응답 스키마)] ---
 class ChatMessageResponse(BaseModel):
     session_id: int
