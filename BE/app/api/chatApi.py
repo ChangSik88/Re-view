@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest,SessionMarkRequest
+from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest, DiaryTextResponse, SessionCreateRequest,SessionMarkRequest
 from app.services.chatService import ChatService
 from app.api.dependencies import get_current_user_id
 
@@ -31,6 +31,16 @@ async def generate_diary(request: DiaryRequest, user_id: int = Depends(get_curre
     # 토큰의 user_id로 방 소유권을 검증한 뒤 키워드를 서비스로 전송
     try:
         return await chat_service.create_diary(user_id, request.session_id, request.selected_keywords)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+
+# 이미지 없이 일기 텍스트만 생성
+@router.post("/diary/text", response_model=DiaryTextResponse)
+async def generate_diary_text(request: DiaryRequest, user_id: int = Depends(get_current_user_id)):
+    try:
+        return await chat_service.create_diary_text(user_id, request.session_id, request.selected_keywords)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except PermissionError as e:
