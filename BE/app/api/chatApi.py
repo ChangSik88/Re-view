@@ -25,7 +25,6 @@ async def send_message(request: ChatMessageRequest, user_id: int = Depends(get_c
     except PermissionError as e:
         raise HTTPException(status_code=403, detail=str(e))
 
-#image_url도 함께 받기 위해서 response_model 없앰
 @router.post("/diary")
 async def generate_diary(request: DiaryRequest, user_id: int = Depends(get_current_user_id)):
     # 토큰의 user_id로 방 소유권을 검증한 뒤 키워드를 서비스로 전송

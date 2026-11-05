@@ -69,7 +69,6 @@ flutter pub get
 |---|---|---|
 | `DATABASE_URL` | PostgreSQL 접속 문자열 | 로컬 개발과 배포에서 값이 다르다 (아래 참고) |
 | `GEMINI_API_KEY` | 채팅 해몽·일기 생성·임베딩 (langchain이 자동 인식) | Google AI Studio 발급 키 |
-| `FLUX_API_KEY` | 꿈 이미지 생성 | FLUX 발급 키 |
 | `JWT_SECRET_KEY` | 액세스/리프레시 토큰 서명 | 임의의 긴 난수 문자열 |
 | `S3_ENDPOINT` | 스토리지 S3 엔드포인트 | `https://<project_ref>.storage.supabase.co/storage/v1/s3` |
 | `S3_ACCESS_KEY_ID` | S3 액세스 키 | Supabase → Project Settings → Storage → S3 access keys |
@@ -166,7 +165,7 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 
 빌드 단계의 `prisma migrate deploy`가 커밋된 마이그레이션 파일을 운영 DB에 적용한다. 즉 **스키마 변경은 배포로 반영되며, 사람이 운영 DB에 직접 명령을 날릴 일이 없다.** 마이그레이션 파일을 만드는 쪽은 로컬이다 — 아래 "DB 마이그레이션 파이프라인" 참고.
 
-환경 변수 6개(`DATABASE_URL`, `GEMINI_API_KEY`, `FLUX_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`, `WEB_ORIGIN`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
+환경 변수 5개(`DATABASE_URL`, `GEMINI_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`, `WEB_ORIGIN`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
 
 `WEB_ORIGIN`은 홍보 웹페이지(`WEB/`)의 배포 출처다(쉼표로 여러 개 가능). **비워두면 `allow_origins=[]`가 되어 브라우저에서 오는 데모 API 호출이 전부 차단된다.** 정적 호스팅 업체가 확정되면 그 URL을 넣어야 데모가 동작한다. `*`는 쓰지 않는다 — 아무 사이트나 데모를 임베드해 Gemini 쿼터를 태울 수 있다.
 

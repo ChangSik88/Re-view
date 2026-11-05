@@ -49,16 +49,6 @@ class ChatRepository:
             )
 
         return True
-    #이미지 URL을 저장
-    async def save_chat_image(self, room_id: int, image_url: str):
-        return await db.chatimage.create(
-            data={
-                "room_id": room_id,
-                "image_url": image_url,
-            }
-        )
-
-
 
     #채팅방(세션) 단건 조회 - 루틴타입 확인 및 소유권 검증에 사용
     async def get_session(self, room_id: int):

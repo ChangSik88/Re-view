@@ -1,7 +1,6 @@
 from app.repositories.chatRepository import ChatRepository
 from app.schemas.chatSchema import AIAnalysisResponse
 from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_vector_embedding
-from app.core.ai.imageManager import ImageManager
 from app.core import storage
 from typing import List
 
@@ -9,8 +8,7 @@ from typing import List
 class ChatService:
     def __init__(self):
         self.chat_repo = ChatRepository()
-        self.image_manager=ImageManager()
-        
+
 
     # 채팅방 생성 로직
     async def create_new_chat(self, user_id: int,routine_type:str):
@@ -96,30 +94,11 @@ class ChatService:
             vector=vector_data
         )
 
-        image_url = await self._generate_and_save_image(room_id, diary_result.image_prompt)
-
         return {
         "title": diary_result.title,
         "content": diary_result.content,
-        "tags": diary_result.tags,
-        "image_url": image_url
+        "tags": diary_result.tags
     }
-    
-    async def _generate_and_save_image(self, room_id: int, image_prompt: str):
-        try:
-            # AI 이미지 생성
-            image = await self.image_manager.generate_flux_image(image_prompt)
-
-            # 오브젝트 스토리지 업로드 후 공개 URL 확보
-            image_url = await storage.upload_image(image)
-
-            # 4. 이미지 URL DB 저장 (Repository 호출)
-            await self.chat_repo.save_chat_image(room_id, image_url)
-            
-            return image_url
-        except Exception as e:
-            print(f"이미지 생성 중 오류 발생: {e}")
-            return None
 
     # 세션 삭제: 소유권 검증 후 DB 삭제, 성공하면 이미지 파일도 정리한다(실패해도 삭제 자체는 이미 끝난 상태이므로 무시).
     async def delete_session(self, user_id: int, room_id: int) -> None:
