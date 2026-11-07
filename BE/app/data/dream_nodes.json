@@ -70,7 +70,9 @@
     },
     {
       "keyword": "쫓기다",
-      "aliases": [],
+      "aliases": [
+        "추격당함"
+      ],
       "category": "행동·상황",
       "tag": "통제 상실",
       "sub_tag": "도피",
@@ -83,7 +85,9 @@
     },
     {
       "keyword": "떨어지다",
-      "aliases": [],
+      "aliases": [
+        "추락"
+      ],
       "category": "행동·상황",
       "tag": "통제 상실",
       "sub_tag": null,
@@ -5037,6 +5041,2057 @@
       "positive_index": 50,
       "negative_index": 50,
       "modern_interpretation": "알 수 없는 큰 힘에 대한 호기심과 두려움이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "수능",
+      "aliases": [
+        "수학능력시험"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "시간 압박",
+      "card_title": "하루에 걸린 시간",
+      "advice": "지금 가장 부담되는 시험이나 일정을 하나 적어 보세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "한 번의 결과에 많은 것이 걸려 있다는 압박이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "성적표",
+      "aliases": [
+        "성적",
+        "학점"
+      ],
+      "category": "사물·재물",
+      "tag": "평가",
+      "sub_tag": "인정",
+      "card_title": "숫자로 받은 결과",
+      "advice": "결과와 상관없이 애쓴 점 하나를 적어 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "노력의 결과를 확인받고 싶은 마음과 걱정이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "빈 답안지",
+      "aliases": [
+        "답을 못 씀",
+        "시험지를 못 품"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "통제 상실",
+      "card_title": "채우지 못한 칸",
+      "advice": "준비가 덜 된 일 하나를 골라 오늘 조금만 해 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "준비가 부족하다는 불안이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "오디션",
+      "aliases": [
+        "심사",
+        "경연"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "동경",
+      "card_title": "심사석의 눈",
+      "advice": "보여 주고 싶은 나의 장점 하나를 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "인정받고 싶은 마음이 평가받는 긴장과 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "운전면허 시험",
+      "aliases": [
+        "면허 시험"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "문턱",
+      "card_title": "출발선의 운전석",
+      "advice": "새로 익히는 일에 스스로 시간을 주세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "새 자격을 얻기 전의 긴장이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "인사평가",
+      "aliases": [
+        "업무 평가",
+        "고과"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "권위",
+      "card_title": "매겨지는 한 해",
+      "advice": "내가 해낸 일을 세 가지 적어 보세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "위에서 나를 어떻게 볼지 신경 쓰고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "숙제 검사",
+      "aliases": [
+        "검사"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "의무",
+      "card_title": "펼쳐진 공책",
+      "advice": "확인받기 전에 스스로 먼저 점검해 보세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "해야 할 일을 제대로 했는지 확인받는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "수강신청",
+      "aliases": [
+        "수강 신청"
+      ],
+      "category": "디지털",
+      "tag": "시간 압박",
+      "sub_tag": "요행",
+      "card_title": "초 단위의 클릭",
+      "advice": "원하는 것의 우선순위를 미리 정해 두세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "원하는 자리를 놓칠까 하는 조급함이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "학원",
+      "aliases": [
+        "학원 수업"
+      ],
+      "category": "장소·공간",
+      "tag": "학습",
+      "sub_tag": "의무",
+      "card_title": "저녁의 교실",
+      "advice": "배우는 것 중 재미있는 부분 하나를 찾아 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "더 배워야 한다는 부담과 성장하고 싶은 마음이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "교복",
+      "aliases": [
+        "학생 시절 옷"
+      ],
+      "category": "사물·재물",
+      "tag": "과거",
+      "sub_tag": "의무",
+      "card_title": "다시 입은 교복",
+      "advice": "그 시절에 하고 싶었던 일을 하나 떠올려 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "학창 시절의 감정이나 규칙이 지금도 남아 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "졸업논문",
+      "aliases": [
+        "논문",
+        "졸업 작품"
+      ],
+      "category": "사물·재물",
+      "tag": "의무",
+      "sub_tag": "평가",
+      "card_title": "끝나지 않은 마지막 장",
+      "advice": "오늘 쓸 분량을 아주 작게 정해 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "마무리해야 할 큰 과제가 마음을 누른다.",
+      "traditional": null
+    },
+    {
+      "keyword": "장학금",
+      "aliases": [
+        "장학생"
+      ],
+      "category": "사물·재물",
+      "tag": "인정",
+      "sub_tag": "재물",
+      "card_title": "받아든 보상",
+      "advice": "최근 칭찬받을 만한 일을 하나 적어 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "노력이 보상받기를 바라는 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "야근",
+      "aliases": [
+        "밤샘 근무",
+        "철야"
+      ],
+      "category": "행동·상황",
+      "tag": "의무",
+      "sub_tag": "시간 압박",
+      "card_title": "꺼지지 않는 사무실",
+      "advice": "오늘 끝낼 일과 내일로 넘길 일을 나눠 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "일에 쫓겨 쉼이 부족하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "회식",
+      "aliases": [
+        "술자리 모임"
+      ],
+      "category": "행동·상황",
+      "tag": "의무",
+      "sub_tag": "연결",
+      "card_title": "어색한 건배",
+      "advice": "불편한 자리에서 지킬 나만의 선을 정해 두세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "가까워지고 싶은 마음과 피곤함이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "회의",
+      "aliases": [
+        "미팅"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "의무",
+      "card_title": "둘러앉은 책상",
+      "advice": "회의 전에 꼭 할 말 하나를 정해 두세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "여러 사람 앞에서 의견을 내야 하는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "업무 실수",
+      "aliases": [
+        "일 실수",
+        "실수를 들킴"
+      ],
+      "category": "행동·상황",
+      "tag": "노출",
+      "sub_tag": "평가",
+      "card_title": "들켜 버린 실수",
+      "advice": "실수를 바로잡을 첫 단계 하나만 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "잘못이 드러날까 하는 걱정이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "사표",
+      "aliases": [
+        "사직서"
+      ],
+      "category": "사물·재물",
+      "tag": "해방",
+      "sub_tag": "끝맺음",
+      "card_title": "책상 위의 봉투",
+      "advice": "그만두고 싶은 것과 지키고 싶은 것을 나눠 적어 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "지금의 자리에서 벗어나고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "연봉",
+      "aliases": [
+        "연봉 협상"
+      ],
+      "category": "사물·재물",
+      "tag": "재물",
+      "sub_tag": "평가",
+      "card_title": "매겨진 가치",
+      "advice": "내가 받고 싶은 대가를 솔직하게 적어 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "내 가치를 제대로 인정받고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "출장",
+      "aliases": [
+        "외근"
+      ],
+      "category": "행동·상황",
+      "tag": "의무",
+      "sub_tag": "전환",
+      "card_title": "낯선 곳의 일정",
+      "advice": "이동 중에 나를 위한 시간을 하나 넣어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "익숙한 곳을 떠나 책임을 다해야 하는 상황이다.",
+      "traditional": null
+    },
+    {
+      "keyword": "재택근무",
+      "aliases": [
+        "재택"
+      ],
+      "category": "장소·공간",
+      "tag": "의무",
+      "sub_tag": "고립",
+      "card_title": "집 안의 사무실",
+      "advice": "일과 쉼을 나누는 작은 규칙을 정해 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "일과 생활의 경계가 흐려져 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "아르바이트",
+      "aliases": [
+        "알바"
+      ],
+      "category": "행동·상황",
+      "tag": "의무",
+      "sub_tag": "재물",
+      "card_title": "시급의 시간",
+      "advice": "오늘 번 것 중 나에게 쓸 몫을 정해 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "생활을 위해 버티는 시간이 길다.",
+      "traditional": null
+    },
+    {
+      "keyword": "진상 손님",
+      "aliases": [
+        "진상",
+        "무례한 손님"
+      ],
+      "category": "인물·관계",
+      "tag": "갈등",
+      "sub_tag": "권위",
+      "card_title": "큰 목소리의 손님",
+      "advice": "억울한 일이 있었다면 짧게 적어 털어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "참고 넘긴 감정이 쌓여 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "노트북",
+      "aliases": [
+        "랩톱"
+      ],
+      "category": "사물·재물",
+      "tag": "의무",
+      "sub_tag": "연결",
+      "card_title": "열린 화면",
+      "advice": "오늘 꼭 끝낼 작업 하나만 남겨 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "해야 할 일과 연결이 늘 손에 붙어 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "배터리 부족",
+      "aliases": [
+        "배터리 방전",
+        "충전기"
+      ],
+      "category": "디지털",
+      "tag": "시간 압박",
+      "sub_tag": "고립",
+      "card_title": "깜빡이는 빨간 줄",
+      "advice": "오늘 나의 남은 기운을 솔직하게 점검해 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "에너지가 떨어지고 연결이 끊길까 불안하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "와이파이",
+      "aliases": [
+        "인터넷 끊김",
+        "데이터"
+      ],
+      "category": "디지털",
+      "tag": "연결",
+      "sub_tag": "고립",
+      "card_title": "잡히지 않는 신호",
+      "advice": "연락이 잘 안 되는 사람이 있다면 먼저 안부를 물어보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "누군가와 이어지고 싶은데 잘 닿지 않는 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "알람",
+      "aliases": [
+        "알람 소리",
+        "알람을 못 들음"
+      ],
+      "category": "사물·재물",
+      "tag": "시간 압박",
+      "sub_tag": "의무",
+      "card_title": "울리는 아침",
+      "advice": "내일 아침 할 일을 하나만 정해 두세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "정해진 시간에 맞춰야 한다는 압박이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "영상통화",
+      "aliases": [
+        "페이스타임"
+      ],
+      "category": "디지털",
+      "tag": "연결",
+      "sub_tag": "친밀",
+      "card_title": "화면 속 얼굴",
+      "advice": "보고 싶은 사람에게 짧게 연락해 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "멀리 있는 사람과 가까워지고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "사진 삭제",
+      "aliases": [
+        "사진이 지워짐",
+        "파일 삭제"
+      ],
+      "category": "디지털",
+      "tag": "끝맺음",
+      "sub_tag": "과거",
+      "card_title": "사라진 기록",
+      "advice": "남겨 두고 싶은 기억 하나를 적어 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "소중한 것을 잃을까 하는 걱정이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "저장 안 됨",
+      "aliases": [
+        "파일이 날아감",
+        "작업이 사라짐"
+      ],
+      "category": "디지털",
+      "tag": "통제 상실",
+      "sub_tag": "갑작스러운 타격",
+      "card_title": "사라진 작업",
+      "advice": "중요한 일은 오늘 한 번 정리해 두세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "애쓴 것이 헛수고가 될까 불안하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "로그인 실패",
+      "aliases": [
+        "비밀번호 분실",
+        "비밀번호를 잊음"
+      ],
+      "category": "디지털",
+      "tag": "통제 상실",
+      "sub_tag": "고립",
+      "card_title": "열리지 않는 계정",
+      "advice": "막혀 있는 일 하나를 다른 방법으로 시도해 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "해야 할 곳에 들어가지 못하는 답답함이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "검색",
+      "aliases": [
+        "구글링",
+        "인터넷 검색"
+      ],
+      "category": "디지털",
+      "tag": "길찾기",
+      "sub_tag": "학습",
+      "card_title": "빈 검색창",
+      "advice": "궁금한 것 하나를 끝까지 찾아보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "답을 찾으려는 마음이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "배달앱",
+      "aliases": [
+        "배달 주문"
+      ],
+      "category": "디지털",
+      "tag": "회복",
+      "sub_tag": "도피",
+      "card_title": "기다리는 배달",
+      "advice": "오늘 나를 위한 한 끼를 정해 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "쉽게 채우고 싶은 피로가 쌓여 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "온라인 쇼핑",
+      "aliases": [
+        "장바구니",
+        "결제"
+      ],
+      "category": "디지털",
+      "tag": "재물",
+      "sub_tag": "도피",
+      "card_title": "가득 찬 장바구니",
+      "advice": "사고 싶은 것과 필요한 것을 나눠 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "무언가를 채우고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "라이브 방송",
+      "aliases": [
+        "생방송",
+        "라방"
+      ],
+      "category": "디지털",
+      "tag": "노출",
+      "sub_tag": "인정",
+      "card_title": "켜진 카메라",
+      "advice": "보여 주고 싶은 나와 숨기고 싶은 나를 나눠 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "많은 사람 앞에 드러나는 긴장과 기대가 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "유튜버",
+      "aliases": [
+        "인플루언서",
+        "크리에이터"
+      ],
+      "category": "인물·관계",
+      "tag": "동경",
+      "sub_tag": "인정",
+      "card_title": "구독자 수",
+      "advice": "내가 잘하는 것 하나를 남에게 보여 줄 방법을 떠올려 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "주목받고 인정받는 삶에 끌린다.",
+      "traditional": null
+    },
+    {
+      "keyword": "몰래카메라",
+      "aliases": [
+        "몰카",
+        "숨은 카메라"
+      ],
+      "category": "사물·재물",
+      "tag": "노출",
+      "sub_tag": "미지",
+      "card_title": "어딘가의 렌즈",
+      "advice": "불안한 마음이 어디서 오는지 적어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "누군가 나를 몰래 보고 있다는 불안이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "CCTV",
+      "aliases": [
+        "감시 카메라"
+      ],
+      "category": "사물·재물",
+      "tag": "노출",
+      "sub_tag": "권위",
+      "card_title": "지켜보는 렌즈",
+      "advice": "스스로에게 너무 엄격하지 않은지 살펴보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "늘 지켜지는 느낌이나 감시받는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "녹음",
+      "aliases": [
+        "녹음 파일",
+        "통화 녹음"
+      ],
+      "category": "디지털",
+      "tag": "노출",
+      "sub_tag": "과거",
+      "card_title": "남겨진 목소리",
+      "advice": "남에게 꼭 하고 싶은 말이 있다면 정리해 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "한 말이 남고 드러날까 신경 쓰인다.",
+      "traditional": null
+    },
+    {
+      "keyword": "거짓말",
+      "aliases": [
+        "거짓말이 들킴"
+      ],
+      "category": "행동·상황",
+      "tag": "위장",
+      "sub_tag": "노출",
+      "card_title": "들킬 듯한 말",
+      "advice": "미뤄 둔 솔직한 말 하나를 떠올려 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "숨기고 있는 것이 드러날까 불안하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "벌거벗음",
+      "aliases": [
+        "알몸",
+        "옷을 안 입음",
+        "나체"
+      ],
+      "category": "신체·생리",
+      "tag": "노출",
+      "sub_tag": "자기 모습",
+      "card_title": "가릴 것 없는 몸",
+      "advice": "있는 그대로의 나를 받아 줄 사람을 떠올려 보세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "남에게 드러나는 것에 대한 부끄러움이나 해방감이 있다.",
+      "traditional": {
+        "interpretation": "몸을 드러내고 옷이 없으면 크게 이롭다(길몽).",
+        "source": "주공해몽(周公解夢) 露體無衣大吉利",
+        "reversal": true
+      }
+    },
+    {
+      "keyword": "대사를 잊음",
+      "aliases": [
+        "무대에서 말이 막힘",
+        "할 말을 잊음"
+      ],
+      "category": "행동·상황",
+      "tag": "노출",
+      "sub_tag": "평가",
+      "card_title": "멈춘 대사",
+      "advice": "준비한 말 중 핵심 하나만 기억해 두세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "사람들 앞에서 실수할까 하는 걱정이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "교통체증",
+      "aliases": [
+        "차가 막힘",
+        "정체"
+      ],
+      "category": "행동·상황",
+      "tag": "시간 압박",
+      "sub_tag": "통제 상실",
+      "card_title": "멈춘 차선",
+      "advice": "막힌 일이 있다면 순서를 바꿔 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "앞으로 나아가지 못하는 답답함이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "버스를 놓침",
+      "aliases": [
+        "차를 놓침",
+        "지하철을 놓침"
+      ],
+      "category": "행동·상황",
+      "tag": "시간 압박",
+      "sub_tag": "끝맺음",
+      "card_title": "떠나 버린 차",
+      "advice": "놓친 기회 대신 다음 기회를 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "기회를 놓칠까 하는 불안이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "비행기를 놓침",
+      "aliases": [
+        "탑승 시간 지남"
+      ],
+      "category": "행동·상황",
+      "tag": "시간 압박",
+      "sub_tag": "문턱",
+      "card_title": "닫힌 탑승구",
+      "advice": "중요한 일정은 오늘 한 번 확인해 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "중요한 기회를 놓칠까 걱정한다.",
+      "traditional": null
+    },
+    {
+      "keyword": "운전",
+      "aliases": [
+        "운전대"
+      ],
+      "category": "행동·상황",
+      "tag": "길찾기",
+      "sub_tag": "통제 상실",
+      "card_title": "손에 쥔 운전대",
+      "advice": "지금 내가 이끌고 있는 일이 무엇인지 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "삶의 방향을 스스로 잡고 있는지 확인하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "주차장",
+      "aliases": [
+        "주차 자리"
+      ],
+      "category": "장소·공간",
+      "tag": "길찾기",
+      "sub_tag": "미지",
+      "card_title": "찾지 못한 자리",
+      "advice": "머물 곳이 필요한 일이 있는지 살펴보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "잠시 멈출 자리를 찾고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "고속도로",
+      "aliases": [
+        "고속 주행"
+      ],
+      "category": "장소·공간",
+      "tag": "길찾기",
+      "sub_tag": "시간 압박",
+      "card_title": "길게 뻗은 차선",
+      "advice": "속도를 낼 일과 늦출 일을 나눠 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "빠르게 나아가고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "신호등",
+      "aliases": [
+        "빨간불",
+        "초록불"
+      ],
+      "category": "사물·재물",
+      "tag": "길찾기",
+      "sub_tag": "권위",
+      "card_title": "멈춤과 출발",
+      "advice": "지금 멈춰야 할 일과 출발할 일을 하나씩 고르세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "나아갈 때를 고민하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "횡단보도",
+      "aliases": [
+        "건널목"
+      ],
+      "category": "장소·공간",
+      "tag": "문턱",
+      "sub_tag": "보호",
+      "card_title": "건너는 줄무늬",
+      "advice": "미뤄 둔 결정 하나를 작게 시작해 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "다음 단계로 건너갈 때를 보고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "오토바이",
+      "aliases": [
+        "바이크",
+        "스쿠터"
+      ],
+      "category": "사물·재물",
+      "tag": "해방",
+      "sub_tag": "통제 상실",
+      "card_title": "바람을 가르는 속도",
+      "advice": "오늘 나만의 자유 시간을 조금 만들어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "자유롭고 싶은 마음과 위험에 대한 걱정이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "전동킥보드",
+      "aliases": [
+        "킥보드"
+      ],
+      "category": "사물·재물",
+      "tag": "해방",
+      "sub_tag": "통제 상실",
+      "card_title": "가벼운 바퀴",
+      "advice": "가볍게 시작할 수 있는 일을 하나 골라 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "가볍게 벗어나고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "여권 분실",
+      "aliases": [
+        "여권을 잃어버림"
+      ],
+      "category": "사물·재물",
+      "tag": "통제 상실",
+      "sub_tag": "자기 모습",
+      "card_title": "사라진 신분증",
+      "advice": "나를 설명하는 것 세 가지를 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "나를 증명할 무언가를 잃을까 불안하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "카드 결제 거절",
+      "aliases": [
+        "결제 실패",
+        "잔액 부족"
+      ],
+      "category": "디지털",
+      "tag": "재물",
+      "sub_tag": "노출",
+      "card_title": "거절된 결제",
+      "advice": "이번 달 지출을 한 번 점검해 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "돈과 여유가 부족하다는 걱정이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "빚",
+      "aliases": [
+        "대출",
+        "빚 독촉"
+      ],
+      "category": "사물·재물",
+      "tag": "의무",
+      "sub_tag": "재물",
+      "card_title": "무거운 숫자",
+      "advice": "갚아야 할 것 중 가장 작은 것부터 적어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "갚아야 할 부담이 마음을 누른다.",
+      "traditional": null
+    },
+    {
+      "keyword": "월세",
+      "aliases": [
+        "집세",
+        "관리비"
+      ],
+      "category": "사물·재물",
+      "tag": "의무",
+      "sub_tag": "재물",
+      "card_title": "매달 오는 날짜",
+      "advice": "고정 지출을 한 번 정리해 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "생활을 유지해야 하는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "쇼핑",
+      "aliases": [
+        "장보기",
+        "백화점"
+      ],
+      "category": "행동·상황",
+      "tag": "재물",
+      "sub_tag": "동경",
+      "card_title": "고르는 손",
+      "advice": "오늘 나에게 꼭 필요한 것 하나를 고르세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "채우고 싶은 마음이나 갖고 싶은 것이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "세일",
+      "aliases": [
+        "할인",
+        "특가"
+      ],
+      "category": "행동·상황",
+      "tag": "요행",
+      "sub_tag": "재물",
+      "card_title": "놓치기 싫은 가격",
+      "advice": "사고 싶은 것을 하루만 미뤄 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "좋은 기회를 놓칠까 조급하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "영수증",
+      "aliases": [
+        "계산서"
+      ],
+      "category": "사물·재물",
+      "tag": "재물",
+      "sub_tag": "과거",
+      "card_title": "남은 기록",
+      "advice": "이번 주에 쓴 돈을 한 번 돌아보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "지나간 선택의 결과를 확인하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "수술",
+      "aliases": [
+        "수술실"
+      ],
+      "category": "행동·상황",
+      "tag": "회복",
+      "sub_tag": "통제 상실",
+      "card_title": "조명 아래의 시간",
+      "advice": "몸이 보내는 신호 하나를 적어 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "크게 고쳐야 할 것이 있다고 느낀다.",
+      "traditional": null
+    },
+    {
+      "keyword": "주사",
+      "aliases": [
+        "예방주사",
+        "링거"
+      ],
+      "category": "사물·재물",
+      "tag": "회복",
+      "sub_tag": "갑작스러운 타격",
+      "card_title": "따끔한 순간",
+      "advice": "피하던 일 하나를 짧게 마주해 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "잠깐 아프더라도 낫고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "응급실",
+      "aliases": [
+        "응급차",
+        "구급차"
+      ],
+      "category": "장소·공간",
+      "tag": "갑작스러운 타격",
+      "sub_tag": "회복",
+      "card_title": "급히 열린 문",
+      "advice": "급한 일과 중요한 일을 나눠 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "급박한 상황에서 도움이 필요하다고 느낀다.",
+      "traditional": null
+    },
+    {
+      "keyword": "다이어트",
+      "aliases": [
+        "살 빼기"
+      ],
+      "category": "행동·상황",
+      "tag": "자기 모습",
+      "sub_tag": "의무",
+      "card_title": "줄어드는 숫자",
+      "advice": "숫자 말고 몸이 편한 습관 하나를 정해 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "내 몸과 모습을 바꾸고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "탈모",
+      "aliases": [
+        "머리가 빠짐"
+      ],
+      "category": "신체·생리",
+      "tag": "자기 모습",
+      "sub_tag": "끝맺음",
+      "card_title": "빠지는 머리카락",
+      "advice": "요즘 나를 지치게 하는 것을 하나 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "나이 듦이나 모습이 변하는 것에 대한 걱정이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "여드름",
+      "aliases": [
+        "뾰루지",
+        "피부 트러블"
+      ],
+      "category": "신체·생리",
+      "tag": "자기 모습",
+      "sub_tag": "노출",
+      "card_title": "드러난 흔적",
+      "advice": "스트레스를 푸는 방법 하나를 정해 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "남에게 보이는 내 모습이 신경 쓰인다.",
+      "traditional": null
+    },
+    {
+      "keyword": "감기",
+      "aliases": [
+        "기침",
+        "콧물"
+      ],
+      "category": "신체·생리",
+      "tag": "회복",
+      "sub_tag": null,
+      "card_title": "쉬어 가라는 신호",
+      "advice": "오늘은 할 일을 하나 줄여 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "몸이 쉬어야 한다고 말하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "마스크",
+      "aliases": [
+        "마스크를 씀"
+      ],
+      "category": "사물·재물",
+      "tag": "보호",
+      "sub_tag": "위장",
+      "card_title": "가린 얼굴",
+      "advice": "숨기고 싶은 감정이 있는지 살펴보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "나를 지키고 싶거나 감추고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "헬스장",
+      "aliases": [
+        "헬스",
+        "운동"
+      ],
+      "category": "장소·공간",
+      "tag": "자기 모습",
+      "sub_tag": "의무",
+      "card_title": "쌓이는 반복",
+      "advice": "오늘 10분만 몸을 움직여 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "나를 단련하고 바꾸고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "소개팅",
+      "aliases": [
+        "미팅 자리"
+      ],
+      "category": "행동·상황",
+      "tag": "친밀",
+      "sub_tag": "평가",
+      "card_title": "처음 마주한 테이블",
+      "advice": "내가 원하는 관계를 한 문장으로 적어 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "새로운 관계에 대한 기대와 평가받는 긴장이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "고백",
+      "aliases": [
+        "사랑 고백"
+      ],
+      "category": "행동·상황",
+      "tag": "친밀",
+      "sub_tag": "노출",
+      "card_title": "건넨 진심",
+      "advice": "전하지 못한 마음이 있다면 적어 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "마음을 드러내고 싶은 용기와 두려움이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "짝사랑",
+      "aliases": [
+        "혼자 좋아함"
+      ],
+      "category": "인물·관계",
+      "tag": "동경",
+      "sub_tag": "친밀",
+      "card_title": "닿지 않는 마음",
+      "advice": "좋아하는 마음이 나에게 주는 것을 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "가까워지고 싶지만 닿지 않는 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "외도",
+      "aliases": [
+        "바람피움"
+      ],
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": "위장",
+      "card_title": "흔들린 믿음",
+      "advice": "관계에서 불안한 점을 솔직하게 적어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "관계에 대한 믿음이 흔들리고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "질투",
+      "aliases": [
+        "시기"
+      ],
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": "동경",
+      "card_title": "가려진 부러움",
+      "advice": "부러운 사람에게서 배우고 싶은 점을 적어 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "남과 비교하는 마음이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "절교",
+      "aliases": [
+        "손절",
+        "연락 끊김"
+      ],
+      "category": "행동·상황",
+      "tag": "끝맺음",
+      "sub_tag": "갈등",
+      "card_title": "끊어진 연락",
+      "advice": "정리하고 싶은 관계와 지키고 싶은 관계를 나눠 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "관계를 정리하고 싶거나 잃을까 걱정한다.",
+      "traditional": null
+    },
+    {
+      "keyword": "사과하다",
+      "aliases": [
+        "미안하다고 말함"
+      ],
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": "회복",
+      "card_title": "건넨 한마디",
+      "advice": "미뤄 둔 사과나 고마움을 전해 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "풀고 싶은 관계가 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "결혼식장",
+      "aliases": [
+        "웨딩홀",
+        "결혼식"
+      ],
+      "category": "장소·공간",
+      "tag": "친밀",
+      "sub_tag": "문턱",
+      "card_title": "하얀 입구",
+      "advice": "축하하고 싶은 사람에게 연락해 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "관계의 새 단계에 대한 기대나 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "생일 파티",
+      "aliases": [
+        "생일",
+        "생일 케이크"
+      ],
+      "category": "행동·상황",
+      "tag": "인정",
+      "sub_tag": "친밀",
+      "card_title": "켜진 초",
+      "advice": "나를 챙겨 준 사람에게 고마움을 전해 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "기억되고 축하받고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "집들이",
+      "aliases": [
+        "새집 초대"
+      ],
+      "category": "행동·상황",
+      "tag": "친밀",
+      "sub_tag": "전환",
+      "card_title": "열린 새집",
+      "advice": "가까운 사람을 내 공간에 초대해 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "새로운 시작을 사람들과 나누고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "단체 사진",
+      "aliases": [
+        "단체사진"
+      ],
+      "category": "사물·재물",
+      "tag": "연결",
+      "sub_tag": "과거",
+      "card_title": "함께 선 줄",
+      "advice": "함께였던 사람들에게 안부를 물어보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "어디엔가 속하고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "화재",
+      "aliases": [
+        "집에 불이 남",
+        "불이 남"
+      ],
+      "category": "행동·상황",
+      "tag": "갑작스러운 타격",
+      "sub_tag": "통제 상실",
+      "card_title": "번지는 불길",
+      "advice": "마음을 뜨겁게 만드는 일을 하나 적어 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "감당하기 어려운 감정이나 변화가 커지고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "전쟁",
+      "aliases": [
+        "폭격",
+        "전투"
+      ],
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": "통제 상실",
+      "card_title": "무너진 거리",
+      "advice": "요즘 가장 부딪히는 일을 하나 적어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "큰 갈등이나 압박 속에 놓여 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "좀비",
+      "aliases": [
+        "좀비 떼"
+      ],
+      "category": "초자연",
+      "tag": "통제 상실",
+      "sub_tag": "미지",
+      "card_title": "몰려오는 무리",
+      "advice": "나를 지치게 하는 반복을 하나 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "피할 수 없이 몰려오는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "테러",
+      "aliases": [
+        "폭발",
+        "폭탄"
+      ],
+      "category": "행동·상황",
+      "tag": "갑작스러운 타격",
+      "sub_tag": "미지",
+      "card_title": "갑작스러운 폭음",
+      "advice": "안전하다고 느끼는 장소를 하나 떠올려 보세요.",
+      "positive_index": 15,
+      "negative_index": 85,
+      "modern_interpretation": "예측할 수 없는 위협에 대한 불안이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "납치",
+      "aliases": [
+        "끌려감"
+      ],
+      "category": "행동·상황",
+      "tag": "통제 상실",
+      "sub_tag": "미지",
+      "card_title": "끌려가는 길",
+      "advice": "지금 내 뜻대로 안 되는 일을 하나 적어 보세요.",
+      "positive_index": 15,
+      "negative_index": 85,
+      "modern_interpretation": "내 의지와 상관없이 끌려가는 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "도둑",
+      "aliases": [
+        "강도"
+      ],
+      "category": "인물·관계",
+      "tag": "미지",
+      "sub_tag": "재물",
+      "card_title": "열린 창문",
+      "advice": "지키고 싶은 것 하나를 적어 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "소중한 것을 빼앗길까 걱정한다.",
+      "traditional": null
+    },
+    {
+      "keyword": "감옥",
+      "aliases": [
+        "교도소",
+        "갇힘"
+      ],
+      "category": "장소·공간",
+      "tag": "고립",
+      "sub_tag": "권위",
+      "card_title": "닫힌 창살",
+      "advice": "나를 묶고 있는 생각 하나를 적어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "벗어날 수 없는 틀에 갇힌 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "재판",
+      "aliases": [
+        "법정",
+        "소송"
+      ],
+      "category": "장소·공간",
+      "tag": "평가",
+      "sub_tag": "권위",
+      "card_title": "기다리는 판결",
+      "advice": "억울한 일이 있다면 사실만 적어 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "옳고 그름을 판단받는 긴장이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "체포",
+      "aliases": [
+        "경찰에 잡힘",
+        "수갑"
+      ],
+      "category": "행동·상황",
+      "tag": "권위",
+      "sub_tag": "노출",
+      "card_title": "채워진 수갑",
+      "advice": "스스로를 너무 탓하고 있지 않은지 살펴보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "잘못이 드러나 책임을 질까 걱정한다.",
+      "traditional": null
+    },
+    {
+      "keyword": "정전",
+      "aliases": [
+        "불이 꺼짐"
+      ],
+      "category": "행동·상황",
+      "tag": "미지",
+      "sub_tag": "통제 상실",
+      "card_title": "갑자기 꺼진 불",
+      "advice": "불안할 때 기댈 수 있는 것 하나를 떠올려 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "앞이 보이지 않는 막막함이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "물에 빠짐",
+      "aliases": [
+        "익사",
+        "빠져 허우적댐"
+      ],
+      "category": "행동·상황",
+      "tag": "통제 상실",
+      "sub_tag": "회복",
+      "card_title": "차오르는 물",
+      "advice": "버거운 일을 하나 덜어 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "감정이나 일에 압도되어 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "늦잠",
+      "aliases": [
+        "늦게 일어남"
+      ],
+      "category": "행동·상황",
+      "tag": "시간 압박",
+      "sub_tag": "회복",
+      "card_title": "늦어 버린 아침",
+      "advice": "잠이 부족하지 않은지 살펴보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "피로가 쌓였거나 뒤처질까 걱정한다.",
+      "traditional": null
+    },
+    {
+      "keyword": "화장",
+      "aliases": [
+        "메이크업"
+      ],
+      "category": "행동·상황",
+      "tag": "자기 모습",
+      "sub_tag": "위장",
+      "card_title": "그려 넣은 얼굴",
+      "advice": "오늘 나를 위해 꾸밀 작은 것 하나를 골라 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "보여 주고 싶은 모습을 다듬고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "미용실",
+      "aliases": [
+        "머리 자르기",
+        "헤어숍"
+      ],
+      "category": "장소·공간",
+      "tag": "자기 모습",
+      "sub_tag": "전환",
+      "card_title": "거울 앞의 가위",
+      "advice": "바꾸고 싶은 작은 습관 하나를 골라 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "모습을 바꾸고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "옷이 안 맞음",
+      "aliases": [
+        "옷이 작아짐",
+        "옷이 찢어짐"
+      ],
+      "category": "행동·상황",
+      "tag": "자기 모습",
+      "sub_tag": "노출",
+      "card_title": "맞지 않는 옷",
+      "advice": "지금 나에게 맞지 않는 역할이 있는지 살펴보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "지금의 자리나 모습이 나와 맞지 않는다고 느낀다.",
+      "traditional": null
+    },
+    {
+      "keyword": "냉장고",
+      "aliases": [
+        "냉장고 문"
+      ],
+      "category": "사물·재물",
+      "tag": "재물",
+      "sub_tag": "회복",
+      "card_title": "채워 둔 칸",
+      "advice": "가진 것 중 잘 쓰지 않은 것을 떠올려 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "내가 가진 것과 여유를 점검하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "빨래",
+      "aliases": [
+        "세탁기",
+        "세탁"
+      ],
+      "category": "행동·상황",
+      "tag": "정화",
+      "sub_tag": "의무",
+      "card_title": "돌아가는 세탁기",
+      "advice": "미뤄 둔 정리 하나를 끝내 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "쌓인 것을 정리하고 새로워지고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "설거지",
+      "aliases": [
+        "그릇 닦기"
+      ],
+      "category": "행동·상황",
+      "tag": "의무",
+      "sub_tag": "정화",
+      "card_title": "쌓인 그릇",
+      "advice": "해야 할 일을 작은 단위로 나눠 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "쌓인 일을 처리해야 한다는 부담이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "이불",
+      "aliases": [
+        "이불 속"
+      ],
+      "category": "사물·재물",
+      "tag": "보호",
+      "sub_tag": "도피",
+      "card_title": "따뜻한 덮개",
+      "advice": "오늘 일찍 쉬는 시간을 만들어 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "안전한 곳에 숨고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "반려동물",
+      "aliases": [
+        "강아지",
+        "반려견",
+        "반려묘"
+      ],
+      "category": "동물",
+      "tag": "친밀",
+      "sub_tag": "보호",
+      "card_title": "곁의 작은 온기",
+      "advice": "나를 편하게 해 주는 존재를 떠올려 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "돌보고 돌봄받고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "편의점",
+      "aliases": [
+        "편의점 알바"
+      ],
+      "category": "장소·공간",
+      "tag": "회복",
+      "sub_tag": "고립",
+      "card_title": "밤에도 켜진 불",
+      "advice": "간단히 나를 챙길 방법 하나를 찾아 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "급히 채우고 싶은 피로나 외로움이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "카페",
+      "aliases": [
+        "커피숍",
+        "커피"
+      ],
+      "category": "장소·공간",
+      "tag": "회복",
+      "sub_tag": "연결",
+      "card_title": "따뜻한 한 잔",
+      "advice": "좋아하는 자리에서 잠시 쉬어 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "쉼과 대화가 필요한 때다.",
+      "traditional": null
+    },
+    {
+      "keyword": "마트",
+      "aliases": [
+        "대형마트"
+      ],
+      "category": "장소·공간",
+      "tag": "재물",
+      "sub_tag": "길찾기",
+      "card_title": "가득한 진열대",
+      "advice": "필요한 것 세 가지만 골라 적어 보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "무엇을 고를지 고민하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "수영장",
+      "aliases": [
+        "풀장"
+      ],
+      "category": "장소·공간",
+      "tag": "해방",
+      "sub_tag": "정화",
+      "card_title": "파란 물속",
+      "advice": "몸을 가볍게 하는 활동 하나를 해 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "답답함을 풀고 가벼워지고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "노래방",
+      "aliases": [
+        "코인노래방"
+      ],
+      "category": "장소·공간",
+      "tag": "해방",
+      "sub_tag": "정화",
+      "card_title": "크게 부른 노래",
+      "advice": "하고 싶은 말을 소리 내어 정리해 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "눌러 둔 감정을 풀고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "PC방",
+      "aliases": [
+        "피시방"
+      ],
+      "category": "장소·공간",
+      "tag": "도피",
+      "sub_tag": "연결",
+      "card_title": "불 꺼진 자리",
+      "advice": "현실에서 미뤄 둔 일 하나를 떠올려 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "잠시 현실을 잊고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "술",
+      "aliases": [
+        "술에 취함",
+        "만취"
+      ],
+      "category": "사물·재물",
+      "tag": "도피",
+      "sub_tag": "통제 상실",
+      "card_title": "기울어진 잔",
+      "advice": "요즘 잊고 싶은 일이 있는지 적어 보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "긴장을 풀고 싶지만 통제를 잃을까 걱정도 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "담배",
+      "aliases": [
+        "흡연"
+      ],
+      "category": "사물·재물",
+      "tag": "도피",
+      "sub_tag": "의무",
+      "card_title": "흩어지는 연기",
+      "advice": "스트레스를 푸는 다른 방법 하나를 찾아 보세요.",
+      "positive_index": 30,
+      "negative_index": 70,
+      "modern_interpretation": "잠시 숨 돌릴 틈이 필요하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "연예인",
+      "aliases": [
+        "셀럽"
+      ],
+      "category": "인물·관계",
+      "tag": "동경",
+      "sub_tag": "노출",
+      "card_title": "화면 속 스타",
+      "advice": "닮고 싶은 점 하나를 내 일상에 적용해 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "주목받고 빛나고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "슈퍼히어로",
+      "aliases": [
+        "히어로"
+      ],
+      "category": "초자연",
+      "tag": "동경",
+      "sub_tag": "보호",
+      "card_title": "망토를 두른 힘",
+      "advice": "오늘 누군가를 도울 작은 일을 찾아 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "강해지고 누군가를 지키고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "초능력",
+      "aliases": [
+        "능력을 얻음",
+        "순간이동"
+      ],
+      "category": "초자연",
+      "tag": "초월",
+      "sub_tag": "해방",
+      "card_title": "깨어난 힘",
+      "advice": "최근 스스로 놀랐던 나의 능력을 적어 보세요.",
+      "positive_index": 65,
+      "negative_index": 35,
+      "modern_interpretation": "한계를 넘고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "시간여행",
+      "aliases": [
+        "과거로 돌아감",
+        "미래로 감"
+      ],
+      "category": "초자연",
+      "tag": "과거",
+      "sub_tag": "초월",
+      "card_title": "되감은 시계",
+      "advice": "돌아가고 싶은 순간과 그 이유를 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "바꾸고 싶은 과거나 궁금한 미래가 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "우주",
+      "aliases": [
+        "우주 공간",
+        "우주선"
+      ],
+      "category": "자연·환경",
+      "tag": "초월",
+      "sub_tag": "고립",
+      "card_title": "끝없는 어둠의 빛",
+      "advice": "큰 그림에서 지금 고민을 한 번 바라보세요.",
+      "positive_index": 55,
+      "negative_index": 45,
+      "modern_interpretation": "나보다 큰 무언가 앞에서 작아지거나 자유로워진다.",
+      "traditional": null
+    },
+    {
+      "keyword": "로봇",
+      "aliases": [
+        "인공지능",
+        "AI"
+      ],
+      "category": "사물·재물",
+      "tag": "미지",
+      "sub_tag": "권위",
+      "card_title": "감정 없는 얼굴",
+      "advice": "기계적으로 하고 있는 일이 있는지 살펴보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "사람이 아닌 무언가에 대한 기대와 불안이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "게임 속 세계",
+      "aliases": [
+        "게임 안에 들어감"
+      ],
+      "category": "디지털",
+      "tag": "도피",
+      "sub_tag": "초월",
+      "card_title": "화면 너머의 지도",
+      "advice": "현실에서 이루고 싶은 레벨업 하나를 정해 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "현실과 다른 세계에서 살아 보고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "콘서트",
+      "aliases": [
+        "공연"
+      ],
+      "category": "행동·상황",
+      "tag": "해방",
+      "sub_tag": "동경",
+      "card_title": "함께 부르는 노래",
+      "advice": "좋아하는 노래를 크게 들어 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "감정을 마음껏 풀고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "영화관",
+      "aliases": [
+        "영화"
+      ],
+      "category": "장소·공간",
+      "tag": "도피",
+      "sub_tag": "동경",
+      "card_title": "어두운 객석",
+      "advice": "요즘 끌리는 이야기가 무엇인지 적어 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "다른 이야기 속에 잠시 머물고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "신",
+      "aliases": [
+        "하느님",
+        "신령"
+      ],
+      "category": "초자연",
+      "tag": "초월",
+      "sub_tag": "권위",
+      "card_title": "위에서 내린 빛",
+      "advice": "기대고 싶은 믿음이나 원칙을 떠올려 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "나보다 큰 존재에게 기대고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "교회",
+      "aliases": [
+        "성당",
+        "예배"
+      ],
+      "category": "장소·공간",
+      "tag": "초월",
+      "sub_tag": "정화",
+      "card_title": "고요한 기도",
+      "advice": "마음을 내려놓을 시간을 잠깐 가져 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "위로와 의미를 찾고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "절",
+      "aliases": [
+        "사찰",
+        "불상"
+      ],
+      "category": "장소·공간",
+      "tag": "초월",
+      "sub_tag": "정화",
+      "card_title": "종소리의 마당",
+      "advice": "조용히 호흡을 세어 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "마음을 비우고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "점집",
+      "aliases": [
+        "무당"
+      ],
+      "category": "장소·공간",
+      "tag": "미지",
+      "sub_tag": "요행",
+      "card_title": "미래를 묻는 자리",
+      "advice": "불안한 일 중 내가 할 수 있는 것을 적어 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "앞날을 미리 알고 싶은 불안이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "타로",
+      "aliases": [
+        "타로 카드"
+      ],
+      "category": "사물·재물",
+      "tag": "미지",
+      "sub_tag": "길찾기",
+      "card_title": "뒤집힌 그림",
+      "advice": "지금 답을 원하는 질문을 하나 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "선택에 대한 확신이 필요하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "예지몽",
+      "aliases": [
+        "미래를 봄"
+      ],
+      "category": "초자연",
+      "tag": "초월",
+      "sub_tag": "미지",
+      "card_title": "미리 본 장면",
+      "advice": "꿈에서 본 장면과 지금 걱정을 나란히 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "앞으로의 일에 대한 예감이나 걱정이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "칭찬",
+      "aliases": [
+        "칭찬받음"
+      ],
+      "category": "행동·상황",
+      "tag": "인정",
+      "sub_tag": "친밀",
+      "card_title": "건네받은 말",
+      "advice": "오늘 나 자신을 한 번 칭찬해 보세요.",
+      "positive_index": 75,
+      "negative_index": 25,
+      "modern_interpretation": "인정받고 싶은 마음이 채워지고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "박수",
+      "aliases": [
+        "박수갈채",
+        "환호"
+      ],
+      "category": "행동·상황",
+      "tag": "인정",
+      "sub_tag": "노출",
+      "card_title": "쏟아지는 소리",
+      "advice": "최근 해낸 일을 하나 떠올려 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "노력을 인정받고 싶은 마음이 크다.",
+      "traditional": null
+    },
+    {
+      "keyword": "1등",
+      "aliases": [
+        "우승",
+        "금메달"
+      ],
+      "category": "행동·상황",
+      "tag": "인정",
+      "sub_tag": "평가",
+      "card_title": "가장 높은 자리",
+      "advice": "작은 목표 하나를 이뤄 보세요.",
+      "positive_index": 70,
+      "negative_index": 30,
+      "modern_interpretation": "이기고 인정받고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "꼴찌",
+      "aliases": [
+        "탈락",
+        "낙방"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "고립",
+      "card_title": "맨 뒤의 자리",
+      "advice": "비교 대신 어제의 나와 견줘 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "뒤처질까 하는 두려움이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "무대",
+      "aliases": [
+        "공연 무대",
+        "무대 위"
+      ],
+      "category": "장소·공간",
+      "tag": "노출",
+      "sub_tag": "인정",
+      "card_title": "조명 아래의 자리",
+      "advice": "사람들 앞에서 보여 주고 싶은 나를 적어 보세요.",
+      "positive_index": 50,
+      "negative_index": 50,
+      "modern_interpretation": "주목받는 긴장과 기대가 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "선거",
+      "aliases": [
+        "투표",
+        "반장 선거"
+      ],
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": "권위",
+      "card_title": "모이는 표",
+      "advice": "내가 이끌고 싶은 일을 떠올려 보세요.",
+      "positive_index": 45,
+      "negative_index": 55,
+      "modern_interpretation": "선택받고 인정받고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "군중 속 혼자",
+      "aliases": [
+        "아무도 날 모름"
+      ],
+      "category": "행동·상황",
+      "tag": "고립",
+      "sub_tag": "미지",
+      "card_title": "사람 사이의 빈자리",
+      "advice": "가볍게 안부를 나눌 사람을 하나 떠올려 보세요.",
+      "positive_index": 25,
+      "negative_index": 75,
+      "modern_interpretation": "사람들 사이에서도 외로움을 느낀다.",
+      "traditional": null
+    },
+    {
+      "keyword": "이사 갈 집",
+      "aliases": [
+        "새집"
+      ],
+      "category": "장소·공간",
+      "tag": "전환",
+      "sub_tag": "탄생",
+      "card_title": "비어 있는 새 방",
+      "advice": "새로 시작하고 싶은 것 하나를 적어 보세요.",
+      "positive_index": 60,
+      "negative_index": 40,
+      "modern_interpretation": "새로운 환경으로 옮겨 가고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "엄마 잔소리",
+      "aliases": [
+        "잔소리"
+      ],
+      "category": "행동·상황",
+      "tag": "권위",
+      "sub_tag": "갈등",
+      "card_title": "반복되는 말",
+      "advice": "듣기 싫은 말 속에서 걱정을 한 번 찾아보세요.",
+      "positive_index": 35,
+      "negative_index": 65,
+      "modern_interpretation": "간섭받는 답답함과 걱정받는 마음이 함께 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "부모님 싸움",
+      "aliases": [
+        "부모님 다툼"
+      ],
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": "보호",
+      "card_title": "큰 소리의 거실",
+      "advice": "불안할 때 나를 안정시키는 방법을 정해 보세요.",
+      "positive_index": 20,
+      "negative_index": 80,
+      "modern_interpretation": "가까운 사람들 사이의 긴장이 마음에 걸린다.",
+      "traditional": null
+    },
+    {
+      "keyword": "치과",
+      "aliases": [
+        "스케일링",
+        "충치 치료"
+      ],
+      "category": "장소·공간",
+      "tag": "회복",
+      "sub_tag": "갑작스러운 타격",
+      "card_title": "불 켜진 의자",
+      "advice": "미뤄 둔 검진이나 정리를 하나 해 보세요.",
+      "positive_index": 40,
+      "negative_index": 60,
+      "modern_interpretation": "피하던 문제를 마주해야 할 때다.",
       "traditional": null
     }
   ]
