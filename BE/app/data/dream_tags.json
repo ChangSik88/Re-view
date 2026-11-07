@@ -1,0 +1,628 @@
+{
+  "version": 1,
+  "source": "주공해몽(周公解夢)",
+  "tags": [
+    {
+      "id": "평가",
+      "image_key": "tag_evaluation",
+      "definition": "남에게 판단받는 압박이 있는 대상이나 장소",
+      "past_examples": [
+        {
+          "label": "관아 소송",
+          "source_text": "入官詞訟主大吉"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "시험",
+        "면접",
+        "발표"
+      ],
+      "image_scene": "저울 위에 선 인물을 위에서 여러 개의 눈이 내려다봄"
+    },
+    {
+      "id": "학습",
+      "image_key": "tag_learning",
+      "definition": "지식과 기술을 익히고 이해를 넓힘",
+      "past_examples": [
+        {
+          "label": "책 읽는 사람",
+          "source_text": "見讀書者主聰明"
+        },
+        {
+          "label": "글을 가르침",
+          "source_text": "有人教書大富貴"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "온라인 강의",
+        "스터디",
+        "독서실"
+      ],
+      "image_scene": "펼친 책에서 빛이 올라오고 그 앞에 인물이 앉아 있음"
+    },
+    {
+      "id": "의무",
+      "image_key": "tag_duty",
+      "definition": "스스로 짊어진, 해야 하지만 내키지 않는 일과 부담",
+      "past_examples": [],
+      "past_note": "원문에 없음",
+      "now_examples": [
+        "과제",
+        "출근",
+        "군대"
+      ],
+      "image_scene": "커다란 짐을 등에 지고 걸어가는 인물"
+    },
+    {
+      "id": "연결",
+      "image_key": "tag_connection",
+      "definition": "누군가와 닿으려는 시도, 소통, 정보 수집",
+      "past_examples": [
+        {
+          "label": "편지",
+          "source_text": "封書信者主通達"
+        },
+        {
+          "label": "새를 잡음",
+          "source_text": "捉住飛鳥遠信至"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "휴대폰",
+        "메신저",
+        "SNS"
+      ],
+      "image_scene": "멀리 떨어진 두 인물을 붉은 실이 이어 줌"
+    },
+    {
+      "id": "도피",
+      "image_key": "tag_escape",
+      "definition": "현실의 부담에서 잠시 빠져나가고 싶은 마음",
+      "past_examples": [
+        {
+          "label": "숨음",
+          "source_text": "伏藏井中刑獄事"
+        },
+        {
+          "label": "달아남",
+          "source_text": "身逃去得脫病去"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "게임",
+        "유튜브",
+        "낮잠"
+      ],
+      "image_scene": "달빛 아래 덤불 속으로 달아나는 인물"
+    },
+    {
+      "id": "동경",
+      "image_key": "tag_longing",
+      "definition": "닮고 싶거나 멋지다고 느끼는 대상, 높은 목표",
+      "past_examples": [
+        {
+          "label": "임금의 궁궐",
+          "source_text": "入帝王宮行大吉"
+        },
+        {
+          "label": "별을 쥠",
+          "source_text": "持執星宿大富貴"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "아이돌",
+        "운동선수",
+        "애니 명장면"
+      ],
+      "image_scene": "높이 뜬 별을 향해 손을 뻗는 인물"
+    },
+    {
+      "id": "갑작스러운 타격",
+      "image_key": "tag_sudden_blow",
+      "definition": "예상하지 못한 충격이나 공격",
+      "past_examples": [
+        {
+          "label": "칼에 베임",
+          "source_text": "被刀出血得酒食"
+        },
+        {
+          "label": "벼락",
+          "source_text": "身被霹靂主富貴"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "총에 맞음",
+        "교통사고",
+        "해고 통보"
+      ],
+      "image_scene": "위에서 내리꽂힌 번개에 몸이 젖혀진 인물"
+    },
+    {
+      "id": "회복",
+      "image_key": "tag_recovery",
+      "definition": "쉼과 치유, 돌봄의 필요",
+      "past_examples": [
+        {
+          "label": "손발을 씻음",
+          "source_text": "洗手洗足舊病除"
+        },
+        {
+          "label": "하늘빛",
+          "source_text": "天光照主疾病除"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "병원",
+        "영양제",
+        "찜질방"
+      ],
+      "image_scene": "침상에 누운 인물 위로 따뜻한 빛과 약초 잎이 내려옴"
+    },
+    {
+      "id": "위장",
+      "image_key": "tag_disguise",
+      "definition": "진짜 모습을 숨기거나 역할을 연기함",
+      "past_examples": [],
+      "past_note": "원문에 없음",
+      "now_examples": [
+        "첩보요원",
+        "부캐",
+        "가짜 계정"
+      ],
+      "image_scene": "가면을 든 인물과 그와 다른 모양의 그림자"
+    },
+    {
+      "id": "통제 상실",
+      "image_key": "tag_loss_of_control",
+      "definition": "상황을 내 뜻대로 다룰 수 없음",
+      "past_examples": [
+        {
+          "label": "우물에 떨어짐",
+          "source_text": "身墜井中疾病凶"
+        },
+        {
+          "label": "큰길이 무너짐",
+          "source_text": "大道崩陷主失財"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "브레이크 고장",
+        "가위눌림",
+        "멈춘 엘리베이터"
+      ],
+      "image_scene": "소용돌이에 휩쓸려 도는 작은 배"
+    },
+    {
+      "id": "재물",
+      "image_key": "tag_wealth",
+      "definition": "얻는 것, 자원, 풍요에 대한 기대",
+      "past_examples": [
+        {
+          "label": "똥",
+          "source_text": "糞土堆積主得財"
+        },
+        {
+          "label": "금은",
+          "source_text": "金銀寶者主富貴"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "로또 당첨",
+        "월급",
+        "현금"
+      ],
+      "image_scene": "금화가 넘쳐흐르는 항아리"
+    },
+    {
+      "id": "보호",
+      "image_key": "tag_protection",
+      "definition": "나를 지켜 주거나 내가 지키는 것, 안전한 울타리",
+      "past_examples": [
+        {
+          "label": "나무 아래 귀인",
+          "source_text": "立樹下貴人庇蔭"
+        },
+        {
+          "label": "불 속의 귀인",
+          "source_text": "身在火中貴人扶"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "안전벨트",
+        "경호원",
+        "도어락"
+      ],
+      "image_scene": "커다란 두 손이 작은 인물을 감쌈"
+    },
+    {
+      "id": "문턱",
+      "image_key": "tag_threshold",
+      "definition": "다음 단계로 넘어가기 직전, 경계를 건너는 순간",
+      "past_examples": [
+        {
+          "label": "강 건너기",
+          "source_text": "乘船渡江河得官"
+        },
+        {
+          "label": "문이 열림",
+          "source_text": "門戶忽開主大吉"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "입학식",
+        "첫 출근",
+        "출국장"
+      ],
+      "image_scene": "빛이 새어 나오는 문 앞에서 한 발을 내딛는 인물"
+    },
+    {
+      "id": "전환",
+      "image_key": "tag_transition",
+      "definition": "진행 중인 변화, 환경이나 상태가 바뀜",
+      "past_examples": [
+        {
+          "label": "뱀이 용이 됨",
+          "source_text": "蛇化龍得貴人助"
+        },
+        {
+          "label": "이사",
+          "source_text": "洗頭遷居疾病除"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "이사",
+        "이직",
+        "전학"
+      ],
+      "image_scene": "번데기에서 빠져나오는 나비"
+    },
+    {
+      "id": "탄생",
+      "image_key": "tag_birth",
+      "definition": "새로운 것의 시작과 싹틈",
+      "past_examples": [
+        {
+          "label": "별이 품에 듦",
+          "source_text": "星入懷主生貴子"
+        },
+        {
+          "label": "나무를 심음",
+          "source_text": "種植樹木大吉昌"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "임신",
+        "창업",
+        "새 프로젝트"
+      ],
+      "image_scene": "갈라진 땅에서 올라오는 새싹"
+    },
+    {
+      "id": "끝맺음",
+      "image_key": "tag_ending",
+      "definition": "한 단계나 관계가 끝남",
+      "past_examples": [
+        {
+          "label": "거울이 깨짐",
+          "source_text": "鏡破主夫妻離別"
+        },
+        {
+          "label": "옛일이 사라짐",
+          "source_text": "牙木梳舊事盡去"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "졸업",
+        "퇴사",
+        "이별"
+      ],
+      "image_scene": "꺼진 촛불과 끊어진 실"
+    },
+    {
+      "id": "갈등",
+      "image_key": "tag_conflict",
+      "definition": "다른 사람이나 마음과 부딪힘",
+      "past_examples": [
+        {
+          "label": "집안 다툼",
+          "source_text": "家中人鬥主分散"
+        },
+        {
+          "label": "활 싸움",
+          "source_text": "弓弩相鬥主爭論"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "말다툼",
+        "악플",
+        "팀플 갈등"
+      ],
+      "image_scene": "칼을 맞댄 두 인물"
+    },
+    {
+      "id": "요행",
+      "image_key": "tag_gamble",
+      "definition": "운에 맡김, 위험 감수, 유혹",
+      "past_examples": [],
+      "past_note": "원문에 없음",
+      "now_examples": [
+        "도박장",
+        "코인 투자",
+        "스포츠토토"
+      ],
+      "image_scene": "공중에 뜬 주사위를 향해 뻗은 손"
+    },
+    {
+      "id": "자기 모습",
+      "image_key": "tag_self_image",
+      "definition": "나를 어떻게 보고 보여 주는가, 자아상",
+      "past_examples": [],
+      "past_note": "원문에 없음. 거울, 이빨, 머리카락은 있으나 뜻이 다름",
+      "now_examples": [
+        "셀카",
+        "프로필 사진",
+        "체중계"
+      ],
+      "image_scene": "거울 속 자신과 마주 선 인물"
+    },
+    {
+      "id": "과거",
+      "image_key": "tag_past",
+      "definition": "지나간 사람, 기억, 돌아봄",
+      "past_examples": [
+        {
+          "label": "돌아가신 어른",
+          "source_text": "見先亡尊長大吉"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "옛 연인",
+        "졸업앨범",
+        "모교"
+      ],
+      "image_scene": "뒤돌아서 멀어진 옛집을 바라보는 인물"
+    },
+    {
+      "id": "미지",
+      "image_key": "tag_unknown",
+      "definition": "정체를 알 수 없음, 막연한 두려움과 가능성",
+      "past_examples": [
+        {
+          "label": "귀신",
+          "source_text": "被神鬼打大不祥"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "모르는 번호",
+        "낯선 도시",
+        "정체불명 택배"
+      ],
+      "image_scene": "안개 속에서 눈만 보이는 형체 모를 그림자"
+    },
+    {
+      "id": "권위",
+      "image_key": "tag_authority",
+      "definition": "나보다 위에 있는 힘, 규칙, 기준",
+      "past_examples": [
+        {
+          "label": "임금의 부름",
+          "source_text": "帝王宣召有驚喜"
+        },
+        {
+          "label": "호랑이",
+          "source_text": "猛虎大吼主得官"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "상사",
+        "교수",
+        "경찰"
+      ],
+      "image_scene": "높은 왕좌의 거대한 인물과 그 아래 작은 인물"
+    },
+    {
+      "id": "인정",
+      "image_key": "tag_recognition",
+      "definition": "노력을 인정받음, 성취, 사람들 앞에서의 자리",
+      "past_examples": [
+        {
+          "label": "상을 받음",
+          "source_text": "手持旌節有恩賞"
+        },
+        {
+          "label": "문서에 도장",
+          "source_text": "文書用印有名聲"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "합격",
+        "승진",
+        "좋아요"
+      ],
+      "image_scene": "머리 위 월계관과 둘러싼 박수 치는 손들"
+    },
+    {
+      "id": "고립",
+      "image_key": "tag_isolation",
+      "definition": "혼자 있음, 관계가 끊김, 멈춤",
+      "past_examples": [
+        {
+          "label": "빈집",
+          "source_text": "屋宅無人主死亡"
+        },
+        {
+          "label": "빈 시장",
+          "source_text": "見市中無人主凶"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "혼밥",
+        "단톡방 강퇴",
+        "읽씹"
+      ],
+      "image_scene": "바다 한가운데 작은 섬에 홀로 앉은 인물"
+    },
+    {
+      "id": "친밀",
+      "image_key": "tag_intimacy",
+      "definition": "가까운 관계에서의 애정과 약속",
+      "past_examples": [
+        {
+          "label": "부부가 머리를 빗겨 줌",
+          "source_text": "夫妻各與梳頭吉"
+        },
+        {
+          "label": "손잡고 다리에 오름",
+          "source_text": "攜手上橋妻有孕"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "연인",
+        "결혼",
+        "커플링"
+      ],
+      "image_scene": "서로 끌어안은 두 인물"
+    },
+    {
+      "id": "길찾기",
+      "image_key": "tag_wayfinding",
+      "definition": "방향과 선택을 고민함, 나아갈 길",
+      "past_examples": [
+        {
+          "label": "사방으로 통한 길",
+          "source_text": "見四路通名利遂"
+        },
+        {
+          "label": "횃불 들고 감",
+          "source_text": "把火行路大通達"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "내비게이션",
+        "환승",
+        "진로 선택"
+      ],
+      "image_scene": "갈림길 앞에서 등불을 든 인물"
+    },
+    {
+      "id": "시간 압박",
+      "image_key": "tag_time_pressure",
+      "definition": "늦음, 마감, 시간에 쫓김",
+      "past_examples": [],
+      "past_note": "원문에 없음",
+      "now_examples": [
+        "지각",
+        "마감",
+        "막차"
+      ],
+      "image_scene": "모래가 거의 빠진 거대한 모래시계 앞에서 달리는 인물"
+    },
+    {
+      "id": "해방",
+      "image_key": "tag_freedom",
+      "definition": "자유로움, 틀에서 벗어남, 넓어짐",
+      "past_examples": [
+        {
+          "label": "날개가 돋아 낢",
+          "source_text": "身生羽翼飛大吉"
+        },
+        {
+          "label": "옥이 무너짐",
+          "source_text": "牢獄崩壞有赦吉"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "퇴근",
+        "방학",
+        "전역"
+      ],
+      "image_scene": "끊어진 사슬을 뒤로하고 하늘로 날아오르는 인물"
+    },
+    {
+      "id": "노출",
+      "image_key": "tag_exposure",
+      "definition": "남의 시선에 드러남, 수치, 사적인 것이 보임",
+      "past_examples": [
+        {
+          "label": "벌거벗음",
+          "source_text": "露體無衣大吉利",
+          "note": "뜻은 길몽"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "화장실 문 열림",
+        "발표 중 실수",
+        "사생활 유출"
+      ],
+      "image_scene": "스포트라이트 아래 몸을 가리는 인물과 주위의 시선"
+    },
+    {
+      "id": "정화",
+      "image_key": "tag_cleansing",
+      "definition": "씻어 내고 비움, 감정을 흘려보냄",
+      "past_examples": [
+        {
+          "label": "목욕",
+          "source_text": "沐浴塵土疾病安"
+        },
+        {
+          "label": "비가 갬",
+          "source_text": "天晴雨散百憂去"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "샤워",
+        "청소",
+        "방 정리"
+      ],
+      "image_scene": "위에서 쏟아지는 물줄기 아래 선 인물"
+    },
+    {
+      "id": "초월",
+      "image_key": "tag_transcendence",
+      "definition": "신성함, 영적인 힘, 인간을 넘어선 존재",
+      "past_examples": [
+        {
+          "label": "용",
+          "source_text": "乘龍上天大主貴"
+        },
+        {
+          "label": "신선",
+          "source_text": "仙聖到家福祿至"
+        }
+      ],
+      "past_note": null,
+      "now_examples": [
+        "외계인",
+        "UFO",
+        "천사"
+      ],
+      "image_scene": "구름 위로 솟은 빛기둥을 올려다보는 작은 인물"
+    }
+  ]
+}
