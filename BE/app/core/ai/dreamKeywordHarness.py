@@ -10,6 +10,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
 from app.core.ai.langchainManager import llm, text_llm
+from app.schemas.tarotSchema import TarotKeywordDetail
 
 
 class DreamKeywordAnalysis(BaseModel):
@@ -31,19 +32,34 @@ class CatalogDreamSynthesis(BaseModel):
     ai_reply: str = Field(description="등록 키워드 해석들을 하나로 통합한 해몽과 조언")
 
 
-class KeywordMatch(BaseModel):
+class TarotKeywordExtraction(BaseModel):
+    dream_elements: list[str] = Field(
+        description=(
+            "풀이할 꿈 속 핵심 요소 1~3개. 사물·인물·행동을 꿈에 나온 표현에 가깝게, "
+            "등록 키워드에 해당하는 요소부터 중요한 순서로"
+        )
+    )
     matched_keywords: list[str] = Field(
         description=(
             "꿈에 실제로 등장한 등록 표준 키워드 중 핵심 1~2개. "
             "목록과 정확히 같은 문자열만 반환하고, 없으면 빈 배열"
         )
     )
+    dream_category: str = Field(description="랭킹용 카테고리. 지정 목록에서 하나 선택")
+
+
+class TarotWriting(BaseModel):
+    card_title: str = Field(description="등록 카드가 없을 때 쓸 카드 제목. 가장 중요한 꿈 요소의 의미를 담은 4~8자")
+    tags: list[str] = Field(description="카드에 붙일 짧은 태그 2~3개. '#' 없이 단어만")
+    summary: str = Field(description="'[가장 중요한 꿈 요소] 꿈은 ~예요' 형태의 한 줄 설명")
+    details: list[TarotKeywordDetail] = Field(description="풀이할 꿈 요소 순서대로 요소마다 하나씩")
 
 
 _DATA_FILE = Path(__file__).resolve().parents[2] / "data" / "dream_tarot.example.json"
 _parser = PydanticOutputParser(pydantic_object=DreamKeywordAnalysis)
 _synthesis_parser = PydanticOutputParser(pydantic_object=CatalogDreamSynthesis)
-_match_parser = PydanticOutputParser(pydantic_object=KeywordMatch)
+_tarot_extraction_parser = PydanticOutputParser(pydantic_object=TarotKeywordExtraction)
+_tarot_writing_parser = PydanticOutputParser(pydantic_object=TarotWriting)
 
 
 def _normalize_keyword(value: str) -> str:
@@ -215,28 +231,99 @@ dream_category는 랭킹 전용입니다. 아래 [랭킹 카테고리] 중 하�
     return analysis
 
 
-async def find_keyword_cards(dream: str) -> list[dict]:
-    """Ask Gemini which registered keywords appear in the dream and return their cards."""
-    cards_by_keyword = _load_keyword_cards()
-    system_prompt = """아래 [등록 키워드]에서 꿈에 실제로 등장하거나 직접 표현된 핵심 키워드를 1~2개까지 선택하세요.
-matched_keywords에는 목록에 있는 표준 키워드 문자열만 정확히 그대로 넣으세요.
-꿈에 맞는 등록 키워드가 하나도 없으면 matched_keywords를 빈 배열로 반환하세요.
+def find_cards(keywords: list[str]) -> list[dict]:
+    """Return catalog cards for model-picked keywords, dropping anything not registered."""
+    return _resolve_cards(keywords, _load_keyword_cards())
+
+
+async def extract_tarot_keywords(dream: str, ranking_categories: list[str]) -> TarotKeywordExtraction:
+    """Ask Gemini for the dream elements to explain, registered keywords and ranking category."""
+    system_prompt = """당신은 꿈 내용을 분석하는 AI입니다.
+
+dream_elements에는 해몽할 꿈 속 핵심 요소를 1~3개 고르세요. 사물·인물·행동을 꿈에 나온 표현에 가깝게 쓰고(예: 뱀, 문을 여는 것),
+아래 [등록 키워드]에 해당하는 요소부터 중요한 순서로 나열하세요.
+
+matched_keywords에는 [등록 키워드]에서 꿈에 실제로 등장하거나 직접 표현된 핵심 키워드를 1~2개까지 고르세요.
+목록에 있는 표준 키워드 문자열만 정확히 그대로 넣고, 맞는 키워드가 없으면 빈 배열로 반환하세요.
 비슷해 보인다는 이유만으로 등록 키워드를 억지로 고르지 마세요.
+
+dream_category는 랭킹 전용입니다. 아래 [랭킹 카테고리] 중 하나만 선택하세요.
+등록 키워드의 분야(category)와 랭킹 카테고리는 서로 다른 분류이므로 혼동하지 마세요.
 
 [등록 키워드]
 {keyword_list}
+
+[랭킹 카테고리]
+{category_list}
 
 반드시 아래 JSON 스키마만 반환하세요.
 {format_instructions}"""
     prompt = ChatPromptTemplate.from_messages(
         [("system", system_prompt), ("user", "다음 꿈을 분석하세요.\n{dream}")]
     )
-    chain = prompt | text_llm | _match_parser
-    result = await chain.ainvoke(
+    chain = prompt | text_llm | _tarot_extraction_parser
+    return await chain.ainvoke(
         {
             "dream": dream,
-            "keyword_list": "\n".join(f"- {keyword}" for keyword in cards_by_keyword),
-            "format_instructions": _match_parser.get_format_instructions(),
+            "keyword_list": "\n".join(f"- {keyword}" for keyword in _load_keyword_cards()),
+            "category_list": ", ".join(ranking_categories),
+            "format_instructions": _tarot_extraction_parser.get_format_instructions(),
         }
     )
-    return _resolve_cards(result.matched_keywords, cards_by_keyword)
+
+
+async def write_tarot_reading(dream: str, elements: list[str], cards: list[dict]) -> TarotWriting:
+    """Write the tag, one-line summary and per-element details shown under the tarot card."""
+    card_context = json.dumps(
+        [
+            {
+                "keyword": card["keyword"],
+                "card_title": card["card_title"],
+                "interpretation": card["positive_interpretation"],
+                "advice": card["advice"],
+                "positive_index": card["positive_index"],
+                "negative_index": card["negative_index"],
+            }
+            for card in cards
+        ],
+        ensure_ascii=False,
+        indent=2,
+    ) if cards else "없음"
+    system_prompt = """당신은 꿈을 타로 카드 형식으로 풀이합니다. 아래 [꿈], [풀이할 꿈 요소], [등록 카드]를 읽고 카드 아래에 들어갈 글을 쓰세요.
+
+[작성 규칙]
+- card_title: [등록 카드]가 있으면 첫 카드의 card_title을 그대로 쓰세요. "없음"이면 첫 번째 꿈 요소의 의미를 담은
+  4~8자 카드 제목을 지으세요. 예: 변화의 문, 잠든 힘의 각성
+- tags: 꿈의 분위기와 의미를 담은 짧은 태그 2~3개. '#' 없이 단어만 쓰세요.
+- summary: "[가장 중요한 꿈 요소] 꿈은 ~예요" 형태의 한 문장으로, 40자 이내로 쓰세요.
+- details: [풀이할 꿈 요소] 순서대로 요소마다 하나씩 쓰세요. keyword에는 요소를 그대로 쓰고,
+  description은 keyword로 문장을 시작해 2~3문장의 ~해요체로 쓰세요.
+- [등록 카드]와 같은 요소는 카드의 해석과 조언을 근거로 쓰고, 길흉 지수(positive_index, negative_index)를
+  "길흉이 반반이라", "좋은 쪽이 우세해서"처럼 쉬운 말로 함께 알려 주세요.
+- [등록 카드]에 없는 요소는 전통 해몽을 바탕으로 가능성으로 표현하세요.
+- 두 번째 요소부터는 앞의 요소와 함께 나온 의미를 이어서 풀이하세요.
+- 카드에 없는 내용을 카드 해석인 것처럼 쓰거나 길흉을 확정하지 마세요. 외부 검색이나 출처를 지어내지 마세요.
+
+[꿈]
+{dream}
+
+[풀이할 꿈 요소]
+{elements}
+
+[등록 카드]
+{card_context}
+
+반드시 아래 JSON 스키마만 반환하세요.
+{format_instructions}"""
+    prompt = ChatPromptTemplate.from_messages(
+        [("system", system_prompt), ("user", "타로 카드 아래에 들어갈 풀이를 작성하세요.")]
+    )
+    chain = prompt | text_llm | _tarot_writing_parser
+    return await chain.ainvoke(
+        {
+            "dream": dream,
+            "elements": "\n".join(f"- {element}" for element in elements),
+            "card_context": card_context,
+            "format_instructions": _tarot_writing_parser.get_format_instructions(),
+        }
+    )

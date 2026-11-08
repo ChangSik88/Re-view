@@ -2,17 +2,19 @@ import os
 from langchain_google_genai import ChatGoogleGenerativeAI,GoogleGenerativeAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
-from app.schemas.chatSchema import AIAnalysisResponse, DiaryGenerationResponse, DiaryTextResponse
+from app.schemas.chatSchema import AIAnalysisResponse, DiaryGenerationResponse
 
 # .env에서 불러온 API 키를 자동 인식하여 모델을 세팅합니다.
 llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.7)
 
 embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
-# 텍스트 전용 API는 사용량을 나누기 위해 별도 키를 쓴다. 없으면 기본 키를 쓴다.
-_text_api_key = os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY")
-text_llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.7, google_api_key=_text_api_key)
-text_embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001", google_api_key=_text_api_key)
+# 웹 타로 API(/demo/tarot)는 사용량을 나누기 위해 별도 키를 쓴다. 없으면 기본 키를 쓴다.
+text_llm = ChatGoogleGenerativeAI(
+    model="gemini-3.1-flash-lite",
+    temperature=0.7,
+    google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
+)
 
 # 1. 채팅용 프롬프트 (아침 vs 밤)
 chat_parser = PydanticOutputParser(pydantic_object=AIAnalysisResponse)
@@ -84,10 +86,9 @@ story_details에는 대화에서 사용자가 직접 말한 사실만 누적 정
 
 # 2. 컨텐츠 요약 작성용 프롬프트 (아침 vs 밤)
 diary_parser = PydanticOutputParser(pydantic_object=DiaryGenerationResponse)
-diary_text_parser = PydanticOutputParser(pydantic_object=DiaryTextResponse)
 
 # [아침용] 환상적인 이야기 작가
-_MORNING_DIARY_BODY = """당신은 사용자의 단편적인 꿈 내용을 한 편의 생생한 1인칭 판타지 단편 소설로 재창조하는 프로 웹소설 작가입니다.
+MORNING_DIARY_PROMPT = """당신은 사용자의 단편적인 꿈 내용을 한 편의 생생한 1인칭 판타지 단편 소설로 재창조하는 프로 웹소설 작가입니다.
 이 글은 일기나 회고록이 절대 아닙니다. 현실에서의 회상 없이, 오직 꿈속에서 겪은 사건들을 자유롭게 이어나가며 재미있는 이야기로 풀어내세요.
 
 [문체 및 서술 지침 - 반드시 지킬 것]
@@ -106,44 +107,33 @@ _MORNING_DIARY_BODY = """당신은 사용자의 단편적인 꿈 내용을 한 �
 - 꿈속 이야기가 모두 끝난 후, 글의 가장 마지막 문장은 반드시 아래의 양식을 토씨 하나 틀리지 않고 똑같이 작성하여 글을 끝맺으세요. 다른 다짐이나 여운을 남기는 말은 절대 허용하지 않습니다.
 "오늘 꿨던 [꿈의 핵심 소재] 꿈은 실제로 [해몽 의미](이)라는 의미를 담고 있다고 한다. 참 재미있었다."
 
-"""
-
-_MORNING_DIARY_FORMAT = """[JSON 문법 엄수 경고]
-반드시 올바른 JSON 형식으로 답변해야 합니다. "title", "content", "tags" 항목 사이의 쉼표(,)를 절대 누락하지 마세요.
-{format_instructions}"""
-
-# [밤용] 따뜻한 하루 회고 일기 작가
-_NIGHT_DIARY_BODY = """당신은 사용자의 하루 일과 대화를 바탕으로 하루를 차분하게 마무리하는 따뜻한 회고 일기를 작성하는 작가입니다.
-오늘 겪은 일상적인 사건과 그 속에서 느낀 감정을 정리하며, 스스로를 위로하고 응원하는 1인칭 시점의 일기를 완결된 이야기로 작성해 주세요.
-
-[중요 지침] 사용자가 선택한 핵심 키워드: {selected_keywords}
-이 키워드들이 스토리의 핵심 감정선으로 눈에 띄게 강조되도록 자연스럽게 녹여내 주세요.
-
-"""
-
-_NIGHT_DIARY_FORMAT = """반드시 아래 JSON 형식으로만 답하세요.
-{format_instructions}"""
-
-_IMAGE_PROMPT_INSTRUCTIONS = """[추가 지침 - 이미지 생성용]
+[추가 지침 - 이미지 생성용]
 - 이 꿈 일기의 분위기와 핵심 장면을 가장 잘 나타내는 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
 - 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
 - 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
 - 반드시 영어로만 작성하세요.
 - 16:9 비율정도의 이미지가 생성되게 하세요.
 
-"""
+[JSON 문법 엄수 경고]
+반드시 올바른 JSON 형식으로 답변해야 합니다. "title", "content", "tags" 항목 사이의 쉼표(,)를 절대 누락하지 마세요.
+{format_instructions}"""
 
-_DREAM_CARD_INSTRUCTIONS = """[등록 해몽 카드]
-{card_context}
-- 카드가 있으면 마지막 문장의 [해몽 의미]는 카드의 해석과 조언을 근거로 작성하세요. 카드에 없는 상징 풀이를 새로 만들거나 길흉을 확정하지 마세요.
-- 카드가 "없음"이면 전통 해몽을 바탕으로 [해몽 의미]를 작성하세요.
+# [밤용] 따뜻한 하루 회고 일기 작가
+NIGHT_DIARY_PROMPT = """당신은 사용자의 하루 일과 대화를 바탕으로 하루를 차분하게 마무리하는 따뜻한 회고 일기를 작성하는 작가입니다.
+오늘 겪은 일상적인 사건과 그 속에서 느낀 감정을 정리하며, 스스로를 위로하고 응원하는 1인칭 시점의 일기를 완결된 이야기로 작성해 주세요.
 
-"""
+[중요 지침] 사용자가 선택한 핵심 키워드: {selected_keywords}
+이 키워드들이 스토리의 핵심 감정선으로 눈에 띄게 강조되도록 자연스럽게 녹여내 주세요.
 
-MORNING_DIARY_PROMPT = _MORNING_DIARY_BODY + _IMAGE_PROMPT_INSTRUCTIONS + _MORNING_DIARY_FORMAT
-NIGHT_DIARY_PROMPT = _NIGHT_DIARY_BODY + _IMAGE_PROMPT_INSTRUCTIONS + _NIGHT_DIARY_FORMAT
-MORNING_DIARY_TEXT_PROMPT = _MORNING_DIARY_BODY + _DREAM_CARD_INSTRUCTIONS + _MORNING_DIARY_FORMAT
-NIGHT_DIARY_TEXT_PROMPT = _NIGHT_DIARY_BODY + _NIGHT_DIARY_FORMAT
+[추가 지침 - 이미지 생성용]
+- 이 꿈 일기의 분위기와 핵심 장면을 가장 잘 나타내는 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
+- 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
+- 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
+- 반드시 영어로만 작성하세요.
+- 16:9 비율정도의 이미지가 생성되게 하세요.
+
+반드시 아래 JSON 형식으로만 답하세요.
+{format_instructions}"""
 
 async def generate_diary_content(history: str, selected_keywords: list[str], routine_type: str) -> DiaryGenerationResponse:
     system_instruction = MORNING_DIARY_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_DIARY_PROMPT
@@ -161,30 +151,9 @@ async def generate_diary_content(history: str, selected_keywords: list[str], rou
         "format_instructions": diary_parser.get_format_instructions()
     })
 
-async def generate_diary_text(history: str, selected_keywords: list[str], routine_type: str, card_context: str = "없음") -> DiaryTextResponse:
-    system_instruction = MORNING_DIARY_TEXT_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_DIARY_TEXT_PROMPT
-    keywords_str = ", ".join(selected_keywords) if selected_keywords else "특별히 선택된 키워드 없음"
-
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", system_instruction),
-        ("user", "대화 내역:\n{history}")
-    ])
-    diary_chain = prompt | text_llm | diary_text_parser
-
-    return await diary_chain.ainvoke({
-        "history": history,
-        "selected_keywords": keywords_str,
-        "card_context": card_context,
-        "format_instructions": diary_text_parser.get_format_instructions()
-    })
-
 #콘텐츠 내용을 받아서 벡터 데이터로 입력
 #주간 요약 기능을 위한 데이터
 async def generate_vector_embedding(text: str) -> list[float]:
     """일기 제목과 내용을 하나의 벡터(숫자 배열)로 변환합니다."""
     vector = await embeddings_model.aembed_query(text)
     return vector
-
-async def generate_text_vector_embedding(text: str) -> list[float]:
-    """텍스트 전용 API의 임베딩을 전용 키로 생성합니다."""
-    return await text_embeddings_model.aembed_query(text)

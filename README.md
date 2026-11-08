@@ -69,7 +69,7 @@ flutter pub get
 |---|---|---|
 | `DATABASE_URL` | PostgreSQL 접속 문자열 | 로컬 개발과 배포에서 값이 다르다 (아래 참고) |
 | `GEMINI_API_KEY` | 채팅 해몽·일기 생성·임베딩 (langchain이 자동 인식) | Google AI Studio 발급 키 |
-| `GEMINI_TEXT_API_KEY` | `/chatting/diary/text` 전용 (선택, 비우면 `GEMINI_API_KEY` 사용) | 별도 Google 프로젝트의 AI Studio 발급 키 |
+| `GEMINI_TEXT_API_KEY` | 웹 타로 해몽 `/demo/tarot` 전용 (선택, 비우면 `GEMINI_API_KEY` 사용) | 별도 Google 프로젝트의 AI Studio 발급 키 |
 | `FLUX_API_KEY` | 꿈 이미지 생성 | FLUX 발급 키 |
 | `JWT_SECRET_KEY` | 액세스/리프레시 토큰 서명 | 임의의 긴 난수 문자열 |
 | `S3_ENDPOINT` | 스토리지 S3 엔드포인트 | `https://<project_ref>.storage.supabase.co/storage/v1/s3` |
@@ -205,7 +205,7 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 |---|---|
 | `BE/app/data/dream_tarot.example.json` | 300개 키워드의 분류, 카드 제목, 길흉 지수, 해석, 조언 저장 |
 | `BE/app/core/ai/dreamKeywordHarness.py` | 키워드 추출, JSON 조회·검증, 해몽 통합 |
-| `BE/app/services/demoService.py` | `/demo/interpret` API 처리 흐름에 연결 |
-| `BE/app/services/chatService.py` | `/chatting/diary/text` API(이미지 없는 일기 생성)의 아침 일기에 연결 |
+| `BE/app/services/tarotService.py` | 꿈 문장으로 타로 카드 결과(카드, 태그, 한 줄 설명, 요소별 설명) 생성. 저장하지 않음 |
+| `BE/app/services/demoService.py` | `/demo/tarot`, `/demo/interpret`의 횟수 제한과 랭킹 집계 |
 
 JSON 카탈로그는 최초 사용 시 읽어 메모리에 캐시합니다. 로딩 과정에서 필수 필드, 키워드 중복, 길흉 지수 합계가 100인지 검증합니다

@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from typing import List
 
+from app.schemas.tarotSchema import TarotReading
+
 
 class DemoInterpretRequest(BaseModel):
     dream: str
@@ -13,6 +15,10 @@ class DemoInterpretResponse(BaseModel):
     ai_reply: str
     remaining: int
     dream_category: str  # "내가 해몽한 꿈" 표시용. 정규화된 값(목록 밖이면 "기타")을 그대로 노출한다.
+
+
+class DemoTarotResponse(TarotReading):
+    remaining: int  # dream_category는 정규화된 값(목록 밖이면 "기타")이다.
 
 
 class DemoRankingItem(BaseModel):
