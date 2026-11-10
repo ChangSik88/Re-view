@@ -34,3 +34,25 @@ class UserResponse(BaseModel):
 class LoginRequest(BaseModel):
     userAccount: str
     password: str
+
+class ProfilePatch(BaseModel):
+    model_config = {"extra": "forbid"}
+    name: Optional[str] = Field(default=None, max_length=30)
+    birth: Optional[date] = None
+    gender: Optional[str] = Field(default=None, pattern="^(male|female)$")
+
+    @field_validator("name")
+    @classmethod
+    def valid_name(cls, value):
+        if value is None or not value.strip():
+            raise ValueError("이름을 입력해 주세요.")
+        return value.strip()
+
+class ProfileData(BaseModel):
+    id: str
+    name: str
+    birth: Optional[date]
+    gender: Optional[str]
+
+class ProfileResponse(BaseModel):
+    result: ProfileData
