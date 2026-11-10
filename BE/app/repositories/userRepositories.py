@@ -16,3 +16,21 @@ class UserRepository:
         return await db.user.find_unique(
             where={"login_id": userAccount}
         )
+
+    async def is_active(self, user_id: int):
+        return await db.user.find_first(where={
+            "user_id": user_id, "UserWithdrawal": {"none": {}}
+        }) is not None
+
+    async def profile(self, user_id: int):
+        return await db.user.find_unique(where={"user_id": user_id})
+
+    async def update_profile(self, user_id: int, data: dict):
+        return await db.user.update(where={"user_id": user_id}, data=data)
+
+    async def withdraw(self, user_id: int):
+        async with db.tx() as tx:
+            await tx.query_raw('SELECT user_id FROM users WHERE user_id = $1 FOR UPDATE', user_id)
+            existing = await tx.userwithdrawal.find_first(where={"user_id": user_id})
+            if not existing:
+                await tx.userwithdrawal.create(data={"user_id": user_id})
