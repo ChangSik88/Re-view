@@ -13,6 +13,7 @@
       "id": "평가",
       "image_key": "tag_evaluation",
       "definition": "남에게 판단받는 압박이 있는 대상이나 장소",
+      "explanation": "시험, 면접, 발표처럼 누군가에게 판단받는 장면이 나오면 이 태그로 묶여요. 평가받는 자리를 잘 넘기고 싶은 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -32,6 +33,7 @@
       "id": "학습",
       "image_key": "tag_learning",
       "definition": "지식과 기술을 익히고 이해를 넓힘",
+      "explanation": "온라인 강의, 스터디, 독서실처럼 무언가를 배우고 익히는 장면이 나오면 이 태그로 묶여요. 더 배우고 자라려는 쪽으로 마음이 향하는 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -55,6 +57,7 @@
       "id": "의무",
       "image_key": "tag_duty",
       "definition": "스스로 짊어진, 해야 하지만 내키지 않는 일과 부담",
+      "explanation": "과제, 출근, 군대처럼 해야 하지만 내키지 않는 일을 하는 장면이 나오면 이 태그로 묶여요. 맡은 몫을 버텨 내려 애쓰고 있는 것 같아요",
       "tier": 3,
       "past_examples": [],
       "past_note": "원문에 없음",
@@ -69,6 +72,7 @@
       "id": "연결",
       "image_key": "tag_connection",
       "definition": "누군가와 닿으려는 시도, 소통, 정보 수집",
+      "explanation": "휴대폰, 메신저, SNS처럼 누군가와 연락하거나 소식을 주고받는 장면이 나오면 이 태그로 묶여요. 누군가에게 닿으려는 마음이 커지고 있는 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -92,6 +96,7 @@
       "id": "도피",
       "image_key": "tag_escape",
       "definition": "현실의 부담에서 잠시 빠져나가고 싶은 마음",
+      "explanation": "게임, 유튜브, 낮잠처럼 현실에서 잠시 빠져나와 다른 데 몰두하는 장면이 나오면 이 태그로 묶여요. 잠시 다른 곳으로 숨고 싶은 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -115,6 +120,7 @@
       "id": "동경",
       "image_key": "tag_longing",
       "definition": "닮고 싶거나 멋지다고 느끼는 대상, 높은 목표",
+      "explanation": "아이돌, 운동선수, 애니 명장면처럼 멋지다고 느끼는 대상이 나오면 이 태그로 묶여요. 닮고 싶은 모습을 향해 마음이 움직이는 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -138,6 +144,7 @@
       "id": "갑작스러운 타격",
       "image_key": "tag_sudden_blow",
       "definition": "예상하지 못한 충격이나 공격",
+      "explanation": "총에 맞음, 교통사고, 해고 통보처럼 예고 없이 충격을 받는 장면이 나오면 이 태그로 묶여요. 뜻밖의 충격에서 마음을 추스르려는 것 같아요",
       "tier": 1,
       "past_examples": [
         {
@@ -161,6 +168,7 @@
       "id": "회복",
       "image_key": "tag_recovery",
       "definition": "쉼과 치유, 돌봄의 필요",
+      "explanation": "병원, 영양제, 찜질방처럼 치료받고 돌봄을 받는 장면이 나오면 이 태그로 묶여요. 지금은 나를 돌보는 일이 먼저인 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -184,6 +192,7 @@
       "id": "위장",
       "image_key": "tag_disguise",
       "definition": "진짜 모습을 숨기거나 역할을 연기함",
+      "explanation": "첩보요원, 부캐, 가짜 계정처럼 정체를 숨기거나 다른 역할을 하는 장면이 나오면 이 태그로 묶여요. 속마음은 감추고 다른 모습을 입고 싶은 것 같아요",
       "tier": 2,
       "past_examples": [],
       "past_note": "원문에 없음",
@@ -198,6 +207,7 @@
       "id": "통제 상실",
       "image_key": "tag_loss_of_control",
       "definition": "상황을 내 뜻대로 다룰 수 없음",
+      "explanation": "브레이크 고장, 가위눌림, 멈춘 엘리베이터처럼 내 뜻대로 움직일 수 없는 장면이 나오면 이 태그로 묶여요. 흔들리는 상황을 다시 손에 쥐고 싶은 것 같아요",
       "tier": 1,
       "past_examples": [
         {
@@ -221,6 +231,7 @@
       "id": "재물",
       "image_key": "tag_wealth",
       "definition": "얻는 것, 자원, 풍요에 대한 기대",
+      "explanation": "로또 당첨, 월급, 현금처럼 무언가를 얻는 장면이 나오면 이 태그로 묶여요. 넉넉히 채워지길 바라는 쪽으로 마음이 향하는 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -244,6 +255,7 @@
       "id": "보호",
       "image_key": "tag_protection",
       "definition": "나를 지켜 주거나 내가 지키는 것, 안전한 울타리",
+      "explanation": "안전벨트, 경호원, 도어락처럼 무언가가 나를 지켜 주거나 내가 지키는 장면이 나오면 이 태그로 묶여요. 소중한 것을 지키려는 마음이 커진 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -267,6 +279,7 @@
       "id": "문턱",
       "image_key": "tag_threshold",
       "definition": "다음 단계로 넘어가기 직전, 경계를 건너는 순간",
+      "explanation": "입학식, 첫 출근, 출국장처럼 새 단계로 들어서기 직전의 장면이 나오면 이 태그로 묶여요. 다음 단계로 한 발 내딛으려는 참인 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -290,6 +303,7 @@
       "id": "전환",
       "image_key": "tag_transition",
       "definition": "진행 중인 변화, 환경이나 상태가 바뀜",
+      "explanation": "이사, 이직, 전학처럼 환경이나 상태가 바뀌는 장면이 나오면 이 태그로 묶여요. 바뀌는 흐름을 따라 움직이고 있는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -313,6 +327,7 @@
       "id": "탄생",
       "image_key": "tag_birth",
       "definition": "새로운 것의 시작과 싹틈",
+      "explanation": "임신, 창업, 새 프로젝트처럼 새로운 것이 시작되는 장면이 나오면 이 태그로 묶여요. 무언가를 새로 시작하려는 힘이 싹트는 것 같아요",
       "tier": 1,
       "past_examples": [
         {
@@ -336,6 +351,7 @@
       "id": "끝맺음",
       "image_key": "tag_ending",
       "definition": "한 단계나 관계가 끝남",
+      "explanation": "졸업, 퇴사, 이별처럼 한 단계나 관계가 끝나는 장면이 나오면 이 태그로 묶여요. 한 시기를 정리하고 있는 것 같아요",
       "tier": 1,
       "past_examples": [
         {
@@ -359,6 +375,7 @@
       "id": "갈등",
       "image_key": "tag_conflict",
       "definition": "다른 사람이나 마음과 부딪힘",
+      "explanation": "말다툼, 악플, 팀플 갈등처럼 누군가와 부딪히는 장면이 나오면 이 태그로 묶여요. 누군가와, 혹은 나 자신과 맞서고 있는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -382,6 +399,7 @@
       "id": "요행",
       "image_key": "tag_gamble",
       "definition": "운에 맡김, 위험 감수, 유혹",
+      "explanation": "도박장, 코인 투자, 스포츠토토처럼 운에 맡기고 위험을 거는 장면이 나오면 이 태그로 묶여요. 운에 걸어 보고 싶은 마음이 고개를 든 것 같아요",
       "tier": 3,
       "past_examples": [],
       "past_note": "원문에 없음",
@@ -396,6 +414,7 @@
       "id": "자기 모습",
       "image_key": "tag_self_image",
       "definition": "나를 어떻게 보고 보여 주는가, 자아상",
+      "explanation": "셀카, 프로필 사진, 체중계처럼 내 모습을 보거나 보여 주는 장면이 나오면 이 태그로 묶여요. 내가 어떻게 보이는지에 마음이 쏠려 있는 것 같아요",
       "tier": 3,
       "past_examples": [],
       "past_note": "원문에 없음. 거울, 이빨, 머리카락은 있으나 뜻이 다름",
@@ -410,6 +429,7 @@
       "id": "과거",
       "image_key": "tag_past",
       "definition": "지나간 사람, 기억, 돌아봄",
+      "explanation": "옛 연인, 졸업앨범, 모교처럼 지나간 사람이나 장소가 나오면 이 태그로 묶여요. 지나간 시간 쪽으로 마음이 돌아가 있는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -429,6 +449,7 @@
       "id": "미지",
       "image_key": "tag_unknown",
       "definition": "정체를 알 수 없음, 막연한 두려움과 가능성",
+      "explanation": "모르는 번호, 낯선 도시, 정체불명 택배처럼 정체를 알 수 없는 것이 나오면 이 태그로 묶여요. 알 수 없는 것 앞에서 조심스레 살피고 있는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -448,6 +469,7 @@
       "id": "권위",
       "image_key": "tag_authority",
       "definition": "나보다 위에 있는 힘, 규칙, 기준",
+      "explanation": "상사, 교수, 경찰처럼 나보다 위에 있는 사람이나 규칙이 나오면 이 태그로 묶여요. 큰 기준 앞에서 내 자리를 가늠하는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -471,6 +493,7 @@
       "id": "인정",
       "image_key": "tag_recognition",
       "definition": "노력을 인정받음, 성취, 사람들 앞에서의 자리",
+      "explanation": "합격, 승진, 좋아요처럼 노력을 인정받는 장면이 나오면 이 태그로 묶여요. 해낸 것을 누군가 알아봐 주길 바라는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -494,6 +517,7 @@
       "id": "고립",
       "image_key": "tag_isolation",
       "definition": "혼자 있음, 관계가 끊김, 멈춤",
+      "explanation": "혼밥, 단톡방 강퇴, 읽씹처럼 혼자 남거나 관계가 끊기는 장면이 나오면 이 태그로 묶여요. 혼자 남은 마음을 가만히 들여다보는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -517,6 +541,7 @@
       "id": "친밀",
       "image_key": "tag_intimacy",
       "definition": "가까운 관계에서의 애정과 약속",
+      "explanation": "연인, 결혼, 커플링처럼 가까운 사람과 마음을 나누는 장면이 나오면 이 태그로 묶여요. 소중한 사람과 더 깊이 마음을 나누고 싶은 것 같아요",
       "tier": 2,
       "past_examples": [
         {
@@ -540,6 +565,7 @@
       "id": "길찾기",
       "image_key": "tag_wayfinding",
       "definition": "방향과 선택을 고민함, 나아갈 길",
+      "explanation": "내비게이션, 환승, 진로 선택처럼 길을 고르거나 방향을 찾는 장면이 나오면 이 태그로 묶여요. 어느 쪽으로 갈지 고르는 중인 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -563,6 +589,7 @@
       "id": "시간 압박",
       "image_key": "tag_time_pressure",
       "definition": "늦음, 마감, 시간에 쫓김",
+      "explanation": "지각, 마감, 막차처럼 시간에 쫓기는 장면이 나오면 이 태그로 묶여요. 늦지 않으려고 마음이 앞서 달리는 것 같아요",
       "tier": 2,
       "past_examples": [],
       "past_note": "원문에 없음",
@@ -577,6 +604,7 @@
       "id": "해방",
       "image_key": "tag_freedom",
       "definition": "자유로움, 틀에서 벗어남, 넓어짐",
+      "explanation": "퇴근, 방학, 전역처럼 틀에서 벗어나 자유로워지는 장면이 나오면 이 태그로 묶여요. 틀 밖의 넓은 곳으로 나아가고 싶은 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -600,6 +628,7 @@
       "id": "노출",
       "image_key": "tag_exposure",
       "definition": "남의 시선에 드러남, 수치, 사적인 것이 보임",
+      "explanation": "화장실 문 열림, 발표 중 실수, 사생활 유출처럼 원치 않게 남의 시선에 드러나는 장면이 나오면 이 태그로 묶여요. 감춘 것이 드러날까 마음을 졸이는 것 같아요",
       "tier": 1,
       "past_examples": [
         {
@@ -620,6 +649,7 @@
       "id": "정화",
       "image_key": "tag_cleansing",
       "definition": "씻어 내고 비움, 감정을 흘려보냄",
+      "explanation": "샤워, 청소, 방 정리처럼 씻어 내고 비우는 장면이 나오면 이 태그로 묶여요. 쌓인 감정을 흘려보내고 가벼워지고 싶은 것 같아요",
       "tier": 3,
       "past_examples": [
         {
@@ -643,6 +673,7 @@
       "id": "초월",
       "image_key": "tag_transcendence",
       "definition": "신성함, 영적인 힘, 인간을 넘어선 존재",
+      "explanation": "외계인, UFO, 천사처럼 사람을 넘어선 존재가 나오면 이 태그로 묶여요. 일상 너머의 큰 의미에 끌리는 것 같아요",
       "tier": 2,
       "past_examples": [
         {
