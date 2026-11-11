@@ -6,75 +6,72 @@
   <title>Re-view — 오늘의 꿈 해몽</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" />
-  <!-- Gowun Batang에 凶 글리프가 없을 때를 대비한 폴백. 두 글자만 서브셋으로 받는다. -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&text=%E5%90%89%E5%87%B6&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="home.css" />
 </head>
-<body class="home theme-clear stage-input">
-  <main>
-    <div class="sky">
-      <div class="decor decor-soft" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="decor decor-rain" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      <div class="decor decor-snow" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      <div class="sun" aria-hidden="true"></div>
-      <div class="cloud" aria-hidden="true"><span class="c1"></span><span class="c2"></span><span class="c3"></span><span class="base"></span></div>
+<body class="home stage-input">
+  <main class="stage">
+    <div class="sky" aria-hidden="true"></div>
 
-      <header class="topbar">
-        <span class="logo">굿모닝 드림</span>
-        <section id="weather-widget" class="weather-widget" hidden>
-          <span class="weather-dot" aria-hidden="true"></span>
-          <!-- Figma에 도시명이 없어 표시하지 않는다. id 계약 때문에 요소만 남긴다. -->
-          <span id="weather-city" hidden></span>
-          <span id="weather-desc"></span>
-        </section>
-      </header>
+    <header class="topbar">
+      <a href="index.html" class="logo">굿모닝 드림</a>
+      <p id="remaining" class="remaining" hidden>
+        <span class="remaining-dot" aria-hidden="true"></span>
+        <span><span class="remaining-long">오늘 </span>남은 해몽 <span id="remaining-count"></span>회</span>
+      </p>
+    </header>
 
-      <div class="hero-copy">
-        <p id="hero-sub" class="hero-sub">맑은 아침이에요</p>
-        <h1 id="hero-title" class="hero-title">햇살 좋은 아침,<br />어떤 꿈을 꿨나요?</h1>
+    <div class="hero">
+      <p class="hero-sub">좋은 아침이에요</p>
+      <h1 class="hero-title">오늘 아침,<br />어떤 <em>꿈</em>을 꾸셨나요?</h1>
+    </div>
+
+    <form id="interpret-form" class="dream-form">
+      <div class="dream-pill">
+        <input id="dream-input" type="text" maxlength="500" autocomplete="off" aria-label="간밤에 꾼 꿈" placeholder="간밤에 꾼 꿈을 한 줄로 적어보세요" />
+        <button type="submit" id="submit-btn" aria-label="해몽 받기">
+          <span class="btn-label">해몽 받기</span><span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
       </div>
-    </div>
+      <p id="input-error" class="error-message" hidden></p>
+    </form>
 
-    <div class="ground">
-      <form id="interpret-form" class="dream-form">
-        <div class="dream-pill">
-          <input id="dream-input" type="text" maxlength="500" autocomplete="off" aria-label="간밤에 꾼 꿈" placeholder="간밤에 꾼 꿈을 한 줄로 적어보세요" />
-          <button type="submit" id="submit-btn" aria-label="해몽 받기">
-            <span class="btn-label">해몽 받기</span><span class="btn-arrow" aria-hidden="true">→</span>
-          </button>
-        </div>
-        <p id="input-error" class="error-message" hidden></p>
-      </form>
+    <section id="home-ranking" class="preview" hidden>
+      <div class="preview-head">
+        <span class="preview-label"><span class="preview-label-long">오늘 아침 </span>많이 찾는 꿈</span>
+        <a href="ranking.html" class="ranking-link">전체보기 →</a>
+      </div>
+      <ol id="home-ranking-list" class="preview-list"></ol>
+    </section>
 
-      <section id="home-ranking" class="preview" hidden>
-        <div class="preview-head">
-          <span class="preview-label"><span class="preview-label-long">오늘 아침 </span>많이 찾는 꿈</span>
-          <a href="ranking.html" class="ranking-link">전체보기 →</a>
-        </div>
-        <ol id="home-ranking-list" class="preview-list"></ol>
-      </section>
+    <!-- 카드는 단계마다 지평선을 넘나들며 움직이므로 문서 흐름 밖에 둔다. 클릭은 B5(reveal)에서만 받아 결과로 넘긴다. -->
+    <button type="button" id="tarot-card" class="tarot-card" aria-label="카드를 눌러 해몽 보기" disabled>
+      <span class="card-inner">
+        <span class="face face-back" aria-hidden="true">
+          <span class="emblem"><span></span></span>
+          <span class="face-back-label">GOODMORNING DREAM</span>
+        </span>
+        <span class="face face-front">
+          <span id="card-art" class="card-art"></span>
+          <span id="card-title" class="card-title"></span>
+        </span>
+      </span>
+    </button>
+    <p id="stage-caption" class="stage-caption" aria-live="polite"></p>
 
-      <article id="result" class="result" hidden>
-        <div class="result-meta">
-          <span><span id="result-date-long" class="result-date-long"></span><span id="result-date-short" class="result-date-short"></span></span>
-          <span>굿모닝 드림</span>
+    <article id="result" class="result">
+      <h2 id="result-tag" class="result-tag"></h2>
+      <p id="result-summary" class="result-summary"></p>
+      <div class="result-more">
+        <hr class="result-rule" />
+        <div id="result-details" class="result-details"></div>
+        <div class="result-actions">
+          <button type="button" id="share-btn" class="btn-ghost">공유</button>
+          <button type="button" id="retry-btn" class="btn-fill">다시 해보기</button>
         </div>
-        <div class="result-box"><h2 id="result-theme"></h2></div>
-        <p id="result-quote" class="result-quote"></p>
-        <p id="result-vibe" class="reveal"></p>
-        <ul id="result-feelings" class="reveal"></ul>
-        <div class="result-body reveal">
-          <p id="result-reply"></p>
-          <span id="result-seal-slot" class="result-seal"></span>
-        </div>
-        <div class="result-actions reveal">
-          <button type="button" id="retry-btn" class="btn-ghost">다시 풀<span class="long">어보</span>기</button>
-          <a href="#" id="result-app-link" class="btn-fill">앱에서 이어 쓰기</a>
-        </div>
-      </article>
-    </div>
+      </div>
+    </article>
   </main>
 
   <div id="exhausted-modal" class="modal" hidden>
@@ -87,7 +84,6 @@
     </div>
   </div>
 
-  <script src="categoryDictionary.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
