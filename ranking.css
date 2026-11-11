@@ -239,11 +239,18 @@
   font-weight: 500;
   color: #a8a6bc;
 }
-/* 태그 풀이 본문이 BE에 생기기 전까지는 패널에 태그 정의를 보여 준다. */
-.panel-summary {
+/* 데스크톱은 행에 정의가 이미 보이므로, 본문이 있으면 패널에서는 본문만 보여 준다. 본문이 없으면 정의를 보여 준다. */
+.panel-summary,
+.panel-text {
   margin: 0;
   font-size: 14px;
   line-height: 1.75;
+}
+.panel-summary:has(+ .panel-text) {
+  display: none;
+}
+.panel-text {
+  grid-column: 2;
 }
 
 /* ── 상태 문구 ── */
@@ -325,5 +332,14 @@
   .panel-summary {
     font-size: 13.5px;
     font-weight: 700;
+  }
+  /* 모바일은 행에 정의가 없어 패널에 정의(굵게)와 본문을 함께 둔다. */
+  .panel-summary:has(+ .panel-text) {
+    display: block;
+  }
+  .panel-text {
+    grid-column: 1;
+    font-size: 13px;
+    line-height: 1.7;
   }
 }

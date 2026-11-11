@@ -85,19 +85,39 @@ function showRemaining(count) {
 function readReading(data) {
   return {
     cardTitle: data.card.card_title,
+    imageUrl: data.card.image_url,
     tag: data.tag,
     summary: data.summary,
     details: data.details,
   };
 }
 
-// 카드 그림은 아직 API에 없다. 그림이 생기기 전까지는 뒷면 문양을 옅게 그린 대체 표시를 쓴다.
-function renderCardArt() {
+// 카드 앞면은 태그 사진 한 장이다(card.image_url, API 기준 상대 경로). 뒤집기 전에 다 받아 두고,
+// 없거나 제때 못 받으면 뒷면 문양을 옅게 그린 대체 표시를 쓴다.
+const ART_TIMEOUT_MS = 3000;
+
+async function renderCardArt(imageUrl) {
+  const art = document.getElementById("card-art");
   const emblem = document.createElement("span");
   emblem.className = "emblem";
   emblem.setAttribute("aria-hidden", "true");
   emblem.appendChild(document.createElement("span"));
-  document.getElementById("card-art").replaceChildren(emblem);
+  art.replaceChildren(emblem);
+  if (!imageUrl) return;
+
+  const img = new Image();
+  img.className = "card-photo";
+  img.alt = "";
+  img.src = new URL(imageUrl, API_BASE_URL).href;
+  try {
+    await Promise.race([
+      img.decode(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("시간 초과")), ART_TIMEOUT_MS)),
+    ]);
+    art.replaceChildren(img);
+  } catch (e) {
+    console.warn("카드 사진 로딩 실패:", e);
+  }
 }
 
 // 상세 설명은 keyword로 시작한다(#57 스키마). 시안처럼 앞의 keyword만 굵게 쓴다.
@@ -113,9 +133,9 @@ function renderDetail(detail) {
   return p;
 }
 
-function fillReading(reading) {
-  renderCardArt();
-  document.getElementById("card-title").textContent = reading.cardTitle;
+async function fillReading(reading) {
+  await renderCardArt(reading.imageUrl);
+  document.getElementById("result-card-title").textContent = reading.cardTitle;
   document.getElementById("result-tag").textContent = reading.tag;
   document.getElementById("result-summary").textContent = reading.summary;
   document.getElementById("result-details").replaceChildren(...reading.details.map(renderDetail));
@@ -208,7 +228,8 @@ async function drawCard(dream) {
   // "나의 태그" 표시용. 서버는 방문자를 식별하지 않으므로 클라이언트가 세션 동안만 들고 있는다.
   sessionStorage.setItem("lastDreamTag", data.tag);
   showRemaining(data.remaining);
-  fillReading(readReading(data));
+  // 사진을 받는 동안은 B2(카드를 고르는 중)에 머문다.
+  await fillReading(readReading(data));
   await playFlip();
 }
 

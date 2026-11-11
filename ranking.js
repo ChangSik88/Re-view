@@ -41,10 +41,16 @@ function buildRow(item, myTag) {
   `;
 
   // 서버에서 온 문자열(태그 이름, 정의)은 innerHTML에 끼워 넣지 않고 textContent로 채운다.
-  // 태그 풀이 본문은 BE에 아직 없다(dream_tags.json). 생기면 panel-summary 아래에 붙인다.
   li.querySelector(".name").textContent = item.tag;
   li.querySelector(".summary").textContent = item.definition;
   li.querySelector(".panel-summary").textContent = item.definition;
+  // 태그 풀이 본문(dream_tags.json의 explanation). 응답에 아직 없으면 정의만 보여 준다.
+  if (item.explanation) {
+    const text = document.createElement("p");
+    text.className = "panel-text";
+    text.textContent = item.explanation;
+    li.querySelector(".ranking-panel-inner").appendChild(text);
+  }
 
   const panel = li.querySelector(".ranking-panel");
   // 열림 트랜지션이 끝나면 제한을 풀어, 열린 채로 창 폭이 줄어도 본문이 잘리지 않게 한다.
