@@ -9,7 +9,7 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
-from app.core.ai.langchainManager import text_llm
+from app.core.ai.langchainManager import tag_llm, text_llm
 from app.schemas.tarotSchema import TarotKeywordDetail
 
 
@@ -141,7 +141,7 @@ tag에는 가장 중요한 꿈 요소가 꿈에서 하는 역할에 가장 잘 �
     prompt = ChatPromptTemplate.from_messages(
         [("system", system_prompt), ("user", "다음 꿈을 분석하세요.\n{dream}")]
     )
-    chain = prompt | text_llm | _tarot_extraction_parser
+    chain = prompt | tag_llm | _tarot_extraction_parser
     return await chain.ainvoke(
         {
             "dream": dream,

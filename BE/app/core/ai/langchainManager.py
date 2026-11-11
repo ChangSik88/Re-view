@@ -15,6 +15,13 @@ text_llm = ChatGoogleGenerativeAI(
     temperature=0.7,
     google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
 )
+# 타로 태그 고르기 전용. 태그가 웹 랭킹 집계 키라 같은 꿈에는 같은 태그가 나와야 한다.
+# 설명 글은 text_llm(0.7)이 계속 쓴다.
+tag_llm = ChatGoogleGenerativeAI(
+    model="gemini-3.1-flash-lite",
+    temperature=0,
+    google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
+)
 
 # 1. 채팅용 프롬프트 (아침 vs 밤)
 chat_parser = PydanticOutputParser(pydantic_object=AIAnalysisResponse)
