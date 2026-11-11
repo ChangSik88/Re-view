@@ -138,7 +138,12 @@ class DemoService:
         tags = load_dream_tags()
         rows = await self.demo_repo.get_today_ranking(_today_kst_for_db(), list(tags))
         items = [
-            DemoRankingItem(rank=i + 1, tag=row.category, definition=tags[row.category]["definition"])
+            DemoRankingItem(
+                rank=i + 1,
+                tag=row.category,
+                definition=tags[row.category]["definition"],
+                explanation=tags[row.category]["explanation"],
+            )
             for i, row in enumerate(rows)
         ]
         return DemoRankingResponse(date=_today_kst().isoformat(), items=items)

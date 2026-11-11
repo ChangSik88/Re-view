@@ -104,8 +104,8 @@ def load_dream_tags() -> dict[str, dict]:
     by_id: dict[str, dict] = {}
     for tag in tags:
         tag_id = _normalize_keyword(tag.get("id", "")) if isinstance(tag, dict) else ""
-        if not tag_id or tag_id in by_id or not tag.get("definition"):
-            raise ValueError(f"비어 있거나 중복됐거나 정의가 없는 태그입니다: {tag_id!r}")
+        if not tag_id or tag_id in by_id or not all(tag.get(k) for k in ("definition", "explanation", "image_key")):
+            raise ValueError(f"비어 있거나 중복됐거나 정의, 풀이, 사진 키가 없는 태그입니다: {tag_id!r}")
         by_id[tag_id] = tag
 
     return by_id
