@@ -205,7 +205,7 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 |---|---|
 | `BE/app/data/dream_tarot.example.json` | 300개 키워드의 분류, 카드 제목, 길흉 지수, 해석, 조언 저장 |
 | `BE/app/data/dream_tags.json` | 해몽 태그 31개의 이름과 정의. 카드 태그와 웹 랭킹 집계 단위 |
-| `BE/app/static/tagImages/normal/` | 태그별 카드 사진(`<image_key>.webp`, 552x828). `/demo/tarot`의 `card.image_url`이 가리킨다 |
+| `BE/app/static/tagImages/normal/` | 태그별 카드 사진(`<image_key>.webp`, 1024x1536). `/demo/tarot`의 `card.image_url`이 가리킨다 |
 | `BE/scripts/build_tag_images.py` | 카드 사진 원본 폴더를 위 WebP로 변환. 태그와 파일이 어긋나면 실패 |
 | `BE/app/core/ai/dreamKeywordHarness.py` | 키워드 추출, JSON 조회·검증, 해몽 통합 |
 | `BE/app/services/tarotService.py` | 꿈 문장으로 타로 카드 결과(카드, 태그, 한 줄 설명, 요소별 설명) 생성. 저장하지 않음 |

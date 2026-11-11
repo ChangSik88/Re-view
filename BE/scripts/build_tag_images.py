@@ -20,10 +20,10 @@ BE_DIR = Path(__file__).resolve().parents[1]
 TAGS_FILE = BE_DIR / "app" / "data" / "dream_tags.json"
 OUT_DIR = BE_DIR / "app" / "static" / "tagImages" / "normal"
 
-# Figma 카드 앞면 폭 276px의 2배(고해상도 화면). 원본 비율 2:3을 그대로 둔다.
-# 사진에 카드 테두리와 글자가 그려져 있어 잘라 내면 테두리가 깨진다.
-SIZE = (552, 828)
-QUALITY = 80
+# 원본 해상도 그대로(더 키우면 확대라 선명해지지 않는다). 웹 카드 폭 306px을 3배 화면에서도
+# 덮는다. 원본 비율 2:3을 그대로 둔다. 사진에 카드 테두리와 글자가 그려져 있어 잘라 내면 테두리가 깨진다.
+SIZE = (1024, 1536)
+QUALITY = 75
 FILE_PATTERN = re.compile(r"^(\d+)\.(.+)\.png$", re.IGNORECASE)
 
 
