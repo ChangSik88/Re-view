@@ -26,13 +26,13 @@ body.home.stage-done {
 
 /* ════════════ 단계별 좌표 (데스크톱) ════════════ */
 body.home.stage-input  { --horizon: 496px; }
-body.home.stage-paper  { --horizon: 352px; --card-top: 384px; --card-w: 200px; --card-h: 320px; --cap-top: 726px; }
+body.home.stage-paper  { --horizon: 352px; --card-top: 384px; --card-w: 214px; --card-h: 321px; --cap-top: 726px; }
 /* B3은 정지 화면이 아니라 B2에서 B4로 가는 동작이다. 카드가 뒤집히면서 B4 자리로 올라가고, 그동안만 0.9초로 움직인다. */
-body.home.stage-flip   { --horizon: 256px; --card-top: 170px; --card-w: 276px; --card-h: 460px; --cap-top: 672px; --card-dur: 0.9s; }
-body.home.stage-front  { --horizon: 256px; --card-top: 170px; --card-w: 276px; --card-h: 460px; }
-body.home.stage-reveal { --horizon: 360px; --card-top: 66px;  --card-w: 194px; --card-h: 322px; --result-top: 504px; --cap-top: 404px; }
+body.home.stage-flip   { --horizon: 256px; --card-top: 170px; --card-w: 306px; --card-h: 459px; --cap-top: 672px; --card-dur: 0.9s; }
+body.home.stage-front  { --horizon: 256px; --card-top: 170px; --card-w: 306px; --card-h: 459px; }
+body.home.stage-reveal { --horizon: 360px; --card-top: 66px;  --card-w: 214px; --card-h: 321px; --result-top: 504px; --cap-top: 404px; }
 /* 데스크톱 결과 화면은 시안이 없다. 카드는 B5 자리에 두고, 제목만 모바일 결과처럼 카드 바로 아래로 올린다. */
-body.home.stage-done   { --horizon: 360px; --card-top: 66px;  --card-w: 194px; --card-h: 322px; --result-top: 404px; }
+body.home.stage-done   { --horizon: 360px; --card-top: 66px;  --card-w: 214px; --card-h: 321px; --result-top: 404px; }
 
 .stage {
   position: relative;
@@ -253,22 +253,29 @@ body.home:not(.stage-input) :is(.hero, .dream-form, .preview) {
 .tarot-card {
   position: absolute;
   top: var(--card-top);
-  left: 50%;
+  left: calc(50% - var(--card-w) / 2);
   z-index: 1;
   width: var(--card-w);
   height: var(--card-h);
   padding: 0;
   border: 0;
   background: none;
-  transform: translateX(-50%);
   /* 카드 안 글자와 문양을 카드 폭에 비례시키려고 컨테이너 단위(cqw)를 쓴다. */
   container-type: size;
   perspective: 1400px;
   transition:
     top var(--card-dur, 0.6s) ease-in-out,
+    left var(--card-dur, 0.6s) ease-in-out,
     width var(--card-dur, 0.6s) ease-in-out,
     height var(--card-dur, 0.6s) ease-in-out,
     opacity 0.3s ease;
+}
+
+/* 0.5px 위치에 놓이면 사진과 글자가 흐려지므로 정수 픽셀로 내림한다. round()를 모르는 브라우저는 위의 calc를 쓴다. */
+@supports (left: round(down, 10.5px, 1px)) {
+  .tarot-card {
+    left: round(down, calc(50% - var(--card-w) / 2), 1px);
+  }
 }
 
 body.home.stage-input .tarot-card {
@@ -354,18 +361,23 @@ body.home:not(.stage-input, .stage-paper) .card-inner {
   background: #fff;
 }
 
-/* 세로 8:2. 위가 그림, 아래가 카드 이름(시안 메모 994:370). */
+/* 앞면은 태그 사진 한 장이다. 사진(552x828)과 카드가 같은 2:3이라 자르지 않고 꽉 채운다. */
 .card-art {
   position: relative;
-  flex: 0 0 80%;
-  border-bottom: 1px solid var(--line);
+  flex: 1;
   background: var(--tint);
 }
 
-.card-art img {
+.card-photo {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+}
+
+/* 사진 모서리는 흰색에 가까워, 사진이 있으면 테두리 없이 사진에 그려진 카드 모서리에 맞춰 둥글게 자른다. */
+.face-front:has(.card-photo) {
+  border: 0;
+  border-radius: 3.5cqw;
 }
 
 /* 카드 그림이 없을 때의 대체 표시. 뒷면 문양을 포인트 색으로 옅게 그린다. */
@@ -376,19 +388,6 @@ body.home:not(.stage-input, .stage-paper) .card-inner {
 
 .card-art .emblem > span {
   border-color: rgba(110, 99, 255, 0.25);
-}
-
-.card-title {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding: 0 5cqw;
-  font-family: var(--font-serif);
-  font-size: 8.8cqw;
-  font-weight: 700;
-  text-align: center;
-  color: var(--ink);
 }
 
 .stage-caption {
@@ -426,6 +425,14 @@ body.home.stage-reveal .stage-caption {
 
 body.home:not(.stage-reveal, .stage-done) .result {
   display: none;
+}
+
+/* 사진에 태그 이름이 그려져 있어 카드 이름(card_title)은 카드 대신 해몽 영역에 둔다. */
+.result-card-title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--point);
 }
 
 .result-tag {
@@ -547,11 +554,11 @@ body.home.stage-reveal .result-more {
 /* ════════════ 모바일 360 ════════════ */
 @media (max-width: 720px) {
   body.home.stage-input  { --horizon: 459px; }
-  body.home.stage-paper  { --horizon: 296px; --card-top: 350px; --card-w: 156px; --card-h: 260px; --cap-top: 626px; }
-  body.home.stage-flip   { --horizon: 192px; --card-top: 140px; --card-w: 244px; --card-h: 406px; --cap-top: 576px; }
-  body.home.stage-front  { --horizon: 192px; --card-top: 140px; --card-w: 244px; --card-h: 406px; }
-  body.home.stage-reveal { --horizon: 316px; --card-top: 58px;  --card-w: 171px; --card-h: 284px; --result-top: 479px; --cap-top: 358px; }
-  body.home.stage-done   { --horizon: 300px; --card-top: 46px;  --card-w: 160px; --card-h: 266px; --result-top: 318px; }
+  body.home.stage-paper  { --horizon: 296px; --card-top: 350px; --card-w: 174px; --card-h: 261px; --cap-top: 626px; }
+  body.home.stage-flip   { --horizon: 192px; --card-top: 140px; --card-w: 270px; --card-h: 405px; --cap-top: 576px; }
+  body.home.stage-front  { --horizon: 192px; --card-top: 140px; --card-w: 270px; --card-h: 405px; }
+  body.home.stage-reveal { --horizon: 316px; --card-top: 58px;  --card-w: 190px; --card-h: 285px; --result-top: 479px; --cap-top: 358px; }
+  body.home.stage-done   { --horizon: 300px; --card-top: 46px;  --card-w: 178px; --card-h: 267px; --result-top: 318px; }
 
   .stage {
     min-height: max(100dvh, 740px);
@@ -673,6 +680,11 @@ body.home.stage-reveal .result-more {
 
   .stage-caption {
     font-size: 12px;
+  }
+
+  .result-card-title {
+    margin-bottom: 4px;
+    font-size: 11.5px;
   }
 
   .result-tag {
