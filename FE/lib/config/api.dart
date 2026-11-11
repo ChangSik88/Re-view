@@ -32,8 +32,4 @@ class Api {
   // Report
   static const String report = '/report';
   static const String reportAnalyze = '/report/analyze';
-
-  // Store
-  static const String itemList = '/item/list';
-  static String itemDetail(int itemId) => '/item/detail/$itemId';
 }
