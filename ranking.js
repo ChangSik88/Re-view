@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://re-view-uxww.onrender.com";
+const API_BASE_URL = "https://re-view-uxww.onrender.com"; // 배포 시 Render URL로 교체
 
 function formatKoreanDate(isoDate) {
   const [, month, day] = isoDate.split("-").map(Number);
@@ -19,12 +19,8 @@ function setOpen(li, open) {
   }
 }
 
-function buildRow(item, myCategory) {
-  const entry = CATEGORY_DICTIONARY[item.category] || {
-    summary: "아직 해몽 사전에 없는 카테고리예요.",
-    text: "이 카테고리는 아직 전통 해몽 사전에 등록되지 않았어요.",
-  };
-  const isMine = item.category === myCategory;
+function buildRow(item, myTag) {
+  const isMine = item.tag === myTag;
 
   const li = document.createElement("li");
   li.className = "ranking-item" + (isMine ? " is-mine" : "");
@@ -32,25 +28,23 @@ function buildRow(item, myCategory) {
     <button class="ranking-row" type="button" aria-expanded="false">
       <span class="rank">${item.rank}</span>
       <span class="name"></span>
-      <span class="seal-slot"></span>
-      <span class="summary">${entry.summary}</span>
-      ${isMine ? '<span class="mine-tag">내 꿈</span>' : ""}
+      <span class="summary"></span>
+      ${isMine ? '<span class="mine-tag">내 태그</span>' : ""}
       <svg class="chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5L10 12.5L15 7.5" /></svg>
     </button>
     <div class="ranking-panel" aria-hidden="true">
       <div class="ranking-panel-inner">
-        <p class="panel-label">전통 해몽</p>
-        <p class="panel-summary">${entry.summary}</p>
-        <p class="panel-text">${entry.text}</p>
+        <p class="panel-label">태그 풀이</p>
+        <p class="panel-summary"></p>
       </div>
     </div>
   `;
 
-  // 서버에서 오는 값 중 문자열은 카테고리 이름뿐이다. innerHTML에 끼워 넣지 않고 textContent로 채운다.
-  // 지금은 BE가 13종 화이트리스트로 정규화해 안전하지만, 카테고리 목록을 넓힐 때
-  // 그 정규화를 놓치면 여기가 그대로 XSS 통로가 된다.
-  li.querySelector(".name").textContent = item.category;
-  li.querySelector(".seal-slot").appendChild(createSeal(luckOf(item.category)));
+  // 서버에서 온 문자열(태그 이름, 정의)은 innerHTML에 끼워 넣지 않고 textContent로 채운다.
+  // 태그 풀이 본문은 BE에 아직 없다(dream_tags.json). 생기면 panel-summary 아래에 붙인다.
+  li.querySelector(".name").textContent = item.tag;
+  li.querySelector(".summary").textContent = item.definition;
+  li.querySelector(".panel-summary").textContent = item.definition;
 
   const panel = li.querySelector(".ranking-panel");
   // 열림 트랜지션이 끝나면 제한을 풀어, 열린 채로 창 폭이 줄어도 본문이 잘리지 않게 한다.
@@ -65,11 +59,11 @@ function buildRow(item, myCategory) {
 }
 
 function showMine(mine, mineRow) {
-  document.getElementById("mine-name").textContent = mine.category;
+  document.getElementById("mine-name").textContent = mine.tag;
   document.getElementById("mine-rank").textContent = `오늘 ${mine.rank}위`;
   document.getElementById("mine-goto").addEventListener("click", () => {
     setOpen(mineRow, true);
-    // 행을 만들 때 잡아둔 참조로 스크롤한다. 카테고리 이름으로 속성 선택자를 만들면
+    // 행을 만들 때 잡아둔 참조로 스크롤한다. 태그 이름으로 속성 선택자를 만들면
     // 이름에 따옴표가 섞이는 순간 선택자 자체가 깨진다.
     mineRow.scrollIntoView({ behavior: "smooth", block: "center" });
   });
@@ -84,7 +78,6 @@ function showMineEmpty() {
   document.getElementById("mine-rank").textContent = "꿈을 풀어보면 오늘 몇 위인지 알려드려요";
   const goto = document.getElementById("mine-goto");
   goto.textContent = "해몽하러 가기";
-  // 홈은 로드 시 방문자 날씨로 테마를 정하므로 링크만 걸면 된다.
   goto.addEventListener("click", () => {
     location.href = "index.html";
   });
@@ -92,7 +85,7 @@ function showMineEmpty() {
 }
 
 async function loadRanking() {
-  const myCategory = sessionStorage.getItem("lastDreamCategory");
+  const myTag = sessionStorage.getItem("lastDreamTag");
   const loadingEl = document.getElementById("ranking-loading");
 
   try {
@@ -104,7 +97,7 @@ async function loadRanking() {
     if (!res.ok) throw new Error("랭킹 실패");
     const data = await res.json();
 
-    document.getElementById("ranking-date").textContent = `${formatKoreanDate(data.date)} · 오늘 해몽된 꿈만 모았어요`;
+    document.getElementById("ranking-date").textContent = formatKoreanDate(data.date);
 
     if (data.items.length === 0) {
       document.getElementById("ranking-empty").hidden = false;
@@ -116,12 +109,12 @@ async function loadRanking() {
     list.innerHTML = "";
     let mineRow = null;
     for (const item of data.items) {
-      const row = buildRow(item, myCategory);
-      if (item.category === myCategory) mineRow = row;
+      const row = buildRow(item, myTag);
+      if (item.tag === myTag) mineRow = row;
       list.appendChild(row);
     }
 
-    const mine = data.items.find((item) => item.category === myCategory);
+    const mine = data.items.find((item) => item.tag === myTag);
     if (mine) {
       showMine(mine, mineRow);
     } else {
