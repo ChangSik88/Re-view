@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
-from app.schemas.demoSchema import DemoInterpretRequest, DemoInterpretResponse, DemoRankingResponse, DemoTarotResponse
+from app.schemas.demoSchema import DemoInterpretRequest, DemoRankingResponse, DemoTarotResponse
 from app.services.demoService import DemoService, DemoRateLimitError, DemoUnavailableError
 
 router = APIRouter()
@@ -26,26 +26,7 @@ def _get_visitor_id(request: Request) -> str:
     return fallback_ip
 
 
-@router.post("/interpret", response_model=DemoInterpretResponse)
-async def interpret_dream(body: DemoInterpretRequest, request: Request):
-    visitor_id = _get_visitor_id(request)
-    try:
-        return await demo_service.interpret(body.dream, visitor_id)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except DemoRateLimitError as e:
-        # 스펙 3.3의 429 바디는 {"detail", "reason"}이 평평한 구조라 HTTPException(dict detail)로는
-        # {"detail": {"detail":..., "reason":...}}처럼 중첩되어 버린다. JSONResponse로 직접 반환한다.
-        return JSONResponse(
-            status_code=429,
-            content={"detail": "지금은 더 해몽할 수 없어요.", "reason": e.reason},
-        )
-    except DemoUnavailableError:
-        raise HTTPException(status_code=503, detail="지금은 해몽을 불러올 수 없어요.")
-
-
-# 타로 카드 형식 해몽. /interpret를 대체한다(웹 화면 전환 후 /interpret 삭제 예정).
-# 횟수 제한은 /interpret와 같은 카운터를 쓴다.
+# 타로 카드 형식 해몽. 옛 /interpret를 대체했다.
 @router.post("/tarot", response_model=DemoTarotResponse)
 async def tarot_dream(body: DemoInterpretRequest, request: Request):
     visitor_id = _get_visitor_id(request)
@@ -54,6 +35,8 @@ async def tarot_dream(body: DemoInterpretRequest, request: Request):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except DemoRateLimitError as e:
+        # 스펙 3.3의 429 바디는 {"detail", "reason"}이 평평한 구조라 HTTPException(dict detail)로는
+        # {"detail": {"detail":..., "reason":...}}처럼 중첩되어 버린다. JSONResponse로 직접 반환한다.
         return JSONResponse(
             status_code=429,
             content={"detail": "지금은 더 해몽할 수 없어요.", "reason": e.reason},

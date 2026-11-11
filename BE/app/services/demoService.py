@@ -3,17 +3,14 @@ from datetime import date, datetime, time, timedelta, timezone
 from typing import Dict, Tuple
 
 from app.repositories.demoRepository import DemoRepository
-from app.core.ai.dreamKeywordHarness import analyze_dream_with_keyword_catalog
+from app.core.ai.dreamKeywordHarness import load_dream_tags
 from app.services.tarotService import TarotService
-from app.schemas.demoSchema import DemoInterpretResponse, DemoRankingResponse, DemoRankingItem, DemoTarotResponse
+from app.schemas.demoSchema import DemoRankingResponse, DemoRankingItem, DemoTarotResponse
 
 # 한국은 DST가 없어 고정 오프셋으로 충분하다.
 # ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
 KST = timezone(timedelta(hours=9))
 VISITOR_DAILY_LIMIT = 5
-CATEGORY_LIST = [
-    "쫓김", "이빨", "똥", "돼지", "조상님", "뱀", "불", "물", "높은곳", "피", "시험", "죽음", "기타",
-]
 
 
 class DemoRateLimitError(Exception):
@@ -111,59 +108,37 @@ class DemoService:
         self._decrement_visitor(visitor_id, counted_date)
         self._decrement_global(counted_date)
 
-    async def _count_category(self, raw_category: str) -> str:
-        category = raw_category if raw_category in CATEGORY_LIST else "기타"
+    async def _count_tag(self, tag: str) -> None:
         try:
-            await self.demo_repo.increment_category_count(_today_kst_for_db(), category)
+            await self.demo_repo.increment_category_count(_today_kst_for_db(), tag)
         except Exception as e:
             # 랭킹 집계는 부가 기능이다. 여기서 실패해도 해몽 결과는 그대로 돌려준다.
             print(f"데모 랭킹 집계 실패: {e}")
-        return category
 
     async def tarot(self, dream: str, visitor_id: str) -> DemoTarotResponse:
         dream = self._clean_dream(dream)
         counted_date, new_visitor_count = self._reserve(visitor_id)
 
         try:
-            reading = await self.tarot_service.create_reading(dream, CATEGORY_LIST)
+            reading = await self.tarot_service.create_reading(dream)
         except Exception as e:
             self._release(visitor_id, counted_date)
             print(f"데모 타로 해몽 처리 실패: {e}")
             raise DemoUnavailableError()
 
-        category = await self._count_category(reading.dream_category)
+        await self._count_tag(reading.tag)
         return DemoTarotResponse(
-            **reading.model_dump(exclude={"dream_category"}),
-            dream_category=category,
+            **reading.model_dump(),
             remaining=VISITOR_DAILY_LIMIT - new_visitor_count,
-        )
-
-    async def interpret(self, dream: str, visitor_id: str) -> DemoInterpretResponse:
-        dream = self._clean_dream(dream)
-        counted_date, new_visitor_count = self._reserve(visitor_id)
-
-        try:
-            ai_result = await analyze_dream_with_keyword_catalog(
-                dream=dream,
-                ranking_categories=CATEGORY_LIST,
-            )
-        except Exception as e:
-            self._release(visitor_id, counted_date)
-            print(f"데모 키워드 해몽 처리 실패: {e}")
-            raise DemoUnavailableError()
-
-        category = await self._count_category(ai_result.dream_category)
-
-        return DemoInterpretResponse(
-            theme=ai_result.theme,
-            vibe=ai_result.vibe,
-            suggested_feelings=ai_result.suggested_feelings,
-            ai_reply=ai_result.ai_reply,
-            remaining=VISITOR_DAILY_LIMIT - new_visitor_count,
-            dream_category=category,  # 정규화된 값. "내가 해몽한 꿈" 표시는 FE가 이 값으로 전체보기 목록에서 매칭한다.
         )
 
     async def get_ranking(self) -> DemoRankingResponse:
-        rows = await self.demo_repo.get_today_ranking(_today_kst_for_db())
-        items = [DemoRankingItem(rank=i + 1, category=row.category) for i, row in enumerate(rows)]
+        # 현재 태그 목록에 있는 행만 센다. 태그 전환 전의 옛 카테고리 행(뱀, 이빨 등)과
+        # 나중에 목록에서 빠진 태그는 DB에 남아도 랭킹에 나오지 않는다.
+        tags = load_dream_tags()
+        rows = await self.demo_repo.get_today_ranking(_today_kst_for_db(), list(tags))
+        items = [
+            DemoRankingItem(rank=i + 1, tag=row.category, definition=tags[row.category]["definition"])
+            for i, row in enumerate(rows)
+        ]
         return DemoRankingResponse(date=_today_kst().isoformat(), items=items)

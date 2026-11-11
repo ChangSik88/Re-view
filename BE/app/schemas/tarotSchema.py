@@ -17,7 +17,6 @@ class TarotKeywordDetail(BaseModel):
 
 class TarotReading(BaseModel):
     card: TarotCard
-    tags: List[str]
-    summary: str
+    tag: str  # dream_tags.json의 태그 이름. 웹 랭킹도 같은 값으로 집계한다.
+    summary: str  # 태그의 한 줄 정의
     details: List[TarotKeywordDetail]
-    dream_category: str  # 랭킹용. 목록 밖 값의 정규화는 호출하는 쪽이 한다.
