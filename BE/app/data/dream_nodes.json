@@ -1833,11 +1833,12 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
-      "tag": "동경",
+      "generic": true,
+      "tag": "시간 압박",
       "sub_tag": null,
-      "card_title": "앞으로의 박자",
-      "advice": "속도가 필요한 일과 쉬어야 할 일을 나눠 보세요.",
-      "modern_interpretation": "목표를 향한 에너지가 살아날 수 있다.",
+      "card_title": "서두르는 발걸음",
+      "advice": "지금 꼭 서둘러야 하는 일인지 한 번 확인해 보세요.",
+      "modern_interpretation": "무언가에 늦지 않으려고 마음이 앞서 있다.",
       "traditional": null
     },
     {
@@ -1845,6 +1846,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "길찾기",
       "sub_tag": null,
       "card_title": "한 걸음의 리듬",
@@ -1917,6 +1919,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "동경",
       "sub_tag": "인정",
       "card_title": "높아지는 시야",
@@ -1929,6 +1932,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "회복",
       "sub_tag": null,
       "card_title": "낮춰 보는 눈",
@@ -2037,6 +2041,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "길찾기",
       "sub_tag": null,
       "card_title": "잃은 단서",
@@ -2073,6 +2078,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "권위",
       "sub_tag": null,
       "card_title": "뒤따르는 길",
@@ -2150,6 +2156,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "회복",
       "sub_tag": "재물",
       "card_title": "채우는 행동",
@@ -2162,6 +2169,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "회복",
       "sub_tag": null,
       "card_title": "목마른 신호",
@@ -2174,6 +2182,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "연결",
       "sub_tag": "자기 모습",
       "card_title": "남기는 문장",
@@ -2186,6 +2195,7 @@
       "aliases": [],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "학습",
       "sub_tag": null,
       "card_title": "새로운 문장",
@@ -6609,6 +6619,7 @@
       ],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "끝맺음",
       "sub_tag": "통제 상실",
       "card_title": "빠져나가는 것",
@@ -6639,6 +6650,7 @@
       ],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "요행",
       "sub_tag": "재물",
       "card_title": "발밑의 행운",
@@ -6697,6 +6709,7 @@
       ],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "시간 압박",
       "sub_tag": "끝맺음",
       "card_title": "손에서 빠진 기회",
@@ -6738,7 +6751,9 @@
         "공격받다",
         "얻어맞다",
         "찔리다",
-        "총에 맞음"
+        "총에 맞음",
+        "물리다",
+        "물림"
       ],
       "type": "action",
       "category": "행동·상황",
@@ -6757,6 +6772,7 @@
       ],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "끝맺음",
       "sub_tag": "갑작스러운 타격",
       "card_title": "갈라진 조각",
@@ -6789,6 +6805,7 @@
       ],
       "type": "action",
       "category": "행동·상황",
+      "generic": true,
       "tag": "연결",
       "sub_tag": "친밀",
       "card_title": "마주한 얼굴",
@@ -7036,6 +7053,233 @@
       "card_title": "울려 퍼진 총성",
       "advice": "최근 크게 놀란 일을 떠올리고 천천히 숨을 고르세요.",
       "modern_interpretation": "예고 없는 위협에 몸과 마음이 크게 놀라 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "팔",
+      "aliases": [
+        "팔뚝"
+      ],
+      "type": "object",
+      "category": "신체·생리",
+      "tag": "자기 모습",
+      "sub_tag": null,
+      "card_title": "뻗은 팔",
+      "advice": "요즘 내 힘으로 해낼 수 있는 일을 하나 적어 보세요.",
+      "modern_interpretation": "무언가를 해낼 내 힘과 능력에 마음이 가 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "얼굴",
+      "aliases": [
+        "내 얼굴"
+      ],
+      "type": "object",
+      "category": "신체·생리",
+      "tag": "자기 모습",
+      "sub_tag": null,
+      "card_title": "비친 얼굴",
+      "advice": "남에게 보이고 싶은 내 모습을 한 줄로 적어 보세요.",
+      "modern_interpretation": "남에게 어떻게 보이는지에 신경이 쓰인다.",
+      "traditional": null
+    },
+    {
+      "keyword": "어둠",
+      "aliases": [
+        "어두운 곳",
+        "깜깜함",
+        "캄캄한 방"
+      ],
+      "type": "object",
+      "category": "자연·환경",
+      "tag": "미지",
+      "sub_tag": null,
+      "card_title": "불 꺼진 길",
+      "advice": "막연하게 걱정되는 일을 하나 적어 보세요.",
+      "modern_interpretation": "앞이 보이지 않는 일 앞에서 조심스러워진다.",
+      "traditional": null
+    },
+    {
+      "keyword": "고향",
+      "aliases": [
+        "어린 시절 집",
+        "옛 동네",
+        "고향 집"
+      ],
+      "type": "object",
+      "category": "장소·공간",
+      "tag": "과거",
+      "sub_tag": null,
+      "card_title": "돌아간 골목",
+      "advice": "그 시절의 내가 좋아하던 것을 하나 떠올려 보세요.",
+      "modern_interpretation": "지나간 시절의 나와 그때의 감정을 다시 들여다본다.",
+      "traditional": null
+    },
+    {
+      "keyword": "미로",
+      "aliases": [
+        "미궁"
+      ],
+      "type": "object",
+      "category": "장소·공간",
+      "tag": "길찾기",
+      "sub_tag": null,
+      "card_title": "얽힌 통로",
+      "advice": "지금 고민 중인 선택지를 모두 적어 보세요.",
+      "modern_interpretation": "어디로 가야 할지 몰라 같은 자리를 맴도는 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "폐허",
+      "aliases": [
+        "종말",
+        "무너진 도시",
+        "멸망한 세상"
+      ],
+      "type": "object",
+      "category": "장소·공간",
+      "tag": "끝맺음",
+      "sub_tag": null,
+      "card_title": "남겨진 폐허",
+      "advice": "끝내고 싶은 일과 지키고 싶은 일을 나눠 보세요.",
+      "modern_interpretation": "익숙한 질서가 무너지고 한 시기가 끝나는 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "텔레비전",
+      "aliases": [
+        "TV",
+        "티비"
+      ],
+      "type": "object",
+      "category": "사물·재물",
+      "tag": "도피",
+      "sub_tag": null,
+      "card_title": "켜 둔 화면",
+      "advice": "오늘은 화면을 끄고 쉬는 시간을 잠깐 가져 보세요.",
+      "modern_interpretation": "생각을 잠시 내려놓고 다른 데 기대어 쉬고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "서점",
+      "aliases": [
+        "책방"
+      ],
+      "type": "object",
+      "category": "장소·공간",
+      "tag": "학습",
+      "sub_tag": null,
+      "card_title": "줄지어 선 책장",
+      "advice": "요즘 궁금한 주제를 하나 적어 보세요.",
+      "modern_interpretation": "새로운 것을 알고 싶은 마음이 커지고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "다치다",
+      "aliases": [
+        "부상",
+        "다침"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "갑작스러운 타격",
+      "sub_tag": null,
+      "card_title": "벌어진 상처",
+      "advice": "최근 마음이 다친 일을 짧게 적어 보세요.",
+      "modern_interpretation": "몸이나 마음이 다칠 수 있다는 걱정이 커져 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "찌르다",
+      "aliases": [
+        "찌름"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "갈등",
+      "sub_tag": null,
+      "card_title": "겨눈 칼끝",
+      "advice": "누군가에게 쌓인 감정이 있다면 한 줄로 적어 보세요.",
+      "modern_interpretation": "참아 온 분노나 맞서고 싶은 마음이 밖으로 나오고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "혼나다",
+      "aliases": [
+        "꾸중",
+        "야단맞다",
+        "혼남"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "권위",
+      "sub_tag": null,
+      "card_title": "높아진 목소리",
+      "advice": "나를 평가하는 기준이 누구의 것인지 적어 보세요.",
+      "modern_interpretation": "윗사람이나 규칙 앞에서 잘못할까 긴장하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "버림받다",
+      "aliases": [
+        "외면당하다",
+        "버려짐",
+        "등을 돌림"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "고립",
+      "sub_tag": null,
+      "card_title": "돌아선 등",
+      "advice": "내 편이라고 느끼는 사람을 한 명 떠올려 보세요.",
+      "modern_interpretation": "소중한 사람에게서 멀어질까 하는 두려움이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "비웃음",
+      "aliases": [
+        "비웃다",
+        "놀림받다",
+        "조롱"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "평가",
+      "sub_tag": null,
+      "card_title": "등 뒤의 웃음",
+      "advice": "남의 시선과 내 생각을 나눠서 적어 보세요.",
+      "modern_interpretation": "남에게 우습게 보일까 마음을 졸이고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "쓰다듬다",
+      "aliases": [
+        "쓰다듬음",
+        "어루만지다"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "친밀",
+      "sub_tag": null,
+      "card_title": "닿은 손길",
+      "advice": "가까운 사람에게 따뜻한 말을 한마디 건네 보세요.",
+      "modern_interpretation": "가까이 다가가 마음을 나누고 싶다.",
+      "traditional": null
+    },
+    {
+      "keyword": "아프다",
+      "aliases": [
+        "병에 걸리다",
+        "앓다",
+        "아픔"
+      ],
+      "type": "action",
+      "category": "신체·생리",
+      "tag": "회복",
+      "sub_tag": null,
+      "card_title": "쉬어 가는 몸",
+      "advice": "오늘은 몸이 보내는 신호에 귀를 기울여 보세요.",
+      "modern_interpretation": "지친 몸과 마음을 돌봐야 할 때라는 신호가 있다.",
       "traditional": null
     }
   ]

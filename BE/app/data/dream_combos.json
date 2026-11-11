@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "rule": "대상 노드와 행동 노드가 함께 잡히면 이 표를 먼저 본다. 있으면 node의 해석을 쓴다. 없으면 행동 노드의 태그를 쓰고, 행동이 없으면 대상 노드의 태그를 쓴다.",
+  "rule": "대상 노드와 행동 노드가 함께 잡히면 이 표를 먼저 본다. 있으면 node의 해석을 쓴다. 없으면 행동 노드의 태그를 쓰고, 행동이 없거나 범용 동사(generic)면 대상 노드의 태그를 쓴다.",
   "combos": [
     {
       "object": "이빨",
@@ -85,6 +85,30 @@
       "action": "놓치다",
       "node": "비행기를 놓침",
       "source": "TDQ 6"
+    },
+    {
+      "object": "호수",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "강",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "수영장",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "이빨",
+      "action": "깨지다",
+      "node": "이가 빠지다",
+      "source": null
     }
   ]
 }
