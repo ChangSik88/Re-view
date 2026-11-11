@@ -14,94 +14,6 @@ function getVisitorId() {
   return id;
 }
 
-const WMO_THEME_MAP = {
-  clear: [0, 1],
-  cloudy: [2, 3],
-  fog: [45, 48],
-  rain: [51, 52, 53, 54, 55, 56, 57, 61, 62, 63, 64, 65, 66, 67, 80, 81, 82, 95, 96, 97, 98, 99],
-  snow: [71, 72, 73, 74, 75, 76, 77, 85, 86],
-};
-
-function themeForWmoCode(code) {
-  for (const [theme, codes] of Object.entries(WMO_THEME_MAP)) {
-    if (codes.includes(code)) return theme;
-  }
-  return "clear";
-}
-
-// 안개는 Figma에 전용 시안이 없어 흐림 문구를 그대로 쓰고 날씨 표기만 "안개"로 둔다.
-const THEME_COPY = {
-  clear: { label: "맑음", sub: "맑은 아침이에요", title: ["햇살 좋은 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
-  cloudy: { label: "흐림", sub: "흐린 아침이에요", title: ["구름 낀 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
-  fog: { label: "안개", sub: "흐린 아침이에요", title: ["구름 낀 아침,", "어떤 꿈을 꿨나요?"], placeholder: "간밤에 꾼 꿈을 한 줄로 적어보세요" },
-  rain: { label: "비", sub: "비 오는 아침이에요", title: ["빗소리 듣는 아침,", "간밤의 꿈은요?"], placeholder: "비를 맞으며 걷는 꿈을 꿨어요" },
-  snow: { label: "눈", sub: "눈 내리는 아침이에요", title: ["포근한 눈 오는 날,", "어떤 꿈을 꿨어요?"], placeholder: "눈 쌓인 길을 걷는 꿈을 꿨어요" },
-};
-
-// 날씨 조회에 성공했을 때만 채운다. 실패 시 결과 화면 날짜 줄에 날씨를 붙이지 않는다.
-let weatherLabel = null;
-
-function applyTheme(theme) {
-  document.body.classList.remove(...Object.keys(THEME_COPY).map((t) => `theme-${t}`));
-  document.body.classList.add(`theme-${theme}`);
-  const copy = THEME_COPY[theme];
-  document.getElementById("hero-sub").textContent = copy.sub;
-  document.getElementById("hero-title").replaceChildren(copy.title[0], document.createElement("br"), copy.title[1]);
-  document.getElementById("dream-input").placeholder = copy.placeholder;
-}
-
-function kstDateParts() {
-  const parts = new Intl.DateTimeFormat("ko-KR", {
-    timeZone: "Asia/Seoul",
-    month: "numeric",
-    day: "numeric",
-    weekday: "long",
-  }).formatToParts(new Date());
-  const pick = (type) => parts.find((p) => p.type === type).value;
-  return { month: pick("month"), day: pick("day"), weekday: pick("weekday") };
-}
-
-// ipapi.co가 차단되거나 레이트리밋에 걸려도 날씨는 보여준다. 스펙상 폴백 좌표는 서울이다.
-const SEOUL_COORDS = { latitude: 37.5665, longitude: 126.978 };
-
-async function fetchLocation() {
-  try {
-    const res = await fetch("https://ipapi.co/json/");
-    if (!res.ok) throw new Error("ipapi 응답 실패");
-    const geo = await res.json();
-    // 레이트리밋에 걸리면 200이면서 {"error": true}를 준다. ok만으로는 판정할 수 없어 좌표 유무로 본다.
-    if (typeof geo.latitude !== "number" || typeof geo.longitude !== "number") {
-      throw new Error("ipapi 좌표 없음");
-    }
-    return { latitude: geo.latitude, longitude: geo.longitude };
-  } catch (e) {
-    console.warn("위치 조회 실패, 서울 좌표로 폴백:", e);
-    return { ...SEOUL_COORDS };
-  }
-}
-
-async function loadWeather() {
-  const { latitude, longitude } = await fetchLocation();
-
-  try {
-    const weatherRes = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
-    );
-    if (!weatherRes.ok) throw new Error("open-meteo 실패");
-    const weather = await weatherRes.json();
-    const theme = themeForWmoCode(weather.current_weather.weathercode);
-
-    applyTheme(theme);
-    weatherLabel = THEME_COPY[theme].label;
-    const { month, day } = kstDateParts();
-    document.getElementById("weather-desc").textContent = `${weatherLabel} · ${month}/${day}`;
-    document.getElementById("weather-widget").hidden = false;
-  } catch (e) {
-    // 날씨가 죽어도 페이지는 뜬다 — 기본 테마를 유지하고 위젯만 숨긴다.
-    console.warn("날씨 로딩 실패:", e);
-  }
-}
-
 async function loadRankingPreview() {
   try {
     // 크론이 쉬는 02:00~07:00 KST에는 Render 콜드 스타트로 수십 초가 걸릴 수 있다.
@@ -123,8 +35,8 @@ async function loadRankingPreview() {
       rank.textContent = String(item.rank).padStart(2, "0");
       const name = document.createElement("span");
       name.className = "preview-name";
-      // 서버에서 온 카테고리 이름은 textContent로만 넣는다(랭킹 페이지와 같은 이유).
-      name.textContent = item.category;
+      // 서버에서 온 태그 이름은 textContent로만 넣는다(랭킹 페이지와 같은 이유).
+      name.textContent = item.tag;
       card.append(rank, name);
       const li = document.createElement("li");
       li.appendChild(card);
@@ -132,107 +44,103 @@ async function loadRankingPreview() {
     }
     document.getElementById("home-ranking").hidden = false;
   } catch (e) {
-    // 스펙 5장: 랭킹이 죽으면 섹션만 숨긴다.
+    // 랭킹이 죽으면 섹션만 숨긴다.
     console.warn("랭킹 미리보기 로딩 실패:", e);
   }
 }
 
-const STAGES = ["stage-input", "stage-paper", "stage-writing", "stage-done"];
-const TYPE_INTERVAL_MS = 45;
-// 하늘이 줄어드는 CSS 트랜지션(0.6s)이 끝난 뒤 타이핑해야 글자가 움직이는 박스 위에 찍히지 않는다.
-const SKY_SHIFT_MS = 600;
+// B1 입력 → B2 카드를 고르는 중 → B3 뒤집히며 올라감 → B4 앞면 → B5 태그와 한 줄 설명, 안내 문구(카드 클릭 대기) → 결과
+const STAGES = ["stage-input", "stage-paper", "stage-flip", "stage-front", "stage-reveal", "stage-done"];
+const CAPTIONS = {
+  "stage-paper": "한 장을 고르는 중...",
+  "stage-flip": "뒤집는 중",
+  "stage-reveal": "카드를 누르면 해몽을 볼 수 있어요",
+};
+const FLIP_MS = 900; // home.css의 stage-flip --card-dur와 맞춘다.
+const FRONT_HOLD_MS = 1000;
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-let typingTimer = null;
-let typingResolve = null;
-// 연출 도중 "다시 풀어보기"나 재제출이 끼어들면 이전 연출의 남은 단계를 버리기 위한 번호.
+// 연출 도중 "다시 해보기"나 재제출이 끼어들면 이전 연출의 남은 단계를 버리기 위한 번호.
 let playToken = 0;
+let lastDream = "";
 
 function setStage(stage) {
   document.body.classList.remove(...STAGES);
   document.body.classList.add(stage);
+  document.getElementById("stage-caption").textContent = CAPTIONS[stage] || "";
+  // B4에서 눌러도 받는다. 앞면이 가장 크게 보이는 순간이라 사람들이 바로 누르기 때문이다.
+  document.getElementById("tarot-card").disabled = stage !== "stage-front" && stage !== "stage-reveal";
 }
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, reduceMotion ? 0 : ms));
 }
 
-function stopTyping() {
-  clearInterval(typingTimer);
-  typingTimer = null;
-  const resolve = typingResolve;
-  typingResolve = null;
-  if (resolve) resolve();
+function showRemaining(count) {
+  document.getElementById("remaining-count").textContent = String(count);
+  document.getElementById("remaining").hidden = false;
 }
 
-function typeText(el, text) {
-  stopTyping();
-  const chars = Array.from(text);
-  if (reduceMotion || chars.length === 0) {
-    el.textContent = text;
-    return Promise.resolve();
+// /demo/tarot 응답을 화면 칸으로 옮긴다. summary는 tag의 한 줄 정의다. 필드가 바뀌면 이 함수만 고친다.
+function readReading(data) {
+  return {
+    cardTitle: data.card.card_title,
+    tag: data.tag,
+    summary: data.summary,
+    details: data.details,
+  };
+}
+
+// 카드 그림은 아직 API에 없다. 그림이 생기기 전까지는 뒷면 문양을 옅게 그린 대체 표시를 쓴다.
+function renderCardArt() {
+  const emblem = document.createElement("span");
+  emblem.className = "emblem";
+  emblem.setAttribute("aria-hidden", "true");
+  emblem.appendChild(document.createElement("span"));
+  document.getElementById("card-art").replaceChildren(emblem);
+}
+
+// 상세 설명은 keyword로 시작한다(#57 스키마). 시안처럼 앞의 keyword만 굵게 쓴다.
+function renderDetail(detail) {
+  const p = document.createElement("p");
+  if (detail.description.startsWith(detail.keyword)) {
+    const strong = document.createElement("strong");
+    strong.textContent = detail.keyword;
+    p.append(strong, detail.description.slice(detail.keyword.length));
+  } else {
+    p.textContent = detail.description;
   }
-  el.textContent = "";
-  return new Promise((resolve) => {
-    typingResolve = resolve;
-    let i = 0;
-    typingTimer = setInterval(() => {
-      el.textContent += chars[i];
-      i += 1;
-      if (i === chars.length) {
-        stopTyping();
-      }
-    }, TYPE_INTERVAL_MS);
-  });
+  return p;
 }
 
-function fillResultMeta() {
-  const { month, day, weekday } = kstDateParts();
-  const suffix = weatherLabel ? ` · ${weatherLabel}` : "";
-  document.getElementById("result-date-long").textContent = `${month}월 ${day}일 ${weekday}${suffix}`;
-  document.getElementById("result-date-short").textContent = `${month}/${day} ${weekday.charAt(0)}${suffix}`;
+function fillReading(reading) {
+  renderCardArt();
+  document.getElementById("card-title").textContent = reading.cardTitle;
+  document.getElementById("result-tag").textContent = reading.tag;
+  document.getElementById("result-summary").textContent = reading.summary;
+  document.getElementById("result-details").replaceChildren(...reading.details.map(renderDetail));
 }
 
-// F2: 제출 즉시. BE 응답을 기다리는 동안 빈 박스 + 커서가 로딩 표시를 겸한다.
-function showPaper(dream) {
-  playToken += 1;
-  stopTyping();
-  fillResultMeta();
-  document.getElementById("result-quote").textContent = `"${dream}"`;
-  document.getElementById("result-theme").textContent = "";
-  document.getElementById("result-vibe").textContent = "";
-  document.getElementById("result-feelings").replaceChildren();
-  document.getElementById("result-reply").textContent = "";
-  document.getElementById("result-seal-slot").replaceChildren();
-  document.getElementById("result").hidden = false;
-  setStage("stage-paper");
-}
-
-// F3~F5
-async function playResult(result) {
+// B3 → B4 → B5는 터치 없이 이어진다. B5에서 카드를 누를 때까지 멈춘다.
+async function playFlip() {
   const token = playToken;
-  document.getElementById("result-vibe").textContent = result.vibe;
-  const feelingsEl = document.getElementById("result-feelings");
-  for (const feeling of result.suggested_feelings) {
-    const li = document.createElement("li");
-    li.textContent = feeling;
-    feelingsEl.appendChild(li);
-  }
-  document.getElementById("result-reply").textContent = result.ai_reply;
-  document.getElementById("result-seal-slot").appendChild(createSeal(luckOf(result.dream_category)));
+  setStage("stage-flip");
+  await wait(FLIP_MS);
+  if (token !== playToken) return;
+  setStage("stage-front");
+  await wait(FRONT_HOLD_MS);
+  if (token !== playToken) return;
+  setStage("stage-reveal");
+}
 
-  setStage("stage-writing");
-  await wait(SKY_SHIFT_MS);
-  if (token !== playToken) return;
-  await typeText(document.getElementById("result-theme"), result.theme);
-  if (token !== playToken) return;
+// 카드 클릭 → 결과. B4에서 누르면 남은 B5 대기를 버리고 바로 결과로 간다.
+function showResult() {
+  playToken += 1;
   setStage("stage-done");
 }
 
 function backToInput() {
   playToken += 1;
-  stopTyping();
-  document.getElementById("result").hidden = true;
   setStage("stage-input");
 }
 
@@ -240,13 +148,6 @@ function showInputError(message) {
   const errorEl = document.getElementById("input-error");
   errorEl.textContent = message;
   errorEl.hidden = false;
-}
-
-function retry() {
-  backToInput();
-  const input = document.getElementById("dream-input");
-  input.value = "";
-  input.focus();
 }
 
 function showExhaustedModal(reason) {
@@ -258,25 +159,18 @@ function showExhaustedModal(reason) {
   document.getElementById("exhausted-modal").hidden = false;
 }
 
-async function submitDream(event) {
-  event.preventDefault();
-  const input = document.getElementById("dream-input");
+async function drawCard(dream) {
   const submitBtn = document.getElementById("submit-btn");
   document.getElementById("input-error").hidden = true;
-
-  const dream = input.value.trim();
-  if (dream.length < 1 || dream.length > 500) {
-    showInputError("꿈 내용은 1~500자로 입력해 주세요.");
-    return;
-  }
-
   submitBtn.disabled = true;
-  showPaper(dream);
-  let result;
+  playToken += 1;
+  setStage("stage-paper");
+
+  let data;
   try {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 60000);
-    const res = await fetch(`${API_BASE_URL}/demo/interpret`, {
+    const res = await fetch(`${API_BASE_URL}/demo/tarot`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Demo-Visitor-Id": getVisitorId() },
       body: JSON.stringify({ dream }),
@@ -287,6 +181,7 @@ async function submitDream(event) {
     if (res.status === 429) {
       const body = await res.json();
       backToInput();
+      showRemaining(0);
       showExhaustedModal(body.reason);
       return;
     }
@@ -301,30 +196,62 @@ async function submitDream(event) {
       showInputError("잠시 후 다시 시도해 주세요.");
       return;
     }
-    result = await res.json();
+    data = await res.json();
   } catch (e) {
     backToInput();
     showInputError("잠시 후 다시 시도해 주세요.");
     return;
   } finally {
-    // 연출 대기(await playResult) 전에 풀어야 연출 중 "다시 풀어보기" 후 재제출이 막히지 않는다.
     submitBtn.disabled = false;
   }
 
-  // "내가 해몽한 꿈" — 서버는 방문자를 식별하지 않으므로 클라이언트가 세션 동안만 들고 있는다.
-  sessionStorage.setItem("lastDreamCategory", result.dream_category);
-  await playResult(result);
+  // "나의 태그" 표시용. 서버는 방문자를 식별하지 않으므로 클라이언트가 세션 동안만 들고 있는다.
+  sessionStorage.setItem("lastDreamTag", data.tag);
+  showRemaining(data.remaining);
+  fillReading(readReading(data));
+  await playFlip();
+}
 
-  if (result.remaining <= 0) {
-    showExhaustedModal("visitor");
+function submitDream(event) {
+  event.preventDefault();
+  const dream = document.getElementById("dream-input").value.trim();
+  if (dream.length < 1 || dream.length > 500) {
+    showInputError("꿈 내용은 1~500자로 입력해 주세요.");
+    return;
+  }
+  lastDream = dream;
+  drawCard(dream);
+}
+
+// "다시 해보기"는 B2로 돌아간다(시안 메모 994:374). 같은 꿈으로 다시 요청하므로 횟수가 차감된다.
+function retry() {
+  drawCard(lastDream);
+}
+
+async function share() {
+  const btn = document.getElementById("share-btn");
+  const tag = document.getElementById("result-tag").textContent;
+  const payload = { title: "굿모닝 드림", text: `오늘 내 꿈의 태그는 "${tag}"`, url: location.href };
+  try {
+    if (navigator.share) {
+      await navigator.share(payload);
+      return;
+    }
+    await navigator.clipboard.writeText(location.href);
+    btn.textContent = "링크 복사됨";
+    setTimeout(() => { btn.textContent = "공유"; }, 1500);
+  } catch (e) {
+    // 사용자가 공유 창을 닫으면 AbortError가 난다. 알릴 일이 아니다.
+    console.warn("공유 실패:", e);
   }
 }
 
 document.getElementById("interpret-form").addEventListener("submit", submitDream);
+document.getElementById("tarot-card").addEventListener("click", showResult);
 document.getElementById("retry-btn").addEventListener("click", retry);
+document.getElementById("share-btn").addEventListener("click", share);
 document.getElementById("modal-close").addEventListener("click", () => {
   document.getElementById("exhausted-modal").hidden = true;
 });
 
-loadWeather();
 loadRankingPreview();

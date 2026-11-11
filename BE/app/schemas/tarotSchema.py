@@ -5,9 +5,11 @@ from pydantic import BaseModel, Field
 
 class TarotCard(BaseModel):
     # 등록 키워드가 있으면 JSON 카탈로그의 표준 키워드와 카드 제목,
-    # 없으면 가장 중요한 꿈 요소와 Gemini가 지은 카드 제목(카탈로그에 없어 카드 그림도 없다).
+    # 없으면 가장 중요한 꿈 요소와 Gemini가 지은 카드 제목.
     keyword: str
     card_title: str
+    # 태그 카드 사진의 상대 경로(/static/...). 웹과 토스는 API 주소를 앞에 붙여 쓴다.
+    image_url: str
 
 
 class TarotKeywordDetail(BaseModel):

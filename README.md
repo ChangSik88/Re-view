@@ -205,8 +205,18 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 |---|---|
 | `BE/app/data/dream_tarot.example.json` | 300개 키워드의 분류, 카드 제목, 길흉 지수, 해석, 조언 저장 |
 | `BE/app/data/dream_tags.json` | 해몽 태그 31개의 이름과 정의. 카드 태그와 웹 랭킹 집계 단위 |
+| `BE/app/static/tagImages/normal/` | 태그별 카드 사진(`<image_key>.webp`, 552x828). `/demo/tarot`의 `card.image_url`이 가리킨다 |
+| `BE/scripts/build_tag_images.py` | 카드 사진 원본 폴더를 위 WebP로 변환. 태그와 파일이 어긋나면 실패 |
 | `BE/app/core/ai/dreamKeywordHarness.py` | 키워드 추출, JSON 조회·검증, 해몽 통합 |
 | `BE/app/services/tarotService.py` | 꿈 문장으로 타로 카드 결과(카드, 태그, 한 줄 설명, 요소별 설명) 생성. 저장하지 않음 |
 | `BE/app/services/demoService.py` | `/demo/tarot`의 횟수 제한과 태그 랭킹 집계 |
 
 JSON 카탈로그는 최초 사용 시 읽어 메모리에 캐시합니다. 로딩 과정에서 필수 필드, 키워드 중복, 길흉 지수 합계가 100인지 검증합니다
+
+### 태그 카드 사진 갱신
+
+사진은 git으로 추적하고 기존 `/static` 마운트로 서빙합니다. 원본(1024x1536 PNG, 장당 약 3MB)은 저장소에 넣지 않습니다.
+
+1. 원본 폴더에서 사진을 바꿉니다. 파일명은 `번호.태그id.png`(예: `7.갑작스러운 타격.png`)입니다.
+2. 저장소 루트에서 `python BE/scripts/build_tag_images.py "<원본 폴더>"`를 실행합니다. 누락, 여분, 중복, 2:3이 아닌 사진이 있으면 아무것도 쓰지 않고 실패합니다.
+3. 바뀐 `BE/app/static/tagImages/normal/`을 PR로 올립니다.
