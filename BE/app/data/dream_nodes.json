@@ -74,7 +74,7 @@
       "sub_tag": "도피",
       "card_title": "뒤따르는 그림자",
       "advice": "오늘은 가장 마음에 걸리는 일 하나를 작게 나누어 보세요.",
-      "modern_interpretation": "피해 온 문제를 알아차리고 마주할 준비가 시작된다.",
+      "modern_interpretation": "무언가에 끌려다니며 내 뜻대로 하지 못한다고 느낀다.",
       "traditional": null
     },
     {
@@ -88,7 +88,7 @@
       "sub_tag": null,
       "card_title": "흔들리는 발판",
       "advice": "오늘은 통제할 수 있는 일 한 가지에 집중해 보세요.",
-      "modern_interpretation": "기존 방식에서 벗어나 새 균형을 찾을 계기다.",
+      "modern_interpretation": "발 디딜 곳을 잃고 상황을 붙잡지 못한다고 느낀다.",
       "traditional": null
     },
     {
@@ -124,7 +124,7 @@
       "sub_tag": null,
       "card_title": "빠르게 가는 시계",
       "advice": "오늘은 꼭 해야 할 일 하나부터 먼저 처리해 보세요.",
-      "modern_interpretation": "중요한 일의 우선순위를 다시 정할 계기다.",
+      "modern_interpretation": "시간에 쫓겨 마음이 급하고 자꾸 조급해지는 상태다.",
       "traditional": null
     },
     {
@@ -136,7 +136,7 @@
       "sub_tag": null,
       "card_title": "갈림길의 표지",
       "advice": "오늘은 원하는 방향을 한 문장으로 적어 보세요.",
-      "modern_interpretation": "익숙한 길 밖에서 새로운 선택지를 발견할 수 있다.",
+      "modern_interpretation": "어느 쪽으로 가야 할지 몰라 방향을 고민하고 있다.",
       "traditional": null
     },
     {
@@ -153,7 +153,10 @@
     },
     {
       "keyword": "집",
-      "aliases": [],
+      "aliases": [
+        "아파트",
+        "빌라"
+      ],
       "type": "object",
       "category": "장소·공간",
       "tag": "보호",
@@ -201,14 +204,16 @@
     },
     {
       "keyword": "낯선 사람",
-      "aliases": [],
+      "aliases": [
+        "모르는 사람"
+      ],
       "type": "object",
       "category": "인물·관계",
       "tag": "미지",
       "sub_tag": null,
       "card_title": "이름 없는 방문자",
       "advice": "오늘은 낯선 상황에서 느낀 첫 감정을 살펴보세요.",
-      "modern_interpretation": "아직 몰랐던 자신의 모습이나 가능성을 발견한다.",
+      "modern_interpretation": "아직 잘 모르는 사람에 대한 막연한 경계와 호기심이 있다.",
       "traditional": null
     },
     {
@@ -285,7 +290,7 @@
       "sub_tag": null,
       "card_title": "부딪힌 두 마음",
       "advice": "오늘은 상대를 판단하기 전에 내가 원하는 것을 말해 보세요.",
-      "modern_interpretation": "숨겨 둔 생각을 알아차리고 필요한 경계를 세운다.",
+      "modern_interpretation": "마음속에서 누군가와 팽팽하게 맞서 부딪히는 중이다.",
       "traditional": null
     },
     {
@@ -299,7 +304,7 @@
       "sub_tag": null,
       "card_title": "멈춤의 신호",
       "advice": "오늘은 일정에 짧은 여유 시간을 남겨 보세요.",
-      "modern_interpretation": "속도를 늦추고 놓친 부분을 점검할 기회다.",
+      "modern_interpretation": "예상하지 못한 충격에 마음이 크게 흔들려 있다.",
       "traditional": null
     },
     {
@@ -445,7 +450,7 @@
       "sub_tag": null,
       "card_title": "작은 불편의 신호",
       "advice": "오늘은 신경 쓰이던 작은 일 하나를 처리해 보세요.",
-      "modern_interpretation": "사소하지만 거슬리던 문제를 발견하고 정리한다.",
+      "modern_interpretation": "작지만 떨쳐 내기 어려운 불편이 신경을 건드린다.",
       "traditional": null
     },
     {
@@ -603,7 +608,7 @@
       "sub_tag": "동경",
       "card_title": "잠재된 용기",
       "advice": "오늘은 내 의견을 한 번 분명하게 말해 보세요.",
-      "modern_interpretation": "어려운 상황에서도 힘 있게 자신을 표현한다.",
+      "modern_interpretation": "나보다 큰 힘 앞에서 긴장하고 눈치를 살피게 된다.",
       "traditional": null
     },
     {
@@ -618,7 +623,7 @@
       "sub_tag": null,
       "card_title": "잠시 멈춘 발걸음",
       "advice": "오늘은 혼자 버티기보다 작은 도움 하나를 요청해 보세요.",
-      "modern_interpretation": "서두르기 전에 지금 필요한 도움을 알아차린다.",
+      "modern_interpretation": "내 몸과 상황이 내 뜻대로 움직이지 않아 막막하다.",
       "traditional": null
     },
     {
@@ -630,7 +635,7 @@
       "sub_tag": "동경",
       "card_title": "달리는 선택",
       "advice": "오늘 밀고 싶은 일 하나의 첫 단계를 정해 보세요.",
-      "modern_interpretation": "마음속 추진력이 다시 살아날 수 있다.",
+      "modern_interpretation": "답답한 틀 밖으로 거침없이 달려 나가고 싶은 마음이 있다.",
       "traditional": null
     },
     {
@@ -762,7 +767,7 @@
       "sub_tag": null,
       "card_title": "작은 활기",
       "advice": "오늘 좋았던 순간을 하나 적어 보세요.",
-      "modern_interpretation": "평범한 하루에서 가벼운 기쁨을 발견한다.",
+      "modern_interpretation": "가까운 이들과 소소하게 정을 나누고 싶은 마음이 있다.",
       "traditional": null
     },
     {
@@ -786,7 +791,7 @@
       "sub_tag": null,
       "card_title": "영리한 우회",
       "advice": "익숙한 방법 말고 다른 선택지를 하나 찾아보세요.",
-      "modern_interpretation": "문제를 새로운 방식으로 풀 실마리가 보인다.",
+      "modern_interpretation": "속마음을 감추고 영리하게 처신하고 있다는 느낌이 있다.",
       "traditional": null
     },
     {
@@ -822,7 +827,7 @@
       "sub_tag": "인정",
       "card_title": "드러나는 용기",
       "advice": "오늘 한 번은 의견을 분명히 말해 보세요.",
-      "modern_interpretation": "자신의 의견을 표현할 자신감이 자란다.",
+      "modern_interpretation": "위엄 있는 존재 앞에서 내 위치를 의식하고 있다.",
       "traditional": null
     },
     {
@@ -858,7 +863,7 @@
       "sub_tag": null,
       "card_title": "작은 단서",
       "advice": "놓친 세부 사항 하나를 다시 확인해 보세요.",
-      "modern_interpretation": "사소한 신호에서 해결의 힌트를 찾는다.",
+      "modern_interpretation": "눈에 띄지 않는 불안한 기척이 마음에 남아 있다.",
       "traditional": null
     },
     {
@@ -942,7 +947,7 @@
       "sub_tag": "통제 상실",
       "card_title": "날카로운 긴장",
       "advice": "걱정의 원인을 구체적으로 한 줄로 적어 보세요.",
-      "modern_interpretation": "부담스러운 상황의 핵심을 알아차린다.",
+      "modern_interpretation": "언제 닥칠지 모르는 위협에 바짝 긴장하고 있다.",
       "traditional": null
     },
     {
@@ -954,7 +959,7 @@
       "sub_tag": "의무",
       "card_title": "여러 갈래의 손",
       "advice": "해야 할 일을 우선순위대로 세 개만 남겨 보세요.",
-      "modern_interpretation": "동시에 맡은 일을 조율할 능력을 돌아본다.",
+      "modern_interpretation": "여러 일이 한꺼번에 얽혀 감당이 안 된다고 느낀다.",
       "traditional": null
     },
     {
@@ -978,7 +983,7 @@
       "sub_tag": null,
       "card_title": "모이는 노력",
       "advice": "오늘의 작은 성취를 체크해 보세요.",
-      "modern_interpretation": "작은 반복이 눈에 보이는 성과로 쌓인다.",
+      "modern_interpretation": "끝없이 이어지는 할 일을 묵묵히 해내는 중이다.",
       "traditional": null
     },
     {
@@ -1062,7 +1067,7 @@
       "sub_tag": null,
       "card_title": "닿는 선택",
       "advice": "바로 실행할 수 있는 행동 하나를 해보세요.",
-      "modern_interpretation": "스스로 움직여 바꿀 수 있는 일이 보인다.",
+      "modern_interpretation": "내가 하는 일과 솜씨가 어떻게 보일지 의식한다.",
       "traditional": null
     },
     {
@@ -1086,7 +1091,7 @@
       "sub_tag": null,
       "card_title": "새로운 시선",
       "advice": "한 가지 일을 다른 입장에서 생각해 보세요.",
-      "modern_interpretation": "익숙한 상황을 다른 관점에서 볼 수 있다.",
+      "modern_interpretation": "남이 나를 어떻게 바라보는지 자꾸 신경이 쓰인다.",
       "traditional": null
     },
     {
@@ -1290,7 +1295,7 @@
       "sub_tag": null,
       "card_title": "하얀 소용돌이",
       "advice": "급하지 않은 일은 잠시 미뤄 보세요.",
-      "modern_interpretation": "복잡한 상황에서 우선순위를 다시 세운다.",
+      "modern_interpretation": "앞이 보이지 않고 휘몰아쳐 어쩔 줄 모르겠는 상태다.",
       "traditional": null
     },
     {
@@ -1338,7 +1343,7 @@
       "sub_tag": null,
       "card_title": "거센 변화",
       "advice": "지금 통제 가능한 일 하나에 집중하세요.",
-      "modern_interpretation": "혼란 속에서도 지킬 중심을 찾을 수 있다.",
+      "modern_interpretation": "거센 상황에 휩쓸려 내 뜻대로 되지 않는다고 느낀다.",
       "traditional": null
     },
     {
@@ -1398,7 +1403,7 @@
       "sub_tag": "과거",
       "card_title": "이어지는 길",
       "advice": "지금까지 해온 일을 세 가지 적어 보세요.",
-      "modern_interpretation": "계속 흘러온 경험이 지금의 선택을 돕는다.",
+      "modern_interpretation": "건너야 할 경계 앞에서 한 발 내딛기를 망설인다.",
       "traditional": null
     },
     {
@@ -1542,7 +1547,7 @@
       "sub_tag": "갑작스러운 타격",
       "card_title": "흔들린 바닥",
       "advice": "지금 믿고 의지할 수 있는 것을 확인하세요.",
-      "modern_interpretation": "안정감을 다시 만드는 방법을 찾는다.",
+      "modern_interpretation": "발밑이 흔들려 믿고 의지하던 기반이 불안하게 느껴진다.",
       "traditional": null
     },
     {
@@ -1554,7 +1559,7 @@
       "sub_tag": null,
       "card_title": "오르내리는 마음",
       "advice": "하루 중 마음이 달라진 순간을 적어 보세요.",
-      "modern_interpretation": "변하는 감정을 자연스럽게 받아들일 수 있다.",
+      "modern_interpretation": "밀려오는 감정에 마음이 이리저리 휩쓸리고 있다.",
       "traditional": null
     },
     {
@@ -1768,11 +1773,11 @@
       "aliases": [],
       "type": "action",
       "category": "삶의 변화",
-      "tag": "도피",
-      "sub_tag": "해방",
+      "tag": "해방",
+      "sub_tag": "도피",
       "card_title": "떠나는 마음",
       "advice": "가까운 곳에서 작은 새로움을 찾아보세요.",
-      "modern_interpretation": "일상 밖의 관점이 새로운 활력을 준다.",
+      "modern_interpretation": "일상에서 잠시 벗어나 숨 돌리고 싶은 마음이 있다.",
       "traditional": null
     },
     {
@@ -1892,7 +1897,7 @@
       "sub_tag": null,
       "card_title": "흔들린 균형",
       "advice": "급한 일에서 한 번 더 확인해 보세요.",
-      "modern_interpretation": "불안정한 부분을 미리 살필 기회다.",
+      "modern_interpretation": "발이 헛디뎌져 중심을 잡지 못하는 느낌이 든다.",
       "traditional": null
     },
     {
@@ -1904,7 +1909,7 @@
       "sub_tag": "회복",
       "card_title": "다시 일어서는 자리",
       "advice": "실패에서 배운 점 하나를 적어 보세요.",
-      "modern_interpretation": "실수 뒤에도 회복할 방법을 찾는다.",
+      "modern_interpretation": "뜻밖의 실수나 충격에 갑자기 주저앉은 기분이다.",
       "traditional": null
     },
     {
@@ -2012,7 +2017,7 @@
       "sub_tag": "위장",
       "card_title": "말 없는 시간",
       "advice": "말하기 전 내 마음을 먼저 정리해 보세요.",
-      "modern_interpretation": "바로 답하지 않고 생각할 여유를 찾는다.",
+      "modern_interpretation": "말을 삼킨 채 사람들과 거리를 두고 혼자 있다.",
       "traditional": null
     },
     {
@@ -2137,7 +2142,7 @@
       "sub_tag": null,
       "card_title": "만드는 시간",
       "advice": "작은 결과물을 하나 완성해 보세요.",
-      "modern_interpretation": "자원을 모아 자신에게 필요한 것을 만든다.",
+      "modern_interpretation": "누군가를 챙겨야 한다는 부담이 마음에 얹혀 있다.",
       "traditional": null
     },
     {
@@ -2408,7 +2413,7 @@
       "sub_tag": "갑작스러운 타격",
       "card_title": "무너진 계산",
       "advice": "현실의 걱정이 있다면 믿을 만한 지원을 찾으세요.",
-      "modern_interpretation": "큰 걱정을 구체적인 문제로 나누어 볼 수 있다.",
+      "modern_interpretation": "가진 것이 손에서 빠져나가 막을 수 없다고 느낀다.",
       "traditional": null
     },
     {
@@ -2736,7 +2741,7 @@
       "sub_tag": "자기 모습",
       "card_title": "처음 보는 거처",
       "advice": "낯선 변화에서 마음에 드는 점을 찾아보세요.",
-      "modern_interpretation": "새로운 자기 모습을 탐색할 수 있다.",
+      "modern_interpretation": "낯설어서 어디에 마음 붙일지 모르는 막연함이 있다.",
       "traditional": null
     },
     {
@@ -2977,7 +2982,9 @@
     },
     {
       "keyword": "경찰",
-      "aliases": [],
+      "aliases": [
+        "112"
+      ],
       "type": "object",
       "category": "인물·관계",
       "tag": "권위",
@@ -3120,7 +3127,7 @@
       "sub_tag": null,
       "card_title": "복잡한 작업대",
       "advice": "큰 작업을 작은 파일처럼 나눠 보세요.",
-      "modern_interpretation": "여러 생각을 체계적으로 정리할 수 있다.",
+      "modern_interpretation": "처리해야 할 일이 화면 너머에 계속 쌓이는 느낌이다.",
       "traditional": null
     },
     {
@@ -3144,7 +3151,7 @@
       "sub_tag": null,
       "card_title": "다시 보는 렌즈",
       "advice": "익숙한 판단을 한 번 질문해 보세요.",
-      "modern_interpretation": "상황을 다르게 볼 계기가 생긴다.",
+      "modern_interpretation": "내가 나를 어떤 모습으로 바라보는지 의식하고 있다.",
       "traditional": null
     },
     {
@@ -3218,7 +3225,7 @@
       "sub_tag": null,
       "card_title": "열 수 있는 문",
       "advice": "지금 가진 자원을 다시 살펴보세요.",
-      "modern_interpretation": "문제를 풀 실마리를 발견할 수 있다.",
+      "modern_interpretation": "다음 단계로 넘어가는 문 앞에서 준비를 확인한다.",
       "traditional": null
     },
     {
@@ -3398,7 +3405,7 @@
       "sub_tag": null,
       "card_title": "흑백의 건반",
       "advice": "오늘의 감정을 음악 한 곡에 담아 보세요.",
-      "modern_interpretation": "여러 감정을 조화롭게 다루고 싶다.",
+      "modern_interpretation": "눌러 둔 감정을 자유롭게 풀어내고 싶은 마음이 있다.",
       "traditional": null
     },
     {
@@ -3569,7 +3576,7 @@
       "sub_tag": "끝맺음",
       "card_title": "날카로운 선택",
       "advice": "급한 감정으로 결정하지 말고 멈춰 보세요.",
-      "modern_interpretation": "무엇을 끊고 지킬지 분명히 할 때다.",
+      "modern_interpretation": "날카로운 일이 불쑥 닥칠까 봐 몸이 움츠러든다.",
       "traditional": null
     },
     {
@@ -4245,7 +4252,8 @@
         "코인 투자",
         "비트코인",
         "가상화폐",
-        "주식"
+        "주식",
+        "주식창"
       ],
       "type": "object",
       "category": "디지털",
@@ -6919,6 +6927,115 @@
       "card_title": "처음 보는 문",
       "advice": "아직 시도하지 않은 가능성 하나를 적어 보세요.",
       "modern_interpretation": "몰랐던 가능성이나 내 안의 새로운 면을 발견하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "축제",
+      "aliases": [
+        "페스티벌",
+        "축제 현장"
+      ],
+      "type": "object",
+      "category": "장소·공간",
+      "tag": "해방",
+      "sub_tag": "연결",
+      "card_title": "불빛 아래의 행렬",
+      "advice": "오늘 나를 들뜨게 하는 일을 하나 해 보세요.",
+      "modern_interpretation": "일상의 틀에서 벗어나 마음껏 어울리고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "놀다",
+      "aliases": [
+        "놀러 가다",
+        "어울려 놀다"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "해방",
+      "sub_tag": "친밀",
+      "card_title": "함께 웃는 시간",
+      "advice": "좋아하는 사람과 가볍게 시간을 보내 보세요.",
+      "modern_interpretation": "부담 없이 즐기며 숨 돌리고 싶은 마음이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "챗봇",
+      "aliases": [
+        "제미나이",
+        "챗GPT",
+        "AI 챗봇"
+      ],
+      "type": "object",
+      "category": "디지털",
+      "tag": "연결",
+      "sub_tag": "미지",
+      "card_title": "화면 속 대답",
+      "advice": "묻고 싶은 것을 한 문장으로 정리해 보세요.",
+      "modern_interpretation": "답을 얻고 싶어 어딘가에 기대어 묻고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "도움을 요청하다",
+      "aliases": [
+        "신고하다",
+        "신고",
+        "도와 달라고 함"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "연결",
+      "sub_tag": "보호",
+      "card_title": "내민 손",
+      "advice": "기댈 수 있는 사람을 한 명 떠올려 보세요.",
+      "modern_interpretation": "혼자 감당하기 어려워 누군가의 도움을 바라고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "도움을 받지 못하다",
+      "aliases": [
+        "답을 못함",
+        "대답이 없음",
+        "도와주지 않음"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "고립",
+      "sub_tag": "통제 상실",
+      "card_title": "닿지 않는 대답",
+      "advice": "도움을 청할 다른 길을 하나 찾아보세요.",
+      "modern_interpretation": "도움을 구했지만 닿지 않아 혼자 남은 느낌이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "몸을 낮추다",
+      "aliases": [
+        "엎드리다",
+        "웅크리다"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "보호",
+      "sub_tag": "통제 상실",
+      "card_title": "낮춘 몸",
+      "advice": "불안할 때 나를 지키는 방법을 하나 정해 두세요.",
+      "modern_interpretation": "위협 앞에서 우선 나를 지키려 하고 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "총격",
+      "aliases": [
+        "발포",
+        "총을 쏘다",
+        "총을 쏨"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "갑작스러운 타격",
+      "sub_tag": "통제 상실",
+      "card_title": "울려 퍼진 총성",
+      "advice": "최근 크게 놀란 일을 떠올리고 천천히 숨을 고르세요.",
+      "modern_interpretation": "예고 없는 위협에 몸과 마음이 크게 놀라 있다.",
       "traditional": null
     }
   ]
