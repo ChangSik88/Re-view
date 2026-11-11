@@ -16,6 +16,7 @@ class DemoRankingItem(BaseModel):
     rank: int
     tag: str  # "나의 태그" 표시는 FE가 /demo/tarot의 tag와 이 값을 맞춰 본다.
     definition: str
+    explanation: str  # 펼침 패널의 태그 풀이. dream_tags.json 원문 그대로다.
 
 
 class DemoRankingResponse(BaseModel):

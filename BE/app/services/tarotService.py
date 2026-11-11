@@ -20,10 +20,12 @@ class TarotService:
         writing = await write_tarot_reading(dream, elements, cards)
 
         # 등록 카드가 있으면 JSON의 제목을 쓰고, 없으면 Gemini가 지은 제목을 쓴다.
+        # 사진은 태그 단위라 카드 제목과 상관없이 항상 있다(BE/scripts/build_tag_images.py가 만든다).
+        image_url = f"/static/tagImages/normal/{tag['image_key']}.webp"
         if cards:
-            card = TarotCard(keyword=cards[0]["keyword"], card_title=cards[0]["card_title"])
+            card = TarotCard(keyword=cards[0]["keyword"], card_title=cards[0]["card_title"], image_url=image_url)
         else:
-            card = TarotCard(keyword=elements[0], card_title=writing.card_title)
+            card = TarotCard(keyword=elements[0], card_title=writing.card_title, image_url=image_url)
 
         return TarotReading(
             card=card,
