@@ -9,6 +9,13 @@ llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.7)
 
 embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
+# 웹 타로 API(/demo/tarot)는 사용량을 나누기 위해 별도 키를 쓴다. 없으면 기본 키를 쓴다.
+text_llm = ChatGoogleGenerativeAI(
+    model="gemini-3.1-flash-lite",
+    temperature=0.7,
+    google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
+)
+
 # 1. 채팅용 프롬프트 (아침 vs 밤)
 chat_parser = PydanticOutputParser(pydantic_object=AIAnalysisResponse)
 night_chat_parser = PydanticOutputParser(pydantic_object=NightAnalysisResponse)

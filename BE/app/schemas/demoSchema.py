@@ -1,25 +1,23 @@
 from pydantic import BaseModel
 from typing import List
 
+from app.schemas.tarotSchema import TarotReading
+
 
 class DemoInterpretRequest(BaseModel):
     dream: str
 
 
-class DemoInterpretResponse(BaseModel):
-    theme: str
-    vibe: str
-    suggested_feelings: List[str]
-    ai_reply: str
+class DemoTarotResponse(TarotReading):
     remaining: int
-    dream_category: str  # "내가 해몽한 꿈" 표시용. 정규화된 값(목록 밖이면 "기타")을 그대로 노출한다.
 
 
 class DemoRankingItem(BaseModel):
     rank: int
-    category: str
+    tag: str  # "나의 태그" 표시는 FE가 /demo/tarot의 tag와 이 값을 맞춰 본다.
+    definition: str
 
 
 class DemoRankingResponse(BaseModel):
     date: str
-    items: List[DemoRankingItem]  # 상한 없음. 그날 1건 이상 집계된 카테고리만 전부 담긴다.
+    items: List[DemoRankingItem]  # 상한 없음. 그날 1건 이상 집계된 태그만 전부 담긴다.
