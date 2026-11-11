@@ -1,0 +1,54 @@
+# main의 WEB/를 GitHub Pages(gh-pages 브랜치)에 배포한다.
+# WEB/app.js와 WEB/ranking.js 첫 줄의 API_BASE_URL(로컬 주소)만 운영 Render 주소로 바꿔 올린다.
+name: Deploy WEB to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "WEB/**"
+      - ".github/workflows/deploy-web.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      API_BASE_URL: https://re-view-uxww.onrender.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          mkdir out
+          cp -R WEB/. out/
+          for f in out/app.js out/ranking.js; do
+            sed -i "1s#^const API_BASE_URL = \".*\";#const API_BASE_URL = \"${API_BASE_URL}\";#" "$f"
+            # 첫 줄 형식이 바뀌어 치환이 안 됐으면 로컬 주소로 배포되지 않게 멈춘다.
+            head -1 "$f" | grep -qF "\"${API_BASE_URL}\"" || { echo "::error::$f 첫 줄의 API_BASE_URL을 바꾸지 못했습니다"; exit 1; }
+          done
+
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+
+      - name: Publish
+        run: |
+          rsync -a --delete --exclude .git out/ site/
+          cd site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git commit -m "deploy: WEB/ ${GITHUB_SHA::7} 배포"
+          git push
