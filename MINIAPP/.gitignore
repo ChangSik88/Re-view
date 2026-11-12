@@ -1,0 +1,3 @@
+*.ait
+node_modules/
+dist/
