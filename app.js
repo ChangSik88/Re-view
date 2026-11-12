@@ -172,7 +172,7 @@ function showExhaustedModal(reason) {
   const message = document.getElementById("exhausted-message");
   message.textContent =
     reason === "global"
-      ? "지금 많은 분들이 이용 중이에요. 내일 다시 찾아 주세요."
+      ? "지금 많은 분들이 이용 중이에요. 잠시 후 다시 시도해 주세요."
       : "오늘 무료 체험을 다 쓰셨어요.";
   document.getElementById("exhausted-modal").hidden = false;
 }
