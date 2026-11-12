@@ -84,7 +84,6 @@ function showRemaining(count) {
 // /demo/tarot 응답을 화면 칸으로 옮긴다. summary는 tag의 한 줄 정의다. 필드가 바뀌면 이 함수만 고친다.
 function readReading(data) {
   return {
-    cardTitle: data.card.card_title,
     imageUrl: data.card.image_url,
     tag: data.tag,
     summary: data.summary,
@@ -135,7 +134,6 @@ function renderDetail(detail) {
 
 async function fillReading(reading) {
   await renderCardArt(reading.imageUrl);
-  document.getElementById("result-card-title").textContent = reading.cardTitle;
   document.getElementById("result-tag").textContent = reading.tag;
   document.getElementById("result-summary").textContent = reading.summary;
   document.getElementById("result-details").replaceChildren(...reading.details.map(renderDetail));
@@ -174,9 +172,17 @@ function showExhaustedModal(reason) {
   const message = document.getElementById("exhausted-message");
   message.textContent =
     reason === "global"
-      ? "지금 많은 분들이 이용 중이에요. 앱에서는 대기 없이 이용할 수 있어요!"
-      : "오늘 무료 체험을 다 쓰셨어요. 앱 설치 시 추가 기회를 무료로 드려요!";
+      ? "지금 많은 분들이 이용 중이에요. 내일 다시 찾아 주세요."
+      : "오늘 무료 체험을 다 쓰셨어요.";
   document.getElementById("exhausted-modal").hidden = false;
+}
+
+// 503은 서버가 AI 실패를 알린 경우, 나머지(연결 끊김, 60초 시간 초과)는 서버가 늦게라도 처리했을 수 있다.
+// 제목은 둘 다 "연결이 원활하지 않아요"로 같고, 횟수 차감 여부는 말하지 않는다.
+function showErrorModal(cause) {
+  document.getElementById("error-message").textContent =
+    cause === "ai" ? "잠시 후 다시 시도해 주세요." : "인터넷 연결을 확인하고 다시 시도해 주세요.";
+  document.getElementById("error-modal").hidden = false;
 }
 
 async function drawCard(dream) {
@@ -213,13 +219,13 @@ async function drawCard(dream) {
     }
     if (!res.ok) {
       backToInput();
-      showInputError("잠시 후 다시 시도해 주세요.");
+      showErrorModal("ai");
       return;
     }
     data = await res.json();
   } catch (e) {
     backToInput();
-    showInputError("잠시 후 다시 시도해 주세요.");
+    showErrorModal("net");
     return;
   } finally {
     submitBtn.disabled = false;
@@ -273,6 +279,13 @@ document.getElementById("retry-btn").addEventListener("click", retry);
 document.getElementById("share-btn").addEventListener("click", share);
 document.getElementById("modal-close").addEventListener("click", () => {
   document.getElementById("exhausted-modal").hidden = true;
+});
+document.getElementById("error-close").addEventListener("click", () => {
+  document.getElementById("error-modal").hidden = true;
+});
+document.getElementById("error-retry").addEventListener("click", () => {
+  document.getElementById("error-modal").hidden = true;
+  drawCard(lastDream);
 });
 
 loadRankingPreview();

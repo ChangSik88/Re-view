@@ -60,7 +60,6 @@
     <p id="stage-caption" class="stage-caption" aria-live="polite"></p>
 
     <article id="result" class="result">
-      <p id="result-card-title" class="result-card-title"></p>
       <h2 id="result-tag" class="result-tag"></h2>
       <p id="result-summary" class="result-summary"></p>
       <div class="result-more">
@@ -76,10 +75,23 @@
 
   <div id="exhausted-modal" class="modal" hidden>
     <div class="modal-content">
-      <p id="exhausted-message">앱에서 더 해보세요! 앱 설치 시 추가 기회를 무료로 드려요.</p>
+      <p id="exhausted-message"></p>
       <div class="modal-actions">
         <button type="button" id="modal-close" class="btn-ghost">닫기</button>
-        <a href="#" id="app-store-link" class="btn-fill">앱 설치하러 가기</a>
+        <!-- 스토어 주소가 생길 때까지 숨긴다. id는 미니앱 빌드가 찾으므로 유지한다. -->
+        <a href="#" id="app-store-link" class="btn-fill" hidden>앱 설치하러 가기</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 해몽 실패(AI 오류, 연결 끊김, 시간 초과). 적은 꿈은 입력칸에 남고, 다시 시도는 같은 꿈으로 요청한다. -->
+  <div id="error-modal" class="modal" hidden>
+    <div class="modal-content" role="alertdialog" aria-labelledby="error-title" aria-describedby="error-message">
+      <h2 id="error-title" class="modal-title">연결이 원활하지 않아요</h2>
+      <p id="error-message"></p>
+      <div class="modal-actions">
+        <button type="button" id="error-close" class="btn-ghost">닫기</button>
+        <button type="button" id="error-retry" class="btn-fill">다시 시도</button>
       </div>
     </div>
   </div>
