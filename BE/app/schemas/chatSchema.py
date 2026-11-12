@@ -56,3 +56,8 @@ class DiaryRequest(BaseModel):
 
 class SessionMarkRequest(BaseModel):
     is_marked: bool
+
+class SessionLocationRequest(BaseModel):
+    latitude: float = Field(ge=-90, le=90)
+    longitude: float = Field(ge=-180, le=180)
+    place_name: Optional[str] = Field(default=None, max_length=100)

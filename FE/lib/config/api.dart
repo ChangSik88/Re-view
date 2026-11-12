@@ -15,6 +15,7 @@ class Api {
   // Auth
   static const String login = '/users/login';
   static const String signup = '/users/signup';
+  static const String deleteMe = '/users/me';
 
   // Chat (chatApi)
   static const String createSession = '/chatting/session';
@@ -28,12 +29,10 @@ class Api {
       '/chatting/session/single/$roomId';
   static String sessionMark(int roomId) => '/chatting/session/$roomId/mark';
   static String deleteSession(int roomId) => '/chatting/session/$roomId';
+  static String sessionLocation(int roomId) =>
+      '/chatting/session/$roomId/location';
 
   // Report
   static const String report = '/report';
   static const String reportAnalyze = '/report/analyze';
-
-  // Store
-  static const String itemList = '/item/list';
-  static String itemDetail(int itemId) => '/item/detail/$itemId';
 }

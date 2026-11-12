@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/report_service.dart';
 import 'design.dart';
+import 'location_pages.dart';
 import 'review_state.dart';
 import 'chat_page.dart';
 import 'emotion_statistics_page.dart';
@@ -30,7 +31,6 @@ class HomePage extends StatelessWidget {
         DateTime(anchor.year, anchor.month, anchor.day - anchor.weekday + 1);
     void calendar() => Navigator.push(
         context, MaterialPageRoute(builder: (_) => const CalendarPage()));
-    void shop() => Navigator.pushNamed(context, '/store');
     return ReviewPage(
         tab: 0,
         horizontalPadding: 20,
@@ -147,24 +147,7 @@ class HomePage extends StatelessWidget {
                     }),
               ])),
           gap,
-          Paper(
-              radius: 20,
-              padding: const EdgeInsets.all(15),
-              child: Column(children: [
-                _previewHeading('Dream Store', shop),
-                gap,
-                InkWell(
-                    onTap: shop,
-                    child: const Row(children: [
-                      Expanded(
-                          child: RecordImage(previewProductImage,
-                              height: 136, radius: 10)),
-                      SizedBox(width: 16),
-                      Expanded(
-                          child: RecordImage(previewProductImage,
-                              height: 136, radius: 10)),
-                    ])),
-              ])),
+          const LocationCard(),
         ]));
   }
 

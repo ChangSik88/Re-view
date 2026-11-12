@@ -22,6 +22,11 @@ class ChatService:
         session = await self.chat_repo.set_marked(room_id, is_marked)
         return session.is_marked
 
+    # 위치 저장: 소유권 검증 후 좌표·장소명 갱신
+    async def set_location(self, user_id: int, room_id: int, latitude: float, longitude: float, place_name: str | None) -> None:
+        await self._get_owned_session(user_id, room_id)
+        await self.chat_repo.set_location(room_id, latitude, longitude, place_name)
+
     # 방 소유권 검증 공통 로직
     async def _get_owned_session(self, user_id: int, room_id: int):
         session = await self.chat_repo.get_session(room_id)
