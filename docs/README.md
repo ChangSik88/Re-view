@@ -11,6 +11,7 @@
 | `40-decisions/` | ADR — "왜 그렇게 정했나" 기록 |
 | `50-specs/` | 기능 설계 문서 (구현 전) |
 | `60-plans/` | 구현 계획 (설계 → 작업 단위 분해) |
+| `70-references/` | 외부 연구, 원전 등 근거 자료 정리 |
 
 ## 현재 문서
 
@@ -35,6 +36,9 @@
 
 **60-plans**
 - 날짜-주제 형식으로 쌓인다. 예: `2026-07-20-favorite-delete-api.md`
+
+**70-references**
+- [dream-psychology.md](70-references/dream-psychology.md): 꿈 심리학 연구 자료, TDQ 55문항과 노드 대응
 
 ## 규칙
 
