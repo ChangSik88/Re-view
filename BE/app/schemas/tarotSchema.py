@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 
 
 class TarotCard(BaseModel):
-    # 등록 키워드가 있으면 JSON 카탈로그의 표준 키워드와 카드 제목,
+    # 대표 노드가 있으면 dream_nodes.json의 키워드와 카드 제목,
     # 없으면 가장 중요한 꿈 요소와 Gemini가 지은 카드 제목.
     keyword: str
     card_title: str
