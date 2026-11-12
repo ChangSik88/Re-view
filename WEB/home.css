@@ -427,14 +427,6 @@ body.home:not(.stage-reveal, .stage-done) .result {
   display: none;
 }
 
-/* 사진에 태그 이름이 그려져 있어 카드 이름(card_title)은 카드 대신 해몽 영역에 둔다. */
-.result-card-title {
-  margin: 0 0 6px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--point);
-}
-
 .result-tag {
   margin: 0;
   font-family: var(--font-serif);
@@ -543,6 +535,17 @@ body.home.stage-reveal .result-more {
   margin: 0 0 22px;
   font-size: 15px;
   line-height: 1.6;
+}
+
+.modal-title {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.modal-title + p {
+  font-size: 14px;
+  color: var(--sub);
 }
 
 .modal-actions {
@@ -680,11 +683,6 @@ body.home.stage-reveal .result-more {
 
   .stage-caption {
     font-size: 12px;
-  }
-
-  .result-card-title {
-    margin-bottom: 4px;
-    font-size: 11.5px;
   }
 
   .result-tag {
