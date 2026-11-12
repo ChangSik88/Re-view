@@ -1,3 +1,4 @@
+import asyncio
 import os
 from datetime import date, datetime, time, timedelta, timezone
 from typing import Dict, Tuple
@@ -11,6 +12,10 @@ from app.schemas.demoSchema import DemoRankingResponse, DemoRankingItem, DemoTar
 # ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
 KST = timezone(timedelta(hours=9))
 VISITOR_DAILY_LIMIT = 5
+# 결과 생성(Gemini 2회와 재시도 포함) 전체의 상한. 평소 약 5초(실측 4.7초)라 12초면 여유가 있고,
+# 재시도로 수십 초씩 늘어지는 경우(실측 47초)는 끊고 횟수를 되돌린다.
+# 웹이 요청을 끊는 60초보다 충분히 짧아 결과를 못 본 사용자의 횟수가 차감되는 일도 없다.
+TAROT_TIMEOUT_SECONDS = 12
 
 
 class DemoRateLimitError(Exception):
@@ -120,10 +125,14 @@ class DemoService:
         counted_date, new_visitor_count = self._reserve(visitor_id)
 
         try:
-            reading = await self.tarot_service.create_reading(dream)
+            # 시간이 넘으면 진행 중인 Gemini 호출을 취소하고 TimeoutError를 낸다. 아래 except가
+            # 다른 실패와 똑같이 횟수를 되돌리고 503으로 바꾼다.
+            reading = await asyncio.wait_for(
+                self.tarot_service.create_reading(dream), timeout=TAROT_TIMEOUT_SECONDS
+            )
         except Exception as e:
             self._release(visitor_id, counted_date)
-            print(f"데모 타로 해몽 처리 실패: {e}")
+            print(f"데모 타로 해몽 처리 실패: {e!r}")
             raise DemoUnavailableError()
 
         await self._count_tag(reading.tag)
