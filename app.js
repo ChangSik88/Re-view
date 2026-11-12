@@ -94,7 +94,7 @@ function readReading(data) {
 
 // 카드 앞면은 태그 사진 한 장이다(card.image_url, API 기준 상대 경로). 뒤집기 전에 다 받아 두고,
 // 없거나 제때 못 받으면 뒷면 문양을 옅게 그린 대체 표시를 쓴다.
-const ART_TIMEOUT_MS = 3000;
+const ART_TIMEOUT_MS = 5000; // 사진이 장당 약 270KB라 느린 모바일 회선을 감안한다.
 
 async function renderCardArt(imageUrl) {
   const art = document.getElementById("card-art");
