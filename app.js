@@ -250,9 +250,12 @@ function submitDream(event) {
   drawCard(dream);
 }
 
-// "다시 해보기"는 B2로 돌아간다(시안 메모 994:374). 같은 꿈으로 다시 요청하므로 횟수가 차감된다.
+// "다시 해보기"는 첫 화면(입력)으로 돌아가 새 꿈을 받는다(시안 메모 994:374). 서버 요청이 없어 횟수도 그대로다.
+// 같은 꿈으로 다시 요청하는 것은 오류 안내 창의 "다시 시도"뿐이다.
 function retry() {
-  drawCard(lastDream);
+  backToInput();
+  document.getElementById("dream-input").value = "";
+  window.scrollTo(0, 0);
 }
 
 async function share() {
