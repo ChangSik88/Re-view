@@ -10,10 +10,13 @@ llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.7)
 embeddings_model = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 # 웹 타로 API(/demo/tarot)는 사용량을 나누기 위해 별도 키를 쓴다. 없으면 기본 키를 쓴다.
+# 시도는 첫 호출을 포함해 2번(max_retries=2)이다. 기본값 6번이면 Gemini 한도 초과(429)도
+# 1, 2, 4, 8초 간격으로 다시 시도해 데모의 12초 상한에 먼저 걸리고, 웹이 한도 초과를 구분하지 못한다.
 text_llm = ChatGoogleGenerativeAI(
     model="gemini-3.1-flash-lite",
     temperature=0.7,
     google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
+    max_retries=2,
 )
 # 타로 태그 고르기 전용. 태그가 웹 랭킹 집계 키라 같은 꿈에는 같은 태그가 나와야 한다.
 # 설명 글은 text_llm(0.7)이 계속 쓴다.
@@ -21,6 +24,7 @@ tag_llm = ChatGoogleGenerativeAI(
     model="gemini-3.1-flash-lite",
     temperature=0,
     google_api_key=os.getenv("GEMINI_TEXT_API_KEY") or os.getenv("GEMINI_API_KEY"),
+    max_retries=2,
 )
 
 # 1. 채팅용 프롬프트 (아침 vs 밤)
