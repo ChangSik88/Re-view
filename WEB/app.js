@@ -168,21 +168,39 @@ function showInputError(message) {
   errorEl.hidden = false;
 }
 
+// 소진 안내 창(닫기만). visitor는 방문자 하루 5회, 그 밖(429 global, 503 ai_daily)은 하루 단위 한도다.
 function showExhaustedModal(reason) {
   const message = document.getElementById("exhausted-message");
   message.textContent =
-    reason === "global"
-      ? "지금 많은 분들이 이용 중이에요. 잠시 후 다시 시도해 주세요."
-      : "오늘 무료 체험을 다 쓰셨어요.";
+    reason === "visitor"
+      ? "오늘 무료 체험을 다 쓰셨어요."
+      : "오늘은 더 이상 해몽할 수 없어요.\n내일 다시 시도해 주세요.";
   document.getElementById("exhausted-modal").hidden = false;
 }
 
-// 503은 서버가 AI 실패를 알린 경우, 나머지(연결 끊김, 60초 시간 초과)는 서버가 늦게라도 처리했을 수 있다.
-// 제목은 둘 다 "연결이 원활하지 않아요"로 같고, 횟수 차감 여부는 말하지 않는다.
+// 오류 안내 창(닫기, 다시 시도). 제목이 경우마다 다르므로 매번 제목과 설명을 함께 넣는다.
+// ai_minute: Gemini 분당 한도. ai: 그 밖의 503(reason 없음 포함). net: 연결 끊김, 60초 시간 초과.
+// 연결 문제는 서버가 늦게라도 처리했을 수 있어 횟수 차감 여부는 말하지 않는다.
+const ERROR_COPY = {
+  ai_minute: ["지금 많은 분들이 이용 중이에요", "잠시 후 다시 시도해 주세요."],
+  ai: ["연결이 원활하지 않아요", "잠시 후 다시 시도해 주세요."],
+  net: ["연결이 원활하지 않아요", "인터넷 연결을 확인하고 다시 시도해 주세요."],
+};
+
 function showErrorModal(cause) {
-  document.getElementById("error-message").textContent =
-    cause === "ai" ? "잠시 후 다시 시도해 주세요." : "인터넷 연결을 확인하고 다시 시도해 주세요.";
+  const [title, message] = ERROR_COPY[cause];
+  document.getElementById("error-title").textContent = title;
+  document.getElementById("error-message").textContent = message;
   document.getElementById("error-modal").hidden = false;
+}
+
+// 503 본문의 reason(ai_minute, ai_daily). 백엔드가 아직 안 붙였거나 본문을 못 읽으면 null.
+async function readFailureReason(res) {
+  try {
+    return (await res.json()).reason ?? null;
+  } catch (e) {
+    return null;
+  }
 }
 
 async function drawCard(dream) {
@@ -218,8 +236,10 @@ async function drawCard(dream) {
       return;
     }
     if (!res.ok) {
+      const reason = await readFailureReason(res);
       backToInput();
-      showErrorModal("ai");
+      if (reason === "ai_daily") showExhaustedModal(reason);
+      else showErrorModal(reason === "ai_minute" ? "ai_minute" : "ai");
       return;
     }
     data = await res.json();
