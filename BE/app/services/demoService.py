@@ -1,7 +1,9 @@
 import asyncio
 import os
 from datetime import date, datetime, time, timedelta, timezone
-from typing import Dict, Tuple
+from typing import Dict, Optional, Tuple
+
+from google.genai.errors import ClientError
 
 from app.repositories.demoRepository import DemoRepository
 from app.core.ai.dreamKeywordHarness import load_dream_tags
@@ -11,7 +13,7 @@ from app.schemas.demoSchema import DemoRankingResponse, DemoRankingItem, DemoTar
 # 한국은 DST가 없어 고정 오프셋으로 충분하다.
 # ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
 KST = timezone(timedelta(hours=9))
-VISITOR_DAILY_LIMIT = 5
+VISITOR_DAILY_LIMIT = 3
 # 결과 생성(Gemini 2회와 재시도 포함) 전체의 상한. 평소 약 5초(실측 4.7초)라 12초면 여유가 있고,
 # 재시도로 수십 초씩 늘어지는 경우(실측 47초)는 끊고 횟수를 되돌린다.
 # 웹이 요청을 끊는 60초보다 충분히 짧아 결과를 못 본 사용자의 횟수가 차감되는 일도 없다.
@@ -24,7 +26,23 @@ class DemoRateLimitError(Exception):
 
 
 class DemoUnavailableError(Exception):
-    pass
+    def __init__(self, reason: Optional[str] = None):
+        self.reason = reason
+
+
+def _gemini_quota_reason(e: Optional[BaseException]) -> Optional[str]:
+    """Gemini 한도 초과(429)면 "ai_daily" 또는 "ai_minute"를, 다른 실패면 None을 돌려준다.
+
+    langchain은 google.genai의 ClientError를 ChatGoogleGenerativeAIError로 감싸 raise from 하므로
+    원래 예외는 __cause__ 사슬에 있다. 분 단위와 하루 단위는 둘 다 429이고, 응답 본문(details)의
+    quotaId(...PerMinute..., ...PerDay...)만 다르다. 본문 형식이 예상과 달라도 다시 시도할 수 있는
+    분 단위 쪽으로 보낸다.
+    """
+    while e is not None:
+        if isinstance(e, ClientError) and e.code == 429:
+            return "ai_daily" if "PerDay" in str(e.details) else "ai_minute"
+        e = e.__cause__
+    return None
 
 
 def _today_kst() -> date:
@@ -133,7 +151,7 @@ class DemoService:
         except Exception as e:
             self._release(visitor_id, counted_date)
             print(f"데모 타로 해몽 처리 실패: {e!r}")
-            raise DemoUnavailableError()
+            raise DemoUnavailableError(_gemini_quota_reason(e))
 
         await self._count_tag(reading.tag)
         return DemoTarotResponse(
