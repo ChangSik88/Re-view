@@ -535,6 +535,7 @@ body.home.stage-reveal .result-more {
   margin: 0 0 22px;
   font-size: 15px;
   line-height: 1.6;
+  white-space: pre-line; /* 하루 한도 문구를 문장마다 줄을 나눈다(Figma 1162:396). */
 }
 
 .modal-title {
