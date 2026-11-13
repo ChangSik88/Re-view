@@ -168,7 +168,7 @@ function showInputError(message) {
   errorEl.hidden = false;
 }
 
-// 소진 안내 창(닫기만). visitor는 방문자 하루 5회, 그 밖(429 global, 503 ai_daily)은 하루 단위 한도다.
+// 소진 안내 창(닫기만). visitor는 방문자 하루 한도(백엔드 VISITOR_DAILY_LIMIT), 그 밖(429 global, 503 ai_daily)은 하루 단위 한도다.
 function showExhaustedModal(reason) {
   const message = document.getElementById("exhausted-message");
   message.textContent =
