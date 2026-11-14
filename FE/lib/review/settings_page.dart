@@ -38,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final state = context.watch<ReviewState>();
     return ReviewPage(
-        tab: 3,
+        tab: 2,
         horizontalPadding: 20,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const SizedBox(height: 16),

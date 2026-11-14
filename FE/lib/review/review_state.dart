@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/session_service.dart';
-import '../services/store_service.dart';
 
 enum Routine { morning, night }
 
@@ -51,41 +50,6 @@ class DiaryRecord {
   String get dateLabel => '${date.year}년 ${date.month}월 ${date.day}일';
 }
 
-class ShopItem {
-  final int id, price;
-  final String name, image, description, category;
-  ShopItem(
-      {required this.id,
-      required this.name,
-      required this.price,
-      this.image = '',
-      this.description = '',
-      this.category = '다이어리'});
-  factory ShopItem.fromJson(Map<String, dynamic> j, [String? category]) =>
-      ShopItem(
-          id: (j['item_id'] as num).toInt(),
-          name: '${j['item_name'] ?? '상품'}',
-          price: (j['price'] as num?)?.toInt() ?? 0,
-          image: '${j['image_url'] ?? ''}',
-          description: '${j['description'] ?? j['headline'] ?? ''}',
-          category: category ?? '${j['category'] ?? '다이어리'}');
-  Map<String, dynamic> toJson() => {
-        'item_id': id,
-        'item_name': name,
-        'price': price,
-        'image_url': image,
-        'description': description,
-        'category': category
-      };
-}
-
-class CartLine {
-  final ShopItem item;
-  int quantity;
-  bool selected;
-  CartLine(this.item, {this.quantity = 1, this.selected = true});
-}
-
 bool sameDate(DateTime a, DateTime b) =>
     a.year == b.year && a.month == b.month && a.day == b.day;
 
@@ -95,10 +59,7 @@ class ReviewState extends ChangeNotifier {
   String? error;
   String account = '';
   List<DiaryRecord> records = [];
-  List<ShopItem> products = [];
-  final List<CartLine> cart = [];
   final Set<int> marking = {};
-  Future<void> _cartWrite = Future.value();
   List<DiaryRecord> forRoutine(Routine routine) =>
       records.where((r) => r.routine == routine).toList()
         ..sort((a, b) => b.date.compareTo(a.date));
@@ -115,8 +76,6 @@ class ReviewState extends ChangeNotifier {
     guest = asGuest;
     preview = demo;
     records = [];
-    products = [];
-    cart.clear();
     error = null;
     final prefs = await SharedPreferences.getInstance();
     account = prefs.getString('user_id') ?? '';
@@ -150,31 +109,9 @@ class ReviewState extends ChangeNotifier {
             tags: const ['피곤', '불안'],
             marked: true));
       }
-      products = [
-        ShopItem(
-            id: -1,
-            name: '드림 다이어리 (날짜별)',
-            price: 8900,
-            image: previewProductImage,
-            description: '꿈의 내용과 감정을 함께 기록하는 나만의 다이어리입니다.'),
-        ShopItem(
-            id: -2,
-            name: '드림 다이어리 (개수별)',
-            price: 8900,
-            image: previewProductImage),
-        ShopItem(id: -3, name: '드림 캐처', price: 12900, category: '악세서리')
-      ];
       notifyListeners();
       return;
     }
-    try {
-      final saved =
-          jsonDecode(prefs.getString('review_cart_$account') ?? '[]') as List;
-      cart.addAll(saved.map((j) => CartLine(
-          ShopItem.fromJson(Map<String, dynamic>.from(j['item'])),
-          quantity: j['quantity'] as int,
-          selected: j['selected'] == true)));
-    } catch (_) {/* A corrupt local cart must not prevent opening the app. */}
     await refresh();
   }
 
@@ -197,17 +134,6 @@ class ReviewState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadProducts() async {
-    if (preview) return;
-    final result =
-        await storeService.getItems().timeout(const Duration(seconds: 30));
-    products = result.entries
-        .expand((entry) => (entry.value as List).map(
-            (j) => ShopItem.fromJson(Map<String, dynamic>.from(j), entry.key)))
-        .toList();
-    notifyListeners();
-  }
-
   Future<void> toggleMarked(DiaryRecord r) async {
     if (!marking.add(r.id)) return;
     notifyListeners();
@@ -222,53 +148,7 @@ class ReviewState extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  int get subtotal => cart
-      .where((l) => l.selected)
-      .fold(0, (sum, l) => sum + l.item.price * l.quantity);
-  int get delivery =>
-      0; // No shipping tariff is available from the current catalog API.
-  int get total => subtotal + delivery;
-  Future<void> addToCart(ShopItem item) async {
-    final index = cart.indexWhere((l) => l.item.id == item.id);
-    if (index < 0) {
-      cart.add(CartLine(item));
-    } else {
-      cart[index].quantity++;
-    }
-    await saveCart();
-  }
-
-  Future<void> removeFromCart(int id) async {
-    cart.removeWhere((l) => l.item.id == id);
-    await saveCart();
-  }
-
-  Future<void> clearCart() async {
-    cart.clear();
-    await saveCart();
-  }
-
-  Future<void> saveCart() {
-    notifyListeners();
-    if (preview) return Future.value();
-    final key = 'review_cart_$account';
-    final snapshot = jsonEncode(cart
-        .map((l) => {
-              'item': l.item.toJson(),
-              'quantity': l.quantity,
-              'selected': l.selected
-            })
-        .toList());
-    _cartWrite = _cartWrite.catchError((_) {}).then((_) async {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(key, snapshot);
-    });
-    return _cartWrite;
-  }
 }
 
 const previewDreamImage =
     'assets/figma/cc6874b1-405f-44fd-adb1-e94e5bb6725a.png';
-// Figma product asset is filled from the downloaded manifest in the UI.
-const previewProductImage = 'figma-product';
