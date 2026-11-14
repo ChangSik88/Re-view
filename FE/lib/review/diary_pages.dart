@@ -6,6 +6,7 @@ import 'location_pages.dart';
 import 'review_state.dart';
 import 'chat_page.dart';
 import 'emotion_statistics_page.dart';
+import 'night_insight.dart';
 
 void openChat(BuildContext context, Routine routine, [DiaryRecord? record]) =>
     Navigator.push(
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
                 icon: const FIcon('bell'))
           ]),
           const SizedBox(height: 20),
-          const Padding(
+          Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child:
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -68,7 +69,10 @@ class HomePage extends StatelessWidget {
                               height: 1.3,
                               color: Color(0xFF585858))),
                     ])),
-                LumiArt(width: 128, height: 108),
+                Padding(
+                    padding: const EdgeInsets.only(right: 14),
+                    child: LumiArt(
+                        routine: routineNow(), width: 128, height: 108)),
               ])),
           const SizedBox(height: 22),
           Padding(
@@ -189,24 +193,27 @@ class PreviewLink extends StatelessWidget {
               ]))));
 }
 
+/// 현재 시각에 맞는 루틴. 05:00~17:59는 모닝, 그 외는 나이트.
+Routine routineNow() {
+  final hour = DateTime.now().hour;
+  return hour >= 5 && hour < 18 ? Routine.morning : Routine.night;
+}
+
+/// 루틴별 루미 마스코트. 모닝은 잠자는 구름, 나이트는 일기 쓰는 구름.
 class LumiArt extends StatelessWidget {
+  final Routine routine;
   final double width, height;
-  const LumiArt({super.key, this.width = 42, this.height = 42});
+  const LumiArt(
+      {super.key, required this.routine, this.width = 64, this.height = 52});
   @override
   Widget build(BuildContext context) => SizedBox(
       width: width,
       height: height,
-      child: ClipRect(
-          child: Stack(children: [
-        Positioned(
-            left: -width * .2264,
-            top: -height * .7772,
-            width: width * 1.41,
-            height: height * 2.51,
-            child: Image.asset(
-                'assets/figma/b73dc5d5-779d-44bf-810e-681b0b65df6f.png',
-                fit: BoxFit.fill)),
-      ])));
+      child: Image.asset(
+          routine == Routine.morning
+              ? 'assets/figma/lumi_morning.png'
+              : 'assets/figma/lumi_night.png',
+          fit: BoxFit.contain));
 }
 
 class DiaryHomePage extends StatefulWidget {
@@ -893,6 +900,10 @@ class _AnalysisPageState extends State<AnalysisPage> {
     final state = context.watch<ReviewState>();
     final r = widget.record;
     final previous = state.previousNight(r);
+    final night = r.routine == Routine.night;
+    final tabLabels =
+        night ? ['하루 리포트', 'AI 감정 인사이트'] : ['AI 요약', '전문 보기', 'AI 감정 인사이트'];
+    final tabIds = night ? [0, 2] : [0, 1, 2];
     return ReviewPage(
         background: canvas,
         child: Column(children: [
@@ -925,10 +936,12 @@ class _AnalysisPageState extends State<AnalysisPage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(r.title,
-                        style: const TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w700)),
-                    gap,
+                    if (!night) ...[
+                      Text(r.title,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.w700)),
+                      gap,
+                    ],
                     Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(12),
@@ -950,37 +963,37 @@ class _AnalysisPageState extends State<AnalysisPage> {
                                 const Icon(Icons.wb_sunny_outlined,
                                     size: 14, color: purple),
                               const SizedBox(width: 6),
-                              Text(r.routine == Routine.morning ? '꿈' : '하루',
+                              Text(r.routine == Routine.morning ? '꿈' : '일상',
                                   style: const TextStyle(fontSize: 12)),
                             ])),
                     gap,
                     Row(
                         children: List.generate(
-                            3,
+                            tabLabels.length,
                             (i) => Expanded(
                                 child: InkWell(
-                                    onTap: () => setState(() => tab = i),
+                                    onTap: () =>
+                                        setState(() => tab = tabIds[i]),
                                     child: Container(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 4),
                                         decoration: BoxDecoration(
-                                            color: tab == i
+                                            color: tab == tabIds[i]
                                                 ? lavender
                                                 : Colors.white,
                                             border: Border.all(
                                                 color: lineColor, width: .7)),
-                                        child: Text(
-                                            ['AI 요약', '전문 보기', 'AI 감정 인사이트'][i],
+                                        child: Text(tabLabels[i],
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 10,
-                                                color: tab == i
+                                                color: tab == tabIds[i]
                                                     ? purple
                                                     : muted))))))),
                     const SizedBox(height: 20),
                     if (tab != 2) ...[
                       RecordImage(r.image, height: 112),
-                      if (tab == 0) ...[
+                      if (tab == 0 && !night) ...[
                         const SizedBox(height: 20),
                         const AnalysisSectionTitle('꿈 핵심 키워드',
                             asset: '519-1448/imgFrame473'),
@@ -991,7 +1004,24 @@ class _AnalysisPageState extends State<AnalysisPage> {
                       const Divider(),
                       gap
                     ],
-                    if (tab == 0) ...[
+                    if (tab == 0 && night) ...[
+                      const Row(children: [
+                        Icon(Icons.psychology_outlined,
+                            color: purple, size: 18),
+                        SizedBox(width: 6),
+                        Text('하루 리포트 · 저장 완료',
+                            style: TextStyle(fontSize: 11, color: purple)),
+                      ]),
+                      gap,
+                      NightReport(r.content),
+                      gap,
+                      const Divider(),
+                      gap,
+                      PrimaryButton('대화 이어서하기',
+                          height: 40,
+                          radius: 20,
+                          onPressed: () => openChat(context, r.routine, r)),
+                    ] else if (tab == 0) ...[
                       AnalysisSectionTitle(state.preview ? 'AI 해석' : 'AI 요약',
                           asset: '519-1448/imgFrame474'),
                       gap,
@@ -1065,13 +1095,16 @@ class _AnalysisPageState extends State<AnalysisPage> {
                         ],
                         const Divider(),
                         gap,
-                      ],
+                      ] else
+                        NightInsight(record: r, records: state.records),
                       const Text('AI 감정 리포트',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600)),
                       gap,
                       if (busy)
                         const Center(child: CircularProgressIndicator())
+                      else if (state.preview && night)
+                        const InfoBox('하루를 꾸준히 기록하면 감정 리포트가 쌓여요. (예시)')
                       else if (state.preview)
                         const InfoBox(
                             '어제 하루의 ‘불안’이 오늘 꿈에서도 이어졌어요.\n하지만 ‘기대’와 ‘설렘’이 함께 나타나며 새로운 시작에 대한 긍정적인 에너지도 느껴져요. (예시)')

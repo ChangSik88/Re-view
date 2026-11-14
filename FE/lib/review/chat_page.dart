@@ -392,7 +392,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                       : MainAxisAlignment.start,
                                   children: [
                                     if (!m.me) ...[
-                                      const LumiArt(),
+                                      LumiArt(routine: widget.routine),
                                       const SizedBox(width: 8)
                                     ],
                                     Flexible(
@@ -445,7 +445,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const LumiArt(),
+                                    LumiArt(routine: widget.routine),
                                     const SizedBox(width: 8),
                                     Expanded(
                                         child: Paper(
