@@ -13,6 +13,9 @@ class ChatSessionData(BaseModel):
     updated_at: Optional[datetime]
     routine_type: Optional[str]
     image_url: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    place_name: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -31,6 +34,9 @@ class SingleSessionData(BaseModel):
     updated_at: Optional[datetime]
     image_url: Optional[str] = None
     is_marked: Optional[bool] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    place_name: Optional[str] = None
     class Config:
         from_attributes = True
 

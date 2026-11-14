@@ -25,7 +25,10 @@ class ChatSessionService:
                 "routine_type": session.routine_type,
                 "is_marked": session.is_marked,
                 "updated_at": str(session.updated_at),
-                "image_url": extracted_url  # 추출된 진짜 주소(또는 None)가 프론트로 전달됨
+                "image_url": extracted_url,  # 추출된 진짜 주소(또는 None)가 프론트로 전달됨
+                "latitude": session.latitude,
+                "longitude": session.longitude,
+                "place_name": session.place_name
             })
         return processed_sessions
     
@@ -45,7 +48,10 @@ class ChatSessionService:
                 "created_at":session.created_at,
                 "updated_at": str(session.updated_at),
                 "image_url": extracted_url,
-                "is_marked": session.is_marked
+                "is_marked": session.is_marked,
+                "latitude": session.latitude,
+                "longitude": session.longitude,
+                "place_name": session.place_name
             }
     
     

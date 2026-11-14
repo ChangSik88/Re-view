@@ -1,5 +1,6 @@
-from fastapi import APIRouter,HTTPException
+from fastapi import APIRouter,Depends,HTTPException
 from app.services.userServices import UserService
+from app.api.dependencies import get_current_user_id
 from app.schemas.userSchema import UserCreateBody,UserResponse,LoginRequest # Schema 폴더에 정의할 모델
 
 
@@ -26,3 +27,8 @@ async def login_user(request: LoginRequest):
         "access_token": token,
         "token_type": "bearer"
     }
+
+@router.delete("/me")
+async def delete_me(user_id: int = Depends(get_current_user_id)):
+    await user_service.delete_account(user_id)
+    return {"message": "회원 탈퇴 완료"}

@@ -73,6 +73,13 @@ class ChatRepository:
             data={"is_marked": is_marked}
         )
 
+    # 위치 저장
+    async def set_location(self, room_id: int, latitude: float, longitude: float, place_name: str | None):
+        return await db.chatroom.update(
+            where={"room_id": room_id},
+            data={"latitude": latitude, "longitude": longitude, "place_name": place_name}
+        )
+
     # 세션 삭제: FK가 NoAction이라 자식(메시지/이미지)을 먼저 지워야 부모 삭제가 가능하다.
     # 파일 정리는 서비스 계층 책임이므로, 지우기 전에 이미지 URL을 먼저 확보해 반환한다.
     async def delete_session(self, room_id: int) -> list[str]:
