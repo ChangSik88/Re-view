@@ -249,6 +249,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
+          // --- 홈 화면으로 나가는 버튼 ---
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                tooltip: '홈으로',
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (_) => false),
+              ),
+            ),
+          ),
         ],
       ),
     );

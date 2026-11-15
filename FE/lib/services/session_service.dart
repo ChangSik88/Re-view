@@ -25,6 +25,16 @@ class SessionService {
     return data['is_marked'] as bool;
   }
 
+  /// 기록에 현재 위치(좌표·장소명)를 저장한다.
+  Future<void> setLocation(
+      int roomId, double latitude, double longitude, String? placeName) async {
+    await apiClient.patch(Api.sessionLocation(roomId), body: {
+      'latitude': latitude,
+      'longitude': longitude,
+      'place_name': placeName
+    });
+  }
+
   /// 세션(꿈 일기)을 삭제한다.
   Future<void> deleteSession(int roomId) async {
     await apiClient.delete(Api.deleteSession(roomId));

@@ -6,8 +6,8 @@ import 'package:frontend/review/review_state.dart';
 import 'package:frontend/review/design.dart';
 import 'package:frontend/review/diary_pages.dart';
 import 'package:frontend/review/chat_page.dart';
-import 'package:frontend/review/store_pages.dart';
 import 'package:frontend/review/settings_page.dart';
+import 'package:frontend/review/location_pages.dart';
 import 'package:frontend/review/emotion_statistics_page.dart';
 
 void main() {
@@ -72,27 +72,6 @@ void main() {
             .every((r) => r.routine == Routine.night),
         isTrue);
   });
-  test('Cart removal, clear and selected totals survive persistence', () async {
-    final state = ReviewState()..account = 'test';
-    final a = ShopItem(id: 1, name: 'A', price: 8900);
-    final b = ShopItem(id: 2, name: 'B', price: 12900);
-    await state.addToCart(a);
-    await state.addToCart(a);
-    await state.addToCart(b);
-    expect(state.total, 30700);
-    state.cart.last.selected = false;
-    await state.saveCart();
-    expect(state.total, 17800);
-    await state.removeFromCart(1);
-    expect(state.cart.length, 1);
-    expect(state.total, 0);
-    final prefs = await SharedPreferences.getInstance();
-    expect(prefs.getString('review_cart_test'), contains('B'));
-    expect(prefs.getString('review_cart_test'), isNot(contains('"A"')));
-    await state.clearCart();
-    expect(state.total, 0);
-    expect(prefs.getString('review_cart_test'), '[]');
-  });
   testWidgets(
       'Night bookmark calendar toggles and routine dropdown keep routine',
       (tester) async {
@@ -151,18 +130,20 @@ void main() {
     expect(find.text('전체 4'), findsOneWidget);
     expect(find.text(record.title), findsNothing);
   });
-  testWidgets('Cart item X and clear remove visible products', (tester) async {
+  testWidgets('Location map lists places and opens a place report',
+      (tester) async {
     final state = ReviewState();
     await state.start(demo: true);
-    await state.addToCart(state.products[0]);
-    await state.addToCart(state.products[2]);
-    await mount(tester, state, const CartPage());
-    await tester.tap(find.byTooltip('${state.products[0].name} 삭제'));
+    await mount(tester, state, const LocationMapPage());
+    expect(find.text('내가 머문 장소'), findsOneWidget);
+    expect(find.text('3개 장소에 담긴 3개의 하루'), findsOneWidget);
+    await tester.tap(find.text('고잔동 카페'));
     await tester.pumpAndSettle();
-    expect(find.text(state.products[0].name), findsNothing);
-    await tester.tap(find.text('전체 삭제'));
+    expect(find.text('이 장소에서 남긴 기록 1개'), findsOneWidget);
+    await tester.tap(find.text('리포트 보기 ›'));
     await tester.pumpAndSettle();
-    expect(find.text('장바구니가 비어 있어요.'), findsOneWidget);
+    expect(find.byType(PlaceReportPage), findsOneWidget);
+    expect(find.text('오늘 있었던 일'), findsOneWidget);
   });
   testWidgets('All pages fit a 360px phone and respect camera inset',
       (tester) async {
@@ -176,8 +157,9 @@ void main() {
       const CalendarPage(),
       const SearchPage(routine: Routine.night),
       AnalysisPage(record: record),
-      const ShopPage(),
-      ProductPage(item: state.products.first),
+      const LocationMapPage(),
+      PlaceReportPage(
+          record: state.records.firstWhere((r) => r.hasLocation)),
       const SettingsPage()
     ]) {
       await mount(tester, state, page);

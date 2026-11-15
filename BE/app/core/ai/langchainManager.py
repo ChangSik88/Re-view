@@ -99,11 +99,17 @@ dream_category는 나이트루틴에서 항상 '기타'입니다. 꿈 해몽을 
 async def analyze_dream_chat(history: str, new_message: str, routine_type: str) -> AIAnalysisResponse:
     # 넘어온 채팅방의 루틴 타입에 따라 시스템 대본을 갈아 끼웁니다.
     system_instruction = MORNING_CHAT_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_CHAT_PROMPT
-    system_instruction += """
+    is_morning = (routine_type or "").upper() == "MORNING"
+    interpretation_rule = (
+        "인사나 일상 대화에 꿈 해몽을 억지로 붙이지 마세요. 해몽을 할 때는 전통적 해석임을 밝히고 미래를 확정하거나 금전적 행동을 권하지 마세요."
+        if is_morning
+        else "하루 이야기에 해몽이나 꿈 해석을 붙이지 마세요. 미래를 확정하거나 금전적 행동을 권하지 마세요."
+    )
+    system_instruction += f"""
 
 [자유 대화 규칙 — 앞선 지침과 충돌하면 이 규칙을 우선합니다]
 사용자와 실제로 대화하는 루미로서 최신 메시지의 질문이나 요청에 먼저 답하세요.
-인사나 일상 대화에 꿈 해몽을 억지로 붙이지 마세요. 해몽을 할 때는 전통적 해석임을 밝히고 미래를 확정하거나 금전적 행동을 권하지 마세요.
+{interpretation_rule}
 이전 대화에서 이미 답한 질문을 반복하지 말고, 각 루틴의 분량 규칙에 맞춰 자연스러운 한국어 존댓말로 답하세요.
 이야기 정리에 필요한 미확인 정보가 있을 때만 한 번에 하나를 자연스럽게 물어보세요. 사용자가 질문을 원하지 않거나 건너뛴 항목은 묻지 마세요.
 story_details에는 대화에서 사용자가 직접 말한 사실만 누적 정리하세요. 모르는 값은 빈 문자열이나 빈 목록으로 두고 추측하지 마세요.
@@ -171,12 +177,25 @@ USER 발언에서 확인된 사건·장소·등장인물·감정만 기록하세
 신체 증상의 원인, 사건의 해결, 긍정적인 결말, 사용자의 다짐을 지어내지 마세요.
 짧게 이야기했다면 짧게 기록해도 됩니다. 분량을 채우기 위해 경험을 추가하지 마세요.
 
+[content 작성 형식 — 반드시 지킬 것]
+content는 아래 3개 소제목을 이 순서, 이 이름 그대로 한 줄씩 쓰고, 각 소제목 다음 줄에 내용을 쓰세요. 소제목 사이에는 빈 줄 하나를 두세요.
+오늘 있었던 일
+(USER가 말한 사건을 1~2문장으로)
+
+주요 감정
+(USER가 표현한 감정을 1~2문장으로. 말하지 않았다면 "따로 남기지 않았어요."라고만 쓰세요)
+
+하루 돌아보기
+(오늘을 차분히 정리하는 1~2문장. 사실에 없는 다짐·결말은 쓰지 마세요)
+어조는 부드러운 해요체("~했어요", "~괜찮아요")로 통일하고, 소제목 외의 제목·기호·마크다운은 쓰지 마세요.
+
 [추가 지침 - 이미지 생성용]
-- 이 꿈 일기의 분위기와 핵심 장면을 가장 잘 나타내는 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
-- 화풍은 반드시 'A clumsy and cute drawing by a 5-year-old child, using crayons and soft pastel colors, messy lines, naive art style'을 기본으로 하세요.
-- 절대로 정교하거나 입체적인(3D, cinematic) 묘사를 넣지 마세요. 마치 5~7살 아이가 스케치북에 크레파스로 삐뚤빼뚤 서툴게, 하지만 상상력 넘치게 그린 듯한 순수한 느낌이 나도록 꿈의 핵심 소재를 영어로 묘사하세요.
+- 그날의 분위기와 핵심 장면을 담은 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
+- 화풍은 '실사(photorealistic) 타로 카드 일러스트'입니다. 반드시 'A photorealistic tarot card illustration, ornate gold border, mystical moonlit atmosphere, symbolic composition, soft cinematic lighting, highly detailed'를 기본으로 하세요.
+- 그날의 핵심 장면이나 소재(장소, 사물, 분위기)를 타로 카드의 상징적인 한 장면처럼 영어로 묘사하세요. 카드 윗부분이나 아랫부분에 글자·숫자를 넣지 마세요(no text, no letters).
+- 사용자가 말하지 않은 사건이나 사람을 넣지 마세요.
 - 반드시 영어로만 작성하세요.
-- 16:9 비율정도의 이미지가 생성되게 하세요.
+- 세로형 타로 카드 비율(2:3)로 생성되게 하세요.
 
 반드시 아래 JSON 형식으로만 답하세요.
 {format_instructions}"""

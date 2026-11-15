@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest,SessionMarkRequest
+from app.schemas.chatSchema import ChatMessageRequest, ChatMessageResponse, DiaryGenerationResponse, DiaryRequest,SessionCreateRequest,SessionMarkRequest,SessionLocationRequest
 from app.services.chatService import ChatService
 from app.api.dependencies import get_current_user_id
 
@@ -42,6 +42,17 @@ async def set_session_mark(session_id: int, request: SessionMarkRequest, user_id
     try:
         is_marked = await chat_service.set_marked(user_id, session_id, request.is_marked)
         return {"message": "즐겨찾기 상태 변경 완료", "room_id": session_id, "is_marked": is_marked}
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except PermissionError as e:
+        raise HTTPException(status_code=403, detail=str(e))
+
+# 위치 저장: 기록 생성 후 현재 GPS 좌표와 장소명을 붙인다
+@router.patch("/session/{session_id}/location")
+async def set_session_location(session_id: int, request: SessionLocationRequest, user_id: int = Depends(get_current_user_id)):
+    try:
+        await chat_service.set_location(user_id, session_id, request.latitude, request.longitude, request.place_name)
+        return {"message": "위치 저장 완료", "room_id": session_id}
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except PermissionError as e:

@@ -13,6 +13,11 @@ class AuthService {
     return data['access_token'] as String?;
   }
 
+  /// 계정과 모든 기록을 삭제한다. 되돌릴 수 없다.
+  Future<void> deleteAccount() async {
+    await apiClient.delete(Api.deleteMe);
+  }
+
   Future<void> signup({
     required String id,
     required String password,

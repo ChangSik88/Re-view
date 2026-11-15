@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/chat_service.dart';
+import '../services/location_service.dart';
+import '../services/session_service.dart';
 import 'design.dart';
 import 'diary_pages.dart';
 import 'review_state.dart';
@@ -255,6 +257,9 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
             [emotionText, ...feelings]
                 .where((s) => s.trim().isNotEmpty)
                 .toList());
+        if (widget.routine == Routine.night) {
+          await _attachLocation(session, confirmed.place);
+        }
         await state.refresh();
         generated = state.records.where((r) => r.id == session).firstOrNull;
         if (generated == null) throw StateError('생성 결과 조회 실패');
@@ -270,6 +275,16 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
     } finally {
       if (mounted) setState(() => busy = false);
     }
+  }
+
+  /// 나이트루틴 기록에 현재 위치를 붙인다. 권한 거부·실패해도 기록은 그대로 둔다.
+  Future<void> _attachLocation(int session, String place) async {
+    final position = await currentPosition();
+    if (position == null) return;
+    try {
+      await sessionService.setLocation(session, position.latitude,
+          position.longitude, place.trim().isEmpty ? null : place.trim());
+    } catch (_) {/* 위치 저장 실패는 기록 생성 결과에 영향을 주지 않는다. */}
   }
 
   Future<void> _editText(
@@ -377,7 +392,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                                       : MainAxisAlignment.start,
                                   children: [
                                     if (!m.me) ...[
-                                      const LumiArt(),
+                                      LumiArt(routine: widget.routine),
                                       const SizedBox(width: 8)
                                     ],
                                     Flexible(
@@ -430,7 +445,7 @@ class _ReviewChatPageState extends State<ReviewChatPage> {
                               child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const LumiArt(),
+                                    LumiArt(routine: widget.routine),
                                     const SizedBox(width: 8),
                                     Expanded(
                                         child: Paper(

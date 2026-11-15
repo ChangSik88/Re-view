@@ -22,6 +22,11 @@ class ChatService:
         session = await self.chat_repo.set_marked(room_id, is_marked)
         return session.is_marked
 
+    # 위치 저장: 소유권 검증 후 좌표·장소명 갱신
+    async def set_location(self, user_id: int, room_id: int, latitude: float, longitude: float, place_name: str | None) -> None:
+        await self._get_owned_session(user_id, room_id)
+        await self.chat_repo.set_location(room_id, latitude, longitude, place_name)
+
     # 방 소유권 검증 공통 로직
     async def _get_owned_session(self, user_id: int, room_id: int):
         session = await self.chat_repo.get_session(room_id)
@@ -96,7 +101,8 @@ class ChatService:
             vector=vector_data
         )
 
-        image_url = await self._generate_and_save_image(room_id, diary_result.image_prompt)
+        image_url = await self._generate_and_save_image(
+            room_id, diary_result.image_prompt, routine_type)
 
         return {
         "title": diary_result.title,
@@ -105,10 +111,14 @@ class ChatService:
         "image_url": image_url
     }
     
-    async def _generate_and_save_image(self, room_id: int, image_prompt: str):
+    async def _generate_and_save_image(self, room_id: int, image_prompt: str, routine_type: str):
         try:
             # AI 이미지 생성
-            image = await self.image_manager.generate_flux_image(image_prompt)
+            # 나이트루틴은 Gemini, 모닝루틴은 기존 FLUX로 생성
+            if (routine_type or "").upper() == "NIGHT":
+                image = await self.image_manager.generate_gemini_image(image_prompt)
+            else:
+                image = await self.image_manager.generate_flux_image(image_prompt)
 
             # 오브젝트 스토리지 업로드 후 공개 URL 확보
             image_url = await storage.upload_image(image)

@@ -1,5 +1,6 @@
 from app.repositories.userRepositories import UserRepository
 from fastapi import HTTPException
+from app.core import storage
 from app.core.security import create_access_token, hash_password, verify_password
 class UserService:
     def __init__(self):
@@ -40,3 +41,12 @@ class UserService:
         # 3. 인증 성공 시, 해당 유저의 DB ID번호(PK)를 넣어 토큰 생성
         token = create_access_token(user_id=user.user_id)
         return token
+
+    # 회원 탈퇴: 모든 기록·리포트·계정을 하드 삭제하고, 성공하면 이미지 파일도 정리한다.
+    async def delete_account(self, user_id: int) -> None:
+        image_urls = await self.user_repo.delete_user_with_data(user_id)
+        for url in image_urls:
+            try:
+                await storage.delete_image(url)
+            except Exception as e:
+                print(f"이미지 파일 삭제 중 오류 발생: {e}")

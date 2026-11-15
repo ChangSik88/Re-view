@@ -6,6 +6,8 @@
     <string>말한 내용을 채팅 입력칸에 작성하기 위해 마이크를 사용합니다.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
     <string>음성으로 말한 꿈과 하루 이야기를 글자로 입력합니다.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>나이트루틴 기록에 현재 위치를 남겨 장소별로 모아보기 위해 위치를 사용합니다.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>

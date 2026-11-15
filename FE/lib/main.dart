@@ -7,7 +7,6 @@ import 'review/design.dart';
 import 'review/review_state.dart';
 import 'review/diary_pages.dart';
 import 'review/chat_page.dart';
-import 'review/store_pages.dart';
 import 'review/settings_page.dart';
 
 void main() => runApp(const MyApp());
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
           '/signup': (_) => SignUpScreen(),
           '/home': (_) => const HomePage(),
           '/dream_list': (_) => const DiaryHomePage(),
-          '/store': (_) => const ShopPage(),
           '/settings': (_) => const SettingsPage(),
           '/notifications': (_) =>
               const InformationPage(title: '알림', text: '아직 도착한 알림이 없어요.'),
