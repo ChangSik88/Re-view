@@ -31,6 +31,8 @@ class AIAnalysisResponse(BaseModel):
     dream_category: str = Field(default="기타", description="아래 목록 중 정확히 하나: 쫓김, 이빨, 똥, 돼지, 조상님, 뱀, 불, 물, 높은곳, 피, 시험, 죽음, 기타")
 
 class NightAnalysisResponse(AIAnalysisResponse):
+    # 부모의 해몽 카테고리 목록이 나이트 출력 형식 안내에 섞이지 않도록 덮어쓴다.
+    dream_category: str = Field(default="기타", description="나이트루틴에서는 항상 '기타'")
     theme: str = Field(default="", description="사용자가 말한 하루 사건의 주제. 불명확하면 빈 문자열")
     vibe: str = Field(default="", description="사용자가 직접 표현한 분위기. 불명확하면 빈 문자열")
     suggested_feelings: List[str] = Field(default_factory=list, description="사용자가 표현한 감정만. 없으면 빈 목록이며 개수를 채우지 않음")

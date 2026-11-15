@@ -95,11 +95,17 @@ dream_category는 나이트루틴에서 항상 '기타'입니다. 꿈 해몽을 
 async def analyze_dream_chat(history: str, new_message: str, routine_type: str) -> AIAnalysisResponse:
     # 넘어온 채팅방의 루틴 타입에 따라 시스템 대본을 갈아 끼웁니다.
     system_instruction = MORNING_CHAT_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_CHAT_PROMPT
-    system_instruction += """
+    is_morning = (routine_type or "").upper() == "MORNING"
+    interpretation_rule = (
+        "인사나 일상 대화에 꿈 해몽을 억지로 붙이지 마세요. 해몽을 할 때는 전통적 해석임을 밝히고 미래를 확정하거나 금전적 행동을 권하지 마세요."
+        if is_morning
+        else "하루 이야기에 해몽이나 꿈 해석을 붙이지 마세요. 미래를 확정하거나 금전적 행동을 권하지 마세요."
+    )
+    system_instruction += f"""
 
 [자유 대화 규칙 — 앞선 지침과 충돌하면 이 규칙을 우선합니다]
 사용자와 실제로 대화하는 루미로서 최신 메시지의 질문이나 요청에 먼저 답하세요.
-인사나 일상 대화에 꿈 해몽을 억지로 붙이지 마세요. 해몽을 할 때는 전통적 해석임을 밝히고 미래를 확정하거나 금전적 행동을 권하지 마세요.
+{interpretation_rule}
 이전 대화에서 이미 답한 질문을 반복하지 말고, 각 루틴의 분량 규칙에 맞춰 자연스러운 한국어 존댓말로 답하세요.
 이야기 정리에 필요한 미확인 정보가 있을 때만 한 번에 하나를 자연스럽게 물어보세요. 사용자가 질문을 원하지 않거나 건너뛴 항목은 묻지 마세요.
 story_details에는 대화에서 사용자가 직접 말한 사실만 누적 정리하세요. 모르는 값은 빈 문자열이나 빈 목록으로 두고 추측하지 마세요.

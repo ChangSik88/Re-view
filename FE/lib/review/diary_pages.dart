@@ -992,7 +992,15 @@ class _AnalysisPageState extends State<AnalysisPage> {
                                                     : muted))))))),
                     const SizedBox(height: 20),
                     if (tab != 2) ...[
-                      RecordImage(r.image, height: 112),
+                      if (night)
+                        Center(
+                            child: SizedBox(
+                                width: 210,
+                                child: AspectRatio(
+                                    aspectRatio: 2 / 3,
+                                    child: RecordImage(r.image, radius: 12))))
+                      else
+                        RecordImage(r.image, height: 112),
                       if (tab == 0 && !night) ...[
                         const SizedBox(height: 20),
                         const AnalysisSectionTitle('꿈 핵심 키워드',
