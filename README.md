@@ -69,6 +69,7 @@ flutter pub get
 |---|---|---|
 | `DATABASE_URL` | PostgreSQL 접속 문자열 | 로컬 개발과 배포에서 값이 다르다 (아래 참고) |
 | `GEMINI_API_KEY` | 채팅 해몽·일기 생성·임베딩 (langchain이 자동 인식) | Google AI Studio 발급 키 |
+| `GEMINI_TEXT_API_KEY` | 웹 타로 해몽 `/demo/tarot` 전용 (선택, 비우면 `GEMINI_API_KEY` 사용) | 별도 Google 프로젝트의 AI Studio 발급 키 |
 | `FLUX_API_KEY` | 꿈 이미지 생성 | FLUX 발급 키 |
 | `JWT_SECRET_KEY` | 액세스/리프레시 토큰 서명 | 임의의 긴 난수 문자열 |
 | `S3_ENDPOINT` | 스토리지 S3 엔드포인트 | `https://<project_ref>.storage.supabase.co/storage/v1/s3` |
@@ -166,7 +167,7 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 
 빌드 단계의 `prisma migrate deploy`가 커밋된 마이그레이션 파일을 운영 DB에 적용한다. 즉 **스키마 변경은 배포로 반영되며, 사람이 운영 DB에 직접 명령을 날릴 일이 없다.** 마이그레이션 파일을 만드는 쪽은 로컬이다 — 아래 "DB 마이그레이션 파이프라인" 참고.
 
-환경 변수 6개(`DATABASE_URL`, `GEMINI_API_KEY`, `FLUX_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`, `WEB_ORIGIN`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
+환경 변수 7개(`DATABASE_URL`, `GEMINI_API_KEY`, `GEMINI_TEXT_API_KEY`, `FLUX_API_KEY`, `JWT_SECRET_KEY`, `SERVER_BASE_URL`, `WEB_ORIGIN`)는 `sync: false`라 대시보드에서 직접 입력해야 한다. 첫 배포 후 실제 서비스 URL을 확인해 `SERVER_BASE_URL`을 갱신하고 재배포한다.
 
 `WEB_ORIGIN`은 홍보 웹페이지(`WEB/`)의 배포 출처다(쉼표로 여러 개 가능). **비워두면 `allow_origins=[]`가 되어 브라우저에서 오는 데모 API 호출이 전부 차단된다.** 정적 호스팅 업체가 확정되면 그 URL을 넣어야 데모가 동작한다. `*`는 쓰지 않는다 — 아무 사이트나 데모를 임베드해 Gemini 쿼터를 태울 수 있다.
 
@@ -189,21 +190,35 @@ Render 대시보드 → **New → Blueprint** → 이 레포 선택. 루트의 `
 
 ## JSON 기반 꿈 키워드 해몽
 
-웹 데모의 해몽 API에 300개 꿈 키워드가 담긴 JSON 카탈로그를 연결했습니다. AI가 꿈에서 키워드를 추출하고, 백엔드가 해당 키워드의 해석과 조언을 조회해 최종 해몽을 생성합니다.
+웹 타로 해몽 API(`/demo/tarot`)에 해몽 노드 548개(대상, 행동), 조합표, 해몽 태그 31개를 연결했습니다. AI는 꿈의 장면마다 대상과 행동을 목록에서 고르기만 하고, 태그와 대표 카드는 백엔드가 `card_rule`대로 정합니다.
 
 ### 처리 흐름
 
-1. 사용자가 입력한 꿈에서 Gemini가 등록된 핵심 키워드를 최대 2개 추출합니다.
-2. 백엔드가 JSON 카탈로그에서 키워드와 정확히 일치하는 항목을 조회합니다.
-3. Gemini가 조회된 해석과 조언을 꿈의 장면·행동·관계에 맞춰 하나의 자연스러운 해몽으로 통합합니다.
-4. 일치하는 키워드가 없으면 Gemini가 생성한 일반 해몽을 반환합니다.
+1. Gemini(온도 0)가 꿈을 장면 1~5개로 나누고, 장면마다 대상 목록과 행동 목록에서 하나씩 고릅니다. 대체 태그도 1개 고릅니다.
+2. 백엔드가 장면마다 노드를 찾습니다. 조합표, 행동, 대상 순으로 보고, 범용 동사(`generic`)는 대상이 있으면 대상에 양보합니다.
+3. 백엔드가 `dream_tags.json`의 `card_rule`(tier, 빈도, 동률 규칙)로 대표 케이스를 고르고, 그 노드의 태그와 카드 제목을 씁니다. 장면이 하나도 안 맞으면 대체 태그를 쓰고, 그것도 목록 밖이면 실패(503) 처리합니다.
+4. Gemini가 노드의 현대 해석과 조언을 근거로 요소별 설명을 씁니다(최대 3개, 대표 장면이 먼저). 한 줄 설명은 태그 정의를 그대로 씁니다.
+5. 고른 태그를 그날 웹 랭킹에 1건 집계합니다.
 
 ### 구성 파일
 
 | 파일 | 역할 |
 |---|---|
-| `BE/app/data/dream_tarot.example.json` | 300개 키워드의 분류, 카드 제목, 길흉 지수, 해석, 조언 저장 |
-| `BE/app/core/ai/dreamKeywordHarness.py` | 키워드 추출, JSON 조회·검증, 해몽 통합 |
-| `BE/app/services/demoService.py` | `/demo/interpret` API 처리 흐름에 연결 |
+| `BE/app/data/dream_nodes.json` | 해몽 노드 548개(대상 368, 행동 180). 별칭, 태그, 카드 제목, 현대 해석, 조언, 범용 동사 표시 |
+| `BE/app/data/dream_combos.json` | 대상 + 행동 조합 18개. 같은 행동이 대상에 따라 뜻이 바뀌는 경우(예: 이빨 + 빠지다) |
+| `BE/app/data/dream_tags.json` | 해몽 태그 31개의 이름, 정의, 풀이, tier, 대표 카드 규칙(`card_rule`). 카드 태그와 웹 랭킹 집계 단위 |
+| `BE/app/static/tagImages/normal/` | 태그별 카드 사진(`<image_key>.webp`, 1024x1536). `/demo/tarot`의 `card.image_url`이 가리킨다 |
+| `BE/scripts/build_tag_images.py` | 카드 사진 원본 폴더를 위 WebP로 변환. 태그와 파일이 어긋나면 실패 |
+| `BE/app/core/ai/dreamKeywordHarness.py` | 장면 추출, 노드와 조합표 로딩과 검증, 대표 카드 선택(`resolve_case`, `pick_main_case`), 설명 생성 |
+| `BE/app/services/tarotService.py` | 꿈 문장으로 타로 카드 결과(카드, 태그, 한 줄 설명, 요소별 설명) 생성. 저장하지 않음 |
+| `BE/app/services/demoService.py` | `/demo/tarot`의 횟수 제한과 태그 랭킹 집계 |
 
-JSON 카탈로그는 최초 사용 시 읽어 메모리에 캐시합니다. 로딩 과정에서 필수 필드, 키워드 중복, 길흉 지수 합계가 100인지 검증합니다
+태그, 노드, 조합표는 최초 사용 시 읽어 메모리에 캐시합니다. 로딩 과정에서 노드의 type(대상, 행동), 태그가 31개 안에 있는지, 카드 제목 유무, 키워드와 별칭 중복, 조합표의 대상, 행동, 결과 노드가 실제 노드와 맞는지 검증합니다
+
+### 태그 카드 사진 갱신
+
+사진은 git으로 추적하고 기존 `/static` 마운트로 서빙합니다. 원본(1024x1536 PNG, 장당 약 3MB)은 저장소에 넣지 않습니다.
+
+1. 원본 폴더에서 사진을 바꿉니다. 파일명은 `번호.태그id.png`(예: `7.갑작스러운 타격.png`)입니다.
+2. 저장소 루트에서 `python BE/scripts/build_tag_images.py "<원본 폴더>"`를 실행합니다. 누락, 여분, 중복, 2:3이 아닌 사진이 있으면 아무것도 쓰지 않고 실패합니다.
+3. 바뀐 `BE/app/static/tagImages/normal/`을 PR로 올립니다.

@@ -38,6 +38,9 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
+      # 웹 타로 해몽(/demo/tarot) 전용 키. 비워두면 GEMINI_API_KEY를 쓴다.
+      - key: GEMINI_TEXT_API_KEY
+        sync: false
       - key: FLUX_API_KEY
         sync: false
       - key: JWT_SECRET_KEY
