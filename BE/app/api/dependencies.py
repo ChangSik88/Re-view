@@ -16,7 +16,8 @@ async def get_current_user_id(credentials: HTTPAuthorizationCredentials = Depend
         # 토큰 해독 로직은 동일합니다.
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         user_id = int(payload["sub"])
-        if not await UserRepository().is_active(user_id):
+        auth_version = int(payload.get("ver", 0))
+        if not await UserRepository().token_is_active(user_id, auth_version):
             raise HTTPException(status_code=401, detail="사용할 수 없는 계정입니다.")
         return user_id
     except jwt.ExpiredSignatureError:
