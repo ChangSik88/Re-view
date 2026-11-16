@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "rule": "대상 노드와 행동 노드가 함께 잡히면 이 표를 먼저 본다. 있으면 node의 해석을 쓴다. 없으면 행동 노드의 태그를 쓰고, 행동이 없거나 범용 동사(generic)면 대상 노드의 태그를 쓴다.",
+  "combos": [
+    {
+      "object": "이빨",
+      "action": "빠지다",
+      "node": "이가 빠지다",
+      "source": "TDQ 18"
+    },
+    {
+      "object": "머리카락",
+      "action": "빠지다",
+      "node": "탈모",
+      "source": null
+    },
+    {
+      "object": "물",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "바다",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "시험",
+      "action": "떨어지다",
+      "node": "불합격",
+      "source": "TDQ 38"
+    },
+    {
+      "object": "수능",
+      "action": "떨어지다",
+      "node": "불합격",
+      "source": null
+    },
+    {
+      "object": "면접",
+      "action": "떨어지다",
+      "node": "불합격",
+      "source": null
+    },
+    {
+      "object": "돈",
+      "action": "줍다",
+      "node": "돈을 줍다",
+      "source": "TDQ 10"
+    },
+    {
+      "object": "거울",
+      "action": "깨지다",
+      "node": "거울이 깨지다",
+      "source": "주공해몽"
+    },
+    {
+      "object": "화장실",
+      "action": "찾지 못하다",
+      "node": "화장실을 못 찾다",
+      "source": "TDQ 30"
+    },
+    {
+      "object": "버스",
+      "action": "놓치다",
+      "node": "버스를 놓침",
+      "source": "TDQ 6"
+    },
+    {
+      "object": "지하철",
+      "action": "놓치다",
+      "node": "버스를 놓침",
+      "source": "TDQ 6"
+    },
+    {
+      "object": "기차",
+      "action": "놓치다",
+      "node": "버스를 놓침",
+      "source": "TDQ 6"
+    },
+    {
+      "object": "비행기",
+      "action": "놓치다",
+      "node": "비행기를 놓침",
+      "source": "TDQ 6"
+    },
+    {
+      "object": "호수",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "강",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "수영장",
+      "action": "빠지다",
+      "node": "물에 빠짐",
+      "source": null
+    },
+    {
+      "object": "이빨",
+      "action": "깨지다",
+      "node": "이가 빠지다",
+      "source": null
+    }
+  ]
+}

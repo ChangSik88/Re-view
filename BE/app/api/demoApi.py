@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
-from app.schemas.demoSchema import DemoInterpretRequest, DemoInterpretResponse, DemoRankingResponse
+from app.schemas.demoSchema import DemoInterpretRequest, DemoRankingResponse, DemoTarotResponse
 from app.services.demoService import DemoService, DemoRateLimitError, DemoUnavailableError
 
 router = APIRouter()
@@ -26,11 +26,12 @@ def _get_visitor_id(request: Request) -> str:
     return fallback_ip
 
 
-@router.post("/interpret", response_model=DemoInterpretResponse)
-async def interpret_dream(body: DemoInterpretRequest, request: Request):
+# 타로 카드 형식 해몽. 옛 /interpret를 대체했다.
+@router.post("/tarot", response_model=DemoTarotResponse)
+async def tarot_dream(body: DemoInterpretRequest, request: Request):
     visitor_id = _get_visitor_id(request)
     try:
-        return await demo_service.interpret(body.dream, visitor_id)
+        return await demo_service.tarot(body.dream, visitor_id)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except DemoRateLimitError as e:
@@ -40,8 +41,13 @@ async def interpret_dream(body: DemoInterpretRequest, request: Request):
             status_code=429,
             content={"detail": "지금은 더 해몽할 수 없어요.", "reason": e.reason},
         )
-    except DemoUnavailableError:
-        raise HTTPException(status_code=503, detail="지금은 해몽을 불러올 수 없어요.")
+    except DemoUnavailableError as e:
+        # Gemini 한도 초과일 때만 reason(ai_minute, ai_daily)을 붙인다. 시간 초과와 그 밖의 실패는
+        # 예전과 같은 {"detail"}이라 reason을 모르는 웹과 미니앱도 그대로 동작한다.
+        content = {"detail": "지금은 해몽을 불러올 수 없어요."}
+        if e.reason:
+            content["reason"] = e.reason
+        return JSONResponse(status_code=503, content=content)
 
 
 @router.get("/ranking", response_model=DemoRankingResponse)
