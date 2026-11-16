@@ -335,8 +335,7 @@ model UserWithdrawal {
   reason             String?   @db.VarChar(200)
   withdrawn_at       DateTime  @default(now()) @db.Timestamptz(6)
   purge_scheduled_at DateTime? @db.Timestamptz(6)
-  // TODO: users 실제 파기(purge) 방식 미정 — 하드 삭제면 이 FK(RESTRICT)가 막는다.
-  // 개인정보 익명화 배치로 갈지, user_id를 nullable+SetNull로 풀지 결정 필요.
+  // 30일 경과 계정 파기 시 Repository에서 이 기록을 users보다 먼저 삭제한다.
   User               User      @relation(fields: [user_id], references: [user_id], onDelete: Restrict, onUpdate: NoAction, map: "FK_UW_USER")
 
   @@map("user_withdrawals")

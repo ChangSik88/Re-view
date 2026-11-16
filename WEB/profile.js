@@ -74,6 +74,6 @@ el("edit").onsubmit = event => {
 };
 el("logout").onclick = () => { signOut(); el("status").textContent = "로그아웃했습니다."; };
 el("withdraw").onclick = () => {
-  if (!confirm("탈퇴하면 이 계정으로 다시 로그인할 수 없습니다. 탈퇴할까요?")) return;
+  if (!confirm("탈퇴 즉시 로그인과 기존 토큰 사용이 차단됩니다. 30일 후 계정과 모든 정보가 삭제되며, 삭제 전까지 같은 아이디로 재가입할 수 없습니다. 탈퇴할까요?")) return;
   run(async () => { await request("me", "DELETE"); signOut(); return "회원 탈퇴가 완료됐습니다."; });
 };

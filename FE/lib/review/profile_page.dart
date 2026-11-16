@@ -53,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> withdraw() async {
     final confirmed = await showDialog<bool>(context: context, builder: (ctx) => AlertDialog(
-      title: const Text('회원 탈퇴'), content: const Text('탈퇴하면 이 계정으로 다시 로그인할 수 없습니다. 탈퇴할까요?'),
+      title: const Text('회원 탈퇴'), content: const Text('탈퇴 즉시 로그인과 기존 토큰 사용이 차단됩니다. 30일 후 계정과 모든 정보가 삭제되며, 삭제 전까지 같은 아이디로 재가입할 수 없습니다. 탈퇴할까요?'),
       actions: [TextButton(onPressed: () => Navigator.pop(ctx, false), child: const Text('취소')),
         TextButton(onPressed: () => Navigator.pop(ctx, true), child: const Text('탈퇴'))]));
     if (confirmed != true || !mounted) return;
