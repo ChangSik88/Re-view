@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>내 프로필 · Re-view</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f8fb;color:#253348;font:16px/1.6 system-ui,sans-serif}main{max-width:480px;margin:5vh auto;padding:24px}a{color:#34577b}section{margin-top:22px;background:white;padding:26px;border:1px solid #d5dfeb;border-radius:16px}h1{margin:0 0 18px}label{display:block;margin-top:14px}input,select,button{font:inherit;padding:9px 12px;border:1px solid #98a9bb;border-radius:8px}input,select{width:100%;margin-top:4px}button{cursor:pointer;background:white;color:inherit}button[type=submit]{background:#304e76;color:white;width:100%;margin-top:20px}.actions{display:flex;justify-content:space-between;margin-top:20px}#withdraw{color:#983d40}#status{min-height:1.6em}button:disabled{opacity:.55}
+</style><script defer src="profile.js"></script></head><body><main>
+<a href="index.html">← 굿모닝 드림</a>
+<section><h1>내 프로필</h1>
+<form id="login"><label>아이디<input id="account" autocomplete="username" required></label>
+<label>비밀번호<input id="password" type="password" autocomplete="current-password" required></label><button type="submit">로그인</button></form>
+<div id="profile" hidden><form id="edit"><p>아이디 · <strong id="login-id"></strong></p>
+<label>이름<input id="name" maxlength="30" required></label><label>생년월일<input type="date" id="birth"></label>
+<label>성별<select id="gender"><option value="">미입력</option><option value="male">남성</option><option value="female">여성</option></select></label><button type="submit">저장</button></form>
+<div class="actions"><button id="logout">로그아웃</button><button id="withdraw">회원 탈퇴</button></div></div>
+<p id="status" role="status" aria-live="polite"></p></section></main></body></html>

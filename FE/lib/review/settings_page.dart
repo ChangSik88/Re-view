@@ -1,3 +1,4 @@
+import 'profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -135,6 +136,9 @@ class _SettingsPageState extends State<SettingsPage> {
                                           '현재 서버에서 제공하는 $title 정보가 없어요. 문서가 등록되면 여기에서 확인할 수 있어요.')))))
                       .toList())),
           const SizedBox(height: 24),
+          if (!state.preview)
+            ListTile(title: const Text('내 프로필'), trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ProfilePage()))),
           const Text('계정', style: TextStyle(color: muted)),
           gap,
           Paper(

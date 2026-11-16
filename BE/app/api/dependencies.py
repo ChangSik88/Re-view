@@ -1,3 +1,4 @@
+from app.repositories.userRepositories import UserRepository
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import jwt
@@ -14,8 +15,11 @@ async def get_current_user_id(credentials: HTTPAuthorizationCredentials = Depend
     try:
         # 토큰 해독 로직은 동일합니다.
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return int(payload.get("sub"))
+        user_id = int(payload["sub"])
+        if not await UserRepository().is_active(user_id):
+            raise HTTPException(status_code=401, detail="사용할 수 없는 계정입니다.")
+        return user_id
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="토큰이 만료되었습니다.")
-    except jwt.InvalidTokenError:
+    except (jwt.InvalidTokenError, KeyError, ValueError, TypeError):
         raise HTTPException(status_code=401, detail="유효하지 않은 토큰입니다.")

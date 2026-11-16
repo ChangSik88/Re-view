@@ -5,9 +5,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import os
+import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.db import db
+from app.repositories.userRepositories import UserRepository
 from fastapi.staticfiles import StaticFiles
 from app.api import userApi, chatApi, chatSessionApi, storeApi, reportApi, demoApi
 from contextlib import asynccontextmanager
@@ -23,6 +25,13 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"DB 연결 실패 (앱은 기동함): {e}")
 
+    if db.is_connected():
+        try:
+            deleted_count = await UserRepository().purge_expired_users()
+            logging.getLogger(__name__).info("탈퇴 계정 영구 삭제 완료: %d건", deleted_count)
+        except Exception:
+            logging.getLogger(__name__).exception("탈퇴 계정 삭제 실패. 다음 서버 시작 시 재시도합니다.")
+
     yield # 여기서 서버가 돌아가며 요청을 처리함
 
     # 서버가 꺼질 때 실행
@@ -37,7 +46,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=_web_origins,
     allow_credentials=False,
-    allow_methods=["GET", "POST"],
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["*"],
 )
 

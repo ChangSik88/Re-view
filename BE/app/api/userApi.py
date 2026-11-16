@@ -1,3 +1,6 @@
+from fastapi import Depends, Response
+from app.api.dependencies import get_current_user_id
+from app.schemas.userSchema import ProfilePatch, ProfileResponse
 from fastapi import APIRouter,HTTPException
 from app.services.userServices import UserService
 from app.schemas.userSchema import UserCreateBody,UserResponse,LoginRequest # Schema 폴더에 정의할 모델
@@ -26,3 +29,16 @@ async def login_user(request: LoginRequest):
         "access_token": token,
         "token_type": "bearer"
     }
+
+@router.get("/me", response_model=ProfileResponse)
+async def my_profile(user_id: int = Depends(get_current_user_id)):
+    return await user_service.profile(user_id)
+
+@router.patch("/me", response_model=ProfileResponse)
+async def edit_my_profile(body: ProfilePatch, user_id: int = Depends(get_current_user_id)):
+    return await user_service.profile(user_id, body.model_dump(exclude_unset=True))
+
+@router.delete("/me", status_code=204)
+async def delete_my_account(user_id: int = Depends(get_current_user_id)):
+    await user_service.withdraw(user_id)
+    return Response(status_code=204)

@@ -1,3 +1,4 @@
+from datetime import datetime, time, timezone
 from app.repositories.userRepositories import UserRepository
 from fastapi import HTTPException
 from app.core.security import create_access_token, hash_password, verify_password
@@ -34,9 +35,25 @@ class UserService:
         user = await self.user_repo.get_user_by_username(userAccount)
 
         # 2. 해시 검증 (저장된 해시와 입력한 평문 비밀번호 비교)
-        if not user or not verify_password(password, user.password_hash):
+        if not user or not verify_password(password, user.password_hash) or not await self.user_repo.is_active(user.user_id):
             return None # 인증 실패
 
         # 3. 인증 성공 시, 해당 유저의 DB ID번호(PK)를 넣어 토큰 생성
         token = create_access_token(user_id=user.user_id)
         return token
+
+    async def profile(self, user_id, changes=None):
+        if changes:
+            if changes.get("birth") is not None:
+                changes["birth"] = datetime.combine(changes["birth"], time.min, timezone.utc)
+            user = await self.user_repo.update_profile(user_id, changes)
+        else:
+            user = await self.user_repo.profile(user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="회원 정보를 찾을 수 없습니다.")
+        return {"result": {"id": user.login_id, "name": user.name,
+                           "birth": user.birth.date() if user.birth else None,
+                           "gender": user.gender}}
+
+    async def withdraw(self, user_id):
+        await self.user_repo.withdraw(user_id)
