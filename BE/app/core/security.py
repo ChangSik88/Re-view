@@ -9,7 +9,7 @@ if not SECRET_KEY:
     raise ValueError("환경 변수( .env )에 JWT_SECRET_KEY가 설정되지 않았습니다")
 ALGORITHM = "HS256"
 
-def create_access_token(user_id: int):
+def create_access_token(user_id: int, auth_version: int = 0):
     # 토큰 탈취 시 노출 창을 줄이기 위해 유효기간을 7일로 제한합니다.
     # (refresh 토큰 도입 시 이 값을 더 짧게 조정할 수 있습니다.)
     expire = datetime.now() + timedelta(days=7)
@@ -17,6 +17,7 @@ def create_access_token(user_id: int):
     # 토큰 안에 담을 내용 (sub: 유저 고유 ID, exp: 만료 시간)
     payload = {
         "sub": str(user_id),
+        "ver": auth_version,
         "exp": expire
     }
     

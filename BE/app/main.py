@@ -6,13 +6,26 @@ load_dotenv()
 
 import os
 import logging
+import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.db import db
-from app.repositories.userRepositories import UserRepository
+from app.services.userServices import UserService
 from fastapi.staticfiles import StaticFiles
 from app.api import userApi, chatApi, chatSessionApi, storeApi, reportApi, demoApi
+from app.api import termsApi, consentApi
 from contextlib import asynccontextmanager
+from contextlib import suppress
+
+
+async def cleanup_personal_data():
+    while True:
+        if db.is_connected():
+            try:
+                await UserService().purge_expired_users()
+            except Exception:
+                logging.getLogger(__name__).exception("개인정보 삭제 작업 실패. 다음 실행에서 재시도합니다.")
+        await asyncio.sleep(3600)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -25,19 +38,16 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         print(f"DB 연결 실패 (앱은 기동함): {e}")
 
-    if db.is_connected():
-        try:
-            deleted_count = await UserRepository().purge_expired_users()
-            logging.getLogger(__name__).info("탈퇴 계정 영구 삭제 완료: %d건", deleted_count)
-        except Exception:
-            logging.getLogger(__name__).exception("탈퇴 계정 삭제 실패. 다음 서버 시작 시 재시도합니다.")
-
-    yield # 여기서 서버가 돌아가며 요청을 처리함
-
-    # 서버가 꺼질 때 실행
-    if db.is_connected():
-        await db.disconnect()
-        print("DB 연결 종료")
+    cleanup_task = asyncio.create_task(cleanup_personal_data())
+    try:
+        yield
+    finally:
+        cleanup_task.cancel()
+        with suppress(asyncio.CancelledError):
+            await cleanup_task
+        if db.is_connected():
+            await db.disconnect()
+            print("DB 연결 종료")
 
 app = FastAPI(lifespan=lifespan)
 
@@ -57,6 +67,8 @@ def read_root():
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 app.include_router(userApi.router, prefix="/users", tags=["User"])
+app.include_router(consentApi.router, prefix="/users", tags=["Consent"])
+app.include_router(termsApi.router, prefix="/terms", tags=["Terms"])
 app.include_router(chatApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(chatSessionApi.router, prefix="/chatting", tags=["Chat"])
 app.include_router(reportApi.router,prefix="/report",tags=["Chat"])

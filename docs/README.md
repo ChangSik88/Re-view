@@ -14,12 +14,16 @@
 
 ## 현재 문서
 
+**약관·동의문**
+- [legal/README.md](legal/README.md) — 이용약관, 개인정보, 학습·연구, 마케팅, 외부 제공, 탈퇴·복구 및 결제 안내 초안
+
 **00-overview**
 - [02-architecture.md](00-overview/02-architecture.md) — 4계층 구조, 기술 선택 이유
 
 **20-engineering**
 - [01-onboarding.md](20-engineering/01-onboarding.md) — 설치·실행·진행 이력
 - [03-frontend.md](20-engineering/03-frontend.md) — FE 코드 작성 패턴
+- [04-terms-api.md](20-engineering/04-terms-api.md) — 약관·동의·계정 복구 API 연결과 검증
 
 **30-design**
 - [01-design-tokens.md](30-design/01-design-tokens.md) — 색·타이포 실측값

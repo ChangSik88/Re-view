@@ -4,6 +4,8 @@ from app.schemas.userSchema import ProfilePatch, ProfileResponse
 from fastapi import APIRouter,HTTPException
 from app.services.userServices import UserService
 from app.schemas.userSchema import UserCreateBody,UserResponse,LoginRequest # Schema 폴더에 정의할 모델
+from app.schemas.userSchema import RestoreRequest, RestoreResponse
+from app.services.consentService import ConsentConflict
 
 
 router = APIRouter()
@@ -12,8 +14,24 @@ user_service = UserService()
 @router.post("/signup",response_model=UserResponse)
 async def signup(user: UserCreateBody):
     # 서비스 계층에 데이터 전달
-    result = await user_service.register_user(user.model_dump())
+    try:
+        result = await user_service.register_user(user.model_dump())
+    except ConsentConflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {"message": "회원가입 완료", "result": result}
+
+
+@router.post("/restore", response_model=RestoreResponse)
+async def restore_account(body: RestoreRequest):
+    try:
+        await user_service.restore(body.userAccount, body.password)
+    except PermissionError as exc:
+        raise HTTPException(status_code=401, detail=str(exc)) from exc
+    except ConsentConflict as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    return {"message": "계정이 복구되었습니다. 다시 로그인해 주세요."}
 
 @router.post("/login")
 async def login_user(request: LoginRequest):
