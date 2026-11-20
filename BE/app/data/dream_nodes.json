@@ -2252,6 +2252,21 @@
       "traditional": null
     },
     {
+      "keyword": "도둑맞다",
+      "aliases": [
+        "도난당하다",
+        "물건을 도둑맞다"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "보호",
+      "sub_tag": "재물",
+      "card_title": "비어 있는 서랍",
+      "advice": "요즘 빼앗긴다고 느끼는 시간이나 마음이 있는지 적어 보세요.",
+      "modern_interpretation": "소중한 것을 지키지 못할까 걱정하고 있다.",
+      "traditional": null
+    },
+    {
       "keyword": "숨기다",
       "aliases": [],
       "type": "action",
@@ -2539,10 +2554,10 @@
       "aliases": [],
       "type": "object",
       "category": "장소·공간",
-      "tag": "과거",
-      "sub_tag": "미지",
-      "card_title": "아래의 기억",
-      "advice": "떠오르는 오래된 기억을 편하게 적어 보세요.",
+      "tag": "미지",
+      "sub_tag": "과거",
+      "card_title": "계단 아래 어둠",
+      "advice": "낯설게 느껴지는 생각이 있다면 편하게 적어 보세요.",
       "modern_interpretation": "잘 드러나지 않은 생각을 살펴볼 수 있다.",
       "traditional": null
     },
@@ -4423,8 +4438,8 @@
       "aliases": [],
       "type": "object",
       "category": "사물·재물",
-      "tag": "미지",
-      "sub_tag": "노출",
+      "tag": "노출",
+      "sub_tag": "미지",
       "card_title": "맴도는 눈",
       "advice": "지켜보는 시선이 신경 쓰인다면 그 이유를 적어 보세요.",
       "modern_interpretation": "누군가 나를 지켜보는 듯한 막연한 긴장이 있다.",
@@ -5029,8 +5044,7 @@
     {
       "keyword": "배터리 부족",
       "aliases": [
-        "배터리 방전",
-        "충전기"
+        "배터리 방전"
       ],
       "type": "action",
       "category": "디지털",
@@ -5039,6 +5053,21 @@
       "card_title": "깜빡이는 빨간 줄",
       "advice": "오늘 나의 남은 기운을 솔직하게 점검해 보세요.",
       "modern_interpretation": "에너지가 떨어지고 연결이 끊길까 불안하다.",
+      "traditional": null
+    },
+    {
+      "keyword": "충전",
+      "aliases": [
+        "충전기",
+        "충전하다"
+      ],
+      "type": "action",
+      "category": "디지털",
+      "tag": "회복",
+      "sub_tag": null,
+      "card_title": "차오르는 초록 줄",
+      "advice": "오늘 기운을 채워 주는 일을 하나 골라 해 보세요.",
+      "modern_interpretation": "쉬면서 기운을 다시 채우고 싶어 한다.",
       "traditional": null
     },
     {
@@ -7220,6 +7249,22 @@
       "traditional": null
     },
     {
+      "keyword": "하극상",
+      "aliases": [
+        "대들다",
+        "상관에게 대들다",
+        "말대꾸"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "권위",
+      "sub_tag": "갈등",
+      "card_title": "치켜든 고개",
+      "advice": "참아 온 말이 있다면 누구에게 하고 싶은지 적어 보세요.",
+      "modern_interpretation": "윗사람이나 규칙에 눌린 답답함을 밀어내고 싶어 한다.",
+      "traditional": null
+    },
+    {
       "keyword": "버림받다",
       "aliases": [
         "외면당하다",
@@ -7233,6 +7278,22 @@
       "card_title": "돌아선 등",
       "advice": "내 편이라고 느끼는 사람을 한 명 떠올려 보세요.",
       "modern_interpretation": "소중한 사람에게서 멀어질까 하는 두려움이 있다.",
+      "traditional": null
+    },
+    {
+      "keyword": "기열",
+      "aliases": [
+        "기수 열외",
+        "기열당하다",
+        "열외당하다"
+      ],
+      "type": "action",
+      "category": "행동·상황",
+      "tag": "고립",
+      "sub_tag": "권위",
+      "card_title": "빠진 이름",
+      "advice": "나를 있는 그대로 대해 주는 사람을 한 명 떠올려 보세요.",
+      "modern_interpretation": "속한 무리에서 밀려나 무시당할까 하는 두려움이 있다.",
       "traditional": null
     },
     {
