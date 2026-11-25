@@ -5,7 +5,7 @@ const API = "https://re-view-uxww.onrender.com";
 
 // 토스 출시 체크리스트: 자체 뒤로가기와 토스 내비 뒤로가기 중복 금지, 자사 앱 설치 유도 금지.
 // 공유는 intoss:// 스킴이 필요해 2단계에서 SDK로 붙인다.
-const HIDE = `<style>.rk-back, #share-btn, #app-store-link { display: none !important; }</style>\n</head>`;
+const HIDE = `<style>.rk-back, .profile-link, #share-btn, #app-store-link { display: none !important; }</style>\n</head>`;
 
 // 찾을 문자열이 없으면 WEB/이 바뀐 것이다. 조용히 넘어가지 않고 빌드를 멈춘다.
 function patch(file, pairs) {
