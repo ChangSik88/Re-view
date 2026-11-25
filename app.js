@@ -281,7 +281,7 @@ function retry() {
 async function share() {
   const btn = document.getElementById("share-btn");
   const tag = document.getElementById("result-tag").textContent;
-  const payload = { title: "굿모닝 드림", text: `오늘 내 꿈의 태그는 "${tag}"`, url: location.href };
+  const payload = { title: "창식이의꿈", text: `오늘 내 꿈의 태그는 "${tag}"`, url: location.href };
   try {
     if (navigator.share) {
       await navigator.share(payload);
