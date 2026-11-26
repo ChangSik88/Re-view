@@ -10,27 +10,29 @@ class ReportManager:
             temperature=0.7
         )
 
-    async def generate_insight(self, dreams_text: str) -> str:
+    async def generate_insight(self, daily_summary: str, top_tags: str) -> str:
         prompt = PromptTemplate(
-                    input_variables=["dreams"],
-                    template="""당신은 사용자의 마음을 읽어주는 다정하고 통찰력 있는 꿈 해몽가이자 심리 상담가입니다.
-                    다음은 사용자가 최근 기록한 3개의 꿈 내용입니다:
-                    
-                    {dreams}
-                    
+                    input_variables=["daily_summary", "top_tags"],
+                    template="""당신은 사용자의 마음을 읽어주는 다정하고 통찰력 있는 심리 상담가입니다.
+                    다음은 최근 기록을 날짜순으로 정리한 자료입니다. 각 줄은 하루치이며, 아침(꿈)과 밤(하루 기록) 각각의 분류 범주와 태그를 담고 있습니다.
+
+                    {daily_summary}
+
+                    최근 가장 자주 등장한 태그: {top_tags}
+
                     [작성 지침 - 반드시 엄수할 것]
                     1. 분량 제한: 전체 답변을 반드시 3~4문장(줄) 이내로 아주 짧게 작성하세요.
-                    2. 디테일 언급 금지: 꿈에 등장한 구체적인 사물(예: 치킨, 피자 등)이나 사건을 있는 그대로 나열하거나 요약하지 마세요.
-                    3. 패턴과 인사이트 도출: 3개의 꿈을 관통하는 공통된 감정, 분위기, 상징적 의미 등 '경향성'만 파악하세요.
+                    2. 근거 기반: 위 자료에 적힌 범주·태그만 근거로 삼으세요. 자료에 없는 사건이나 감정을 지어내지 마세요.
+                    3. 같은 날 아침 범주와 밤 범주가 같으면 그 연관성을 짚어주세요. 다른 날은 억지로 엮지 마세요.
                     4. 말투 및 구조: 친근하고 다정한 대화체(~해요, ~네요)를 사용하며, 아래의 흐름을 따라 자연스럽게 구성하세요.
-                    - 도입: 최근 꿈들의 전반적인 흐름이나 감정 짚어주기 (예: "최근에는 어딘가로 훌쩍 떠나거나 쫓기는 꿈을 자주 꾸셨네요!")
-                    - 의미: 그 흐름이 뜻하는 심리적/해몽적 의미 가볍게 설명 (예: "이런 꿈들은 보통 현실에서 휴식이 필요하거나 작은 변화를 원할 때 나타나곤 해요.")
-                    - 마무리: 사용자의 현실 상황에 대한 따뜻한 공감, 질문 또는 격려 (예: "최근 부정적인 감정선이 자주 보이는데, 혹시 요즘 스트레스 받는 일이 있으셨나요? 오늘은 무거운 짐을 내려놓고 편안하게 잠드셨으면 좋겠어요.")"""
+                    - 도입: 최근 가장 자주 등장한 태그나 범주로 전반적인 흐름 짚어주기
+                    - 의미: 그 흐름이 뜻하는 심리적 의미를 가볍게 설명
+                    - 마무리: 사용자의 현실 상황에 대한 따뜻한 공감, 질문 또는 격려"""
                 )
-        
+
         # LangChain v0.1.0 이상 권장 방식 (LCEL 파이프라인)
         chain = prompt | self.llm
-        response = await chain.ainvoke({"dreams": dreams_text})
+        response = await chain.ainvoke({"daily_summary": daily_summary, "top_tags": top_tags})
 
         # Gemini는 content를 [{"type": "text", "text": ...}] 형태의 블록 리스트로 돌려준다.
         # 리스트 그대로 넘기면 weekly_content(String?) 저장이 타입 오류로 깨진다.

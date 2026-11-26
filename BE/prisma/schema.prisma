@@ -60,6 +60,7 @@ model ChatRoom {
   title          String?                @db.VarChar(50)
   content        String?
   tags           String?                @db.VarChar(50)
+  dream_category String?                @db.VarChar(20) // 꿈해몽 9종 카테고리(dream_tarot.categories.json). 모닝·나이트 둘 다 채워 리포트에서 같은 날끼리 비교한다
   is_marked      Boolean                @default(false)
   routine_type   String?                @db.VarChar(20)
   latitude       Float?

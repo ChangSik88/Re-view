@@ -1,8 +1,19 @@
+import json
 import os
+from pathlib import Path
 from langchain_google_genai import ChatGoogleGenerativeAI,GoogleGenerativeAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from app.schemas.chatSchema import AIAnalysisResponse, NightAnalysisResponse, DiaryGenerationResponse
+
+# 꿈해몽 9종 카테고리(아침 꿈·밤 하루 기록 공통 분류 체계). 리포트에서 같은 날끼리 비교하는 근거로 쓴다.
+_CATEGORY_FILE = Path(__file__).resolve().parents[2] / "data" / "dream_tarot.categories.json"
+with open(_CATEGORY_FILE, encoding="utf-8") as f:
+    DREAM_CATEGORIES = json.load(f)["categories"]
+DREAM_CATEGORY_HINT = "\n".join(
+    f"- {c['name']}: {', '.join(c['keywords'][:6])} 등"
+    for c in DREAM_CATEGORIES
+)
 
 # .env에서 불러온 API 키를 자동 인식하여 모델을 세팅합니다.
 llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", temperature=0.7)
@@ -157,6 +168,10 @@ MORNING_DIARY_PROMPT = """당신은 사용자의 단편적인 꿈 내용을 한 
 - 반드시 영어로만 작성하세요.
 - 16:9 비율정도의 이미지가 생성되게 하세요.
 
+[dream_category 분류 지침]
+아래 9개 카테고리 중 이 꿈의 핵심 소재와 가장 가까운 것 하나를 "dream_category" 필드에 그 이름 그대로 담으세요.
+{category_list}
+
 [JSON 문법 엄수 경고]
 반드시 올바른 JSON 형식으로 답변해야 합니다. "title", "content", "tags" 항목 사이의 쉼표(,)를 절대 누락하지 마세요.
 {format_instructions}"""
@@ -193,22 +208,27 @@ content는 아래 3개 소제목을 이 순서, 이 이름 그대로 한 줄씩 
 - 반드시 영어로만 작성하세요.
 - 세로형 타로 카드 비율(2:3)로 생성되게 하세요.
 
+[dream_category 분류 지침]
+아래 9개 카테고리 중 오늘 하루의 핵심 소재와 가장 가까운 것 하나를 "dream_category" 필드에 그 이름 그대로 담으세요. 꿈이 아니라 오늘 있었던 일을 기준으로 고르세요.
+{category_list}
+
 반드시 아래 JSON 형식으로만 답하세요.
 {format_instructions}"""
 
 async def generate_diary_content(history: str, selected_keywords: list[str], routine_type: str) -> DiaryGenerationResponse:
     system_instruction = MORNING_DIARY_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_DIARY_PROMPT
     keywords_str = ", ".join(selected_keywords) if selected_keywords else "특별히 선택된 키워드 없음"
-    
+
     prompt = ChatPromptTemplate.from_messages([
         ("system", system_instruction),
         ("user", "대화 내역:\n{history}")
     ])
     diary_chain = prompt | llm | diary_parser
-    
+
     return await diary_chain.ainvoke({
         "history": history,
         "selected_keywords": keywords_str,
+        "category_list": DREAM_CATEGORY_HINT,
         "format_instructions": diary_parser.get_format_instructions()
     })
 

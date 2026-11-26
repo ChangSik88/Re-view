@@ -29,7 +29,7 @@ class ChatRepository:
             order={"created_at": "asc"}
         )
 
-    async def update_session_with_diary(self, room_id: int, title: str, content: str, tags: str, vector: list[float]):
+    async def update_session_with_diary(self, room_id: int, title: str, content: str, tags: str, vector: list[float], dream_category: str | None = None):
         # 일기 본문 저장과 벡터 갱신을 하나의 트랜잭션으로 묶어 부분 저장(반쪽 일기)을 방지
         vector_str = str(vector)
         async with db.tx() as tx:
@@ -41,6 +41,7 @@ class ChatRepository:
                     "title": title,
                     "content": content,
                     "tags": tags,
+                    "dream_category": dream_category,
                 })
             await tx.execute_raw(
                 'UPDATE "chat_rooms" SET content_vector = $1::vector WHERE room_id = $2',

@@ -91,6 +91,7 @@ class ChatService:
         # 여기서 미리 잘라 트랜잭션 실패(및 LLM 호출 낭비)를 막는다.
         title = diary_result.title[:50]
         tags_str = ", ".join(diary_result.tags)[:50]
+        dream_category = diary_result.dream_category[:20]
 
         # 생성된 모든 데이터를 ChatSession DB에 저장
         await self.chat_repo.update_session_with_diary(
@@ -98,7 +99,8 @@ class ChatService:
             title=title,
             content=diary_result.content,
             tags=tags_str,
-            vector=vector_data
+            vector=vector_data,
+            dream_category=dream_category
         )
 
         image_url = await self._generate_and_save_image(

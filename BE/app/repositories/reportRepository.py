@@ -1,12 +1,16 @@
+from datetime import datetime, timedelta, timezone
 from app.core.db import db
 
+# ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
+KST = timezone(timedelta(hours=9))
+
 class ReportRepository:
-    # 1. 최근 3개 꿈 가져오기 (일기 본문이 작성된 방만, 시간 역순)
-    async def get_latest_sessions(self, user_id: int, limit: int = 3):
+    # 1. 최근 N일간 작성된 일기 가져오기 (일기 본문이 작성된 방만, 시간순)
+    async def get_recent_sessions(self, user_id: int, days: int):
+        since = datetime.now(KST) - timedelta(days=days)
         return await db.chatroom.find_many(
-            where={"user_id": user_id, "content": {"not": None}},
-            order={"created_at": "desc"},
-            take=limit
+            where={"user_id": user_id, "content": {"not": None}, "created_at": {"gte": since}},
+            order={"created_at": "asc"}
         )
 
     # 2. 분석 결과 DB에 저장하기

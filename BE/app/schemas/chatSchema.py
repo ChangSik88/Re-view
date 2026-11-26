@@ -50,6 +50,8 @@ class DiaryGenerationResponse(BaseModel):
     content: str = Field(description="문학적이고 감성적인 일기 본문 (3~4문단)")
     tags: List[str] = Field(description="일기를 대표하는 감성 해시태그 3개")
     image_prompt:str=Field(description="이미지 생성 AI에 넣을 영어 프롬프트")
+    # 기본값을 둔 이유: 필수로 두면 LLM이 이 필드를 빠뜨리는 순간 파싱이 실패해 일기 생성 전체가 죽는다.
+    dream_category: str = Field(default="행동·상황", description="아래 9개 카테고리 중 정확히 하나: 동물, 사물·재물, 삶의 변화, 신체·생리, 인물·관계, 자연·환경, 장소·공간, 초자연, 행동·상황")
 
 # [추가] 프론트엔드에서 일기 생성을 요청할 때 쓸 스키마
 class DiaryRequest(BaseModel):
