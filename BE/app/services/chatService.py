@@ -3,7 +3,11 @@ from app.schemas.chatSchema import AIAnalysisResponse
 from app.core.ai.langchainManager import analyze_dream_chat, generate_diary_content, generate_vector_embedding
 from app.core.ai.imageManager import ImageManager
 from app.core import storage
+from datetime import timedelta, timezone
 from typing import List
+
+# ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
+KST = timezone(timedelta(hours=9))
 
 
 class ChatService:
@@ -77,11 +81,17 @@ class ChatService:
         history_records = await self.chat_repo.get_chat_history(room_id)
         formatted_history = "\n".join([f"{msg.role}: {msg.content}" for msg in history_records])
 
+        # 나이트루틴이면 같은 날 아침 기록을 찾아 꿈-하루 연결 문장에 쓸 요약을 넘겨줌
+        morning_context = None
+        if (routine_type or "").upper() == "NIGHT":
+            morning_context = await self._get_same_day_morning_context(user_id, session.created_at)
+
         # AI 함수에 키워드 리스트를 함께 넘겨주기
         diary_result = await generate_diary_content(
             history=formatted_history,
             selected_keywords=selected_keywords,
-            routine_type=routine_type)
+            routine_type=routine_type,
+            morning_context=morning_context)
 
         # Vector 변환 (제목과 내용을 합쳐서 의미를 뭉칩니다)
         text_to_embed = f"제목: {diary_result.title}\n내용: {diary_result.content}"
@@ -113,6 +123,13 @@ class ChatService:
         "image_url": image_url
     }
     
+    async def _get_same_day_morning_context(self, user_id: int, reference_dt) -> str | None:
+        day = reference_dt.astimezone(KST).date()
+        morning = await self.chat_repo.get_session_by_day(user_id, "MORNING", day)
+        if not morning:
+            return None
+        return f"범주: {morning.dream_category or '미분류'} / 제목: {morning.title or ''} / 태그: {morning.tags or ''}"
+
     async def _generate_and_save_image(self, room_id: int, image_prompt: str, routine_type: str):
         try:
             # AI 이미지 생성

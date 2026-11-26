@@ -1,6 +1,9 @@
 from prisma.models import ChatRoom, ChatMessage
 from app.core.db import db # main.py에서 연결한 prisma db 객체
-from datetime import datetime
+from datetime import date, datetime, timedelta, timezone
+
+# ZoneInfo("Asia/Seoul")은 Windows에 IANA tz DB가 없어 로컬 개발 시 실패한다.
+KST = timezone(timedelta(hours=9))
 class ChatRepository:
     # 1. 새로운 채팅방 생성
     async def create_session(self, user_id: int,routine_type:str):
@@ -65,6 +68,20 @@ class ChatRepository:
     async def get_session(self, room_id: int):
         return await db.chatroom.find_unique(
             where={"room_id": room_id}
+        )
+
+    # 같은 유저의 특정 KST 날짜에 작성된 해당 루틴 일기 조회 (아침↔밤 연결용)
+    async def get_session_by_day(self, user_id: int, routine_type: str, day: date):
+        start = datetime(day.year, day.month, day.day, tzinfo=KST)
+        end = start + timedelta(days=1)
+        return await db.chatroom.find_first(
+            where={
+                "user_id": user_id,
+                "routine_type": routine_type,
+                "content": {"not": None},
+                "created_at": {"gte": start, "lt": end},
+            },
+            order={"created_at": "desc"}
         )
 
     # 즐겨찾기 상태 명시적 설정

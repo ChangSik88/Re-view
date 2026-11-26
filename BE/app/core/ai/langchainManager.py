@@ -200,6 +200,10 @@ content는 아래 3개 소제목을 이 순서, 이 이름 그대로 한 줄씩 
 (오늘을 차분히 정리하는 1~2문장. 사실에 없는 다짐·결말은 쓰지 마세요)
 어조는 부드러운 해요체("~했어요", "~괜찮아요")로 통일하고, 소제목 외의 제목·기호·마크다운은 쓰지 마세요.
 
+[아침 꿈과의 연결]
+오늘 아침 기록: {morning_context}
+위 값이 "아침 기록 없음"이 아니라면, "하루 돌아보기" 문단 마지막에 그 꿈과 오늘 하루를 가볍게 연결하는 문장을 한 문장만 자연스럽게 덧붙이세요(예: "오늘 아침엔 OOO 같은 꿈을 꾸셨는데, 하루는 이런 모습이었네요."). 주어진 범주·제목·태그만 참고하고 아침 기록 내용을 지어내지 마세요. "아침 기록 없음"이면 이 문장은 쓰지 마세요.
+
 [추가 지침 - 이미지 생성용]
 - 그날의 분위기와 핵심 장면을 담은 이미지 생성용 영어 프롬프트를 1줄 작성하여 "image_prompt" 필드에 담으세요.
 - 화풍은 '실사(photorealistic) 타로 카드 일러스트'입니다. 반드시 'A photorealistic tarot card illustration, ornate gold border, mystical moonlit atmosphere, symbolic composition, soft cinematic lighting, highly detailed'를 기본으로 하세요.
@@ -215,7 +219,7 @@ content는 아래 3개 소제목을 이 순서, 이 이름 그대로 한 줄씩 
 반드시 아래 JSON 형식으로만 답하세요.
 {format_instructions}"""
 
-async def generate_diary_content(history: str, selected_keywords: list[str], routine_type: str) -> DiaryGenerationResponse:
+async def generate_diary_content(history: str, selected_keywords: list[str], routine_type: str, morning_context: str | None = None) -> DiaryGenerationResponse:
     system_instruction = MORNING_DIARY_PROMPT if (routine_type or "").upper() == "MORNING" else NIGHT_DIARY_PROMPT
     keywords_str = ", ".join(selected_keywords) if selected_keywords else "특별히 선택된 키워드 없음"
 
@@ -229,6 +233,7 @@ async def generate_diary_content(history: str, selected_keywords: list[str], rou
         "history": history,
         "selected_keywords": keywords_str,
         "category_list": DREAM_CATEGORY_HINT,
+        "morning_context": morning_context or "아침 기록 없음",
         "format_instructions": diary_parser.get_format_instructions()
     })
 
