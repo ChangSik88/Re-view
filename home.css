@@ -29,7 +29,7 @@ body.home.stage-input  { --horizon: 496px; }
 body.home.stage-paper  { --horizon: 352px; --card-top: 384px; --card-w: 214px; --card-h: 321px; --cap-top: 726px; }
 /* B3은 정지 화면이 아니라 B2에서 B4로 가는 동작이다. 카드가 뒤집히면서 B4 자리로 올라가고, 그동안만 0.9초로 움직인다. */
 body.home.stage-flip   { --horizon: 256px; --card-top: 170px; --card-w: 306px; --card-h: 459px; --cap-top: 672px; --card-dur: 0.9s; }
-body.home.stage-front  { --horizon: 256px; --card-top: 170px; --card-w: 306px; --card-h: 459px; }
+body.home.stage-front  { --horizon: 256px; --card-top: 170px; --card-w: 306px; --card-h: 459px; --cap-top: 672px; }
 body.home.stage-reveal { --horizon: 360px; --card-top: 66px;  --card-w: 214px; --card-h: 321px; --result-top: 504px; --cap-top: 404px; }
 /* 데스크톱 결과 화면은 시안이 없다. 카드는 B5 자리에 두고, 제목만 모바일 결과처럼 카드 바로 아래로 올린다. */
 body.home.stage-done   { --horizon: 360px; --card-top: 66px;  --card-w: 214px; --card-h: 321px; --result-top: 404px; }
@@ -202,6 +202,19 @@ body.home:not(.stage-input) :is(.hero, .dream-form, .preview) {
   text-align: center;
   font-size: 13px;
   color: #d64545;
+}
+
+.ai-notice {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--sub);
+  word-break: keep-all;
+}
+
+/* 좁은 화면에서는 문장 사이에서만 줄이 바뀐다. */
+.ai-notice span {
+  display: inline-block;
 }
 
 .preview {
@@ -419,7 +432,7 @@ body.home:not(.stage-input, .stage-paper) .card-inner {
   color: var(--sub);
 }
 
-body.home:not(.stage-paper, .stage-flip, .stage-reveal) .stage-caption {
+body.home:not(.stage-paper, .stage-flip, .stage-front, .stage-reveal) .stage-caption {
   display: none;
 }
 
@@ -443,6 +456,18 @@ body.home.stage-reveal .stage-caption {
 
 body.home:not(.stage-reveal, .stage-done) .result {
   display: none;
+}
+
+.ai-label {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--point);
 }
 
 .result-tag {
@@ -578,7 +603,7 @@ body.home.stage-reveal .result-more {
   body.home.stage-input  { --horizon: 459px; }
   body.home.stage-paper  { --horizon: 296px; --card-top: 350px; --card-w: 174px; --card-h: 261px; --cap-top: 626px; }
   body.home.stage-flip   { --horizon: 192px; --card-top: 140px; --card-w: 270px; --card-h: 405px; --cap-top: 576px; }
-  body.home.stage-front  { --horizon: 192px; --card-top: 140px; --card-w: 270px; --card-h: 405px; }
+  body.home.stage-front  { --horizon: 192px; --card-top: 140px; --card-w: 270px; --card-h: 405px; --cap-top: 576px; }
   body.home.stage-reveal { --horizon: 316px; --card-top: 58px;  --card-w: 190px; --card-h: 285px; --result-top: 479px; --cap-top: 358px; }
   body.home.stage-done   { --horizon: 300px; --card-top: 46px;  --card-w: 178px; --card-h: 267px; --result-top: 318px; }
 
