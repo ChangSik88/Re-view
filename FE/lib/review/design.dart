@@ -55,7 +55,6 @@ const iconFiles = <String, String>{
   'dropdown': '6dc6cbff-76e7-4c82-8ac7-166870fe6a94.svg',
   'home': '48d002cc-da37-45c7-8e17-c2df62c88b1d.svg',
   'chat': 'e99af228-c626-4e69-8f03-d61388d4fcf4.svg',
-  'store': 'eec519f3-6d84-440f-8311-0f52eeed64f5.svg',
   'settings': '7153013e-f425-478e-91f7-3bc36d97e2d5.svg',
   'smile': 'fce8d0c4-6ef7-440b-8da4-f5d96d5b5508.svg',
   'back': 'b50f70fe-20ab-4faa-ac65-cb12df298220.svg',
@@ -153,7 +152,7 @@ class ReviewPage extends StatelessWidget {
                   color: Colors.white,
                   child: Row(
                       children: List.generate(
-                          4,
+                          3,
                           (i) => Expanded(
                               child: InkWell(
                                   onTap: () {
@@ -163,7 +162,6 @@ class ReviewPage extends StatelessWidget {
                                           [
                                             '/home',
                                             '/dream_list',
-                                            '/store',
                                             '/settings'
                                           ][i],
                                           (r) => false);
@@ -177,7 +175,6 @@ class ReviewPage extends StatelessWidget {
                                             [
                                               'home',
                                               'chat',
-                                              'store',
                                               'settings'
                                             ][i],
                                             size: 29,
@@ -185,7 +182,7 @@ class ReviewPage extends StatelessWidget {
                                                 ? purple
                                                 : const Color(0xFFCCCCCC)),
                                         const SizedBox(height: 3),
-                                        Text(['홈', 'AI-채팅', '스토어', '설정'][i],
+                                        Text(['홈', 'AI-채팅', '설정'][i],
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 color: i == tab
@@ -326,9 +323,7 @@ class RecordImage extends StatelessWidget {
         color: const Color(0xFFF4F4F6),
         child: const Center(
             child: Icon(Icons.image_outlined, color: muted, size: 36)));
-    final path = source == previewProductImage
-        ? 'assets/figma/188107ea-a224-4fe1-aa06-708975b55370.png'
-        : source;
+    final path = source;
     return ClipRRect(
         borderRadius: BorderRadius.circular(radius),
         child: path.isEmpty

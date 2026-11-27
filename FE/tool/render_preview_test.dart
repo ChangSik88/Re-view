@@ -11,7 +11,6 @@ import 'package:frontend/review/review_state.dart';
 import 'package:frontend/review/design.dart';
 import 'package:frontend/review/diary_pages.dart';
 import 'package:frontend/review/chat_page.dart';
-import 'package:frontend/review/store_pages.dart';
 import 'package:frontend/review/settings_page.dart';
 import 'package:frontend/review/emotion_statistics_page.dart';
 
@@ -38,8 +37,6 @@ void main() {
     addTearDown(tester.view.resetDevicePixelRatio);
     final state = ReviewState();
     await state.start(demo: true);
-    await state.loadProducts();
-    await state.addToCart(state.products.first);
     final target = Directory('build/design-preview')
       ..createSync(recursive: true);
     final record = state.records.firstWhere((r) => r.id == -13);
@@ -55,9 +52,6 @@ void main() {
       'calendar': const CalendarPage(),
       'search': const SearchPage(routine: Routine.morning),
       'chat': const ReviewChatPage(routine: Routine.morning),
-      'store': const ShopPage(),
-      'product': ProductPage(item: state.products.first),
-      'cart': const CartPage(),
       'settings': const SettingsPage(),
     };
     for (final entry in screens.entries) {

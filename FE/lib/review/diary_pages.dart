@@ -30,7 +30,6 @@ class HomePage extends StatelessWidget {
         DateTime(anchor.year, anchor.month, anchor.day - anchor.weekday + 1);
     void calendar() => Navigator.push(
         context, MaterialPageRoute(builder: (_) => const CalendarPage()));
-    void shop() => Navigator.pushNamed(context, '/store');
     return ReviewPage(
         tab: 0,
         horizontalPadding: 20,
@@ -145,25 +144,6 @@ class HomePage extends StatelessWidget {
                                 child: const FigmaAsset('516-783/imgVector3'))
                           ]));
                     }),
-              ])),
-          gap,
-          Paper(
-              radius: 20,
-              padding: const EdgeInsets.all(15),
-              child: Column(children: [
-                _previewHeading('Dream Store', shop),
-                gap,
-                InkWell(
-                    onTap: shop,
-                    child: const Row(children: [
-                      Expanded(
-                          child: RecordImage(previewProductImage,
-                              height: 136, radius: 10)),
-                      SizedBox(width: 16),
-                      Expanded(
-                          child: RecordImage(previewProductImage,
-                              height: 136, radius: 10)),
-                    ])),
               ])),
         ]));
   }
