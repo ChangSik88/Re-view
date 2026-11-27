@@ -209,6 +209,12 @@ body.home:not(.stage-input) :is(.hero, .dream-form, .preview) {
   text-align: center;
   font-size: 12px;
   color: var(--sub);
+  word-break: keep-all;
+}
+
+/* 좁은 화면에서는 문장 사이에서만 줄이 바뀐다. */
+.ai-notice span {
+  display: inline-block;
 }
 
 .preview {

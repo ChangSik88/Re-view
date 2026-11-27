@@ -55,7 +55,7 @@ const STAGES = ["stage-input", "stage-paper", "stage-flip", "stage-front", "stag
 const CAPTIONS = {
   "stage-paper": "한 장을 고르는 중...",
   "stage-flip": "뒤집는 중",
-  "stage-front": "생성형 AI가 고른 카드예요",
+  "stage-front": "AI가 꿈을 읽고 찾은 카드예요",
   "stage-reveal": "카드를 누르면 해몽을 볼 수 있어요",
 };
 const FLIP_MS = 900; // home.css의 stage-flip --card-dur와 맞춘다.
