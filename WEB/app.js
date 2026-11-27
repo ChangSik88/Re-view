@@ -50,10 +50,12 @@ async function loadRankingPreview() {
 }
 
 // B1 입력 → B2 카드를 고르는 중 → B3 뒤집히며 올라감 → B4 앞면 → B5 태그와 한 줄 설명, 안내 문구(카드 클릭 대기) → 결과
+// B4 안내 문구는 결과가 처음 보이는 순간의 AI 결과물 표시다. B5부터는 결과의 .ai-label이 이어받는다.
 const STAGES = ["stage-input", "stage-paper", "stage-flip", "stage-front", "stage-reveal", "stage-done"];
 const CAPTIONS = {
   "stage-paper": "한 장을 고르는 중...",
   "stage-flip": "뒤집는 중",
+  "stage-front": "AI가 꿈을 읽고 찾은 카드예요",
   "stage-reveal": "카드를 누르면 해몽을 볼 수 있어요",
 };
 const FLIP_MS = 900; // home.css의 stage-flip --card-dur와 맞춘다.
