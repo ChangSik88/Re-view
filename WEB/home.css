@@ -458,16 +458,11 @@ body.home:not(.stage-reveal, .stage-done) .result {
   display: none;
 }
 
+/* B4 안내 문구(.stage-caption)와 같은 흐린 일반 글씨. 위 여백은 결과 화면에서 카드에 붙지 않게 한다. */
 .ai-label {
-  display: inline-block;
-  margin: 0 0 8px;
-  padding: 3px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--point);
+  margin: 6px 0 8px;
+  font-size: 13px;
+  color: var(--sub);
 }
 
 .result-tag {
@@ -725,7 +720,8 @@ body.home.stage-reveal .result-more {
     letter-spacing: -0.24px;
   }
 
-  .stage-caption {
+  .stage-caption,
+  .ai-label {
     font-size: 12px;
   }
 
